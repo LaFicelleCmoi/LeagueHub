@@ -5,6 +5,7 @@ import { formatGoalDiff } from "@/lib/format";
 import type { League } from "@/lib/leagues";
 import { goalDiffClass, zoneClass } from "@/lib/standings-style";
 import type { Standings } from "@/lib/types";
+import { ClubButton } from "./ClubDialogProvider";
 import { LeagueLogo } from "./LeagueLogo";
 import SpotlightCard from "./reactbits/SpotlightCard";
 import { TeamLogo } from "./TeamLogo";
@@ -95,10 +96,13 @@ export function LeagueStandingsCard({ league, standings }: { league: League; sta
                   </td>
                   {/* max-w-0 : la colonne prend la place restante et tronque les noms trop longs. */}
                   <td className="max-w-0 py-2 pr-2">
-                    <div className="flex items-center gap-2.5">
+                    <ClubButton
+                      club={{ team: row.team, league: league.slug }}
+                      className="flex w-full min-w-0 items-center gap-2.5"
+                    >
                       <TeamLogo team={row.team} size={22} />
                       <span className="truncate font-medium">{row.team.shortName}</span>
-                    </div>
+                    </ClubButton>
                   </td>
                   <td className="px-1 text-right text-slate-500 dark:text-slate-400">{row.played}</td>
                   <td className={`px-1 text-right font-medium ${goalDiffClass(row.goalDiff)}`}>
