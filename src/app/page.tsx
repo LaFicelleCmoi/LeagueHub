@@ -11,11 +11,12 @@ import { LeagueShortcuts } from "@/components/LeagueShortcuts";
 import { LeagueStandingsCard } from "@/components/LeagueStandingsCard";
 import { LiveIndicator, LiveMatchesProvider } from "@/components/LiveMatches";
 import { MatchCard } from "@/components/MatchCard";
+import { StatTiles, type Stat } from "@/components/StatTiles";
 import { UclTrackerBanner } from "@/components/UclTrackerBanner";
-import CountUp from "@/components/reactbits/CountUp";
 import SplitFlapText from "@/components/reactbits/SplitFlapText";
 import { getMatches, getStandings } from "@/lib/espn/api";
 import { formatDay } from "@/lib/format";
+import { addTotals, goalsInMatches, goalsPerMatchHint, plural, seasonTotals } from "@/lib/league-stats";
 import { LEAGUES } from "@/lib/leagues";
 import { selectTrackedMatches } from "@/lib/live";
 import type { ClubRef } from "@/lib/types";
@@ -45,7 +46,8 @@ export default async function HomePage() {
     ({ league, standings }) => standings?.rows.map((row) => ({ team: row.team, league: league.slug })) ?? [],
   );
   const todayMatches = matchDays.flatMap((entry) => entry.today);
-  const goalsToday = todayMatches.reduce((sum, m) => sum + (m.home.score ?? 0) + (m.away.score ?? 0), 0);
+  const goalsToday = goalsInMatches(todayMatches);
+  const season = addTotals(overview.map(({ standings }) => seasonTotals(standings)));
 
   const liveSources = matchDays
     .map(({ league, today }) => ({ league: league.slug, matches: selectTrackedMatches(today, now.getTime()) }))
@@ -58,11 +60,19 @@ export default async function HomePage() {
     }),
   );
 
-  const stats = [
+  const stats: Stat[] = [
     { label: "championnats", value: LEAGUES.length },
-    { label: "clubs", value: clubs.length },
-    { label: todayMatches.length > 1 ? "matchs aujourd’hui" : "match aujourd’hui", value: todayMatches.length },
-    { label: goalsToday > 1 ? "buts marqués aujourd’hui" : "but marqué aujourd’hui", value: goalsToday },
+    { label: plural(clubs.length, "club", "clubs"), value: clubs.length },
+    { label: plural(todayMatches.length, "match aujourd’hui", "matchs aujourd’hui"), value: todayMatches.length },
+    { label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"), value: goalsToday },
+    {
+      label: plural(season.goals, "but au total en saison régulière", "buts au total en saison régulière"),
+      value: season.goals,
+      hint: goalsPerMatchHint(season),
+      accent: true,
+      // 5 cases : la dernière prend toute la largeur tant que la grille a 2 colonnes.
+      className: "col-span-2 xl:col-span-1",
+    },
   ];
 
   return (
@@ -92,19 +102,7 @@ export default async function HomePage() {
               Bundesliga et Ligue 1, réunis au même endroit.
             </p>
 
-            <dl className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex flex-col-reverse rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-800 dark:bg-slate-900"
-                >
-                  <dt className="text-sm text-slate-500 dark:text-slate-400">{stat.label}</dt>
-                  <dd className="text-2xl font-bold tabular-nums">
-                    <CountUp to={stat.value} duration={1.2} />
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <StatTiles stats={stats} className="mt-8 grid-cols-2 xl:grid-cols-5" />
           </div>
 
           <div className="flex flex-col gap-3">
