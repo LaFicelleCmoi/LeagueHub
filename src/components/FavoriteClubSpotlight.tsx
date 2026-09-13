@@ -8,6 +8,7 @@ import { getLeague } from "@/lib/leagues";
 import type { Match, TeamFixture, TeamForm } from "@/lib/types";
 import { OUTCOMES } from "./ClubDialog";
 import { useOpenClub } from "./ClubDialogProvider";
+import { EUROPEAN_CUP_STYLES, EuropeanCupTag } from "./EuropeanCup";
 import { LeagueLogo } from "./LeagueLogo";
 import { useLiveMatches } from "./LiveMatches";
 import { TeamLogo } from "./TeamLogo";
@@ -170,7 +171,9 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
                   <li
                     key={result.id}
                     title={`${OUTCOMES[result.outcome].label} ${result.goalsFor}-${result.goalsAgainst} contre ${result.opponent.name}`}
-                    className={`grid size-7 place-items-center rounded-md text-xs font-bold ${OUTCOMES[result.outcome].badge}`}
+                    className={`grid size-7 place-items-center rounded-md text-xs font-bold ${OUTCOMES[result.outcome].badge} ${
+                      result.europeanCup ? EUROPEAN_CUP_STYLES[result.europeanCup].ring : ""
+                    }`}
                   >
                     <span aria-hidden>{OUTCOMES[result.outcome].letter}</span>
                     <span className="sr-only">{OUTCOMES[result.outcome].label}</span>
@@ -195,9 +198,15 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
           ) : form?.next ? (
             <>
               <Opponent home={form.next.home} opponent={form.next.opponent} />
-              <p className="mt-1 truncate text-xs text-slate-500 dark:text-slate-400">
-                {capitalize(fixtureDay.format(new Date(form.next.date)))} · {formatTime(form.next.date)} ·{" "}
-                {form.next.competition}
+              <p className="mt-1 flex min-w-0 items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                <span className="truncate">
+                  {capitalize(fixtureDay.format(new Date(form.next.date)))} · {formatTime(form.next.date)}
+                </span>
+                {form.next.europeanCup ? (
+                  <EuropeanCupTag cup={form.next.europeanCup} label={EUROPEAN_CUP_STYLES[form.next.europeanCup].short} />
+                ) : (
+                  <span className="truncate">· {form.next.competition}</span>
+                )}
               </p>
             </>
           ) : form ? (
