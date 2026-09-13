@@ -1,6 +1,8 @@
 // Modèles de données normalisés utilisés par l'interface.
 // Les réponses brutes d'ESPN sont typées dans `lib/espn/types.ts`.
 
+import type { LeagueSlug } from "./leagues";
+
 export interface Team {
   id: string;
   name: string;
@@ -88,4 +90,32 @@ export interface Article {
   published: string;
   image: string | null;
   url: string | null;
+}
+
+/** Un club et son championnat. */
+export interface ClubRef {
+  team: Team;
+  league: LeagueSlug;
+}
+
+export type MatchOutcome = "win" | "draw" | "loss";
+
+export interface TeamResult {
+  id: string;
+  date: string;
+  competition: string;
+  /** Match joué à domicile ? */
+  home: boolean;
+  opponent: Team;
+  goalsFor: number;
+  goalsAgainst: number;
+  outcome: MatchOutcome;
+  /** Précision éventuelle : « t.a.b. 4-3 », « a.p. »… */
+  detail: string | null;
+}
+
+export interface TeamForm {
+  team: Team;
+  /** Du plus récent au plus ancien. */
+  results: TeamResult[];
 }
