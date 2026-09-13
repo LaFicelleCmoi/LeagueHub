@@ -163,6 +163,13 @@ function toMatchEvent(detail: EspnDetail, homeTeamId: string): MatchEvent | null
   };
 }
 
+/** Nombre de matchs du bilan « victoires-nuls-défaites » fourni avec chaque match. */
+function recordGames(competitor: EspnCompetitor): number | null {
+  const summary = competitor.records?.find((record) => record.type === "total")?.summary;
+  const counts = summary?.split("-").map(Number) ?? [];
+  return counts.length === 3 && counts.every(Number.isInteger) ? counts[0] + counts[1] + counts[2] : null;
+}
+
 function toMatch(event: EspnEvent): Match | null {
   const competition = event.competitions[0];
   const home = competition?.competitors.find((c) => c.homeAway === "home");
@@ -175,6 +182,7 @@ function toMatch(event: EspnEvent): Match | null {
     team: toTeam(competitor.team),
     score: showScore ? Number(competitor.score ?? 0) : null,
     winner: competitor.winner === true,
+    played: recordGames(competitor),
   });
 
   return {
