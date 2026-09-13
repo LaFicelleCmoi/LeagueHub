@@ -9,7 +9,7 @@ Pour chaque championnat :
 - **Buteurs** : meilleurs buteurs et passeurs décisifs
 - **Actualités** : derniers articles ESPN
 
-La page d'accueil affiche les matchs du jour, quelques chiffres clés, le bandeau des clubs et le top 5 de chaque championnat.
+La page d'accueil affiche les chiffres clés, le badge 3D LeagueHub, les raccourcis vers chaque championnat, le bandeau des clubs, les matchs du jour et le top 5 de chaque championnat.
 
 ## Stack
 
@@ -19,7 +19,7 @@ La page d'accueil affiche les matchs du jour, quelques chiffres clés, le bandea
 | Langage | TypeScript |
 | Style | Tailwind CSS 4 |
 | Icônes | Lucide React |
-| Animations | [React Bits](https://reactbits.dev) + motion |
+| Animations | [React Bits](https://reactbits.dev) + motion, three.js / React Three Fiber pour le badge 3D |
 | Données | API publique ESPN |
 | Hébergement | Vercel |
 
@@ -28,7 +28,7 @@ La page d'accueil affiche les matchs du jour, quelques chiffres clés, le bandea
 ```
 src/
 ├── app/
-│   ├── page.tsx                  Accueil : chiffres clés, matchs du jour, top 5 des classements
+│   ├── page.tsx                  Accueil
 │   ├── icon.svg, apple-icon.png  Favicon et icône iOS
 │   ├── api/live/[league]/        Scores en direct (JSON) pour le navigateur
 │   └── [league]/                 premier-league, la-liga, serie-a, bundesliga, ligue-1
@@ -40,6 +40,7 @@ src/
 ├── components/
 │   ├── reactbits/                Composants React Bits adaptés au projet
 │   ├── LiveMatches.tsx           Actualisation des scores en direct
+│   ├── HeroBadge.tsx             Chargement différé du badge 3D
 │   └── …                         Tableaux, cartes de match, logos, navigation
 └── lib/
     ├── leagues.ts                Configuration des 5 championnats
@@ -50,6 +51,8 @@ src/
         ├── client.ts             fetch serveur + cache Next.js (server-only)
         ├── types.ts              Typage des réponses JSON d'ESPN
         └── api.ts                Normalisation : JSON ESPN → modèles de l'app
+public/
+└── lanyard/                      Modèle 3D du badge, recto, verso et sangle
 ```
 
 ### Données et cache
@@ -75,10 +78,12 @@ src/
 
 ### Composants React Bits
 
-Six composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Clause) sont copiés dans `src/components/reactbits/`, en variante TypeScript + Tailwind. Chaque fichier indique en en-tête ce qui a été adapté (`"use client"`, respect du réglage « réduire les animations », etc.).
+Huit composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Clause) sont copiés dans `src/components/reactbits/`, en variante TypeScript + Tailwind. Chaque fichier indique en en-tête ce qui a été adapté (`"use client"`, respect du réglage « réduire les animations », etc.).
 
 | Composant | Utilisation |
 | --- | --- |
+| Lanyard | Badge 3D « Pass supporter » accroché à sa sangle, sur l'accueil |
+| PixelCard | Raccourcis vers les 5 championnats, pixels aux couleurs de chaque ligue |
 | SplitFlapText | Panneau d'affichage des championnats sur l'accueil |
 | CountUp | Chiffres clés de l'accueil |
 | LogoLoop | Bandeau défilant des clubs |
@@ -86,7 +91,15 @@ Six composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Cla
 | StarBorder | Bordure animée des matchs en direct |
 | ShinyText | Minute de jeu des matchs en direct |
 
+Le badge 3D (three.js et moteur physique Rapier) n'est téléchargé que sur grand écran, quand il approche de la zone visible, et jamais si l'utilisateur a activé « réduire les animations ». Son modèle `public/lanyard/card.glb` a été allégé (texture intégrée remplacée par un aplat, de 2,4 Mo à 177 Ko) : le recto, le verso et la sangle sont des images séparées.
+
 Pour ajouter un championnat, il suffit d'ajouter une entrée dans `src/lib/leagues.ts` (code ESPN, par exemple `ned.1` pour l'Eredivisie).
+
+## Serveur MCP shadcn
+
+Le fichier `.mcp.json` déclare le serveur MCP de shadcn pour Claude Code. Il permet de chercher et d'ajouter des composants des registres shadcn, dont React Bits (`@react-bits`). Claude Code demande de l'approuver au premier lancement dans le projet.
+
+Il est épinglé sur **shadcn 3.8.5** : les versions 4.x exigent Node.js 20.18 ou plus récent. Après une mise à jour de Node, on peut revenir à `shadcn@latest` (commande d'origine : `npx shadcn@latest mcp init --client claude`).
 
 ## Développement
 
