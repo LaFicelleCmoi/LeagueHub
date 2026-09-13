@@ -139,3 +139,30 @@ export interface EspnArticle {
 export interface EspnNewsResponse {
   articles?: EspnArticle[];
 }
+
+// --- Calendrier d'une équipe : /apis/site/v2/sports/soccer/{league|all}/teams/{id}/schedule ---
+
+export interface EspnScheduleCompetitor {
+  id: string;
+  homeAway: "home" | "away";
+  winner?: boolean;
+  score?: { value?: number; displayValue?: string };
+  shootoutScore?: number;
+  team: EspnTeam;
+}
+
+export interface EspnScheduleEvent {
+  id: string;
+  date: string;
+  league?: { name?: string; abbreviation?: string; slug?: string };
+  competitions: {
+    status: EspnStatus;
+    competitors: EspnScheduleCompetitor[];
+  }[];
+}
+
+export interface EspnScheduleResponse {
+  team?: EspnTeam;
+  season?: { year?: number };
+  events?: EspnScheduleEvent[];
+}
