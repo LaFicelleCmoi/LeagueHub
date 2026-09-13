@@ -6,7 +6,8 @@
 // - modèle et texture chargés depuis public/lanyard au lieu d'imports de fichiers ;
 // - hauteur du conteneur réglable via `className` (h-screen par défaut) ;
 // - `useMap={1}` au lieu de `useMap` : les types de meshline attendent un nombre ;
-// - `args` facultatif pour meshLineMaterial (R3F l'instancie sans argument, comme la démo).
+// - `args` facultatif pour meshLineMaterial (R3F l'instancie sans argument, comme la démo) ;
+// - `touch-action: pan-y` sur le canvas : sur mobile, la page défile toujours au-dessus du badge.
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -88,6 +89,7 @@ export default function Lanyard({
   return (
     <div className={`relative z-0 w-full flex justify-center items-center transform scale-100 origin-center ${className}`}>
       <Canvas
+        style={{ touchAction: 'pan-y' }}
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
