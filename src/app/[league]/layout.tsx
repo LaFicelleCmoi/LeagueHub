@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import { ClubDialogProvider } from "@/components/ClubDialogProvider";
 import { LeagueLogo } from "@/components/LeagueLogo";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { resolveLeague, type LeaguePageProps } from "@/lib/league-params";
@@ -30,7 +31,9 @@ export default async function LeagueLayout({ children, params }: LeaguePageProps
       </div>
 
       <LeagueTabs slug={league.slug} />
-      <div className="mt-6">{children}</div>
+      <div className="mt-6">
+        <ClubDialogProvider>{children}</ClubDialogProvider>
+      </div>
     </div>
   );
 }
