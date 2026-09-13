@@ -78,7 +78,10 @@ export function LeagueStandingsCard({ league, standings }: { league: League; sta
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/70">
               {rows.map((row) => (
-                <tr key={row.team.id} className="transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
+                <tr
+                  key={row.team.id}
+                  className="transition-colors hover:bg-slate-50/80 has-[[data-favorite]]:bg-amber-50 dark:hover:bg-slate-800/40 dark:has-[[data-favorite]]:bg-amber-400/[0.08]"
+                >
                   <td className="relative py-2 pl-4" title={row.zone?.label}>
                     {row.zone && (
                       <>
