@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ChevronRight, Star, X } from "lucide-react";
+import { CalendarDays, ChevronRight, Star, X } from "lucide-react";
 import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
 import { TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
@@ -10,13 +10,23 @@ import type { ClubRef, MatchOutcome, TeamForm } from "@/lib/types";
 import { LeagueLogo } from "./LeagueLogo";
 import { TeamLogo } from "./TeamLogo";
 
-const OUTCOMES: Record<MatchOutcome, { letter: string; label: string; badge: string; score: string }> = {
+export const OUTCOMES: Record<MatchOutcome, { letter: string; label: string; badge: string; score: string }> = {
   win: { letter: "V", label: "Victoire", badge: "bg-emerald-600 text-white", score: "text-emerald-700 dark:text-emerald-400" },
   draw: { letter: "N", label: "Match nul", badge: "bg-slate-400 text-white dark:bg-slate-500", score: "text-slate-600 dark:text-slate-300" },
   loss: { letter: "D", label: "Défaite", badge: "bg-red-600 text-white", score: "text-red-700 dark:text-red-400" },
 };
 
 const shortDate = new Intl.DateTimeFormat("fr-FR", { timeZone: TIME_ZONE, day: "numeric", month: "short" });
+const fixtureDate = new Intl.DateTimeFormat("fr-FR", {
+  timeZone: TIME_ZONE,
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+
+const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 
 type Status = { state: "loading" } | { state: "error" } | { state: "ready"; form: TeamForm };
 
@@ -75,6 +85,7 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
   const close = () => dialogRef.current?.close();
   const league = club ? getLeague(club.league) : undefined;
   const isFavorite = Boolean(club && favorite?.team.id === club.team.id);
+  const next = status.state === "ready" ? status.form.next : null;
 
   return (
     <dialog
@@ -84,13 +95,27 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
         if (event.target === event.currentTarget) close();
       }}
       aria-labelledby="club-dialog-title"
-      className="m-auto max-h-[min(90dvh,46rem)] w-[min(calc(100%-2rem),28rem)] overflow-y-auto rounded-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm dark:bg-slate-900 dark:text-slate-100"
+      className={`m-auto max-h-[min(90dvh,46rem)] w-[min(calc(100%-2rem),28rem)] overflow-y-auto rounded-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm dark:bg-slate-900 dark:text-slate-100 ${
+        isFavorite ? "ring-2 ring-amber-400/70" : ""
+      }`}
     >
       {club && league && (
         <div className="p-5">
-          <header className="flex items-start gap-3">
+          <header
+            className={`flex items-start gap-3 ${
+              isFavorite
+                ? "-m-5 mb-0 rounded-t-2xl bg-gradient-to-br from-amber-100 via-amber-50 to-transparent p-5 dark:from-amber-500/25 dark:via-amber-500/5"
+                : ""
+            }`}
+          >
             <TeamLogo team={club.team} size={48} />
             <div className="min-w-0 flex-1">
+              {isFavorite && (
+                <p className="mb-1 inline-flex items-center gap-1 rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-amber-950">
+                  <Star className="size-3 fill-amber-950" aria-hidden />
+                  Votre club
+                </p>
+              )}
               <h2 id="club-dialog-title" className="text-lg font-bold leading-tight">
                 {club.team.name}
               </h2>
@@ -196,6 +221,35 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
                 </>
               ))}
           </section>
+
+          {next && (
+            <section className="mt-5" aria-labelledby="club-next-title">
+              <h3 id="club-next-title" className="text-sm font-semibold">
+                Prochain match
+              </h3>
+              <div
+                className={`mt-2 flex items-center gap-3 rounded-xl border p-3 ${
+                  isFavorite
+                    ? "border-amber-300 bg-amber-50/70 dark:border-amber-500/40 dark:bg-amber-500/10"
+                    : "border-slate-200 dark:border-slate-800"
+                }`}
+              >
+                <CalendarDays className="size-5 shrink-0 text-slate-400" aria-hidden />
+                <div className="min-w-0 flex-1">
+                  <p className="flex items-center gap-2 text-sm font-medium">
+                    <span className="text-xs font-normal text-slate-400">{next.home ? "vs" : "chez"}</span>
+                    <TeamLogo team={next.opponent} size={18} />
+                    <span className="truncate">{next.opponent.name}</span>
+                  </p>
+                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                    {[capitalize(fixtureDate.format(new Date(next.date))), next.home ? "Domicile" : "Extérieur", next.competition]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                </div>
+              </div>
+            </section>
+          )}
 
           <footer className="mt-5 flex flex-wrap gap-2">
             <button
