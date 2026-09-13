@@ -1,0 +1,39 @@
+import type { Metadata } from "next";
+import { Geist } from "next/font/google";
+import { SiteHeader } from "@/components/SiteHeader";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "LeagueHub — Les 5 grands championnats européens",
+    template: "%s · LeagueHub",
+  },
+  description:
+    "Classements, résultats, calendriers, buteurs et actualités de la Premier League, La Liga, Serie A, Bundesliga et Ligue 1.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="fr">
+      <body className={`${geistSans.variable} flex min-h-dvh flex-col font-sans antialiased`}>
+        <SiteHeader />
+        <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
+        <footer className="border-t border-slate-200 dark:border-slate-800">
+          <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:justify-between dark:text-slate-400">
+            <p>LeagueHub — site non officiel, sans lien avec les ligues ni les clubs.</p>
+            <p>Données : ESPN · Horaires en heure de Paris</p>
+          </div>
+        </footer>
+      </body>
+    </html>
+  );
+}
