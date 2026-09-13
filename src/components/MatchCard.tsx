@@ -115,7 +115,7 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
   const away = match.events.filter((e) => e.side === "away");
 
   const card = (
-    <article className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+    <article className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
       <div className="flex items-center gap-4">
         <div className="w-16 shrink-0 text-center text-xs font-semibold">
           {live ? (
@@ -159,7 +159,7 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
   return (
     <StarBorder
       as="div"
-      className="block rounded-xl"
+      className="block min-w-0 rounded-xl"
       innerClassName="rounded-xl"
       color="#ef4444"
       speed="5s"
