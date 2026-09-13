@@ -12,7 +12,7 @@ Pour chaque championnat :
 La page d'accueil réunit les chiffres clés, le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
 
 - **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
-- **Club favori** : chaque visiteur peut choisir son club ; il s'affiche sur le badge. Le choix est mémorisé dans le navigateur, sans compte.
+- **Club favori** : chaque visiteur peut choisir son club (mémorisé dans le navigateur, sans compte). Il a droit à un traitement spécial : section « Mon club » sur l'accueil (place au classement, forme, match du jour en direct ou prochain match), logo sur le badge 3D, étoile dorée et ligne ambrée dans les classements, cadre doré sur ses matchs, célébration quand il marque en direct et fiche « Votre club » dorée.
 
 ## Stack
 
