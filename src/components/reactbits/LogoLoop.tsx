@@ -3,8 +3,7 @@
 // Composant React Bits : https://reactbits.dev/animations/logo-loop
 // Licence MIT + Commons Clause. Variante TypeScript + Tailwind copiée depuis le registre.
 // Adaptations LeagueHub :
-// - directive "use client" (avertissements ESLint du code d'origine désactivés) ;
-// - le défilement se met aussi en pause quand un élément du bandeau reçoit le focus clavier.
+// - directive "use client" (code inchangé, avertissements ESLint du code d'origine désactivés).
 /* eslint-disable @typescript-eslint/no-explicit-any, @next/next/no-img-element, react-hooks/exhaustive-deps */
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -493,8 +492,6 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           ref={trackRef}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onFocus={handleMouseEnter}
-          onBlur={handleMouseLeave}
         >
           {logoLists}
         </div>
