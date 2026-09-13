@@ -71,7 +71,8 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
         speed={40}
         gap={24}
         logoHeight={48}
-        pauseOnHover
+        // Ne s'arrête jamais : simple ralentissement au survol pour garder les logos faciles à cliquer.
+        hoverSpeed={20}
         fadeOut
         fadeOutColor="var(--page-bg)"
         ariaLabel="Clubs des 5 championnats"
