@@ -9,7 +9,10 @@ Pour chaque championnat :
 - **Buteurs** : meilleurs buteurs et passeurs décisifs
 - **Actualités** : derniers articles ESPN
 
-La page d'accueil affiche les chiffres clés, le badge 3D LeagueHub, les raccourcis vers chaque championnat, le bandeau des clubs, les matchs du jour et le top 5 de chaque championnat.
+La page d'accueil réunit les chiffres clés, le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
+
+- **Forme d'un club** : un clic sur un club du bandeau ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
+- **Club favori** : chaque visiteur peut choisir son club ; il s'affiche sur le badge. Le choix est mémorisé dans le navigateur, sans compte.
 
 ## Stack
 
@@ -31,6 +34,7 @@ src/
 │   ├── page.tsx                  Accueil
 │   ├── icon.svg, apple-icon.png  Favicon et icône iOS
 │   ├── api/live/[league]/        Scores en direct (JSON) pour le navigateur
+│   ├── api/teams/[league]/[team] 5 derniers matchs d'un club (JSON)
 │   └── [league]/                 premier-league, la-liga, serie-a, bundesliga, ligue-1
 │       ├── layout.tsx            En-tête du championnat + onglets
 │       ├── page.tsx              Classement
@@ -40,11 +44,16 @@ src/
 ├── components/
 │   ├── reactbits/                Composants React Bits adaptés au projet
 │   ├── LiveMatches.tsx           Actualisation des scores en direct
-│   ├── HeroBadge.tsx             Chargement différé du badge 3D
+│   ├── ClubsLoop.tsx             Bandeau des clubs cliquable
+│   ├── ClubDialog.tsx            Fenêtre « 5 derniers matchs »
+│   ├── HeroBadge.tsx             Badge 3D (chargement différé, version fixe de secours)
 │   └── …                         Tableaux, cartes de match, logos, navigation
 └── lib/
     ├── leagues.ts                Configuration des 5 championnats
     ├── live.ts                   Règles du suivi en direct (quels matchs, quand)
+    ├── favorite-club.ts          Club favori mémorisé dans le navigateur
+    ├── favorite-card.ts          Recto du badge dessiné avec le club favori
+    ├── standings-style.ts        Couleurs partagées des classements
     ├── types.ts                  Modèles normalisés utilisés par l'interface
     ├── format.ts                 Dates en français (heure de Paris)
     └── espn/
@@ -65,6 +74,7 @@ public/
   | Scores en direct (`/api/live/[league]`) | 15 s + 10 s sur le CDN Vercel |
   | Pages matchs / accueil | 60 s |
   | Classements | 5 min |
+  | 5 derniers matchs d'un club (`/api/teams/…`) | 10 min + 5 min sur le CDN Vercel |
   | Buteurs, actualités | 15 min |
 
 - Si ESPN ne répond pas, une page d'erreur propose de réessayer. Sur l'accueil, une ligue indisponible n'empêche pas l'affichage des autres.
@@ -76,22 +86,34 @@ public/
 - L'actualisation se met en pause quand l'onglet est masqué et reprend immédiatement au retour. En cas d'erreur, les tentatives s'espacent jusqu'à 5 minutes.
 - Côté ESPN, la charge reste plafonnée à 4 requêtes par minute par championnat, quel que soit le nombre de visiteurs.
 
+### Forme d'un club
+
+- Les 5 derniers matchs viennent du calendrier ESPN « toutes compétitions » du club. Seules les compétitions officielles sont gardées (championnats, coupes nationales, compétitions UEFA/FIFA), avec leur nom en français ; les matchs amicaux sont ignorés.
+- En début de saison, s'il y a moins de 5 matchs, la liste est complétée avec la fin de la saison précédente (y compris la division inférieure pour un club promu).
+
+### Responsive
+
+- Aucune page ne défile horizontalement, de 360 px à grand écran.
+- Sur mobile, les classements de l'accueil défilent en carrousel horizontal ; sur tablette et grand écran, les grilles se remplissent sans case vide.
+- Le panneau d'affichage (SplitFlapText) se dimensionne sur la largeur de sa colonne (container queries).
+- Le badge 3D s'affiche sur tous les écrans. Il est remplacé par une version fixe si l'utilisateur a activé « réduire les animations » ou si WebGL n'est pas disponible.
+
 ### Composants React Bits
 
-Huit composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Clause) sont copiés dans `src/components/reactbits/`, en variante TypeScript + Tailwind. Chaque fichier indique en en-tête ce qui a été adapté (`"use client"`, respect du réglage « réduire les animations », etc.).
+Huit composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Clause) sont copiés dans `src/components/reactbits/`, en variante TypeScript + Tailwind. Chaque fichier indique en en-tête ce qui a été adapté (`"use client"`, respect du réglage « réduire les animations », corrections, etc.).
 
 | Composant | Utilisation |
 | --- | --- |
-| Lanyard | Badge 3D « Pass supporter » accroché à sa sangle, sur l'accueil |
+| Lanyard | Badge 3D « Pass supporter » accroché à sa sangle, personnalisable avec le club favori |
 | PixelCard | Raccourcis vers les 5 championnats, pixels aux couleurs de chaque ligue |
 | SplitFlapText | Panneau d'affichage des championnats sur l'accueil |
 | CountUp | Chiffres clés de l'accueil |
-| LogoLoop | Bandeau défilant des clubs |
+| LogoLoop | Bandeau défilant des clubs (clic pour la forme du club) |
 | SpotlightCard | Halo aux couleurs de la ligue sur les cartes top 5 |
 | StarBorder | Bordure animée des matchs en direct |
 | ShinyText | Minute de jeu des matchs en direct |
 
-Le badge 3D (three.js et moteur physique Rapier) n'est téléchargé que sur grand écran, quand il approche de la zone visible, et jamais si l'utilisateur a activé « réduire les animations ». Son modèle `public/lanyard/card.glb` a été allégé (texture intégrée remplacée par un aplat, de 2,4 Mo à 177 Ko) : le recto, le verso et la sangle sont des images séparées.
+Le badge 3D (three.js et moteur physique Rapier) n'est téléchargé que lorsqu'il approche de la zone visible. Son modèle `public/lanyard/card.glb` a été allégé (texture intégrée remplacée par un aplat, de 2,4 Mo à 177 Ko) : le recto, le verso et la sangle sont des images séparées, et le recto du club favori est dessiné dans le navigateur.
 
 Pour ajouter un championnat, il suffit d'ajouter une entrée dans `src/lib/leagues.ts` (code ESPN, par exemple `ned.1` pour l'Eredivisie).
 
