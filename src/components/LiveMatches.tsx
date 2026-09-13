@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { TIME_ZONE } from "@/lib/format";
 import type { LeagueSlug } from "@/lib/leagues";
 import { LIVE_POLL_INTERVAL, needsLiveUpdate, type TrackedMatch } from "@/lib/live";
@@ -103,6 +103,12 @@ export function LiveMatchesProvider({ sources, children }: { sources: LiveSource
 /** Version la plus récente d'un match : celle reçue en direct si elle existe. */
 export function useLiveMatch(match: Match): Match {
   return useContext(LiveContext).matches.get(match.id) ?? match;
+}
+
+/** Liste de matchs dont chacun est remplacé par sa version reçue en direct quand elle existe. */
+export function useLiveMatches(initial: Match[]): Match[] {
+  const { matches } = useContext(LiveContext);
+  return useMemo(() => initial.map((match) => matches.get(match.id) ?? match), [initial, matches]);
 }
 
 const clockFormatter = new Intl.DateTimeFormat("fr-FR", {
