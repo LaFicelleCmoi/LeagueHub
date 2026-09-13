@@ -1,4 +1,5 @@
-import { Medal, Star, Trophy, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Medal, Star, Trophy, type LucideIcon } from "lucide-react";
+import { UCL_TRACKER_URL } from "@/lib/external-links";
 import { TIME_ZONE } from "@/lib/format";
 import type { EuropeanCup, TeamFixture } from "@/lib/types";
 import { TeamLogo } from "./TeamLogo";
@@ -91,6 +92,18 @@ export function EuropeanFixtureCard({ fixture, cup }: { fixture: TeamFixture; cu
             .filter(Boolean)
             .join(" · ")}
         </p>
+        {cup === "ucl" && (
+          <a
+            href={UCL_TRACKER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2.5 inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold text-white ring-1 ring-white/20 hover:bg-white/25"
+          >
+            Suivre la LDC sur le tracker
+            <ArrowUpRight className="size-3.5" aria-hidden />
+            <span className="sr-only">(nouvel onglet)</span>
+          </a>
+        )}
       </div>
     </div>
   );
