@@ -100,6 +100,9 @@ export interface ClubRef {
   league: LeagueSlug;
 }
 
+/** Coupes d'Europe : Ligue des champions, Ligue Europa, Ligue Conférence. */
+export type EuropeanCup = "ucl" | "uel" | "uecl";
+
 export type MatchOutcome = "win" | "draw" | "loss";
 
 export interface TeamResult {
@@ -114,6 +117,8 @@ export interface TeamResult {
   outcome: MatchOutcome;
   /** Précision éventuelle : « t.a.b. 4-3 », « a.p. »… */
   detail: string | null;
+  /** Coupe d'Europe concernée, pour un affichage dédié. */
+  europeanCup: EuropeanCup | null;
 }
 
 export interface TeamFixture {
@@ -123,6 +128,7 @@ export interface TeamFixture {
   home: boolean;
   opponent: Team;
   venue: string | null;
+  europeanCup: EuropeanCup | null;
 }
 
 export interface TeamForm {
