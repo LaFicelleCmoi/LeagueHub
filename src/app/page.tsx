@@ -4,6 +4,7 @@ import { ClubDialogProvider } from "@/components/ClubDialogProvider";
 import { ClubsLoop } from "@/components/ClubsLoop";
 import { EmptyState } from "@/components/EmptyState";
 import { FavoriteClubPicker } from "@/components/FavoriteClubPicker";
+import { FavoriteClubSpotlight, type ClubPosition } from "@/components/FavoriteClubSpotlight";
 import { HeroBadge } from "@/components/HeroBadge";
 import { LeagueLogo } from "@/components/LeagueLogo";
 import { LeagueShortcuts } from "@/components/LeagueShortcuts";
@@ -48,6 +49,13 @@ export default async function HomePage() {
   const liveSources = matchDays
     .map(({ league, today }) => ({ league: league.slug, matches: selectTrackedMatches(today, now.getTime()) }))
     .filter((source) => source.matches.length > 0);
+
+  const positions: Record<string, ClubPosition> = Object.fromEntries(
+    overview.flatMap(({ standings }) => {
+      const rows = standings?.rows ?? [];
+      return rows.map((row) => [row.team.id, { rank: row.rank, points: row.points, played: row.played, teams: rows.length }]);
+    }),
+  );
 
   const stats = [
     { label: "championnats", value: LEAGUES.length },
@@ -104,11 +112,14 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <LeagueShortcuts />
-
-        {clubs.length > 0 && <ClubsLoop clubs={clubs} />}
-
         <LiveMatchesProvider sources={liveSources}>
+          {/* Affichée seulement quand le visiteur a choisi un club favori. */}
+          <FavoriteClubSpotlight positions={positions} matches={todayMatches} />
+
+          <LeagueShortcuts />
+
+          {clubs.length > 0 && <ClubsLoop clubs={clubs} />}
+
           <section aria-labelledby="today-heading">
             <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h2 id="today-heading" className="text-xl font-semibold">
