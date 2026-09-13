@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MapPin } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
+import { useFavoriteClub } from "@/lib/favorite-club";
 import type { Match, MatchEvent, MatchEventKind, MatchSide } from "@/lib/types";
 import { useLiveMatch } from "./LiveMatches";
 import ShinyText from "./reactbits/ShinyText";
@@ -54,6 +55,7 @@ function LiveBadge({ label }: { label: string }) {
 
 function TeamLine({ side, match }: { side: MatchSide; match: Match }) {
   const scored = useGoalHighlight(side.score);
+  const favorite = useFavoriteClub()?.team.id === side.team.id;
   const decided = match.home.winner || match.away.winner;
   const dimmed = match.state === "post" && decided && !side.winner;
   const tone = dimmed ? "text-slate-500 dark:text-slate-400" : "";
@@ -61,14 +63,27 @@ function TeamLine({ side, match }: { side: MatchSide; match: Match }) {
   return (
     <div
       className={`-mx-2 flex items-center gap-3 rounded-lg px-2 py-0.5 transition-colors duration-700 ${
-        scored ? "bg-emerald-500/15" : ""
+        scored ? (favorite ? "bg-amber-400/25" : "bg-emerald-500/15") : ""
       }`}
     >
       <TeamLogo team={side.team} size={22} />
-      <span className={`min-w-0 flex-1 truncate ${dimmed ? tone : "font-semibold"}`}>{side.team.name}</span>
+      <span className={`flex min-w-0 flex-1 items-center gap-1.5 ${dimmed ? tone : "font-semibold"}`}>
+        <span className="truncate">{side.team.name}</span>
+        {favorite && (
+          <>
+            <Star aria-hidden className="size-3.5 shrink-0 fill-amber-400 text-amber-500" />
+            <span className="sr-only">(club favori)</span>
+          </>
+        )}
+      </span>
       {scored && (
-        <span className="rounded bg-emerald-600 px-1.5 py-0.5 text-[10px] font-bold uppercase leading-none tracking-wide text-white">
-          But
+        // Le but du club favori a droit à sa célébration.
+        <span
+          className={`rounded px-1.5 py-0.5 text-[10px] font-bold uppercase leading-none tracking-wide text-white ${
+            favorite ? "animate-bounce bg-amber-500 motion-reduce:animate-none" : "bg-emerald-600"
+          }`}
+        >
+          {favorite ? "But !" : "But"}
         </span>
       )}
       {side.score !== null && (
@@ -110,12 +125,20 @@ function EventList({ events, alignRight = false }: { events: MatchEvent[]; align
 
 export function MatchCard({ match: initialMatch }: { match: Match }) {
   const match = useLiveMatch(initialMatch);
+  const favorite = useFavoriteClub();
+  const hasFavorite = favorite !== null && [match.home.team.id, match.away.team.id].includes(favorite.team.id);
   const live = match.state === "in";
   const home = match.events.filter((e) => e.side === "home");
   const away = match.events.filter((e) => e.side === "away");
 
   const card = (
-    <article className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+    <article
+      className={`min-w-0 rounded-xl border bg-white p-4 dark:bg-slate-900 ${
+        hasFavorite
+          ? "border-amber-300 ring-2 ring-amber-300/40 dark:border-amber-500/50 dark:ring-amber-500/20"
+          : "border-slate-200 dark:border-slate-800"
+      }`}
+    >
       <div className="flex items-center gap-4">
         <div className="w-16 shrink-0 text-center text-xs font-semibold">
           {live ? (
