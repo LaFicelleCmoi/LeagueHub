@@ -160,6 +160,7 @@ export interface EspnScheduleEvent {
   competitions: {
     status: EspnStatus;
     competitors: EspnScheduleCompetitor[];
+    venue?: { fullName?: string };
   }[];
 }
 
