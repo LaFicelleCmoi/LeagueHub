@@ -13,6 +13,7 @@ La page d'accueil réunit les chiffres clés, le badge 3D « Pass supporter », 
 
 - **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
 - **Club favori** : chaque visiteur peut choisir son club (mémorisé dans le navigateur, sans compte). Il a droit à un traitement spécial : section « Mon club » sur l'accueil (place au classement, forme, match du jour en direct ou prochain match), logo sur le badge 3D, étoile dorée et ligne ambrée dans les classements, cadre doré sur ses matchs, célébration quand il marque en direct et fiche « Votre club » dorée.
+- **Tracker Ligue des champions 2026-2027** : bannière sur l'accueil, pastille « LDC » dans l'en-tête et adresses courtes `/ldc` et `/ligue-des-champions` qui redirigent vers [ldc-2026-2027.vercel.app](https://ldc-2026-2027.vercel.app/) (projet indépendant, ouvert dans un nouvel onglet).
 
 ## Stack
 
