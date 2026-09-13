@@ -13,6 +13,7 @@ import type {
   StandingRow,
   Standings,
   Team,
+  TeamFixture,
   TeamForm,
   TeamResult,
   Zone,
@@ -44,6 +45,7 @@ const REVALIDATE = {
   // Derniers résultats d'un club : ils changent au plus une fois par match.
   form: 600,
   previousSeason: 86_400,
+  fixtures: 3_600,
 } as const;
 
 const soccer = (league: League, resource: string) => `/site/v2/sports/soccer/${league.espnCode}/${resource}`;
@@ -301,10 +303,14 @@ const COMPETITION_LABELS: Record<string, string> = {
 
 const NATIONAL_LEAGUE = /^[a-z]{3}\.\d$/;
 
+function isOfficial(slug: string): boolean {
+  return Object.hasOwn(COMPETITION_LABELS, slug) || NATIONAL_LEAGUE.test(slug);
+}
+
 function toTeamResult(event: EspnScheduleEvent, teamId: string): TeamResult | null {
   const slug = event.league?.slug ?? "";
   // Seules les compétitions officielles comptent : les amicaux ne disent rien de la forme du moment.
-  if (!Object.hasOwn(COMPETITION_LABELS, slug) && !NATIONAL_LEAGUE.test(slug)) return null;
+  if (!isOfficial(slug)) return null;
 
   const competition = event.competitions[0];
   if (!competition?.status.type.completed) return null;
@@ -346,11 +352,44 @@ function toTeamResults(data: EspnScheduleResponse, teamId: string): TeamResult[]
     .filter((result): result is TeamResult => result !== null);
 }
 
+/** Prochain match officiel pas encore commencé. */
+function nextFixture(data: EspnScheduleResponse | null, teamId: string): TeamFixture | null {
+  const now = Date.now();
+  const upcoming = (data?.events ?? [])
+    .filter((event) => {
+      const competition = event.competitions[0];
+      return isOfficial(event.league?.slug ?? "") && competition?.status.type.state === "pre" && Date.parse(event.date) > now;
+    })
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  for (const event of upcoming) {
+    const competition = event.competitions[0];
+    const us = competition.competitors.find((c) => c.team.id === teamId);
+    const them = competition.competitors.find((c) => c.team.id !== teamId);
+    if (!us || !them) continue;
+    const slug = event.league?.slug ?? "";
+    return {
+      id: event.id,
+      date: event.date,
+      competition: COMPETITION_LABELS[slug] ?? event.league?.abbreviation ?? event.league?.name ?? "",
+      home: us.homeAway === "home",
+      opponent: toTeam(them.team),
+      venue: competition.venue?.fullName ?? null,
+    };
+  }
+  return null;
+}
+
 /** Les derniers matchs officiels d'un club (toutes compétitions), du plus récent au plus ancien. */
 export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm | null> {
-  const current = await espnFetch<EspnScheduleResponse>(`/site/v2/sports/soccer/all/teams/${teamId}/schedule`, {
-    revalidate: REVALIDATE.form,
-  });
+  const schedule = `/site/v2/sports/soccer/all/teams/${teamId}/schedule`;
+  const [current, fixtures] = await Promise.all([
+    espnFetch<EspnScheduleResponse>(schedule, { revalidate: REVALIDATE.form }),
+    // Le calendrier à venir est un bonus : s'il manque, la forme du club s'affiche quand même.
+    espnFetch<EspnScheduleResponse>(schedule, { revalidate: REVALIDATE.fixtures, params: { fixture: "true" } }).catch(
+      () => null,
+    ),
+  ]);
   if (!current.team) return null;
 
   let results = toTeamResults(current, teamId);
@@ -370,5 +409,6 @@ export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm |
   return {
     team: toTeam(current.team),
     results: unique.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count),
+    next: nextFixture(fixtures, teamId),
   };
 }
