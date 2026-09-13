@@ -1,16 +1,16 @@
 "use client";
 
-import { useCallback, useMemo, useState, type Key } from "react";
+import { useCallback, useMemo, type Key } from "react";
 import { getLeague } from "@/lib/leagues";
 import type { ClubRef } from "@/lib/types";
-import { ClubDialog } from "./ClubDialog";
+import { useOpenClub } from "./ClubDialogProvider";
 import { LeagueLogo } from "./LeagueLogo";
 import LogoLoop, { type LogoItem } from "./reactbits/LogoLoop";
 import { TeamLogo } from "./TeamLogo";
 
-// Bandeau des clubs : un clic ouvre les 5 derniers matchs du club.
+// Bandeau des clubs : un clic ouvre les 5 derniers matchs du club (fenêtre partagée de la page).
 export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
-  const [selected, setSelected] = useState<ClubRef | null>(null);
+  const openClub = useOpenClub();
 
   const logos = useMemo<LogoItem[]>(() => clubs.map((club) => ({ node: null, title: club.team.name })), [clubs]);
 
@@ -27,7 +27,7 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
         <button
           type="button"
           tabIndex={copy === 0 ? 0 : -1}
-          onClick={() => setSelected(club)}
+          onClick={() => openClub?.(club)}
           title={club.team.name}
           aria-label={`${club.team.name} (${league.name}) : voir les 5 derniers matchs`}
           className="relative block rounded-full p-1.5 transition-transform duration-200 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 motion-reduce:transition-none dark:focus-visible:outline-white"
@@ -43,7 +43,7 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
         </button>
       );
     },
-    [clubs],
+    [clubs, openClub],
   );
 
   return (
@@ -62,7 +62,6 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
         fadeOutColor="var(--page-bg)"
         ariaLabel="Clubs des 5 championnats"
       />
-      <ClubDialog club={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }
