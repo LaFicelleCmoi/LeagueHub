@@ -30,6 +30,8 @@ import type {
 
 // Durée de cache (secondes) adaptée au rythme de mise à jour de chaque donnée.
 const REVALIDATE = {
+  // Scores en direct : ESPN est interrogé au plus 4 fois par minute par championnat.
+  live: 15,
   matches: 60,
   standings: 300,
   leaders: 900,
@@ -182,11 +184,16 @@ function toMatch(event: EspnEvent): Match | null {
 }
 
 /** Matchs joués ou programmés entre deux dates (incluses), triés chronologiquement. */
-export async function getMatches(league: League, from: Date, to: Date = from): Promise<Match[]> {
+export async function getMatches(
+  league: League,
+  from: Date,
+  to: Date = from,
+  revalidate: number = REVALIDATE.matches,
+): Promise<Match[]> {
   const start = espnDate(from);
   const end = espnDate(to);
   const data = await espnFetch<EspnScoreboardResponse>(soccer(league, "scoreboard"), {
-    revalidate: REVALIDATE.matches,
+    revalidate,
     params: { dates: start === end ? start : `${start}-${end}`, limit: 200 },
   });
 
@@ -194,6 +201,11 @@ export async function getMatches(league: League, from: Date, to: Date = from): P
     .map(toMatch)
     .filter((m): m is Match => m !== null)
     .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/** Matchs du jour avec un cache court, pour le suivi en direct. */
+export async function getLiveMatches(league: League): Promise<Match[]> {
+  return getMatches(league, new Date(), undefined, REVALIDATE.live);
 }
 
 // --- Buteurs et passeurs ---
