@@ -77,3 +77,8 @@ export function setFavoriteClub(club: ClubRef | null) {
   }
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
+
+/** Ce club est-il le favori du visiteur ? */
+export function useIsFavorite(teamId: string): boolean {
+  return useFavoriteClub()?.team.id === teamId;
+}
