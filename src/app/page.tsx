@@ -11,6 +11,7 @@ import { LeagueShortcuts } from "@/components/LeagueShortcuts";
 import { LeagueStandingsCard } from "@/components/LeagueStandingsCard";
 import { LiveIndicator, LiveMatchesProvider } from "@/components/LiveMatches";
 import { MatchCard } from "@/components/MatchCard";
+import { UclTrackerBanner } from "@/components/UclTrackerBanner";
 import CountUp from "@/components/reactbits/CountUp";
 import SplitFlapText from "@/components/reactbits/SplitFlapText";
 import { getMatches, getStandings } from "@/lib/espn/api";
@@ -117,6 +118,8 @@ export default async function HomePage() {
           <FavoriteClubSpotlight positions={positions} matches={todayMatches} />
 
           <LeagueShortcuts />
+
+          <UclTrackerBanner />
 
           {clubs.length > 0 && <ClubsLoop clubs={clubs} />}
 
