@@ -96,6 +96,7 @@ public/
 ### Forme d'un club
 
 - Les 5 derniers matchs viennent du calendrier ESPN « toutes compétitions » du club. Seules les compétitions officielles sont gardées (championnats, coupes nationales, compétitions UEFA/FIFA), avec leur nom en français ; les matchs amicaux sont ignorés.
+- Les matchs de **coupe d'Europe** (Ligue des champions, Ligue Europa, Ligue Conférence, tours de qualification compris) ont un affichage dédié : ligne teintée aux couleurs de la compétition avec pastille et icône, forme cerclée, et prochain match européen présenté en carte spéciale.
 - En début de saison, s'il y a moins de 5 matchs, la liste est complétée avec la fin de la saison précédente (y compris la division inférieure pour un club promu).
 
 ### Responsive
