@@ -46,6 +46,8 @@ export interface MatchSide {
   team: Team;
   score: number | null;
   winner: boolean;
+  /** Matchs de championnat joués selon le bilan ESPN (un match en cours n'y est pas encore compté). */
+  played: number | null;
 }
 
 export type MatchEventKind = "goal" | "penalty" | "own-goal" | "red-card";
