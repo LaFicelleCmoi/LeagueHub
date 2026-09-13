@@ -1,17 +1,20 @@
 import "server-only";
 
 import { espnDate, formatTime } from "@/lib/format";
-import type { League } from "@/lib/leagues";
+import { LEAGUES, type League } from "@/lib/leagues";
 import type {
   Article,
   Leader,
   Leaders,
   Match,
   MatchEvent,
+  MatchOutcome,
   MatchSide,
   StandingRow,
   Standings,
   Team,
+  TeamForm,
+  TeamResult,
   Zone,
 } from "@/lib/types";
 import { espnFetch } from "./client";
@@ -20,6 +23,8 @@ import type {
   EspnDetail,
   EspnEvent,
   EspnNewsResponse,
+  EspnScheduleEvent,
+  EspnScheduleResponse,
   EspnScoreboardResponse,
   EspnStandingsResponse,
   EspnStat,
@@ -36,6 +41,9 @@ const REVALIDATE = {
   standings: 300,
   leaders: 900,
   news: 900,
+  // Derniers résultats d'un club : ils changent au plus une fois par match.
+  form: 600,
+  previousSeason: 86_400,
 } as const;
 
 const soccer = (league: League, resource: string) => `/site/v2/sports/soccer/${league.espnCode}/${resource}`;
@@ -255,4 +263,104 @@ export async function getNews(league: League, limit = 12): Promise<Article[]> {
       url: article.links?.web?.href ?? null,
     };
   });
+}
+
+// --- Derniers résultats d'un club ---
+
+// Compétitions officielles retenues, avec leur nom en français. Les championnats nationaux
+// (« eng.1 », « eng.2 »…) sont aussi retenus ; amicaux et tournois de préparation sont ignorés.
+const COMPETITION_LABELS: Record<string, string> = {
+  ...Object.fromEntries(LEAGUES.map((league) => [league.espnCode, league.name])),
+  "eng.2": "Championship",
+  "eng.fa": "FA Cup",
+  "eng.league_cup": "Carabao Cup",
+  "eng.charity": "Community Shield",
+  "esp.copa_del_rey": "Coupe du Roi",
+  "esp.super_cup": "Supercoupe d'Espagne",
+  "ita.coppa_italia": "Coupe d'Italie",
+  "ita.super_cup": "Supercoupe d'Italie",
+  "ger.dfb_pokal": "Coupe d'Allemagne",
+  "ger.super_cup": "Supercoupe d'Allemagne",
+  "fra.coupe_de_france": "Coupe de France",
+  "fra.super_cup": "Trophée des champions",
+  "uefa.champions": "Ligue des champions",
+  "uefa.europa": "Ligue Europa",
+  "uefa.europa.conf": "Ligue Conférence",
+  "uefa.super_cup": "Supercoupe de l'UEFA",
+  "fifa.cwc": "Coupe du monde des clubs",
+  "fifa.intercontinental_cup": "Coupe intercontinentale",
+};
+
+const NATIONAL_LEAGUE = /^[a-z]{3}\.\d$/;
+
+function toTeamResult(event: EspnScheduleEvent, teamId: string): TeamResult | null {
+  const slug = event.league?.slug ?? "";
+  // Seules les compétitions officielles comptent : les amicaux ne disent rien de la forme du moment.
+  if (!Object.hasOwn(COMPETITION_LABELS, slug) && !NATIONAL_LEAGUE.test(slug)) return null;
+
+  const competition = event.competitions[0];
+  if (!competition?.status.type.completed) return null;
+  const us = competition.competitors.find((c) => c.team.id === teamId);
+  const them = competition.competitors.find((c) => c.team.id !== teamId);
+  if (!us || !them) return null;
+
+  const goalsFor = us.score?.value ?? Number(us.score?.displayValue ?? 0);
+  const goalsAgainst = them.score?.value ?? Number(them.score?.displayValue ?? 0);
+
+  let outcome: MatchOutcome;
+  if (us.winner) outcome = "win";
+  else if (them.winner) outcome = "loss";
+  else outcome = goalsFor > goalsAgainst ? "win" : goalsFor < goalsAgainst ? "loss" : "draw";
+
+  let detail: string | null = null;
+  if (us.shootoutScore !== undefined && them.shootoutScore !== undefined) {
+    detail = `t.a.b. ${us.shootoutScore}-${them.shootoutScore}`;
+  } else if (competition.status.type.name === "STATUS_FINAL_AET") {
+    detail = "a.p.";
+  }
+
+  return {
+    id: event.id,
+    date: event.date,
+    competition: COMPETITION_LABELS[slug] ?? event.league?.abbreviation ?? event.league?.name ?? "",
+    home: us.homeAway === "home",
+    opponent: toTeam(them.team),
+    goalsFor,
+    goalsAgainst,
+    outcome,
+    detail,
+  };
+}
+
+function toTeamResults(data: EspnScheduleResponse, teamId: string): TeamResult[] {
+  return (data.events ?? [])
+    .map((event) => toTeamResult(event, teamId))
+    .filter((result): result is TeamResult => result !== null);
+}
+
+/** Les derniers matchs officiels d'un club (toutes compétitions), du plus récent au plus ancien. */
+export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm | null> {
+  const current = await espnFetch<EspnScheduleResponse>(`/site/v2/sports/soccer/all/teams/${teamId}/schedule`, {
+    revalidate: REVALIDATE.form,
+  });
+  if (!current.team) return null;
+
+  let results = toTeamResults(current, teamId);
+
+  // En début de saison, on complète avec la fin de la saison précédente, toutes compétitions
+  // confondues (indispensable pour un club promu, absent du championnat la saison passée).
+  if (results.length < count) {
+    const year = current.season?.year ?? new Date().getFullYear();
+    const previous = await espnFetch<EspnScheduleResponse>(`/site/v2/sports/soccer/all/teams/${teamId}/schedule`, {
+      revalidate: REVALIDATE.previousSeason,
+      params: { season: year - 1 },
+    });
+    results = [...results, ...toTeamResults(previous, teamId)];
+  }
+
+  const unique = [...new Map(results.map((result) => [result.id, result])).values()];
+  return {
+    team: toTeam(current.team),
+    results: unique.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count),
+  };
 }
