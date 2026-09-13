@@ -7,6 +7,7 @@ import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
 import { TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
 import type { ClubRef, MatchOutcome, TeamForm } from "@/lib/types";
+import { EUROPEAN_CUP_STYLES, EuropeanCupTag, EuropeanFixtureCard } from "./EuropeanCup";
 import { LeagueLogo } from "./LeagueLogo";
 import { TeamLogo } from "./TeamLogo";
 
@@ -174,8 +175,10 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
                     {status.form.results.map((result) => (
                       <li
                         key={result.id}
-                        title={OUTCOMES[result.outcome].label}
-                        className={`grid size-7 place-items-center rounded-md text-xs font-bold ${OUTCOMES[result.outcome].badge}`}
+                        title={`${OUTCOMES[result.outcome].label} · ${result.competition}`}
+                        className={`grid size-7 place-items-center rounded-md text-xs font-bold ${OUTCOMES[result.outcome].badge} ${
+                          result.europeanCup ? EUROPEAN_CUP_STYLES[result.europeanCup].ring : ""
+                        }`}
                       >
                         <span aria-hidden>{OUTCOMES[result.outcome].letter}</span>
                         <span className="sr-only">{OUTCOMES[result.outcome].label}</span>
@@ -184,16 +187,29 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
                   </ol>
                   <p className="mt-1.5 text-[11px] text-slate-400 dark:text-slate-500">
                     Du plus récent au plus ancien · V victoire · N nul · D défaite
+                    {status.form.results.some((result) => result.europeanCup) && " · cerclé : coupe d’Europe"}
                   </p>
 
                   <ul className="mt-4 divide-y divide-slate-100 dark:divide-slate-800">
                     {status.form.results.map((result) => {
                       const outcome = OUTCOMES[result.outcome];
+                      const cup = result.europeanCup;
                       const context = [shortDate.format(new Date(result.date)), result.home ? "Domicile" : "Extérieur", result.competition, result.detail]
                         .filter(Boolean)
                         .join(" · ");
                       return (
-                        <li key={result.id} className="flex items-center gap-3 py-2.5">
+                        <li
+                          key={result.id}
+                          className={`relative flex items-center gap-3 py-2.5 ${
+                            cup ? `-mx-2 rounded-lg px-2 ${EUROPEAN_CUP_STYLES[cup].row}` : ""
+                          }`}
+                        >
+                          {cup && (
+                            <span
+                              aria-hidden
+                              className={`absolute inset-y-2 left-0 w-1 rounded-r-full ${EUROPEAN_CUP_STYLES[cup].bar}`}
+                            />
+                          )}
                           <span className="sr-only">
                             {`${outcome.label} ${result.goalsFor} à ${result.goalsAgainst} ${result.home ? "contre" : "chez"} ${result.opponent.name}, ${context}.`}
                           </span>
@@ -209,7 +225,18 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
                               <TeamLogo team={result.opponent} size={18} />
                               <span className="truncate">{result.opponent.name}</span>
                             </p>
-                            <p className="mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">{context}</p>
+                            {cup ? (
+                              <p className="mt-1 flex min-w-0 items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+                                <EuropeanCupTag cup={cup} label={result.competition} />
+                                <span className="truncate">
+                                  {[shortDate.format(new Date(result.date)), result.home ? "Domicile" : "Extérieur", result.detail]
+                                    .filter(Boolean)
+                                    .join(" · ")}
+                                </span>
+                              </p>
+                            ) : (
+                              <p className="mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">{context}</p>
+                            )}
                           </div>
                           <span aria-hidden className={`shrink-0 text-base font-bold tabular-nums ${outcome.score}`}>
                             {result.goalsFor}–{result.goalsAgainst}
@@ -227,27 +254,31 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
               <h3 id="club-next-title" className="text-sm font-semibold">
                 Prochain match
               </h3>
-              <div
-                className={`mt-2 flex items-center gap-3 rounded-xl border p-3 ${
-                  isFavorite
-                    ? "border-amber-300 bg-amber-50/70 dark:border-amber-500/40 dark:bg-amber-500/10"
-                    : "border-slate-200 dark:border-slate-800"
-                }`}
-              >
-                <CalendarDays className="size-5 shrink-0 text-slate-400" aria-hidden />
-                <div className="min-w-0 flex-1">
-                  <p className="flex items-center gap-2 text-sm font-medium">
-                    <span className="text-xs font-normal text-slate-400">{next.home ? "vs" : "chez"}</span>
-                    <TeamLogo team={next.opponent} size={18} />
-                    <span className="truncate">{next.opponent.name}</span>
-                  </p>
-                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                    {[capitalize(fixtureDate.format(new Date(next.date))), next.home ? "Domicile" : "Extérieur", next.competition]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </p>
+              {next.europeanCup ? (
+                <EuropeanFixtureCard fixture={next} cup={next.europeanCup} />
+              ) : (
+                <div
+                  className={`mt-2 flex items-center gap-3 rounded-xl border p-3 ${
+                    isFavorite
+                      ? "border-amber-300 bg-amber-50/70 dark:border-amber-500/40 dark:bg-amber-500/10"
+                      : "border-slate-200 dark:border-slate-800"
+                  }`}
+                >
+                  <CalendarDays className="size-5 shrink-0 text-slate-400" aria-hidden />
+                  <div className="min-w-0 flex-1">
+                    <p className="flex items-center gap-2 text-sm font-medium">
+                      <span className="text-xs font-normal text-slate-400">{next.home ? "vs" : "chez"}</span>
+                      <TeamLogo team={next.opponent} size={18} />
+                      <span className="truncate">{next.opponent.name}</span>
+                    </p>
+                    <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                      {[capitalize(fixtureDate.format(new Date(next.date))), next.home ? "Domicile" : "Extérieur", next.competition]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </section>
           )}
 
