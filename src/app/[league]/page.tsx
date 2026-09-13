@@ -32,7 +32,7 @@ export default async function StandingsPage({ params }: LeaguePageProps) {
     <LiveMatchesProvider sources={sources}>
       <div className="space-y-4">
         <LiveIndicator />
-        <StandingsTable standings={standings} matches={today} />
+        <StandingsTable league={league.slug} standings={standings} matches={today} />
       </div>
     </LiveMatchesProvider>
   );
