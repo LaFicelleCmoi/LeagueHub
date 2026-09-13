@@ -41,7 +41,8 @@ export default async function MatchesPage({ params }: LeaguePageProps) {
         {live.length > 0 && (
           <section>
             <h2 className="mb-4 text-lg font-semibold">En direct</h2>
-            <div className="grid gap-3 md:grid-cols-2">
+            {/* grid-cols-1 (minmax(0, 1fr)) : une carte ne peut jamais élargir la page sur mobile. */}
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {live.map((match) => (
                 <MatchCard key={match.id} match={match} />
               ))}
@@ -49,7 +50,7 @@ export default async function MatchesPage({ params }: LeaguePageProps) {
           </section>
         )}
 
-        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           <MatchDayList
             title="Derniers résultats"
             matches={results}
