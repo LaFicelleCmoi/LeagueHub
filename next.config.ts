@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
     // Ces images changent rarement : on les garde une semaine en cache.
     minimumCacheTTL: 60 * 60 * 24 * 7,
   },
+  // Adresses courtes vers le tracker de la Ligue des champions (même URL que src/lib/external-links.ts).
+  async redirects() {
+    return ["/ldc", "/ligue-des-champions"].map((source) => ({
+      source,
+      destination: "https://ldc-2026-2027.vercel.app/",
+      permanent: false,
+    }));
+  },
 };
 
 export default nextConfig;
