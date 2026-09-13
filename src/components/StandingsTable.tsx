@@ -3,9 +3,11 @@
 import { useCallback, useLayoutEffect, useMemo, useRef } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { formatGoalDiff } from "@/lib/format";
+import type { LeagueSlug } from "@/lib/leagues";
 import { computeLiveStandings, preMatchKey, type LiveResult } from "@/lib/live-standings";
 import { goalDiffClass, zoneClass } from "@/lib/standings-style";
 import type { Match, Standings } from "@/lib/types";
+import { ClubButton, useOpenClub } from "./ClubDialogProvider";
 import { EmptyState } from "./EmptyState";
 import { useLiveMatches } from "./LiveMatches";
 import { TeamLogo } from "./TeamLogo";
@@ -97,8 +99,18 @@ const DETAIL_COLUMNS = [
 ] as const;
 
 // Classement complet, recalculé en direct avec les scores des matchs du jour.
-export function StandingsTable({ standings, matches }: { standings: Standings; matches: Match[] }) {
+// Un clic sur une équipe ouvre ses 5 derniers matchs.
+export function StandingsTable({
+  league,
+  standings,
+  matches,
+}: {
+  league: LeagueSlug;
+  standings: Standings;
+  matches: Match[];
+}) {
   const liveMatches = useLiveMatches(matches);
+  const openClub = useOpenClub();
 
   // Nombre de matchs d'avant-match des équipes vues en train de jouer : sert à savoir, une fois
   // le match terminé, si ESPN l'a déjà ajouté à son classement.
@@ -182,7 +194,8 @@ export function StandingsTable({ standings, matches }: { standings: Standings; m
               <tr
                 key={row.team.id}
                 ref={rowRef(row.team.id)}
-                className={`relative transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/40 ${
+                onClick={() => openClub?.({ team: row.team, league })}
+                className={`relative cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/40 ${
                   row.live ? "bg-red-50/50 dark:bg-red-500/[0.06]" : "bg-white dark:bg-slate-900"
                 }`}
               >
@@ -207,11 +220,13 @@ export function StandingsTable({ standings, matches }: { standings: Standings; m
                 </td>
                 <td className="py-2 pl-1 pr-3">
                   <div className="flex items-center gap-3">
-                    <TeamLogo team={row.team} size={24} />
-                    <span className="whitespace-nowrap font-medium">
-                      <span className="sm:hidden">{row.team.shortName}</span>
-                      <span className="hidden sm:inline">{row.team.name}</span>
-                    </span>
+                    <ClubButton club={{ team: row.team, league }} className="flex items-center gap-3">
+                      <TeamLogo team={row.team} size={24} />
+                      <span className="whitespace-nowrap font-medium">
+                        <span className="sm:hidden">{row.team.shortName}</span>
+                        <span className="hidden sm:inline">{row.team.name}</span>
+                      </span>
+                    </ClubButton>
                     {row.live && <LiveChip result={row.live} />}
                   </div>
                 </td>
