@@ -4,6 +4,7 @@ import { espnDate, formatTime } from "@/lib/format";
 import { LEAGUES, type League } from "@/lib/leagues";
 import type {
   Article,
+  EuropeanCup,
   Leader,
   Leaders,
   Match,
@@ -296,6 +297,9 @@ const COMPETITION_LABELS: Record<string, string> = {
   "uefa.champions": "Ligue des champions",
   "uefa.europa": "Ligue Europa",
   "uefa.europa.conf": "Ligue Conférence",
+  "uefa.champions_qual": "Ligue des champions (qualif.)",
+  "uefa.europa_qual": "Ligue Europa (qualif.)",
+  "uefa.europa.conf_qual": "Ligue Conférence (qualif.)",
   "uefa.super_cup": "Supercoupe de l'UEFA",
   "fifa.cwc": "Coupe du monde des clubs",
   "fifa.intercontinental_cup": "Coupe intercontinentale",
@@ -305,6 +309,20 @@ const NATIONAL_LEAGUE = /^[a-z]{3}\.\d$/;
 
 function isOfficial(slug: string): boolean {
   return Object.hasOwn(COMPETITION_LABELS, slug) || NATIONAL_LEAGUE.test(slug);
+}
+
+// Coupes d'Europe (tours de qualification compris), mises en avant dans l'interface.
+const EUROPEAN_CUPS: Record<string, EuropeanCup> = {
+  "uefa.champions": "ucl",
+  "uefa.champions_qual": "ucl",
+  "uefa.europa": "uel",
+  "uefa.europa_qual": "uel",
+  "uefa.europa.conf": "uecl",
+  "uefa.europa.conf_qual": "uecl",
+};
+
+function europeanCup(slug: string): EuropeanCup | null {
+  return Object.hasOwn(EUROPEAN_CUPS, slug) ? EUROPEAN_CUPS[slug] : null;
 }
 
 function toTeamResult(event: EspnScheduleEvent, teamId: string): TeamResult | null {
@@ -343,6 +361,7 @@ function toTeamResult(event: EspnScheduleEvent, teamId: string): TeamResult | nu
     goalsAgainst,
     outcome,
     detail,
+    europeanCup: europeanCup(slug),
   };
 }
 
@@ -375,6 +394,7 @@ function nextFixture(data: EspnScheduleResponse | null, teamId: string): TeamFix
       home: us.homeAway === "home",
       opponent: toTeam(them.team),
       venue: competition.venue?.fullName ?? null,
+      europeanCup: europeanCup(slug),
     };
   }
   return null;
