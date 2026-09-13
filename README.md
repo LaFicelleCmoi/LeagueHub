@@ -86,6 +86,12 @@ public/
 - L'actualisation se met en pause quand l'onglet est masqué et reprend immédiatement au retour. En cas d'erreur, les tentatives s'espacent jusqu'à 5 minutes.
 - Côté ESPN, la charge reste plafonnée à 4 requêtes par minute par championnat, quel que soit le nombre de visiteurs.
 
+### Classement en direct
+
+- Pendant les matchs, le classement complet de chaque championnat est **recalculé en temps réel** avec les scores en cours : points, bilan et buts provisoires, lignes qui glissent vers leur nouvelle place, pastille « score · minute » pour les équipes qui jouent et flèches de mouvement par rapport au classement officiel.
+- Pas de double comptage : ESPN ne compte un match qu'une fois terminé, et le bilan V-N-D fourni avec chaque match indique s'il est déjà inclus. Un match terminé n'est ajouté que tant que le classement ESPN ne l'a pas encore pris en compte.
+- En cas d'égalité, le départage provisoire se fait aux points, à la différence de buts puis aux buts marqués ; sans match en cours, l'ordre officiel d'ESPN est conservé tel quel.
+
 ### Forme d'un club
 
 - Les 5 derniers matchs viennent du calendrier ESPN « toutes compétitions » du club. Seules les compétitions officielles sont gardées (championnats, coupes nationales, compétitions UEFA/FIFA), avec leur nom en français ; les matchs amicaux sont ignorés.
