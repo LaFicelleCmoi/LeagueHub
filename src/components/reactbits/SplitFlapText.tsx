@@ -4,7 +4,9 @@
 // Licence MIT + Commons Clause. Variante TypeScript + Tailwind copiée depuis le registre.
 // Adaptations LeagueHub :
 // - directive "use client" ;
-// - `setTimeout` global au lieu de `window.setTimeout`, pour correspondre au type du ref.
+// - `setTimeout` global au lieu de `window.setTimeout`, pour correspondre au type du ref ;
+// - une animation inachevée est terminée net avant la suivante (sinon des lettres aléatoires restent bloquées) ;
+// - le cycle se met en pause quand l'onglet est masqué.
 
 import { CSSProperties, HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -148,6 +150,7 @@ const SplitFlapText = ({
   const rafRef = useRef<number | null>(null);
   const cycleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const currentTextRef = useRef('');
+  const pendingTextRef = useRef('');
 
   const sourceWords = Array.isArray(words) && words.length > 0 ? words : DEFAULT_WORDS;
   const phrasesKey = typeof text === 'string' ? text : sourceWords.map(word => String(word ?? '')).join('\u001f');
@@ -179,6 +182,7 @@ const SplitFlapText = ({
 
     const firstPhrase = normalizedPhrases[0] || '';
     currentTextRef.current = firstPhrase;
+    pendingTextRef.current = firstPhrase;
     setTiles(createTiles(firstPhrase));
 
     if (normalizedPhrases.length <= 1 || typeof window === 'undefined') {
@@ -195,6 +199,16 @@ const SplitFlapText = ({
     const activeCharset = resolveCharset(charset);
 
     const animateTo = (targetPhrase: string) => {
+      // Animation précédente inachevée (onglet ralenti, appareil lent…) : on la termine net.
+      // Deux boucles qui se chevauchent laisseraient des lettres aléatoires à l'écran.
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+        currentTextRef.current = pendingTextRef.current;
+        setTiles(createTiles(pendingTextRef.current));
+      }
+      pendingTextRef.current = targetPhrase;
+
       if (prefersReducedMotion) {
         currentTextRef.current = targetPhrase;
         setTiles(createTiles(targetPhrase));
@@ -308,6 +322,12 @@ const SplitFlapText = ({
     const scheduleNext = (delay: number) => {
       cycleTimerRef.current = setTimeout(() => {
         if (cancelled) return;
+
+        // Onglet masqué : on attend son retour plutôt que d'animer dans le vide.
+        if (document.visibilityState === 'hidden') {
+          scheduleNext(safeCycleDelay);
+          return;
+        }
 
         const nextIndex = phraseIndex + 1;
 
