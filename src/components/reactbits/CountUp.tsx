@@ -4,9 +4,10 @@
 // Licence MIT + Commons Clause. Variante TypeScript + Tailwind copiée depuis le registre.
 // Adaptations LeagueHub :
 // - valeur finale rendue côté serveur (lisible sans JavaScript et par les moteurs de recherche) ;
-// - pas d'animation si l'utilisateur a activé « réduire les animations ».
+// - pas d'animation si l'utilisateur a activé « réduire les animations » ;
+// - animation à durée fixe au lieu d'un ressort très amorti, qui restait plusieurs secondes sous la valeur finale.
 
-import { useInView, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
+import { animate, useInView, useMotionValue, useReducedMotion } from 'motion/react';
 import { useCallback, useEffect, useRef } from 'react';
 
 interface CountUpProps {
@@ -38,13 +39,6 @@ export default function CountUp({
   const prefersReducedMotion = useReducedMotion();
   const motionValue = useMotionValue(direction === 'down' ? to : from);
 
-  const damping = 20 + 40 * (1 / duration);
-  const stiffness = 100 * (1 / duration);
-
-  const springValue = useSpring(motionValue, {
-    damping,
-    stiffness
-  });
 
   const isInView = useInView(ref, { once: true, margin: '0px' });
 
@@ -93,8 +87,10 @@ export default function CountUp({
         onStart();
       }
 
+      let controls: ReturnType<typeof animate> | undefined;
       const timeoutId = setTimeout(() => {
-        motionValue.set(direction === 'down' ? from : to);
+        // Durée fixe : le compteur s'arrête exactement sur la valeur réelle.
+        controls = animate(motionValue, direction === 'down' ? from : to, { duration, ease: [0.16, 1, 0.3, 1] });
       }, delay * 1000);
 
       const durationTimeoutId = setTimeout(
@@ -109,19 +105,20 @@ export default function CountUp({
       return () => {
         clearTimeout(timeoutId);
         clearTimeout(durationTimeoutId);
+        controls?.stop();
       };
     }
   }, [isInView, startWhen, motionValue, direction, from, to, delay, onStart, onEnd, duration, prefersReducedMotion]);
 
   useEffect(() => {
-    const unsubscribe = springValue.on('change', (latest: number) => {
+    const unsubscribe = motionValue.on('change', (latest: number) => {
       if (ref.current) {
         ref.current.textContent = formatValue(latest);
       }
     });
 
     return () => unsubscribe();
-  }, [springValue, formatValue]);
+  }, [motionValue, formatValue]);
 
   // Valeur finale rendue côté serveur, remplacée par l'animation une fois la page chargée.
   return (
