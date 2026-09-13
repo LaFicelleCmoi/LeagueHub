@@ -116,8 +116,19 @@ export interface TeamResult {
   detail: string | null;
 }
 
+export interface TeamFixture {
+  id: string;
+  date: string;
+  competition: string;
+  home: boolean;
+  opponent: Team;
+  venue: string | null;
+}
+
 export interface TeamForm {
   team: Team;
   /** Du plus récent au plus ancien. */
   results: TeamResult[];
+  /** Prochain match officiel, s'il est déjà programmé. */
+  next: TeamFixture | null;
 }
