@@ -4,12 +4,14 @@ Les 5 grands championnats européens réunis sur un seul site : **Premier League
 
 Pour chaque championnat :
 
+- **Chiffres clés** : nombre de clubs, matchs et buts du jour, buts au total en saison régulière avec la moyenne par match
+
 - **Classement** : points, bilan, buts, zones européennes et relégation
 - **Matchs** : scores en direct actualisés sans recharger la page, derniers résultats et calendrier des 14 prochains jours, avec les buteurs et les cartons rouges
 - **Buteurs** : meilleurs buteurs et passeurs décisifs
 - **Actualités** : derniers articles ESPN
 
-La page d'accueil réunit les chiffres clés, le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
+La page d'accueil réunit les chiffres clés (dont le total de buts de la saison régulière des 5 championnats et la moyenne par match), le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
 
 - **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
 - **Club favori** : chaque visiteur peut choisir son club (mémorisé dans le navigateur, sans compte). Il a droit à un traitement spécial : section « Mon club » sur l'accueil (place au classement, forme, match du jour en direct ou prochain match), logo sur le badge 3D, étoile dorée et ligne ambrée dans les classements, cadre doré sur ses matchs, célébration quand il marque en direct et fiche « Votre club » dorée.
