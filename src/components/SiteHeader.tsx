@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, Trophy, X } from "lucide-react";
+import { ArrowUpRight, Menu, Star, Trophy, X } from "lucide-react";
+import { UCL_TRACKER_URL } from "@/lib/external-links";
 import { LEAGUES } from "@/lib/leagues";
 import { LeagueLogo } from "./LeagueLogo";
 
@@ -43,6 +44,19 @@ export function SiteHeader() {
                 </li>
               );
             })}
+            <li>
+              <a
+                href={UCL_TRACKER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-950 via-indigo-800 to-blue-700 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-indigo-400/30 transition hover:brightness-125"
+              >
+                <Star className="size-3.5 fill-amber-300 text-amber-300" aria-hidden />
+                LDC
+                <ArrowUpRight className="size-3.5 opacity-70" aria-hidden />
+                <span className="sr-only"> : tracker Ligue des champions 2026-2027 (nouvel onglet)</span>
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -80,6 +94,25 @@ export function SiteHeader() {
                 </li>
               );
             })}
+            <li>
+              <a
+                href={UCL_TRACKER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={close}
+                className="mt-1 flex items-center gap-3 rounded-lg bg-gradient-to-r from-indigo-950 via-indigo-800 to-blue-700 px-3 py-3 font-semibold text-white"
+              >
+                <span className="grid size-6 place-items-center">
+                  <Star className="size-5 fill-amber-300 text-amber-300" aria-hidden />
+                </span>
+                <span>Ligue des champions</span>
+                <span className="ml-auto inline-flex items-center gap-1 text-sm font-normal text-indigo-200">
+                  Tracker 2026-27
+                  <ArrowUpRight className="size-4" aria-hidden />
+                </span>
+                <span className="sr-only">(nouvel onglet)</span>
+              </a>
+            </li>
           </ul>
         </nav>
       )}
