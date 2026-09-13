@@ -11,7 +11,7 @@ Pour chaque championnat :
 
 La page d'accueil réunit les chiffres clés, le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
 
-- **Forme d'un club** : un clic sur un club du bandeau ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
+- **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
 - **Club favori** : chaque visiteur peut choisir son club ; il s'affiche sur le badge. Le choix est mémorisé dans le navigateur, sans compte.
 
 ## Stack
@@ -46,6 +46,7 @@ src/
 │   ├── LiveMatches.tsx           Actualisation des scores en direct
 │   ├── ClubsLoop.tsx             Bandeau des clubs cliquable
 │   ├── ClubDialog.tsx            Fenêtre « 5 derniers matchs »
+│   ├── ClubDialogProvider.tsx    Fenêtre partagée, ouvrable depuis n'importe quel club
 │   ├── HeroBadge.tsx             Badge 3D (chargement différé, version fixe de secours)
 │   └── …                         Tableaux, cartes de match, logos, navigation
 └── lib/
