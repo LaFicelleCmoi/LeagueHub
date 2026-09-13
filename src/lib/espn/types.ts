@@ -66,6 +66,8 @@ export interface EspnCompetitor {
   winner?: boolean;
   score?: string;
   team: EspnTeam;
+  /** Bilan « victoires-nuls-défaites » ; un match terminé y est inclus, un match en cours non. */
+  records?: { type?: string; summary?: string }[];
 }
 
 export interface EspnDetail {
