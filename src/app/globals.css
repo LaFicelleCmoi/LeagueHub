@@ -4,10 +4,48 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+@theme {
+  /* Composant React Bits StarBorder : bordure animée des matchs en direct. */
+  --animate-star-movement-bottom: star-movement-bottom linear infinite alternate;
+  --animate-star-movement-top: star-movement-top linear infinite alternate;
+
+  @keyframes star-movement-bottom {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-100%, 0%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes star-movement-top {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(100%, 0%);
+      opacity: 0;
+    }
+  }
+}
+
 :root {
   color-scheme: light dark;
+  /* Fond de page (slate-50), réutilisé par les fondus du bandeau de logos. */
+  --page-bg: oklch(98.4% 0.003 247.858);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* slate-950 */
+    --page-bg: oklch(12.9% 0.042 264.695);
+  }
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+  background-color: var(--page-bg);
+  @apply text-slate-900 dark:text-slate-100;
 }
