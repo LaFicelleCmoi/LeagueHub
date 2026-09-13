@@ -2,6 +2,7 @@
 
 import { useCallback, useLayoutEffect, useMemo, useRef } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { useFavoriteClub } from "@/lib/favorite-club";
 import { formatGoalDiff } from "@/lib/format";
 import type { LeagueSlug } from "@/lib/leagues";
 import { computeLiveStandings, preMatchKey, type LiveResult } from "@/lib/live-standings";
@@ -111,6 +112,7 @@ export function StandingsTable({
 }) {
   const liveMatches = useLiveMatches(matches);
   const openClub = useOpenClub();
+  const favorite = useFavoriteClub();
 
   // Nombre de matchs d'avant-match des équipes vues en train de jouer : sert à savoir, une fois
   // le match terminé, si ESPN l'a déjà ajouté à son classement.
@@ -196,7 +198,11 @@ export function StandingsTable({
                 ref={rowRef(row.team.id)}
                 onClick={() => openClub?.({ team: row.team, league })}
                 className={`relative cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/40 ${
-                  row.live ? "bg-red-50/50 dark:bg-red-500/[0.06]" : "bg-white dark:bg-slate-900"
+                  row.team.id === favorite?.team.id
+                    ? "bg-amber-50 dark:bg-amber-400/[0.08]"
+                    : row.live
+                      ? "bg-red-50/50 dark:bg-red-500/[0.06]"
+                      : "bg-white dark:bg-slate-900"
                 }`}
               >
                 <td className="relative py-2 pl-4" title={row.zone?.label}>
