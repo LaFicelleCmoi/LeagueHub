@@ -86,6 +86,11 @@ function TeamLine({ side, match }: { side: MatchSide; match: Match }) {
           {favorite ? "But !" : "But"}
         </span>
       )}
+      {side.shootout !== null && (
+        <span className="text-xs tabular-nums text-slate-400" title="Tirs au but">
+          <span className="sr-only">tirs au but : </span>({side.shootout})
+        </span>
+      )}
       {side.score !== null && (
         <span className={`w-6 text-right text-base tabular-nums ${dimmed ? tone : "font-bold"}`}>{side.score}</span>
       )}
