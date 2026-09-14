@@ -30,6 +30,34 @@
       opacity: 0;
     }
   }
+
+  /* Interrupteur de l'onglet Coupes : reflet sur le rail doré et étincelles à l'activation. */
+  --animate-switch-shine: switch-shine 3.2s ease-in-out infinite;
+  --animate-switch-spark: switch-spark 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes switch-shine {
+    0% {
+      transform: translateX(0) skewX(-20deg);
+    }
+    45%,
+    100% {
+      transform: translateX(350%) skewX(-20deg);
+    }
+  }
+
+  @keyframes switch-spark {
+    0% {
+      transform: translate(0, 0) scale(0.4);
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--spark-x), var(--spark-y)) scale(1);
+      opacity: 0;
+    }
+  }
 }
 
 :root {
