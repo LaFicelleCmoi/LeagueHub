@@ -48,6 +48,8 @@ export interface MatchSide {
   winner: boolean;
   /** Matchs de championnat joués selon le bilan ESPN (un match en cours n'y est pas encore compté). */
   played: number | null;
+  /** Tirs au but réussis, en cas de séance. */
+  shootout: number | null;
 }
 
 export type MatchEventKind = "goal" | "penalty" | "own-goal" | "red-card";
@@ -137,4 +139,33 @@ export interface TeamForm {
   results: TeamResult[];
   /** Prochain match officiel, s'il est déjà programmé. */
   next: TeamFixture | null;
+}
+
+/** Tour d'une coupe nationale, d'après le calendrier ESPN. */
+export interface CupRound {
+  label: string;
+  /** Dates en français, ex. « 21 août – 2 sept. ». */
+  dates: string | null;
+  start: string;
+  end: string;
+}
+
+export interface CupMatch {
+  match: Match;
+  round: string | null;
+  /** « Match aller » ou « Match retour » pour une confrontation en deux manches. */
+  leg: string | null;
+}
+
+export interface CupOverview {
+  season: string;
+  /** Le dernier tour de l'édition est passé. */
+  finished: boolean;
+  rounds: CupRound[];
+  /** Du plus récent au plus ancien. */
+  results: CupMatch[];
+  /** Du plus proche au plus lointain. */
+  upcoming: CupMatch[];
+  /** Dernière finale, quand aucune nouvelle édition n'est encore programmée. */
+  lastFinal: CupMatch | null;
 }
