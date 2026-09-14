@@ -16,6 +16,7 @@ La page d'accueil réunit les chiffres clés (dont le total de buts de la saison
 - **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
 - **Club favori** : chaque visiteur peut choisir son club (mémorisé dans le navigateur, sans compte). Il a droit à un traitement spécial : section « Mon club » sur l'accueil (place au classement, forme, match du jour en direct ou prochain match), logo sur le badge 3D, étoile dorée et ligne ambrée dans les classements, cadre doré sur ses matchs, célébration quand il marque en direct et fiche « Votre club » dorée.
 - **Tracker Ligue des champions 2026-2027** : bannière sur l'accueil, pastille « LDC » dans l'en-tête et adresses courtes `/ldc` et `/ligue-des-champions` qui redirigent vers [ldc-2026-2027.vercel.app](https://ldc-2026-2027.vercel.app/) (projet indépendant, ouvert dans un nouvel onglet).
+- **Onglet Coupes nationales** (activable) : un interrupteur « Coupes » dans l'en-tête affiche un onglet dédié à la FA Cup, la Copa del Rey, la Coppa Italia, la DFB-Pokal et la Coupe de France. Chaque coupe a sa page (`/coupes/[coupe]`) : frise des tours, prochains matchs et résultats par tour (aller-retour, tirs au but), exploits des petits poucets face aux clubs de première division, et dernière finale quand l'édition suivante n'est pas encore programmée.
 
 ## Stack
 
@@ -38,6 +39,7 @@ src/
 │   ├── icon.svg, apple-icon.png  Favicon et icône iOS
 │   ├── api/live/[league]/        Scores en direct (JSON) pour le navigateur
 │   ├── api/teams/[league]/[team] 5 derniers matchs d'un club (JSON)
+│   ├── coupes/                   Onglet Coupes nationales : /coupes et /coupes/[coupe]
 │   └── [league]/                 premier-league, la-liga, serie-a, bundesliga, ligue-1
 │       ├── layout.tsx            En-tête du championnat + onglets
 │       ├── page.tsx              Classement
@@ -54,6 +56,8 @@ src/
 │   └── …                         Tableaux, cartes de match, logos, navigation
 └── lib/
     ├── leagues.ts                Configuration des 5 championnats
+    ├── cups.ts                   Configuration des 5 coupes nationales (tours et dates en français)
+    ├── cups-tab.ts               Interrupteur de l'onglet Coupes, mémorisé dans le navigateur
     ├── live.ts                   Règles du suivi en direct (quels matchs, quand)
     ├── favorite-club.ts          Club favori mémorisé dans le navigateur
     ├── favorite-card.ts          Recto du badge dessiné avec le club favori
