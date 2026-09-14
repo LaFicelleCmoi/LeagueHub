@@ -65,6 +65,7 @@ export interface EspnCompetitor {
   homeAway: "home" | "away";
   winner?: boolean;
   score?: string;
+  shootoutScore?: number;
   team: EspnTeam;
   /** Bilan « victoires-nuls-défaites » ; un match terminé y est inclus, un match en cours non. */
   records?: { type?: string; summary?: string }[];
@@ -89,6 +90,8 @@ export interface EspnCompetition {
   venue?: { fullName?: string; address?: { city?: string; country?: string } };
   competitors: EspnCompetitor[];
   details?: EspnDetail[];
+  /** Ex. « 1st Leg » pour une confrontation aller-retour. */
+  notes?: { headline?: string; text?: string }[];
 }
 
 export interface EspnEvent {
@@ -97,10 +100,22 @@ export interface EspnEvent {
   name: string;
   status: EspnStatus;
   competitions: EspnCompetition[];
+  /** Tour de la compétition, ex. « second-round » en coupe. */
+  season?: { slug?: string };
+}
+
+export interface EspnCalendarGroup {
+  label?: string;
+  entries?: { label: string; detail?: string; value?: string; startDate: string; endDate: string }[];
 }
 
 export interface EspnScoreboardResponse {
   events?: EspnEvent[];
+  leagues?: {
+    season?: { displayName?: string };
+    /** Dates des journées en championnat, tours détaillés en coupe. */
+    calendar?: (string | EspnCalendarGroup)[];
+  }[];
 }
 
 // --- Statistiques : /apis/site/v2/sports/soccer/{league}/statistics ---
