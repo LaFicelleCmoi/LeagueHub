@@ -4,13 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowUpRight, Menu, Star, Trophy, X } from "lucide-react";
+import { useCupsTab } from "@/lib/cups-tab";
 import { UCL_TRACKER_URL } from "@/lib/external-links";
 import { LEAGUES } from "@/lib/leagues";
+import { CupsTabSwitch } from "./CupsTabSwitch";
 import { LeagueLogo } from "./LeagueLogo";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const cupsTab = useCupsTab();
+  const onCups = pathname.startsWith("/coupes");
   const close = () => setOpen(false);
 
   return (
@@ -23,7 +27,7 @@ export function SiteHeader() {
           LeagueHub
         </Link>
 
-        <nav aria-label="Championnats" className="hidden lg:block">
+        <nav aria-label="Navigation principale" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {LEAGUES.map((league) => {
               const active = pathname.startsWith(`/${league.slug}`);
@@ -32,18 +36,34 @@ export function SiteHeader() {
                   <Link
                     href={`/${league.slug}`}
                     aria-current={active ? "page" : undefined}
-                    className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    title={league.name}
+                    className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors xl:px-3 ${
                       active
                         ? "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
                     }`}
                   >
                     <LeagueLogo league={league} size={20} />
-                    {league.name}
+                    {/* Noms complets à partir de 1280 px : avant, la place manque avec l'onglet Coupes. */}
+                    <span className="sr-only xl:not-sr-only">{league.name}</span>
                   </Link>
                 </li>
               );
             })}
+            {cupsTab && (
+              <li>
+                <Link
+                  href="/coupes"
+                  aria-current={onCups ? "page" : undefined}
+                  className={`ml-1 inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 px-3 py-2 text-sm font-semibold text-amber-950 shadow-sm transition hover:brightness-105 ${
+                    onCups ? "ring-2 ring-amber-600 ring-offset-2 ring-offset-white dark:ring-offset-slate-950" : "ring-1 ring-amber-500/40"
+                  }`}
+                >
+                  <Trophy className="size-3.5" aria-hidden />
+                  Coupes
+                </Link>
+              </li>
+            )}
             <li>
               <a
                 href={UCL_TRACKER_URL}
@@ -56,6 +76,9 @@ export function SiteHeader() {
                 <ArrowUpRight className="size-3.5 opacity-70" aria-hidden />
                 <span className="sr-only"> : tracker Ligue des champions 2026-2027 (nouvel onglet)</span>
               </a>
+            </li>
+            <li className="ml-2 border-l border-slate-200 pl-2 dark:border-slate-800">
+              <CupsTabSwitch />
             </li>
           </ul>
         </nav>
@@ -73,7 +96,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Championnats" className="border-t border-slate-200 lg:hidden dark:border-slate-800">
+        <nav id="mobile-nav" aria-label="Navigation principale" className="border-t border-slate-200 lg:hidden dark:border-slate-800">
           <ul className="mx-auto grid max-w-6xl gap-1 p-2">
             {LEAGUES.map((league) => {
               const active = pathname.startsWith(`/${league.slug}`);
@@ -94,6 +117,22 @@ export function SiteHeader() {
                 </li>
               );
             })}
+            {cupsTab && (
+              <li>
+                <Link
+                  href="/coupes"
+                  onClick={close}
+                  aria-current={onCups ? "page" : undefined}
+                  className="mt-1 flex items-center gap-3 rounded-lg bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 px-3 py-3 font-semibold text-amber-950"
+                >
+                  <span className="grid size-6 place-items-center">
+                    <Trophy className="size-5" aria-hidden />
+                  </span>
+                  <span>Coupes nationales</span>
+                  <span className="ml-auto text-sm font-normal text-amber-900">5 coupes</span>
+                </Link>
+              </li>
+            )}
             <li>
               <a
                 href={UCL_TRACKER_URL}
@@ -112,6 +151,9 @@ export function SiteHeader() {
                 </span>
                 <span className="sr-only">(nouvel onglet)</span>
               </a>
+            </li>
+            <li className="mt-1 border-t border-slate-200 pt-1 dark:border-slate-800">
+              <CupsTabSwitch variant="row" />
             </li>
           </ul>
         </nav>
