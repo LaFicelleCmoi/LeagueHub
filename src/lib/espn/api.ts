@@ -1,9 +1,13 @@
 import "server-only";
 
-import { espnDate, formatTime } from "@/lib/format";
+import { frenchDateRange, legLabel, roundLabel, type Cup } from "@/lib/cups";
+import { addDays, espnDate, formatTime } from "@/lib/format";
 import { LEAGUES, type League } from "@/lib/leagues";
 import type {
   Article,
+  CupMatch,
+  CupOverview,
+  CupRound,
   EuropeanCup,
   Leader,
   Leaders,
@@ -21,6 +25,7 @@ import type {
 } from "@/lib/types";
 import { espnFetch } from "./client";
 import type {
+  EspnCalendarGroup,
   EspnCompetitor,
   EspnDetail,
   EspnEvent,
@@ -47,6 +52,8 @@ const REVALIDATE = {
   form: 600,
   previousSeason: 86_400,
   fixtures: 3_600,
+  // Calendrier des tours d'une coupe.
+  cupInfo: 3_600,
 } as const;
 
 const soccer = (league: League, resource: string) => `/site/v2/sports/soccer/${league.espnCode}/${resource}`;
@@ -186,6 +193,7 @@ function toMatch(event: EspnEvent): Match | null {
     score: showScore ? Number(competitor.score ?? 0) : null,
     winner: competitor.winner === true,
     played: recordGames(competitor),
+    shootout: showScore && typeof competitor.shootoutScore === "number" ? competitor.shootoutScore : null,
   });
 
   return {
@@ -430,5 +438,95 @@ export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm |
     team: toTeam(current.team),
     results: unique.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count),
     next: nextFixture(fixtures, teamId),
+  };
+}
+
+// --- Coupes nationales ---
+
+const CUP_WINDOW_DAYS = { past: 60, next: 150 };
+
+function calendarEntries(data: EspnScoreboardResponse) {
+  const group = data.leagues?.[0]?.calendar?.[0];
+  return typeof group === "object" && group !== null ? ((group as EspnCalendarGroup).entries ?? []) : [];
+}
+
+/** ESPN nomme « TBD Home » / « TBD Away » l'adversaire d'un tour pas encore tiré. */
+function withUndecidedTeams(match: Match): Match {
+  const side = (s: MatchSide): MatchSide =>
+    /^TBD\b/i.test(s.team.name)
+      ? { ...s, team: { ...s.team, name: "À déterminer", shortName: "À déterminer", abbreviation: "?", logo: null } }
+      : s;
+  return { ...match, home: side(match.home), away: side(match.away) };
+}
+
+function toCupMatch(event: EspnEvent): CupMatch | null {
+  const match = toMatch(event);
+  if (!match) return null;
+  return {
+    match: withUndecidedTeams(match),
+    round: event.season?.slug ? roundLabel(event.season.slug) : null,
+    leg: legLabel(event.competitions[0]?.notes),
+  };
+}
+
+/** Tours, résultats récents et prochains matchs d'une coupe nationale. */
+export async function getCupOverview(cup: Cup): Promise<CupOverview> {
+  const path = `/site/v2/sports/soccer/${cup.espnCode}/scoreboard`;
+  const now = new Date();
+  const [info, recent] = await Promise.all([
+    espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.cupInfo }),
+    espnFetch<EspnScoreboardResponse>(path, {
+      revalidate: REVALIDATE.matches,
+      params: {
+        dates: `${espnDate(addDays(now, -CUP_WINDOW_DAYS.past))}-${espnDate(addDays(now, CUP_WINDOW_DAYS.next))}`,
+        limit: 500,
+      },
+    }),
+  ]);
+
+  const entries = calendarEntries(info);
+  // Tours pas encore programmés : ESPN leur attribue à tous la même plage fictive (« Oct 6-Jun 30 »).
+  const detailCount = new Map<string, number>();
+  for (const entry of entries) {
+    if (entry.detail) detailCount.set(entry.detail, (detailCount.get(entry.detail) ?? 0) + 1);
+  }
+  const rounds: CupRound[] = entries.map((entry) => ({
+    label: roundLabel(entry.label),
+    dates: entry.detail && (detailCount.get(entry.detail) ?? 0) > 1 ? null : frenchDateRange(entry.detail),
+    start: entry.startDate,
+    end: entry.endDate,
+  }));
+
+  const matches = (recent.events ?? []).map(toCupMatch).filter((m): m is CupMatch => m !== null);
+  const results = matches
+    .filter((m) => m.match.state === "post")
+    .sort((a, b) => b.match.date.localeCompare(a.match.date));
+  const upcoming = matches
+    .filter((m) => m.match.state !== "post")
+    .sort((a, b) => a.match.date.localeCompare(b.match.date));
+
+  const lastRound = entries.at(-1);
+  const finished = lastRound !== undefined && Date.parse(lastRound.endDate) < now.getTime();
+
+  // Aucun match à l'horizon (édition terminée, la suivante pas encore programmée) :
+  // on retrouve la dernière finale pour que la page reste utile.
+  let lastFinal: CupMatch | null = null;
+  if (matches.length === 0 && finished && lastRound && /final/i.test(lastRound.label)) {
+    const data = await espnFetch<EspnScoreboardResponse>(path, {
+      revalidate: REVALIDATE.previousSeason,
+      params: { dates: `${espnDate(new Date(lastRound.startDate))}-${espnDate(new Date(lastRound.endDate))}` },
+    }).catch(() => null);
+    const events = data?.events ?? [];
+    const final = events.find((event) => event.season?.slug === "final") ?? events.at(-1);
+    lastFinal = final ? toCupMatch(final) : null;
+  }
+
+  return {
+    season: info.leagues?.[0]?.season?.displayName?.match(/\d{4}-\d{2}/)?.[0] ?? "",
+    finished,
+    rounds,
+    results,
+    upcoming,
+    lastFinal,
   };
 }
