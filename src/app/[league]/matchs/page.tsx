@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LiveIndicator, LiveMatchesProvider } from "@/components/LiveMatches";
 import { MatchCard } from "@/components/MatchCard";
 import { MatchDayList } from "@/components/MatchDayList";
+import { PageSync } from "@/components/PageSync";
 import { getMatches } from "@/lib/espn/api";
 import { addDays } from "@/lib/format";
 import { resolveLeague, type LeaguePageProps } from "@/lib/league-params";
@@ -31,10 +32,11 @@ export default async function MatchesPage({ params }: LeaguePageProps) {
 
   // Les cartes se mettent à jour sur place ; un match qui démarre reste dans sa section.
   const tracked = selectTrackedMatches(matches, now.getTime());
-  const sources = tracked.length > 0 ? [{ league: league.slug, matches: tracked }] : [];
+  const sources = tracked.length > 0 ? [{ slug: league.slug, matches: tracked }] : [];
 
   return (
     <LiveMatchesProvider sources={sources}>
+      <PageSync renderedAt={now.getTime()} />
       <div className="space-y-10">
         <LiveIndicator />
 
