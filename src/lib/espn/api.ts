@@ -213,21 +213,66 @@ function toMatch(event: EspnEvent): Match | null {
   };
 }
 
+type CacheOptions = { revalidate: number } | { memoryTtl: number };
+
+/** Mois au format ESPN (« 202609 ») couvrant une période. */
+function espnMonths(from: Date, to: Date): string[] {
+  const first = espnDate(from);
+  const last = espnDate(to).slice(0, 6);
+  const months: string[] = [];
+  let year = Number(first.slice(0, 4));
+  let month = Number(first.slice(4, 6));
+  for (let key = first.slice(0, 6); key <= last; key = `${year}${String(month).padStart(2, "0")}`) {
+    months.push(key);
+    month += 1;
+    if (month > 12) {
+      month = 1;
+      year += 1;
+    }
+  }
+  return months;
+}
+
+/**
+ * Matchs d'un scoreboard ESPN entre deux dates (heure de Paris, incluses).
+ * ESPN refuse parfois les plages de plusieurs jours (400 « Failed to get events endpoint ») :
+ * on redemande alors mois par mois, format qu'il accepte, puis on garde les jours voulus.
+ */
+async function scoreboardEvents(path: string, from: Date, to: Date, cache: CacheOptions): Promise<EspnEvent[]> {
+  const start = espnDate(from);
+  const end = espnDate(to);
+  try {
+    const data = await espnFetch<EspnScoreboardResponse>(path, {
+      ...cache,
+      params: { dates: start === end ? start : `${start}-${end}`, limit: 500 },
+    });
+    return data.events ?? [];
+  } catch (error) {
+    if (!(error instanceof EspnError) || error.status !== 400 || start === end) throw error;
+    // Un jour de marge de chaque côté : ESPN range les matchs par mois dans son propre fuseau horaire.
+    const pages = await Promise.all(
+      espnMonths(addDays(from, -1), addDays(to, 1)).map((month) =>
+        espnFetch<EspnScoreboardResponse>(path, { ...cache, params: { dates: month, limit: 500 } }),
+      ),
+    );
+    const events = new Map<string, EspnEvent>();
+    for (const event of pages.flatMap((page) => page.events ?? [])) {
+      const day = espnDate(new Date(event.date));
+      if (day >= start && day <= end) events.set(event.id, event);
+    }
+    return [...events.values()];
+  }
+}
+
 /** Matchs joués ou programmés entre deux dates (incluses), triés chronologiquement. */
 export async function getMatches(
   league: League,
   from: Date,
   to: Date = from,
-  cache: { revalidate: number } | { memoryTtl: number } = { revalidate: REVALIDATE.matches },
+  cache: CacheOptions = { revalidate: REVALIDATE.matches },
 ): Promise<Match[]> {
-  const start = espnDate(from);
-  const end = espnDate(to);
-  const data = await espnFetch<EspnScoreboardResponse>(soccer(league, "scoreboard"), {
-    ...cache,
-    params: { dates: start === end ? start : `${start}-${end}`, limit: 200 },
-  });
-
-  return (data.events ?? [])
+  const events = await scoreboardEvents(soccer(league, "scoreboard"), from, to, cache);
+  return events
     .map(toMatch)
     .filter((m): m is Match => m !== null)
     .sort((a, b) => a.date.localeCompare(b.date));
@@ -509,16 +554,11 @@ function toCupMatch(event: EspnEvent): CupMatch | null {
 export async function getCupOverview(cup: Cup): Promise<CupOverview> {
   const path = `/site/v2/sports/soccer/${cup.espnCode}/scoreboard`;
   const now = new Date();
-  const range = `${espnDate(addDays(now, -CUP_WINDOW_DAYS.past))}-${espnDate(addDays(now, CUP_WINDOW_DAYS.next))}`;
-  const [info, recent] = await Promise.all([
+  const [info, recentEvents] = await Promise.all([
     espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.cupInfo }),
-    // ESPN refuse parfois (400) une plage de dates accompagnée de `limit` pour une coupe : on réessaie sans.
-    espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.matches, params: { dates: range, limit: 500 } }).catch(
-      (error: unknown) => {
-        if (!(error instanceof EspnError) || error.status !== 400) throw error;
-        return espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.matches, params: { dates: range } });
-      },
-    ),
+    scoreboardEvents(path, addDays(now, -CUP_WINDOW_DAYS.past), addDays(now, CUP_WINDOW_DAYS.next), {
+      revalidate: REVALIDATE.matches,
+    }),
   ]);
 
   const league = info.leagues?.[0];
@@ -545,7 +585,7 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
   // Jours réellement programmés par ESPN pour chaque tour de l'édition (heure de Paris).
   const matchDays = new Map<string, string[]>();
   if (!forecast) {
-    for (const event of recent.events ?? []) {
+    for (const event of recentEvents) {
       const slug = event.season?.slug;
       const otherSeason =
         event.season?.year !== undefined &&
@@ -563,7 +603,7 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
     matchDays,
   });
 
-  const matches = (recent.events ?? []).map(toCupMatch).filter((m): m is CupMatch => m !== null);
+  const matches = recentEvents.map(toCupMatch).filter((m): m is CupMatch => m !== null);
   const results = matches
     .filter((m) => m.match.state === "post")
     .sort((a, b) => b.match.date.localeCompare(a.match.date));
@@ -580,11 +620,9 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
   // on retrouve la dernière finale pour que la page reste utile.
   let lastFinal: CupMatch | null = null;
   if (matches.length === 0 && espnFinished && lastEspnRound && /final/i.test(lastEspnRound.label)) {
-    const data = await espnFetch<EspnScoreboardResponse>(path, {
+    const events = await scoreboardEvents(path, new Date(lastEspnRound.startDate), new Date(lastEspnRound.endDate), {
       revalidate: REVALIDATE.previousSeason,
-      params: { dates: `${espnDate(new Date(lastEspnRound.startDate))}-${espnDate(new Date(lastEspnRound.endDate))}` },
-    }).catch(() => null);
-    const events = data?.events ?? [];
+    }).catch(() => []);
     const final = events.find((event) => event.season?.slug === "final") ?? events.at(-1);
     lastFinal = final ? toCupMatch(final) : null;
   }
@@ -612,12 +650,10 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
 /** Matchs de coupe d'hier et d'aujourd'hui, pour le suivi en direct. */
 export async function getCupLiveMatches(cup: Cup): Promise<Match[]> {
   const now = new Date();
-  const data = await espnFetch<EspnScoreboardResponse>(`/site/v2/sports/soccer/${cup.espnCode}/scoreboard`, {
+  const events = await scoreboardEvents(`/site/v2/sports/soccer/${cup.espnCode}/scoreboard`, addDays(now, -1), now, {
     memoryTtl: MEMORY_TTL.live,
-    // Sans `limit` : pour une coupe, ESPN refuse (400) une plage de dates accompagnée de ce paramètre.
-    params: { dates: `${espnDate(addDays(now, -1))}-${espnDate(now)}` },
   });
-  return (data.events ?? [])
+  return events
     .map(toCupMatch)
     .filter((item): item is CupMatch => item !== null)
     .map((item) => item.match);
