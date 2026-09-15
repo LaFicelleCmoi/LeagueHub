@@ -2,6 +2,7 @@ import { ArrowUpRight, Medal, Star, Trophy, type LucideIcon } from "lucide-react
 import { UCL_TRACKER_URL } from "@/lib/external-links";
 import { TIME_ZONE } from "@/lib/format";
 import type { EuropeanCup, TeamFixture } from "@/lib/types";
+import { KickoffCountdown } from "./KickoffCountdown";
 import { TeamLogo } from "./TeamLogo";
 
 // Identité visuelle des coupes d'Europe : chaque compétition a sa couleur et son icône.
@@ -92,6 +93,7 @@ export function EuropeanFixtureCard({ fixture, cup }: { fixture: TeamFixture; cu
             .filter(Boolean)
             .join(" · ")}
         </p>
+        <KickoffCountdown date={fixture.date} variant="dark" className="mt-2" />
         {cup === "ucl" && (
           <a
             href={UCL_TRACKER_URL}
