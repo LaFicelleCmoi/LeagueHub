@@ -100,8 +100,8 @@ export interface EspnEvent {
   name: string;
   status: EspnStatus;
   competitions: EspnCompetition[];
-  /** Tour de la compétition, ex. « second-round » en coupe. */
-  season?: { slug?: string };
+  /** Tour de la compétition, ex. « second-round » en coupe, et année de début de l'édition. */
+  season?: { slug?: string; year?: number };
 }
 
 export interface EspnCalendarGroup {
@@ -112,7 +112,7 @@ export interface EspnCalendarGroup {
 export interface EspnScoreboardResponse {
   events?: EspnEvent[];
   leagues?: {
-    season?: { displayName?: string };
+    season?: { displayName?: string; year?: number };
     /** Dates des journées en championnat, tours détaillés en coupe. */
     calendar?: (string | EspnCalendarGroup)[];
   }[];
