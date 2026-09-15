@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CalendarClock, Trophy } from "lucide-react";
+import { currentRound } from "@/lib/cup-calendar";
 import type { Cup } from "@/lib/cups";
 import { formatDateTime } from "@/lib/format";
 import { plural } from "@/lib/league-stats";
@@ -47,7 +48,8 @@ function MiniMatch({ item, label, showRound = true }: { item: CupMatch; label: s
 // Carte d'une coupe sur la page « Coupes nationales ».
 export function CupCard({ cup, overview }: { cup: Cup; overview: CupOverview | null }) {
   const now = Date.now();
-  const current = overview?.rounds.find((round) => Date.parse(round.end) > now);
+  const focus = overview ? currentRound(overview.rounds, now) : null;
+  const final = overview?.rounds.find((round) => round.key === "final" && Date.parse(round.end) > now);
   const next = overview?.upcoming[0];
   const last = overview?.results[0];
 
@@ -80,14 +82,25 @@ export function CupCard({ cup, overview }: { cup: Cup; overview: CupOverview | n
           <p className="text-sm text-slate-500">Données momentanément indisponibles.</p>
         ) : (
           <>
-            {current ? (
-              <p className="text-sm">
-                <span className="font-semibold">{current.label}</span>
-                {current.dates && <span className="text-slate-500 dark:text-slate-400"> · {current.dates}</span>}
-              </p>
-            ) : overview.finished ? (
-              <p className="text-sm text-slate-500 dark:text-slate-400">Édition {overview.season} terminée</p>
-            ) : null}
+            {(focus || overview.finished || overview.forecast) && (
+              <div className="space-y-1">
+                {focus ? (
+                  <p className="text-sm">
+                    <span className="text-slate-500 dark:text-slate-400">{focus.live ? "En cours" : "Prochain tour"} · </span>
+                    <span className="font-semibold">{focus.round.label}</span>
+                    {focus.round.dates && <span className="text-slate-500 dark:text-slate-400"> · {focus.round.dates}</span>}
+                  </p>
+                ) : overview.finished ? (
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Édition {overview.season} terminée</p>
+                ) : null}
+                {overview.forecast && (
+                  <p className="flex items-center gap-1.5 text-xs text-amber-700 dark:text-amber-400">
+                    <CalendarClock className="size-3.5 shrink-0" aria-hidden />
+                    Calendrier officiel, matchs pas encore publiés par ESPN
+                  </p>
+                )}
+              </div>
+            )}
 
             {next ? (
               <MiniMatch item={next} label="Prochain match" />
@@ -99,10 +112,21 @@ export function CupCard({ cup, overview }: { cup: Cup; overview: CupOverview | n
               <p className="text-sm text-slate-500">Aucun match programmé pour le moment.</p>
             )}
 
-            <p className="mt-auto text-xs text-slate-500 dark:text-slate-400">
-              {overview.upcoming.length} {plural(overview.upcoming.length, "match à venir", "matchs à venir")} ·{" "}
-              {overview.results.length} {plural(overview.results.length, "résultat récent", "résultats récents")}
-            </p>
+            <div className="mt-auto space-y-1.5">
+              {final && (
+                <p className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300">
+                  <Trophy className="size-3.5 shrink-0 text-amber-500" aria-hidden />
+                  <span className="truncate">
+                    Finale {final.dates}
+                    {final.venue ? ` · ${final.venue}` : ""}
+                  </span>
+                </p>
+              )}
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                {overview.upcoming.length} {plural(overview.upcoming.length, "match à venir", "matchs à venir")} ·{" "}
+                {overview.results.length} {plural(overview.results.length, "résultat récent", "résultats récents")}
+              </p>
+            </div>
           </>
         )}
       </div>
