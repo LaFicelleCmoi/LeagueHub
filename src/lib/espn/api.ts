@@ -20,10 +20,11 @@ import type {
   Team,
   TeamFixture,
   TeamForm,
+  TeamLiveMatch,
   TeamResult,
   Zone,
 } from "@/lib/types";
-import { espnFetch } from "./client";
+import { EspnError, espnFetch } from "./client";
 import type {
   EspnCalendarGroup,
   EspnCompetitor,
@@ -42,18 +43,20 @@ import type {
 
 // Durée de cache (secondes) adaptée au rythme de mise à jour de chaque donnée.
 const REVALIDATE = {
-  // Scores en direct : ESPN est interrogé au plus 4 fois par minute par championnat.
-  live: 15,
   matches: 60,
   standings: 300,
   leaders: 900,
   news: 900,
-  // Derniers résultats d'un club : ils changent au plus une fois par match.
-  form: 600,
   previousSeason: 86_400,
-  fixtures: 3_600,
   // Calendrier des tours d'une coupe.
   cupInfo: 3_600,
+} as const;
+
+// Données qui suivent le direct : copies en mémoire (millisecondes) plutôt que Data Cache de Next.js,
+// qui renverrait encore l'ancienne version pendant sa mise à jour (voir espnFetch).
+const MEMORY_TTL = {
+  live: 5_000,
+  team: 20_000,
 } as const;
 
 const soccer = (league: League, resource: string) => `/site/v2/sports/soccer/${league.espnCode}/${resource}`;
@@ -215,12 +218,12 @@ export async function getMatches(
   league: League,
   from: Date,
   to: Date = from,
-  revalidate: number = REVALIDATE.matches,
+  cache: { revalidate: number } | { memoryTtl: number } = { revalidate: REVALIDATE.matches },
 ): Promise<Match[]> {
   const start = espnDate(from);
   const end = espnDate(to);
   const data = await espnFetch<EspnScoreboardResponse>(soccer(league, "scoreboard"), {
-    revalidate,
+    ...cache,
     params: { dates: start === end ? start : `${start}-${end}`, limit: 200 },
   });
 
@@ -230,9 +233,10 @@ export async function getMatches(
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-/** Matchs du jour avec un cache court, pour le suivi en direct. */
+/** Matchs d'hier et d'aujourd'hui (un match du soir peut finir après minuit), pour le suivi en direct. */
 export async function getLiveMatches(league: League): Promise<Match[]> {
-  return getMatches(league, new Date(), undefined, REVALIDATE.live);
+  const now = new Date();
+  return getMatches(league, addDays(now, -1), now, { memoryTtl: MEMORY_TTL.live });
 }
 
 // --- Buteurs et passeurs ---
@@ -379,42 +383,73 @@ function toTeamResults(data: EspnScheduleResponse, teamId: string): TeamResult[]
     .filter((result): result is TeamResult => result !== null);
 }
 
+function toFixture(event: EspnScheduleEvent, teamId: string): TeamFixture | null {
+  const competition = event.competitions[0];
+  const us = competition?.competitors.find((c) => c.team.id === teamId);
+  const them = competition?.competitors.find((c) => c.team.id !== teamId);
+  if (!competition || !us || !them) return null;
+  const slug = event.league?.slug ?? "";
+  return {
+    id: event.id,
+    date: event.date,
+    competition: COMPETITION_LABELS[slug] ?? event.league?.abbreviation ?? event.league?.name ?? "",
+    home: us.homeAway === "home",
+    opponent: toTeam(them.team),
+    venue: competition.venue?.fullName ?? null,
+    europeanCup: europeanCup(slug),
+  };
+}
+
+/** Un match encore « à venir » après son heure reste le prochain match tant qu'ESPN ne l'a pas lancé. */
+const KICKOFF_GRACE = 3 * 60 * 60_000;
+
 /** Prochain match officiel pas encore commencé. */
-function nextFixture(data: EspnScheduleResponse | null, teamId: string): TeamFixture | null {
+function nextFixture(events: EspnScheduleEvent[], teamId: string): TeamFixture | null {
   const now = Date.now();
-  const upcoming = (data?.events ?? [])
-    .filter((event) => {
-      const competition = event.competitions[0];
-      return isOfficial(event.league?.slug ?? "") && competition?.status.type.state === "pre" && Date.parse(event.date) > now;
-    })
+  const upcoming = events
+    .filter(
+      (event) =>
+        isOfficial(event.league?.slug ?? "") &&
+        event.competitions[0]?.status.type.state === "pre" &&
+        Date.parse(event.date) > now - KICKOFF_GRACE,
+    )
     .sort((a, b) => a.date.localeCompare(b.date));
 
   for (const event of upcoming) {
+    const fixture = toFixture(event, teamId);
+    if (fixture) return fixture;
+  }
+  return null;
+}
+
+/** Match officiel du club en cours de jeu, avec son score. */
+function liveFixture(events: EspnScheduleEvent[], teamId: string): TeamLiveMatch | null {
+  for (const event of events) {
     const competition = event.competitions[0];
+    if (!competition || competition.status.type.state !== "in" || !isOfficial(event.league?.slug ?? "")) continue;
+    const fixture = toFixture(event, teamId);
     const us = competition.competitors.find((c) => c.team.id === teamId);
     const them = competition.competitors.find((c) => c.team.id !== teamId);
-    if (!us || !them) continue;
-    const slug = event.league?.slug ?? "";
+    if (!fixture || !us || !them) continue;
     return {
-      id: event.id,
-      date: event.date,
-      competition: COMPETITION_LABELS[slug] ?? event.league?.abbreviation ?? event.league?.name ?? "",
-      home: us.homeAway === "home",
-      opponent: toTeam(them.team),
-      venue: competition.venue?.fullName ?? null,
-      europeanCup: europeanCup(slug),
+      ...fixture,
+      goalsFor: us.score?.value ?? Number(us.score?.displayValue ?? 0),
+      goalsAgainst: them.score?.value ?? Number(them.score?.displayValue ?? 0),
+      clock: statusLabel(competition.status, event.date),
     };
   }
   return null;
 }
 
-/** Les derniers matchs officiels d'un club (toutes compétitions), du plus récent au plus ancien. */
+/** Forme d'un club (derniers matchs officiels, toutes compétitions), match en cours et prochain match. */
 export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm | null> {
   const schedule = `/site/v2/sports/soccer/all/teams/${teamId}/schedule`;
+  // Copies en mémoire de courte durée : un score ou un résultat doit apparaître pendant le match,
+  // pas une heure plus tard.
   const [current, fixtures] = await Promise.all([
-    espnFetch<EspnScheduleResponse>(schedule, { revalidate: REVALIDATE.form }),
+    espnFetch<EspnScheduleResponse>(schedule, { memoryTtl: MEMORY_TTL.team }),
     // Le calendrier à venir est un bonus : s'il manque, la forme du club s'affiche quand même.
-    espnFetch<EspnScheduleResponse>(schedule, { revalidate: REVALIDATE.fixtures, params: { fixture: "true" } }).catch(
+    espnFetch<EspnScheduleResponse>(schedule, { memoryTtl: MEMORY_TTL.team, params: { fixture: "true" } }).catch(
       () => null,
     ),
   ]);
@@ -437,7 +472,8 @@ export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm |
   return {
     team: toTeam(current.team),
     results: unique.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count),
-    next: nextFixture(fixtures, teamId),
+    live: liveFixture([...(current.events ?? []), ...(fixtures?.events ?? [])], teamId),
+    next: nextFixture(fixtures?.events ?? [], teamId),
   };
 }
 
@@ -473,15 +509,16 @@ function toCupMatch(event: EspnEvent): CupMatch | null {
 export async function getCupOverview(cup: Cup): Promise<CupOverview> {
   const path = `/site/v2/sports/soccer/${cup.espnCode}/scoreboard`;
   const now = new Date();
+  const range = `${espnDate(addDays(now, -CUP_WINDOW_DAYS.past))}-${espnDate(addDays(now, CUP_WINDOW_DAYS.next))}`;
   const [info, recent] = await Promise.all([
     espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.cupInfo }),
-    espnFetch<EspnScoreboardResponse>(path, {
-      revalidate: REVALIDATE.matches,
-      params: {
-        dates: `${espnDate(addDays(now, -CUP_WINDOW_DAYS.past))}-${espnDate(addDays(now, CUP_WINDOW_DAYS.next))}`,
-        limit: 500,
+    // ESPN refuse parfois (400) une plage de dates accompagnée de `limit` pour une coupe : on réessaie sans.
+    espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.matches, params: { dates: range, limit: 500 } }).catch(
+      (error: unknown) => {
+        if (!(error instanceof EspnError) || error.status !== 400) throw error;
+        return espnFetch<EspnScoreboardResponse>(path, { revalidate: REVALIDATE.matches, params: { dates: range } });
       },
-    }),
+    ),
   ]);
 
   const league = info.leagues?.[0];
@@ -570,4 +607,18 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
         }
       : null,
   };
+}
+
+/** Matchs de coupe d'hier et d'aujourd'hui, pour le suivi en direct. */
+export async function getCupLiveMatches(cup: Cup): Promise<Match[]> {
+  const now = new Date();
+  const data = await espnFetch<EspnScoreboardResponse>(`/site/v2/sports/soccer/${cup.espnCode}/scoreboard`, {
+    memoryTtl: MEMORY_TTL.live,
+    // Sans `limit` : pour une coupe, ESPN refuse (400) une plage de dates accompagnée de ce paramètre.
+    params: { dates: `${espnDate(addDays(now, -1))}-${espnDate(now)}` },
+  });
+  return (data.events ?? [])
+    .map(toCupMatch)
+    .filter((item): item is CupMatch => item !== null)
+    .map((item) => item.match);
 }
