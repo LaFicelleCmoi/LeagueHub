@@ -10,6 +10,7 @@ import { OUTCOMES } from "./ClubDialog";
 import { useOpenClub } from "./ClubDialogProvider";
 import { EUROPEAN_CUP_STYLES, EuropeanCupTag } from "./EuropeanCup";
 import { LeagueLogo } from "./LeagueLogo";
+import { KickoffCountdown } from "./KickoffCountdown";
 import { useLiveMatches } from "./LiveMatches";
 import { TeamLogo } from "./TeamLogo";
 
@@ -71,6 +72,7 @@ function TodayMatch({ match, teamId }: { match: Match; teamId: string }) {
           </>
         )}
       </p>
+      {match.state === "pre" && <KickoffCountdown date={match.date} className="mt-2" />}
     </>
   );
 }
@@ -208,6 +210,7 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
                   <span className="truncate">· {form.next.competition}</span>
                 )}
               </p>
+              <KickoffCountdown date={form.next.date} className="mt-2" />
             </>
           ) : form ? (
             <p className="text-sm text-slate-500">Aucun match programmé</p>
