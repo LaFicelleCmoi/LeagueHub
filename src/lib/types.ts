@@ -142,12 +142,41 @@ export interface TeamForm {
 }
 
 /** Tour d'une coupe nationale, d'après le calendrier ESPN. */
+export interface CupRoundPrize {
+  /** Dotation du vainqueur d'un match du tour. */
+  winner: string;
+  loser: string | null;
+}
+
 export interface CupRound {
+  /** Slug commun avec ESPN, ex. « round-of-16 ». */
+  key: string;
   label: string;
-  /** Dates en français, ex. « 21 août – 2 sept. ». */
+  /** Dates en français, ex. « 21–24 août et 1er–2 sept. ». */
   dates: string | null;
   start: string;
   end: string;
+  /** Dates du calendrier officiel : ESPN n'a pas encore publié les matchs du tour. */
+  forecast: boolean;
+  twoLegged: boolean;
+  draw: string | null;
+  fixtures: number | null;
+  /** Clubs en lice avant et après le tour, ex. « 116 → 60 ». */
+  clubs: string | null;
+  entries: string | null;
+  prize: CupRoundPrize | null;
+  venue: string | null;
+  note: string | null;
+}
+
+export interface CupCalendarInfo {
+  /** Date du relevé (AAAA-MM-JJ). */
+  updatedAt: string;
+  /** Slug du premier tour publié par ESPN. */
+  espnFrom: string;
+  note: string | null;
+  sources: { label: string; url: string }[];
+  checkedWith: string[];
 }
 
 export interface CupMatch {
@@ -161,6 +190,8 @@ export interface CupOverview {
   season: string;
   /** Le dernier tour de l'édition est passé. */
   finished: boolean;
+  /** ESPN n'a pas encore ouvert l'édition : tours et dates viennent du calendrier officiel. */
+  forecast: boolean;
   rounds: CupRound[];
   /** Du plus récent au plus ancien. */
   results: CupMatch[];
@@ -168,4 +199,6 @@ export interface CupOverview {
   upcoming: CupMatch[];
   /** Dernière finale, quand aucune nouvelle édition n'est encore programmée. */
   lastFinal: CupMatch | null;
+  /** Calendrier officiel de l'édition affichée, s'il est connu. */
+  calendar: CupCalendarInfo | null;
 }
