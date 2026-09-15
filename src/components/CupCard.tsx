@@ -7,6 +7,7 @@ import { formatDateTime } from "@/lib/format";
 import { plural } from "@/lib/league-stats";
 import type { CupMatch, CupOverview } from "@/lib/types";
 import { CupLogo } from "./CupLogo";
+import { KickoffCountdown } from "./KickoffCountdown";
 import { TeamLogo } from "./TeamLogo";
 
 function MiniMatch({ item, label, showRound = true }: { item: CupMatch; label: string; showRound?: boolean }) {
@@ -41,6 +42,7 @@ function MiniMatch({ item, label, showRound = true }: { item: CupMatch; label: s
         ))}
       </div>
       {!played && <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{formatDateTime(match.date)}</p>}
+      {!played && <KickoffCountdown date={match.date} className="mt-1.5" />}
     </div>
   );
 }
