@@ -6,10 +6,12 @@ import { CalendarDays, ChevronRight, Star, X } from "lucide-react";
 import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
 import { TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
+import { useTeamForm } from "@/lib/team-form";
 import type { ClubRef, MatchOutcome, TeamForm } from "@/lib/types";
 import { EUROPEAN_CUP_STYLES, EuropeanCupTag, EuropeanFixtureCard } from "./EuropeanCup";
 import { KickoffCountdown } from "./KickoffCountdown";
 import { LeagueLogo } from "./LeagueLogo";
+import { TeamLiveMatchCard } from "./TeamLiveMatch";
 import { TeamLogo } from "./TeamLogo";
 
 export const OUTCOMES: Record<MatchOutcome, { letter: string; label: string; badge: string; score: string }> = {
@@ -30,8 +32,6 @@ const fixtureDate = new Intl.DateTimeFormat("fr-FR", {
 
 const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 
-type Status = { state: "loading" } | { state: "error" } | { state: "ready"; form: TeamForm };
-
 function summary({ results }: TeamForm): string {
   const count = (outcome: MatchOutcome) => results.filter((r) => r.outcome === outcome).length;
   const label = (n: number, one: string, many: string) => `${n} ${n > 1 ? many : one}`;
@@ -47,8 +47,9 @@ function summary({ results }: TeamForm): string {
 export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const favorite = useFavoriteClub();
-  const [status, setStatus] = useState<Status>({ state: "loading" });
   const [attempt, setAttempt] = useState(0);
+  // Relue toutes les 30 s pendant un match du club.
+  const status = useTeamForm(club, attempt);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -68,25 +69,10 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
     };
   }, [club]);
 
-  useEffect(() => {
-    if (!club) return;
-    const controller = new AbortController();
-    setStatus({ state: "loading" });
-    fetch(`/api/teams/${club.league}/${club.team.id}`, { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json() as Promise<TeamForm>;
-      })
-      .then((form) => setStatus({ state: "ready", form }))
-      .catch(() => {
-        if (!controller.signal.aborted) setStatus({ state: "error" });
-      });
-    return () => controller.abort();
-  }, [club, attempt]);
-
   const close = () => dialogRef.current?.close();
   const league = club ? getLeague(club.league) : undefined;
   const isFavorite = Boolean(club && favorite?.team.id === club.team.id);
+  const live = status.state === "ready" ? status.form.live : null;
   const next = status.state === "ready" ? status.form.next : null;
 
   return (
@@ -135,6 +121,8 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
               <X className="size-5" aria-hidden />
             </button>
           </header>
+
+          {live && <TeamLiveMatchCard match={live} />}
 
           <section className="mt-5" aria-labelledby="club-form-title">
             <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
