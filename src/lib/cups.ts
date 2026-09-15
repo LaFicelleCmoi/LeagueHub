@@ -37,34 +37,44 @@ export function cupLogo(cup: Cup, variant: "light" | "dark" = "light"): string {
 }
 
 const ROUND_LABELS: Record<string, string> = {
+  // Tours de qualification (FA Cup) : jamais publiés par ESPN, repris du calendrier officiel.
+  "extra-preliminary-round": "Tour extra-préliminaire",
   "preliminary-round": "Tour préliminaire",
   "qualifying-round": "Tour de qualification",
+  "first-qualifying-round": "1er tour de qualification",
+  "second-qualifying-round": "2e tour de qualification",
+  "third-qualifying-round": "3e tour de qualification",
+  "fourth-qualifying-round": "4e tour de qualification",
   "first-round": "1er tour",
   "second-round": "2e tour",
   "third-round": "3e tour",
   "fourth-round": "4e tour",
   "fifth-round": "5e tour",
   "sixth-round": "6e tour",
+  "seventh-round": "7e tour",
+  "eighth-round": "8e tour",
   "round-of-128": "64es de finale",
   "round-of-64": "32es de finale",
   "round-of-32": "16es de finale",
   "round-of-16": "8es de finale",
-  // ESPN abrège parfois « Round » en « Rd ».
-  "rd-of-128": "64es de finale",
-  "rd-of-64": "32es de finale",
-  "rd-of-32": "16es de finale",
-  "rd-of-16": "8es de finale",
   quarterfinals: "Quarts de finale",
-  "quarter-finals": "Quarts de finale",
   semifinals: "Demi-finales",
-  "semi-finals": "Demi-finales",
   final: "Finale",
 };
 
+/** Slug commun d'un tour : « Rd of 16 », « Round of 16 » et « round-of-16 » donnent « round-of-16 ». */
+export function roundKey(slugOrLabel: string): string {
+  return slugOrLabel
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/^rd-of-/, "round-of-")
+    .replace(/^(quarter|semi)-finals$/, "$1finals");
+}
+
 /** Nom français d'un tour, à partir du slug (« second-round ») ou du libellé ESPN (« Second Round »). */
 export function roundLabel(slugOrLabel: string): string {
-  const key = slugOrLabel.trim().toLowerCase().replace(/\s+/g, "-");
-  return ROUND_LABELS[key] ?? slugOrLabel.replace(/-/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+  return ROUND_LABELS[roundKey(slugOrLabel)] ?? slugOrLabel.replace(/-/g, " ").replace(/^\w/, (c) => c.toUpperCase());
 }
 
 /** « Match aller » / « Match retour » à partir des notes ESPN (« 1st Leg », « 2nd Leg »). */
