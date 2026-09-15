@@ -133,10 +133,19 @@ export interface TeamFixture {
   europeanCup: EuropeanCup | null;
 }
 
+export interface TeamLiveMatch extends TeamFixture {
+  goalsFor: number;
+  goalsAgainst: number;
+  /** Minute de jeu ou étape, ex. « 67' », « Mi-temps ». */
+  clock: string;
+}
+
 export interface TeamForm {
   team: Team;
   /** Du plus récent au plus ancien. */
   results: TeamResult[];
+  /** Match officiel en cours de jeu. */
+  live: TeamLiveMatch | null;
   /** Prochain match officiel, s'il est déjà programmé. */
   next: TeamFixture | null;
 }
