@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Trophy } from "lucide-react";
 import { CupCard } from "@/components/CupCard";
+import { CupsAgenda } from "@/components/CupsAgenda";
 import { CupsNav } from "@/components/CupsNav";
 import { CupsTabNotice } from "@/components/CupsTabSwitch";
 import { CUPS } from "@/lib/cups";
@@ -11,7 +12,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Coupes nationales",
   description:
-    "FA Cup, Copa del Rey, Coppa Italia, DFB-Pokal et Coupe de France : tours, résultats, prochains matchs et exploits.",
+    "FA Cup, Copa del Rey, Coppa Italia, DFB-Pokal et Coupe de France : calendrier officiel, tours, résultats, prochains matchs et exploits.",
 };
 
 // Grand écran : 3 cartes puis 2 plus larges, sans case vide. Tablette : la 5e prend toute la largeur.
@@ -35,8 +36,8 @@ export default async function CupsPage() {
         </p>
         <h1 className="relative mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Coupes nationales</h1>
         <p className="relative mt-2 max-w-2xl text-slate-600 dark:text-slate-400">
-          FA Cup, Copa del Rey, Coppa Italia, DFB-Pokal et Coupe de France : parcours, résultats, prochains matchs et
-          exploits des petits poucets face aux clubs de l’élite.
+          FA Cup, Copa del Rey, Coppa Italia, DFB-Pokal et Coupe de France : calendrier officiel, parcours, résultats,
+          prochains matchs et exploits des petits poucets face aux clubs de l’élite.
         </p>
       </section>
 
@@ -49,6 +50,8 @@ export default async function CupsPage() {
           </div>
         ))}
       </div>
+
+      <CupsAgenda items={cups} />
     </div>
   );
 }
