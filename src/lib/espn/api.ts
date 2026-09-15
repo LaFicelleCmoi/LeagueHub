@@ -1,13 +1,13 @@
 import "server-only";
 
-import { frenchDateRange, legLabel, roundLabel, type Cup } from "@/lib/cups";
-import { addDays, espnDate, formatTime } from "@/lib/format";
+import { buildRounds, CUP_CALENDARS } from "@/lib/cup-calendar";
+import { frenchDateRange, legLabel, roundKey, roundLabel, type Cup } from "@/lib/cups";
+import { addDays, dayKey, espnDate, formatTime } from "@/lib/format";
 import { LEAGUES, type League } from "@/lib/leagues";
 import type {
   Article,
   CupMatch,
   CupOverview,
-  CupRound,
   EuropeanCup,
   Leader,
   Leaders,
@@ -484,18 +484,47 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
     }),
   ]);
 
+  const league = info.leagues?.[0];
+  const espnSeason = league?.season?.displayName?.match(/\d{4}-\d{2}/)?.[0] ?? "";
+  const calendar = CUP_CALENDARS[cup.slug];
+  // ESPN n'a pas encore ouvert la nouvelle édition : on suit le calendrier officiel publié.
+  const forecast = calendar.season > espnSeason;
+  const withCalendar = forecast || calendar.season === espnSeason;
+
   const entries = calendarEntries(info);
   // Tours pas encore programmés : ESPN leur attribue à tous la même plage fictive (« Oct 6-Jun 30 »).
   const detailCount = new Map<string, number>();
   for (const entry of entries) {
     if (entry.detail) detailCount.set(entry.detail, (detailCount.get(entry.detail) ?? 0) + 1);
   }
-  const rounds: CupRound[] = entries.map((entry) => ({
+  const espnRounds = entries.map((entry) => ({
+    key: roundKey(entry.label),
     label: roundLabel(entry.label),
     dates: entry.detail && (detailCount.get(entry.detail) ?? 0) > 1 ? null : frenchDateRange(entry.detail),
     start: entry.startDate,
     end: entry.endDate,
   }));
+
+  // Jours réellement programmés par ESPN pour chaque tour de l'édition (heure de Paris).
+  const matchDays = new Map<string, string[]>();
+  if (!forecast) {
+    for (const event of recent.events ?? []) {
+      const slug = event.season?.slug;
+      const otherSeason =
+        event.season?.year !== undefined &&
+        league?.season?.year !== undefined &&
+        event.season.year !== league.season.year;
+      if (!slug || otherSeason) continue;
+      const key = roundKey(slug);
+      matchDays.set(key, [...(matchDays.get(key) ?? []), dayKey(event.date)]);
+    }
+  }
+
+  const rounds = buildRounds({
+    espn: forecast ? [] : espnRounds,
+    calendar: withCalendar ? calendar : undefined,
+    matchDays,
+  });
 
   const matches = (recent.events ?? []).map(toCupMatch).filter((m): m is CupMatch => m !== null);
   const results = matches
@@ -505,16 +534,18 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
     .filter((m) => m.match.state !== "post")
     .sort((a, b) => a.match.date.localeCompare(b.match.date));
 
-  const lastRound = entries.at(-1);
-  const finished = lastRound !== undefined && Date.parse(lastRound.endDate) < now.getTime();
+  const lastRound = rounds.at(-1);
+  const finished = lastRound !== undefined && Date.parse(lastRound.end) < now.getTime();
+  const lastEspnRound = entries.at(-1);
+  const espnFinished = lastEspnRound !== undefined && Date.parse(lastEspnRound.endDate) < now.getTime();
 
-  // Aucun match à l'horizon (édition terminée, la suivante pas encore programmée) :
+  // Aucun match à l'horizon (édition terminée, la suivante pas encore publiée par ESPN) :
   // on retrouve la dernière finale pour que la page reste utile.
   let lastFinal: CupMatch | null = null;
-  if (matches.length === 0 && finished && lastRound && /final/i.test(lastRound.label)) {
+  if (matches.length === 0 && espnFinished && lastEspnRound && /final/i.test(lastEspnRound.label)) {
     const data = await espnFetch<EspnScoreboardResponse>(path, {
       revalidate: REVALIDATE.previousSeason,
-      params: { dates: `${espnDate(new Date(lastRound.startDate))}-${espnDate(new Date(lastRound.endDate))}` },
+      params: { dates: `${espnDate(new Date(lastEspnRound.startDate))}-${espnDate(new Date(lastEspnRound.endDate))}` },
     }).catch(() => null);
     const events = data?.events ?? [];
     const final = events.find((event) => event.season?.slug === "final") ?? events.at(-1);
@@ -522,11 +553,21 @@ export async function getCupOverview(cup: Cup): Promise<CupOverview> {
   }
 
   return {
-    season: info.leagues?.[0]?.season?.displayName?.match(/\d{4}-\d{2}/)?.[0] ?? "",
+    season: forecast ? calendar.season : espnSeason,
     finished,
+    forecast,
     rounds,
     results,
     upcoming,
     lastFinal,
+    calendar: withCalendar
+      ? {
+          updatedAt: calendar.updatedAt,
+          espnFrom: calendar.espnFrom,
+          note: calendar.note ?? null,
+          sources: calendar.sources,
+          checkedWith: calendar.checkedWith,
+        }
+      : null,
   };
 }
