@@ -4,6 +4,7 @@ import { CupCard } from "@/components/CupCard";
 import { CupsAgenda } from "@/components/CupsAgenda";
 import { CupsNav } from "@/components/CupsNav";
 import { CupsTabNotice } from "@/components/CupsTabSwitch";
+import { PageSync } from "@/components/PageSync";
 import { CUPS } from "@/lib/cups";
 import { getCupOverview } from "@/lib/espn/api";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 const SPANS = ["lg:col-span-2", "lg:col-span-2", "lg:col-span-2", "lg:col-span-3", "md:col-span-2 lg:col-span-3"];
 
 export default async function CupsPage() {
+  const renderedAt = Date.now();
   // Une coupe indisponible ne doit pas empêcher d'afficher les autres.
   const cups = await Promise.all(
     CUPS.map(async (cup) => ({ cup, overview: await getCupOverview(cup).catch(() => null) })),
@@ -26,6 +28,7 @@ export default async function CupsPage() {
 
   return (
     <div className="space-y-8">
+      <PageSync renderedAt={renderedAt} maxAge={330_000} />
       <CupsTabNotice />
 
       <section className="relative overflow-hidden rounded-3xl border border-amber-300/60 bg-gradient-to-br from-amber-50 via-white to-white p-6 sm:p-8 dark:border-amber-500/20 dark:from-amber-500/10 dark:via-slate-900 dark:to-slate-950">
