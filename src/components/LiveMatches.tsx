@@ -1,18 +1,20 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import type { CupSlug } from "@/lib/cups";
 import { TIME_ZONE } from "@/lib/format";
 import type { LeagueSlug } from "@/lib/leagues";
 import { LIVE_POLL_INTERVAL, needsLiveUpdate, type TrackedMatch } from "@/lib/live";
 import type { Match } from "@/lib/types";
 
 // Actualisation des scores sans recharger la page : le navigateur interroge la
-// route interne /api/live/[league], mise en cache côté serveur. Jamais ESPN.
+// route interne /api/live/[championnat ou coupe], mise en cache quelques secondes. Jamais ESPN.
 
 const MAX_RETRY_DELAY = 5 * 60_000;
 
 export interface LiveSource {
-  league: LeagueSlug;
+  /** Championnat ou coupe nationale. */
+  slug: LeagueSlug | CupSlug;
   matches: TrackedMatch[];
 }
 
@@ -26,8 +28,8 @@ const INITIAL_STATE: LiveState = { matches: new Map(), status: "idle", lastUpdat
 
 const LiveContext = createContext<LiveState>(INITIAL_STATE);
 
-async function fetchLiveMatches(league: LeagueSlug, signal: AbortSignal): Promise<Match[]> {
-  const response = await fetch(`/api/live/${league}`, { signal });
+async function fetchLiveMatches(slug: LiveSource["slug"], signal: AbortSignal): Promise<Match[]> {
+  const response = await fetch(`/api/live/${slug}`, { signal, cache: "no-store" });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const data = (await response.json()) as { matches: Match[] };
   return data.matches;
@@ -45,12 +47,12 @@ export function LiveMatchesProvider({ sources, children }: { sources: LiveSource
     let inFlight = false;
     let failures = 0;
 
-    // Seuls les championnats ayant un match en cours ou imminent sont interrogés.
+    // Seuls les championnats et coupes ayant un match en cours ou imminent sont interrogés.
     const leaguesToRefresh = () => {
       const now = Date.now();
       return sources
         .filter((source) => source.matches.some((match) => needsLiveUpdate(known.get(match.id) ?? match, now)))
-        .map((source) => source.league);
+        .map((source) => source.slug);
     };
 
     const refresh = async () => {
