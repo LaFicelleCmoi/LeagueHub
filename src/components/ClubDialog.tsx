@@ -8,6 +8,7 @@ import { TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
 import type { ClubRef, MatchOutcome, TeamForm } from "@/lib/types";
 import { EUROPEAN_CUP_STYLES, EuropeanCupTag, EuropeanFixtureCard } from "./EuropeanCup";
+import { KickoffCountdown } from "./KickoffCountdown";
 import { LeagueLogo } from "./LeagueLogo";
 import { TeamLogo } from "./TeamLogo";
 
@@ -276,6 +277,7 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
                         .filter(Boolean)
                         .join(" · ")}
                     </p>
+                    <KickoffCountdown date={next.date} className="mt-2" />
                   </div>
                 </div>
               )}
