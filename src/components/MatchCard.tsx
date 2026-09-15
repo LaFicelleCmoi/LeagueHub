@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { MapPin, Star } from "lucide-react";
 import { useFavoriteClub } from "@/lib/favorite-club";
 import type { Match, MatchEvent, MatchEventKind, MatchSide } from "@/lib/types";
+import { KickoffCountdown } from "./KickoffCountdown";
 import { useLiveMatch } from "./LiveMatches";
 import ShinyText from "./reactbits/ShinyText";
 import StarBorder from "./reactbits/StarBorder";
@@ -157,6 +158,8 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
           <TeamLine side={match.away} match={match} />
         </div>
       </div>
+
+      {match.state === "pre" && <KickoffCountdown date={match.date} className="mt-3" />}
 
       {/* Annonce les changements de score aux lecteurs d'écran. */}
       {live && (
