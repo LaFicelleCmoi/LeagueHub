@@ -11,6 +11,7 @@ import { LeagueShortcuts } from "@/components/LeagueShortcuts";
 import { LeagueStandingsCard } from "@/components/LeagueStandingsCard";
 import { LiveIndicator, LiveMatchesProvider } from "@/components/LiveMatches";
 import { MatchCard } from "@/components/MatchCard";
+import { PageSync } from "@/components/PageSync";
 import { StatTiles, type Stat } from "@/components/StatTiles";
 import { UclTrackerBanner } from "@/components/UclTrackerBanner";
 import SplitFlapText from "@/components/reactbits/SplitFlapText";
@@ -50,7 +51,7 @@ export default async function HomePage() {
   const season = addTotals(overview.map(({ standings }) => seasonTotals(standings)));
 
   const liveSources = matchDays
-    .map(({ league, today }) => ({ league: league.slug, matches: selectTrackedMatches(today, now.getTime()) }))
+    .map(({ league, today }) => ({ slug: league.slug, matches: selectTrackedMatches(today, now.getTime()) }))
     .filter((source) => source.matches.length > 0);
 
   const positions: Record<string, ClubPosition> = Object.fromEntries(
@@ -78,6 +79,8 @@ export default async function HomePage() {
   return (
     // Fenêtre « 5 derniers matchs » partagée par le bandeau des clubs et les cartes de classement.
     <ClubDialogProvider>
+      {/* Page servie depuis le cache : ses données sont rechargées dès qu'elles ont plus de 90 s. */}
+      <PageSync renderedAt={now.getTime()} />
       <div className="space-y-12">
         <section className="grid gap-6 md:grid-cols-[minmax(0,1fr)_240px] md:items-center md:gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="min-w-0">
