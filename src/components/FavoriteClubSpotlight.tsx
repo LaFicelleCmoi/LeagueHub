@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Star } from "lucide-react";
 import { useFavoriteClub } from "@/lib/favorite-club";
 import { formatTime, TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
-import type { Match, TeamFixture, TeamForm } from "@/lib/types";
+import { useTeamForm } from "@/lib/team-form";
+import type { Match, TeamFixture } from "@/lib/types";
 import { OUTCOMES } from "./ClubDialog";
 import { useOpenClub } from "./ClubDialogProvider";
 import { EUROPEAN_CUP_STYLES, EuropeanCupTag } from "./EuropeanCup";
 import { LeagueLogo } from "./LeagueLogo";
 import { KickoffCountdown } from "./KickoffCountdown";
 import { useLiveMatches } from "./LiveMatches";
+import { TeamLiveMatchCard } from "./TeamLiveMatch";
 import { TeamLogo } from "./TeamLogo";
 
 export interface ClubPosition {
@@ -86,23 +88,10 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
   const favorite = useFavoriteClub();
   const openClub = useOpenClub();
   const liveMatches = useLiveMatches(matches);
-  const [form, setForm] = useState<TeamForm | null>(null);
-
-  const teamId = favorite?.team.id;
-  const leagueSlug = favorite?.league;
-
-  useEffect(() => {
-    setForm(null);
-    if (!teamId || !leagueSlug) return;
-    const controller = new AbortController();
-    fetch(`/api/teams/${leagueSlug}/${teamId}`, { signal: controller.signal })
-      .then((response) => (response.ok ? (response.json() as Promise<TeamForm>) : null))
-      .then(setForm)
-      .catch(() => {
-        // Forme indisponible : le reste de la carte s'affiche quand même.
-      });
-    return () => controller.abort();
-  }, [teamId, leagueSlug]);
+  // Relue toutes les 30 s pendant un match du club ; indisponible, le reste de la carte s'affiche quand même.
+  const status = useTeamForm(favorite);
+  const form = status.state === "ready" ? status.form : null;
+  const failed = status.state === "error";
 
   const league = favorite ? getLeague(favorite.league) : undefined;
   if (!favorite || !league) return null;
@@ -185,6 +174,8 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
             ) : (
               <p className="text-sm text-slate-500">Aucun match récent</p>
             )
+          ) : failed ? (
+            <p className="text-sm text-slate-500">Indisponible</p>
           ) : (
             <span className="flex gap-1">
               {Array.from({ length: 5 }, (_, index) => (
@@ -194,9 +185,11 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
           )}
         </Tile>
 
-        <Tile label={today ? "Aujourd’hui" : "Prochain match"}>
+        <Tile label={today ? "Aujourd’hui" : form?.live ? "En direct" : "Prochain match"}>
           {today ? (
             <TodayMatch match={today} teamId={favorite.team.id} />
+          ) : form?.live ? (
+            <TeamLiveMatchCard match={form.live} compact />
           ) : form?.next ? (
             <>
               <Opponent home={form.next.home} opponent={form.next.opponent} />
@@ -214,6 +207,8 @@ export function FavoriteClubSpotlight({ positions, matches }: { positions: Recor
             </>
           ) : form ? (
             <p className="text-sm text-slate-500">Aucun match programmé</p>
+          ) : failed ? (
+            <p className="text-sm text-slate-500">Indisponible</p>
           ) : (
             <>
               <Skeleton className="h-5 w-32" />
