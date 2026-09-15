@@ -8,8 +8,11 @@ export const LIVE_POLL_INTERVAL = 20_000;
 
 /** On commence à suivre un match 10 minutes avant le coup d'envoi… */
 const BEFORE_KICKOFF = 10 * 60_000;
-/** …et on abandonne un match toujours « à venir » 3 h après l'heure prévue. */
-const AFTER_KICKOFF = 3 * 60 * 60_000;
+/**
+ * …et on continue tant qu'il est « à venir » après l'heure prévue : ESPN le bascule parfois en retard,
+ * et une page servie depuis le cache peut montrer « à venir » un match déjà terminé.
+ */
+const AFTER_KICKOFF = 12 * 60 * 60_000;
 /** Seuls les matchs des prochaines 24 h peuvent démarrer pendant une visite. */
 const TRACKING_HORIZON = 24 * 60 * 60_000;
 
