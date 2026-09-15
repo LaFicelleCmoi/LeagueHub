@@ -17,6 +17,7 @@ La page d'accueil réunit les chiffres clés (dont le total de buts de la saison
 - **Club favori** : chaque visiteur peut choisir son club (mémorisé dans le navigateur, sans compte). Il a droit à un traitement spécial : section « Mon club » sur l'accueil (place au classement, forme, match du jour en direct ou prochain match), logo sur le badge 3D, étoile dorée et ligne ambrée dans les classements, cadre doré sur ses matchs, célébration quand il marque en direct et fiche « Votre club » dorée.
 - **Tracker Ligue des champions 2026-2027** : bannière sur l'accueil, pastille « LDC » dans l'en-tête et adresses courtes `/ldc` et `/ligue-des-champions` qui redirigent vers [ldc-2026-2027.vercel.app](https://ldc-2026-2027.vercel.app/) (projet indépendant, ouvert dans un nouvel onglet).
 - **Onglet Coupes nationales** (activable) : un interrupteur « Coupes » dans l'en-tête affiche un onglet dédié à la FA Cup, la Copa del Rey, la Coppa Italia, la DFB-Pokal et la Coupe de France. Chaque coupe a sa page (`/coupes/[coupe]`) : frise des tours, prochains matchs et résultats par tour (aller-retour, tirs au but), exploits des petits poucets face aux clubs de première division, et dernière finale quand l'édition suivante n'est pas encore programmée.
+- **Calendrier officiel des coupes 2026-27** : ESPN ne publie un tour qu'une fois tiré et ignore les qualifications (la FA Cup et la Coupe de France 2026-27 n'y figurent pas encore). Le calendrier des fédérations (FA, FFF, RFEF, Lega Serie A, DFB), relevé via Wikipédia et recoupé avec ESPN, OpenLigaDB et TheSportsDB, complète la frise et un tableau détaillé : dates, tirages, nombre de matchs, clubs en lice, entrées en lice, dotations de la FA Cup et stades des finales. Les jours réels des matchs publiés par ESPN remplacent les dates prévues. La page `/coupes` ajoute les prochaines échéances et le compte à rebours des finales.
 
 ## Stack
 
@@ -57,6 +58,7 @@ src/
 └── lib/
     ├── leagues.ts                Configuration des 5 championnats
     ├── cups.ts                   Configuration des 5 coupes nationales (tours et dates en français)
+    ├── cup-calendar.ts           Calendrier officiel 2026-27 des coupes, fusionné avec les données ESPN
     ├── cups-tab.ts               Interrupteur de l'onglet Coupes, mémorisé dans le navigateur
     ├── live.ts                   Règles du suivi en direct (quels matchs, quand)
     ├── favorite-club.ts          Club favori mémorisé dans le navigateur
