@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LiveIndicator, LiveMatchesProvider } from "@/components/LiveMatches";
+import { PageSync } from "@/components/PageSync";
 import { StandingsTable } from "@/components/StandingsTable";
 import { getMatches, getStandings } from "@/lib/espn/api";
 import { resolveLeague, type LeaguePageProps } from "@/lib/league-params";
@@ -26,10 +27,11 @@ export default async function StandingsPage({ params }: LeaguePageProps) {
   ]);
 
   const tracked = selectTrackedMatches(today, now.getTime());
-  const sources = tracked.length > 0 ? [{ league: league.slug, matches: tracked }] : [];
+  const sources = tracked.length > 0 ? [{ slug: league.slug, matches: tracked }] : [];
 
   return (
     <LiveMatchesProvider sources={sources}>
+      <PageSync renderedAt={now.getTime()} />
       <div className="space-y-4">
         <LiveIndicator />
         <StandingsTable league={league.slug} standings={standings} matches={today} />
