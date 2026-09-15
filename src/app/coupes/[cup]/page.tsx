@@ -4,15 +4,18 @@ import type { CSSProperties } from "react";
 import { CupLogo } from "@/components/CupLogo";
 import { CupMatchList, exploitLabel } from "@/components/CupMatchList";
 import { CupRounds } from "@/components/CupRounds";
+import { CupSchedule } from "@/components/CupSchedule";
 import { CupsNav } from "@/components/CupsNav";
 import { CupsTabNotice } from "@/components/CupsTabSwitch";
 import { EmptyState } from "@/components/EmptyState";
 import { MatchCard } from "@/components/MatchCard";
 import { StatTiles, type Stat } from "@/components/StatTiles";
+import { currentRound, daysUntil } from "@/lib/cup-calendar";
 import { CUPS, getCup } from "@/lib/cups";
 import { getCupOverview, getStandings } from "@/lib/espn/api";
 import { plural } from "@/lib/league-stats";
 import { getLeague } from "@/lib/leagues";
+import type { CupOverview } from "@/lib/types";
 
 export const revalidate = 60;
 export const dynamicParams = false;
@@ -28,8 +31,20 @@ interface CupPageProps {
 export async function generateMetadata({ params }: CupPageProps): Promise<Metadata> {
   const cup = getCup((await params).cup);
   return cup
-    ? { title: cup.name, description: `${cup.name} (${cup.country}) : parcours, résultats, prochains matchs et exploits.` }
+    ? {
+        title: cup.name,
+        description: `${cup.name} (${cup.country}) : calendrier officiel, parcours, résultats, prochains matchs et exploits.`,
+      }
     : {};
+}
+
+/** « à partir du 1er tour (sam. 7 nov.) », « à partir des 32es de finale (19–20 déc.) ». */
+function espnCoverage(overview: CupOverview): string {
+  const round = overview.rounds.find((item) => item.key === overview.calendar?.espnFrom);
+  if (!round) return "dès le tirage des premiers tours";
+  const many = /^(\d+es |quarts|demi)/i.test(round.label);
+  const label = /^\d/.test(round.label) ? round.label : round.label.charAt(0).toLowerCase() + round.label.slice(1);
+  return `à partir ${many ? "des" : "du"} ${label}${round.dates ? ` (${round.dates})` : ""}`;
 }
 
 export default async function CupPage({ params }: CupPageProps) {
@@ -42,7 +57,8 @@ export default async function CupPage({ params }: CupPageProps) {
   const topFlight = new Set(standings?.rows.map((row) => row.team.id) ?? []);
   const exploits = overview.results.filter((item) => exploitLabel(item, topFlight)).length;
   const now = Date.now();
-  const current = overview.rounds.find((round) => Date.parse(round.end) > now);
+  const focus = currentRound(overview.rounds, now);
+  const final = overview.rounds.find((round) => round.key === "final" && Date.parse(round.end) > now);
 
   const stats: Stat[] = [
     {
@@ -60,9 +76,17 @@ export default async function CupPage({ params }: CupPageProps) {
       value: exploits,
       hint: `Contre un club de ${league.name}`,
       accent: true,
-      className: "col-span-2 lg:col-span-1",
+      className: final ? undefined : "col-span-2 lg:col-span-1",
     },
   ];
+  if (final) {
+    const days = Math.max(0, daysUntil(final.start, now));
+    stats.push({
+      label: plural(days, "jour avant la finale", "jours avant la finale"),
+      value: days,
+      hint: [final.dates, final.venue].filter(Boolean).join(" · "),
+    });
+  }
 
   const nothingScheduled = overview.upcoming.length === 0 && overview.results.length === 0;
 
@@ -83,10 +107,10 @@ export default async function CupPage({ params }: CupPageProps) {
           </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{cup.name}</h1>
         </div>
-        {current ? (
+        {focus ? (
           <p className="rounded-full bg-[var(--accent)] px-3 py-1 text-sm font-semibold text-white">
-            {current.label}
-            {current.dates ? ` · ${current.dates}` : ""}
+            {focus.live ? "En cours" : "Prochain tour"} · {focus.round.label}
+            {focus.round.dates ? ` · ${focus.round.dates}` : ""}
           </p>
         ) : overview.finished ? (
           <p className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
@@ -95,16 +119,18 @@ export default async function CupPage({ params }: CupPageProps) {
         ) : null}
       </header>
 
-      <StatTiles stats={stats} className="grid-cols-2 lg:grid-cols-3" />
+      <StatTiles stats={stats} className={stats.length === 4 ? "grid-cols-2 lg:grid-cols-4" : "grid-cols-2 lg:grid-cols-3"} />
 
       <CupRounds rounds={overview.rounds} />
 
       {nothingScheduled ? (
         <section className="space-y-4">
           <EmptyState>
-            {overview.finished
-              ? `L’édition ${overview.season} est terminée : la prochaine n’est pas encore programmée par ESPN.`
-              : "Aucun match joué ces 60 derniers jours ni programmé dans les 5 prochains mois."}
+            {overview.forecast
+              ? `ESPN n’a pas encore ouvert l’édition ${overview.season} : ses matchs y apparaîtront ${espnCoverage(overview)}. Le calendrier officiel complet est détaillé plus bas.`
+              : overview.finished
+                ? `L’édition ${overview.season} est terminée : la prochaine n’est pas encore programmée par ESPN.`
+                : "Aucun match joué ces 60 derniers jours ni programmé dans les 5 prochains mois."}
           </EmptyState>
           {overview.lastFinal && (
             <div>
@@ -131,6 +157,8 @@ export default async function CupPage({ params }: CupPageProps) {
           />
         </>
       )}
+
+      <CupSchedule overview={overview} />
     </div>
   );
 }
