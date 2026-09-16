@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "calendrier": "tsx scripts/sync-calendar.mts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",
@@ -32,6 +33,7 @@
     "eslint-config-next": "15.5.25",
     "shadcn": "3.8.5",
     "tailwindcss": "4.1.18",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   }
 }
