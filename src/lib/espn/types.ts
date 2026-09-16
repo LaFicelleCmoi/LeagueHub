@@ -77,6 +77,7 @@ export interface EspnDetail {
   team?: { id: string };
   scoringPlay?: boolean;
   redCard?: boolean;
+  yellowCard?: boolean;
   penaltyKick?: boolean;
   ownGoal?: boolean;
   shootout?: boolean;
@@ -183,4 +184,43 @@ export interface EspnScheduleResponse {
   team?: EspnTeam;
   season?: { year?: number };
   events?: EspnScheduleEvent[];
+}
+
+// --- Détail d'un match : /apis/site/v2/sports/soccer/{league}/summary?event={id} ---
+
+export interface EspnKeyEvent {
+  id: string;
+  /** `type.type` : slug de l'action (« goal---header », « yellow-card », « substitution »…). */
+  type?: { id?: string; text?: string; type?: string };
+  text?: string;
+  clock?: { displayValue?: string };
+  team?: { id?: string; displayName?: string };
+  participants?: { athlete?: { id?: string; displayName?: string } }[];
+  scoringPlay?: boolean;
+}
+
+export interface EspnRosterPlayer {
+  starter?: boolean;
+  jersey?: string;
+  formationPlace?: string;
+  athlete: { id: string; displayName: string };
+  position?: { abbreviation?: string; displayName?: string };
+  subbedIn?: boolean;
+  subbedOut?: boolean;
+  stats?: EspnStat[];
+  plays?: { clock?: { displayValue?: string }; substitution?: boolean }[];
+}
+
+export interface EspnSummaryResponse {
+  header?: { competitions?: EspnCompetition[] };
+  keyEvents?: EspnKeyEvent[];
+  commentary?: { time?: { displayValue?: string }; text?: string }[];
+  boxscore?: { teams?: { team: EspnTeam; homeAway?: "home" | "away"; statistics?: (EspnStat & { label?: string })[] }[] };
+  rosters?: { homeAway: "home" | "away"; team: EspnTeam; formation?: string; roster?: EspnRosterPlayer[] }[];
+  gameInfo?: {
+    venue?: { fullName?: string; address?: { city?: string; country?: string } };
+    attendance?: number;
+    officials?: { displayName?: string; fullName?: string; position?: { name?: string; displayName?: string } }[];
+  };
+  broadcasts?: { media?: { shortName?: string; name?: string } }[];
 }
