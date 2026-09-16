@@ -52,7 +52,7 @@ export interface MatchSide {
   shootout: number | null;
 }
 
-export type MatchEventKind = "goal" | "penalty" | "own-goal" | "red-card";
+export type MatchEventKind = "goal" | "penalty" | "own-goal" | "yellow-card" | "red-card";
 
 export interface MatchEvent {
   minute: string;
@@ -63,6 +63,8 @@ export interface MatchEvent {
 
 export interface Match {
   id: string;
+  /** Code ESPN de la compétition (« esp.1 »), pour charger le détail du match. */
+  competition: string;
   date: string;
   state: MatchState;
   /** Libellé affiché : heure du coup d'envoi, minute de jeu, « Terminé »… */
@@ -71,6 +73,82 @@ export interface Match {
   home: MatchSide;
   away: MatchSide;
   events: MatchEvent[];
+}
+
+// --- Détail d'un match (fenêtre « Détails du match ») ---
+
+export type TimelineKind =
+  | "goal"
+  | "penalty-goal"
+  | "own-goal"
+  | "penalty-missed"
+  | "penalty-saved"
+  | "yellow-card"
+  | "second-yellow"
+  | "red-card"
+  | "substitution"
+  | "var"
+  | "period"
+  | "delay"
+  | "other";
+
+export interface TimelineEvent {
+  id: string;
+  minute: string;
+  kind: TimelineKind;
+  /** Libellé français, ex. « But de la tête », « Carton jaune ». */
+  label: string;
+  /** Équipe concernée ; null pour les étapes du match (mi-temps…). */
+  side: "home" | "away" | null;
+  /** Joueur principal (buteur, averti, entrant), puis secondaire (passeur, sortant). */
+  players: string[];
+  /** Précision : motif d'un carton, pied, blessure, score après le but… */
+  detail: string | null;
+}
+
+export interface MatchStat {
+  key: string;
+  label: string;
+  home: string;
+  away: string;
+  /** Part de l'équipe à domicile (de 0 à 1) pour la barre de comparaison. */
+  share: number | null;
+}
+
+export interface LineupPlayer {
+  id: string;
+  name: string;
+  jersey: string | null;
+  position: string | null;
+  starter: boolean;
+  /** Minute d'entrée ou de sortie en jeu (chaîne vide si ESPN ne la donne pas). */
+  subbedIn: string | null;
+  subbedOut: string | null;
+  goals: number;
+  assists: number;
+  yellowCards: number;
+  redCards: number;
+}
+
+export interface Lineup {
+  side: "home" | "away";
+  team: Team;
+  formation: string | null;
+  /** Titulaires dans l'ordre du schéma, puis remplaçants. */
+  players: LineupPlayer[];
+}
+
+export interface MatchDetail {
+  match: Match;
+  timeline: TimelineEvent[];
+  stats: MatchStat[];
+  lineups: Lineup[];
+  officials: { name: string; role: string }[];
+  venue: { name: string; city: string | null } | null;
+  attendance: number | null;
+  broadcasts: string[];
+  /** Commentaire d'ESPN, en anglais, du plus récent au plus ancien. */
+  commentary: { minute: string; text: string }[];
 }
 
 export interface Leader {
