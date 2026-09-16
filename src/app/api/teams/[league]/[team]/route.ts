@@ -6,14 +6,15 @@ import { getLeague } from "@/lib/leagues";
 // Derniers résultats, match en cours et prochain match d'un club, pour sa fiche.
 // 20 s de cache seulement : le score d'un match en cours doit suivre le direct.
 export async function GET(_request: Request, { params }: { params: Promise<{ league: string; team: string }> }) {
-  const { league, team } = await params;
+  const { league: slug, team } = await params;
+  const league = getLeague(slug);
 
-  if (!getLeague(league) || !/^\d{1,10}$/.test(team)) {
+  if (!league || !/^\d{1,10}$/.test(team)) {
     return NextResponse.json({ error: "Club inconnu" }, { status: 404 });
   }
 
   try {
-    const form = await getTeamForm(team);
+    const form = await getTeamForm(team, league);
     if (!form) {
       return NextResponse.json({ error: "Club inconnu" }, { status: 404 });
     }
