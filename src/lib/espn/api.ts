@@ -24,7 +24,7 @@ import type {
   TeamResult,
   Zone,
 } from "@/lib/types";
-import { EspnError, espnFetch } from "./client";
+import { espnFetch } from "./client";
 import type {
   EspnCalendarGroup,
   EspnCompetitor,
@@ -235,33 +235,29 @@ function espnMonths(from: Date, to: Date): string[] {
 
 /**
  * Matchs d'un scoreboard ESPN entre deux dates (heure de Paris, incluses).
- * ESPN refuse parfois les plages de plusieurs jours (400 « Failed to get events endpoint ») :
- * on redemande alors mois par mois, format qu'il accepte, puis on garde les jours voulus.
+ * ESPN refuse régulièrement les plages de plusieurs jours (400 « Failed to get events endpoint »)
+ * mais accepte toujours un jour seul ou un mois entier : au-delà d'un jour, on demande mois par mois
+ * puis on garde les jours voulus.
  */
 async function scoreboardEvents(path: string, from: Date, to: Date, cache: CacheOptions): Promise<EspnEvent[]> {
   const start = espnDate(from);
   const end = espnDate(to);
-  try {
-    const data = await espnFetch<EspnScoreboardResponse>(path, {
-      ...cache,
-      params: { dates: start === end ? start : `${start}-${end}`, limit: 500 },
-    });
+  if (start === end) {
+    const data = await espnFetch<EspnScoreboardResponse>(path, { ...cache, params: { dates: start, limit: 500 } });
     return data.events ?? [];
-  } catch (error) {
-    if (!(error instanceof EspnError) || error.status !== 400 || start === end) throw error;
-    // Un jour de marge de chaque côté : ESPN range les matchs par mois dans son propre fuseau horaire.
-    const pages = await Promise.all(
-      espnMonths(addDays(from, -1), addDays(to, 1)).map((month) =>
-        espnFetch<EspnScoreboardResponse>(path, { ...cache, params: { dates: month, limit: 500 } }),
-      ),
-    );
-    const events = new Map<string, EspnEvent>();
-    for (const event of pages.flatMap((page) => page.events ?? [])) {
-      const day = espnDate(new Date(event.date));
-      if (day >= start && day <= end) events.set(event.id, event);
-    }
-    return [...events.values()];
   }
+  // Un jour de marge de chaque côté : ESPN range les matchs par mois dans son propre fuseau horaire.
+  const pages = await Promise.all(
+    espnMonths(addDays(from, -1), addDays(to, 1)).map((month) =>
+      espnFetch<EspnScoreboardResponse>(path, { ...cache, params: { dates: month, limit: 500 } }),
+    ),
+  );
+  const events = new Map<string, EspnEvent>();
+  for (const event of pages.flatMap((page) => page.events ?? [])) {
+    const day = espnDate(new Date(event.date));
+    if (day >= start && day <= end) events.set(event.id, event);
+  }
+  return [...events.values()];
 }
 
 /** Matchs joués ou programmés entre deux dates (incluses), triés chronologiquement. */
@@ -448,12 +444,13 @@ function toFixture(event: EspnScheduleEvent, teamId: string): TeamFixture | null
 /** Un match encore « à venir » après son heure reste le prochain match tant qu'ESPN ne l'a pas lancé. */
 const KICKOFF_GRACE = 3 * 60 * 60_000;
 
-/** Prochain match officiel pas encore commencé. */
-function nextFixture(events: EspnScheduleEvent[], teamId: string): TeamFixture | null {
+/** Prochain match officiel pas encore commencé (les scoreboards disent si un match a déjà démarré). */
+function nextFixture(events: EspnScheduleEvent[], teamId: string, started: ReadonlySet<string>): TeamFixture | null {
   const now = Date.now();
   const upcoming = events
     .filter(
       (event) =>
+        !started.has(event.id) &&
         isOfficial(event.league?.slug ?? "") &&
         event.competitions[0]?.status.type.state === "pre" &&
         Date.parse(event.date) > now - KICKOFF_GRACE,
@@ -486,39 +483,141 @@ function liveFixture(events: EspnScheduleEvent[], teamId: string): TeamLiveMatch
   return null;
 }
 
+/** Compétitions officielles d'un club du championnat : le championnat, les coupes du pays, les coupes d'Europe. */
+function clubCompetitions(league: League): string[] {
+  const country = `${league.espnCode.split(".")[0]}.`;
+  return Object.keys(COMPETITION_LABELS).filter(
+    (slug) =>
+      slug === league.espnCode ||
+      (slug.startsWith(country) && !NATIONAL_LEAGUE.test(slug)) ||
+      Object.hasOwn(EUROPEAN_CUPS, slug),
+  );
+}
+
+/**
+ * Matchs d'hier et d'aujourd'hui d'un club, lus dans les scoreboards de ses compétitions. Ils sont tenus
+ * à jour en direct, alors que le calendrier d'un club garde parfois de longues minutes de retard sur le
+ * coup d'envoi ou le coup de sifflet final. Chaque scoreboard est partagé par tous les clubs (copie en mémoire).
+ */
+async function recentClubMatches(league: League, teamId: string): Promise<{ slug: string; match: Match }[]> {
+  const now = new Date();
+  const yesterday = addDays(now, -1);
+  const start = espnDate(yesterday);
+  const end = espnDate(now);
+  const months = espnMonths(addDays(yesterday, -1), addDays(now, 1));
+  const pages = await Promise.all(
+    clubCompetitions(league).flatMap((slug) =>
+      months.map(async (month) => {
+        const data = await espnFetch<EspnScoreboardResponse>(`/site/v2/sports/soccer/${slug}/scoreboard`, {
+          memoryTtl: MEMORY_TTL.team,
+          params: { dates: month, limit: 500 },
+        }).catch(() => null);
+        return (data?.events ?? []).map((event) => ({ slug, event }));
+      }),
+    ),
+  );
+
+  return pages.flat().flatMap(({ slug, event }) => {
+    const day = espnDate(new Date(event.date));
+    const plays = event.competitions[0]?.competitors.some((competitor) => competitor.team.id === teamId);
+    const match = plays && day >= start && day <= end ? toMatch(event) : null;
+    return match ? [{ slug, match }] : [];
+  });
+}
+
+function clubSides(match: Match, teamId: string) {
+  const home = match.home.team.id === teamId;
+  return { home, us: home ? match.home : match.away, them: home ? match.away : match.home };
+}
+
+function resultFromMatch(match: Match, slug: string, teamId: string): TeamResult | null {
+  const { home, us, them } = clubSides(match, teamId);
+  // Un match reporté ou annulé est « terminé » sans score : il ne compte pas.
+  if (match.state !== "post" || us.score === null || them.score === null) return null;
+
+  let outcome: MatchOutcome;
+  if (us.winner) outcome = "win";
+  else if (them.winner) outcome = "loss";
+  else outcome = us.score > them.score ? "win" : us.score < them.score ? "loss" : "draw";
+
+  let detail: string | null = null;
+  if (us.shootout !== null && them.shootout !== null) detail = `t.a.b. ${us.shootout}-${them.shootout}`;
+  else if (match.status === STATUS_LABELS.STATUS_FINAL_AET) detail = "a.p.";
+
+  return {
+    id: match.id,
+    date: match.date,
+    competition: COMPETITION_LABELS[slug] ?? slug,
+    home,
+    opponent: them.team,
+    goalsFor: us.score,
+    goalsAgainst: them.score,
+    outcome,
+    detail,
+    europeanCup: europeanCup(slug),
+  };
+}
+
+function liveFromMatch(match: Match, slug: string, teamId: string): TeamLiveMatch | null {
+  if (match.state !== "in") return null;
+  const { home, us, them } = clubSides(match, teamId);
+  return {
+    id: match.id,
+    date: match.date,
+    competition: COMPETITION_LABELS[slug] ?? slug,
+    home,
+    opponent: them.team,
+    venue: match.venue,
+    europeanCup: europeanCup(slug),
+    goalsFor: us.score ?? 0,
+    goalsAgainst: them.score ?? 0,
+    clock: match.status,
+  };
+}
+
 /** Forme d'un club (derniers matchs officiels, toutes compétitions), match en cours et prochain match. */
-export async function getTeamForm(teamId: string, count = 5): Promise<TeamForm | null> {
+export async function getTeamForm(teamId: string, league: League, count = 5): Promise<TeamForm | null> {
   const schedule = `/site/v2/sports/soccer/all/teams/${teamId}/schedule`;
   // Copies en mémoire de courte durée : un score ou un résultat doit apparaître pendant le match,
   // pas une heure plus tard.
-  const [current, fixtures] = await Promise.all([
+  const [current, fixtures, recent] = await Promise.all([
     espnFetch<EspnScheduleResponse>(schedule, { memoryTtl: MEMORY_TTL.team }),
     // Le calendrier à venir est un bonus : s'il manque, la forme du club s'affiche quand même.
     espnFetch<EspnScheduleResponse>(schedule, { memoryTtl: MEMORY_TTL.team, params: { fixture: "true" } }).catch(
       () => null,
     ),
+    recentClubMatches(league, teamId),
   ]);
   if (!current.team) return null;
 
-  let results = toTeamResults(current, teamId);
+  // Les scoreboards priment sur le calendrier du club, souvent en retard juste après un match.
+  const fresh = recent
+    .map(({ slug, match }) => resultFromMatch(match, slug, teamId))
+    .filter((result): result is TeamResult => result !== null);
+  const freshLive = recent.map(({ slug, match }) => liveFromMatch(match, slug, teamId)).find((live) => live !== null);
+  const started = new Set(recent.filter(({ match }) => match.state !== "pre").map(({ match }) => match.id));
+
+  // En cas de doublon, la version du scoreboard (placée après) remplace celle du calendrier.
+  let results = [...toTeamResults(current, teamId), ...fresh];
 
   // En début de saison, on complète avec la fin de la saison précédente, toutes compétitions
   // confondues (indispensable pour un club promu, absent du championnat la saison passée).
-  if (results.length < count) {
+  if (new Set(results.map((result) => result.id)).size < count) {
     const year = current.season?.year ?? new Date().getFullYear();
     const previous = await espnFetch<EspnScheduleResponse>(`/site/v2/sports/soccer/all/teams/${teamId}/schedule`, {
       revalidate: REVALIDATE.previousSeason,
       params: { season: year - 1 },
     });
-    results = [...results, ...toTeamResults(previous, teamId)];
+    results = [...toTeamResults(previous, teamId), ...results];
   }
 
   const unique = [...new Map(results.map((result) => [result.id, result])).values()];
+  const scheduleLive = liveFixture([...(current.events ?? []), ...(fixtures?.events ?? [])], teamId);
   return {
     team: toTeam(current.team),
     results: unique.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count),
-    live: liveFixture([...(current.events ?? []), ...(fixtures?.events ?? [])], teamId),
-    next: nextFixture(fixtures?.events ?? [], teamId),
+    live: freshLive ?? (scheduleLive && !started.has(scheduleLive.id) ? scheduleLive : null),
+    next: nextFixture(fixtures?.events ?? [], teamId, started),
   };
 }
 
