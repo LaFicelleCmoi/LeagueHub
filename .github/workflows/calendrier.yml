@@ -1,0 +1,48 @@
+# Relève chaque nuit le calendrier des championnats et des coupes nationales chez ESPN
+# (horaires fixés tardivement, matchs reportés, tours tirés au sort) et publie les changements :
+# un commit par fichier modifié, puis Vercel redéploie le site.
+name: Calendrier
+
+on:
+  schedule:
+    # 3 h 17 UTC (5 h 17 à Paris l'été) : après les derniers matchs de la soirée.
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: calendrier
+  cancel-in-progress: false
+
+jobs:
+  calendrier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Relevé du calendrier
+        run: npm run calendrier
+
+      - name: Un commit par fichier modifié
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          changed=$(git status --porcelain -- src/data/calendrier | awk '{ print $2 }')
+          if [ -z "$changed" ]; then
+            echo "Calendrier inchangé."
+            exit 0
+          fi
+          for file in $changed; do
+            git add -- "$file"
+            git commit -m "chore(calendrier): met à jour $(basename "$file" .json)" -- "$file"
+          done
+          git push
