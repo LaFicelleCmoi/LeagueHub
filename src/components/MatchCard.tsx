@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MapPin, Star } from "lucide-react";
+import { ChevronRight, MapPin, Star } from "lucide-react";
 import { useFavoriteClub } from "@/lib/favorite-club";
 import type { Match, MatchEvent, MatchEventKind, MatchSide } from "@/lib/types";
 import { KickoffCountdown } from "./KickoffCountdown";
 import { useLiveMatch } from "./LiveMatches";
+import { MatchDetailDialog } from "./MatchDetailDialog";
 import ShinyText from "./reactbits/ShinyText";
 import StarBorder from "./reactbits/StarBorder";
 import { TeamLogo } from "./TeamLogo";
@@ -14,6 +15,7 @@ const EVENT_SUFFIX: Record<MatchEventKind, string> = {
   goal: "",
   penalty: " (pén.)",
   "own-goal": " (c.s.c.)",
+  "yellow-card": "",
   "red-card": "",
 };
 
@@ -107,10 +109,13 @@ function EventList({ events, alignRight = false }: { events: MatchEvent[]; align
           key={`${event.minute}-${event.player}-${index}`}
           className={`flex items-center gap-1.5 ${alignRight ? "justify-end text-right" : ""}`}
         >
-          {event.kind === "red-card" ? (
+          {event.kind === "red-card" || event.kind === "yellow-card" ? (
             <>
-              <span aria-hidden className="inline-block h-3 w-2 shrink-0 rounded-[1px] bg-red-600" />
-              <span className="sr-only">Carton rouge :</span>
+              <span
+                aria-hidden
+                className={`inline-block h-3 w-2 shrink-0 rounded-[1px] ${event.kind === "red-card" ? "bg-red-600" : "bg-amber-400"}`}
+              />
+              <span className="sr-only">{event.kind === "red-card" ? "Carton rouge :" : "Carton jaune :"}</span>
             </>
           ) : (
             <>
@@ -132,6 +137,7 @@ function EventList({ events, alignRight = false }: { events: MatchEvent[]; align
 export function MatchCard({ match: initialMatch }: { match: Match }) {
   const match = useLiveMatch(initialMatch);
   const favorite = useFavoriteClub();
+  const [detailOpen, setDetailOpen] = useState(false);
   const hasFavorite = favorite !== null && [match.home.team.id, match.away.team.id].includes(favorite.team.id);
   const live = match.state === "in";
   const home = match.events.filter((e) => e.side === "home");
@@ -175,12 +181,31 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
         </div>
       )}
 
-      {match.venue && (
-        <p className="mt-3 flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-          <MapPin className="size-3.5 shrink-0" aria-hidden />
-          <span className="truncate">{match.venue}</span>
-        </p>
-      )}
+      <div className="mt-3 flex items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+        {match.venue ? (
+          <p className="flex min-w-0 items-center gap-1.5">
+            <MapPin className="size-3.5 shrink-0" aria-hidden />
+            <span className="truncate">{match.venue}</span>
+          </p>
+        ) : (
+          <span />
+        )}
+        <button
+          type="button"
+          onClick={() => setDetailOpen(true)}
+          className="-my-1 inline-flex shrink-0 items-center gap-0.5 rounded-md px-1.5 py-1 font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+        >
+          Détails
+          <span className="sr-only">
+            {" "}
+            du match {match.home.team.name} – {match.away.team.name}
+          </span>
+          <ChevronRight className="size-3.5" aria-hidden />
+        </button>
+      </div>
+
+      {/* Fenêtre montée à la demande : chronologie, statistiques, compositions, infos et commentaire. */}
+      {detailOpen && <MatchDetailDialog match={match} onClose={() => setDetailOpen(false)} />}
     </article>
   );
 
