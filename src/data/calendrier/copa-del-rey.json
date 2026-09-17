@@ -25,11 +25,11 @@
     "133851": {"name":"Ceuta 6 de Junio","shortName":"Ceuta 6","abbreviation":"C6J","logo":""}
   },
   "matches": [
-    {"id":"401918750","date":"2026-09-26T16:00Z","home":"20776","away":"133838","venue":null,"round":"qualifying-round","leg":1},
-    {"id":"401918755","date":"2026-09-26T16:00Z","home":"131403","away":"22372","venue":null,"round":"qualifying-round","leg":1},
+    {"id":"401918750","date":"2026-09-26T16:00Z","home":"20776","away":"133838","venue":"Txerloia","round":"qualifying-round","leg":1},
+    {"id":"401918755","date":"2026-09-26T16:00Z","home":"131403","away":"22372","venue":"San Íñigo Stadium","round":"qualifying-round","leg":1},
     {"id":"401918765","date":"2026-09-26T16:00Z","home":"133844","away":"133851","venue":"Estadio Municipal de Lebrija","round":"qualifying-round","leg":1},
-    {"id":"401918756","date":"2026-09-26T17:00Z","home":"133842","away":"133850","venue":null,"round":"qualifying-round","leg":1},
-    {"id":"401918764","date":"2026-09-26T18:00Z","home":"133832","away":"131419","venue":null,"round":"qualifying-round","leg":1},
+    {"id":"401918756","date":"2026-09-26T17:00Z","home":"133842","away":"133850","venue":"Oreyana Stadium","round":"qualifying-round","leg":1},
+    {"id":"401918764","date":"2026-09-26T18:00Z","home":"133832","away":"131419","venue":"Jose Antonio Perez Ureba Stadium","round":"qualifying-round","leg":1},
     {"id":"401918749","date":"2026-09-27T10:00Z","home":"133847","away":"133836","venue":null,"round":"qualifying-round","leg":1},
     {"id":"401918763","date":"2026-09-27T10:00Z","home":"133831","away":"133833","venue":null,"round":"qualifying-round","leg":1},
     {"id":"401918754","date":"2026-09-27T14:00Z","home":"133840","away":"18334","venue":null,"round":"qualifying-round","leg":1},
@@ -38,12 +38,12 @@
     {"id":"401918751","date":"2026-10-03T15:30Z","home":"22372","away":"131403","venue":null,"round":"qualifying-round","leg":2},
     {"id":"401918748","date":"2026-10-03T16:00Z","home":"133838","away":"20776","venue":null,"round":"qualifying-round","leg":2},
     {"id":"401918760","date":"2026-10-03T16:00Z","home":"133851","away":"133844","venue":"Estadio José Martínez","round":"qualifying-round","leg":2},
-    {"id":"401918759","date":"2026-10-04T10:00Z","home":"131419","away":"133832","venue":null,"round":"qualifying-round","leg":2},
+    {"id":"401918759","date":"2026-10-04T10:00Z","home":"131419","away":"133832","venue":"La Espiguera","round":"qualifying-round","leg":2},
     {"id":"401918758","date":"2026-10-04T11:00Z","home":"133833","away":"133831","venue":null,"round":"qualifying-round","leg":2},
     {"id":"401918510","date":"2026-10-04T14:00Z","home":"133836","away":"133847","venue":null,"round":"qualifying-round","leg":2},
-    {"id":"401918752","date":"2026-10-04T14:00Z","home":"18334","away":"133840","venue":null,"round":"qualifying-round","leg":2},
+    {"id":"401918752","date":"2026-10-04T14:00Z","home":"18334","away":"133840","venue":"Municipal Sagnier","round":"qualifying-round","leg":2},
     {"id":"401918753","date":"2026-10-04T14:00Z","home":"133850","away":"133842","venue":"La Caseta","round":"qualifying-round","leg":2},
-    {"id":"401918757","date":"2026-10-04T15:30Z","home":"133843","away":"133841","venue":null,"round":"qualifying-round","leg":2},
+    {"id":"401918757","date":"2026-10-04T15:30Z","home":"133843","away":"133841","venue":"Manuel Delgado Meco","round":"qualifying-round","leg":2},
     {"id":"401918761","date":"2026-10-04T16:00Z","home":"133846","away":"131412","venue":"Tavernes de la Valldigna","round":"qualifying-round","leg":2}
   ]
 }
