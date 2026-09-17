@@ -7,7 +7,7 @@ import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
 import { TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
 import { useTeamForm } from "@/lib/team-form";
-import type { ClubRef, MatchOutcome, TeamForm } from "@/lib/types";
+import type { ClubRef, MatchOutcome, TeamSeasonTotals } from "@/lib/types";
 import { EUROPEAN_CUP_STYLES, EuropeanCupTag, EuropeanFixtureCard } from "./EuropeanCup";
 import { KickoffCountdown } from "./KickoffCountdown";
 import { LeagueLogo } from "./LeagueLogo";
@@ -32,14 +32,39 @@ const fixtureDate = new Intl.DateTimeFormat("fr-FR", {
 
 const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 
-function summary({ results }: TeamForm): string {
-  const count = (outcome: MatchOutcome) => results.filter((r) => r.outcome === outcome).length;
-  const label = (n: number, one: string, many: string) => `${n} ${n > 1 ? many : one}`;
-  return [
-    label(count("win"), "victoire", "victoires"),
-    label(count("draw"), "nul", "nuls"),
-    label(count("loss"), "défaite", "défaites"),
-  ].join(" · ");
+/** Bilan de la saison, affiché en face des 5 derniers matchs. */
+function SeasonTotals({ season }: { season: TeamSeasonTotals }) {
+  const { played, wins, draws, losses, goalsFor, goalsAgainst } = season;
+  return (
+    <div className="text-right text-xs text-slate-500 dark:text-slate-400">
+      <p>
+        <span className="sr-only">Saison en cours, toutes compétitions : </span>
+        <span aria-hidden>Saison · </span>
+        {played} {played > 1 ? "matchs" : "match"} ·{" "}
+        <span className="font-semibold text-emerald-700 dark:text-emerald-400">
+          {wins}
+          <span aria-hidden> V</span>
+          <span className="sr-only"> {wins > 1 ? "victoires" : "victoire"}</span>
+        </span>{" "}
+        ·{" "}
+        <span className="font-semibold">
+          {draws}
+          <span aria-hidden> N</span>
+          <span className="sr-only"> {draws > 1 ? "nuls" : "nul"}</span>
+        </span>{" "}
+        ·{" "}
+        <span className="font-semibold text-red-700 dark:text-red-400">
+          {losses}
+          <span aria-hidden> D</span>
+          <span className="sr-only"> {losses > 1 ? "défaites" : "défaite"}</span>
+        </span>
+      </p>
+      <p className="text-slate-400 dark:text-slate-500">
+        {goalsFor} {goalsFor > 1 ? "buts marqués" : "but marqué"} · {goalsAgainst}{" "}
+        {goalsAgainst > 1 ? "encaissés" : "encaissé"}
+      </p>
+    </div>
+  );
 }
 
 // Fenêtre « 5 derniers matchs » d'un club, basée sur l'élément <dialog> natif
@@ -129,9 +154,7 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
               <h3 id="club-form-title" className="text-sm font-semibold">
                 5 derniers matchs
               </h3>
-              {status.state === "ready" && status.form.results.length > 0 && (
-                <p className="text-xs text-slate-500 dark:text-slate-400">{summary(status.form)}</p>
-              )}
+              {status.state === "ready" && status.form.season.played > 0 && <SeasonTotals season={status.form.season} />}
             </div>
 
             {status.state === "loading" && (
