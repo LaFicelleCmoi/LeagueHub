@@ -218,8 +218,19 @@ export interface TeamLiveMatch extends TeamFixture {
   clock: string;
 }
 
+/** Bilan du club sur la saison en cours, toutes compétitions officielles. */
+export interface TeamSeasonTotals {
+  played: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goalsFor: number;
+  goalsAgainst: number;
+}
+
 export interface TeamForm {
   team: Team;
+  season: TeamSeasonTotals;
   /** Du plus récent au plus ancien. */
   results: TeamResult[];
   /** Match officiel en cours de jeu. */
