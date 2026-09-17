@@ -30,6 +30,7 @@ import type {
   TeamForm,
   TeamLiveMatch,
   TeamResult,
+  TeamSeasonTotals,
   Zone,
 } from "@/lib/types";
 import { espnFetch } from "./client";
@@ -721,6 +722,19 @@ export async function getTeamForm(teamId: string, league: League, count = 5): Pr
   // En cas de doublon, la version du scoreboard (placée après) remplace celle du calendrier.
   let results = [...toTeamResults(current, teamId), ...fresh];
 
+  // Bilan de la saison en cours : tous les matchs officiels déjà joués, hors saison précédente.
+  const season = [...new Map(results.map((result) => [result.id, result])).values()].reduce<TeamSeasonTotals>(
+    (totals, result) => ({
+      played: totals.played + 1,
+      wins: totals.wins + (result.outcome === "win" ? 1 : 0),
+      draws: totals.draws + (result.outcome === "draw" ? 1 : 0),
+      losses: totals.losses + (result.outcome === "loss" ? 1 : 0),
+      goalsFor: totals.goalsFor + result.goalsFor,
+      goalsAgainst: totals.goalsAgainst + result.goalsAgainst,
+    }),
+    { played: 0, wins: 0, draws: 0, losses: 0, goalsFor: 0, goalsAgainst: 0 },
+  );
+
   // En début de saison, on complète avec la fin de la saison précédente, toutes compétitions
   // confondues (indispensable pour un club promu, absent du championnat la saison passée).
   if (new Set(results.map((result) => result.id)).size < count) {
@@ -736,6 +750,7 @@ export async function getTeamForm(teamId: string, league: League, count = 5): Pr
   const scheduleLive = liveFixture([...(current.events ?? []), ...(fixtures?.events ?? [])], teamId);
   return {
     team: toTeam(current.team),
+    season,
     results: unique.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count),
     live: freshLive ?? (scheduleLive && !started.has(scheduleLive.id) ? scheduleLive : null),
     // Le plus proche entre le calendrier ESPN du club et celui du site (coupes d'Europe comprises côté ESPN).
