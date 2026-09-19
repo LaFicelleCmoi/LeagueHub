@@ -5,14 +5,14 @@
     "83": {
       "qid": "Q7156",
       "name": "Barcelona",
-      "total": 112,
+      "total": 129,
       "trophies": [
         {
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 32,
           "first": "1910",
-          "last": "2024",
+          "last": "2025",
           "scope": "national"
         },
         {
@@ -20,15 +20,15 @@
           "label": "Championnat d'Espagne",
           "count": 29,
           "first": "1929",
-          "last": "2025",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 5,
-          "first": "1991",
-          "last": "2014",
+          "first": "1992",
+          "last": "2015",
           "scope": "europe"
         },
         {
@@ -43,16 +43,16 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 4,
-          "first": "1978",
-          "last": "1996",
+          "first": "1979",
+          "last": "1997",
           "scope": "europe"
         },
         {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 3,
-          "first": "1955",
-          "last": "1965",
+          "first": "1958",
+          "last": "1966",
           "scope": "europe"
         },
         {
@@ -66,9 +66,9 @@
         {
           "key": "autre:Q1031297",
           "label": "championnat de Catalogne de football",
-          "count": 17,
-          "first": "1901",
-          "last": "2010",
+          "count": 34,
+          "first": "1902",
+          "last": "1938",
           "scope": "autre"
         },
         {
@@ -99,8 +99,8 @@
           "key": "autre:Q3179674",
           "label": "championnat d'Espagne de rink hockey",
           "count": 1,
-          "first": "2013",
-          "last": "2013",
+          "first": "2014",
+          "last": "2014",
           "scope": "autre"
         },
         {
@@ -116,22 +116,22 @@
     "85": {
       "qid": "Q8749",
       "name": "Celta Vigo",
-      "total": 13,
+      "total": 15,
       "trophies": [
         {
           "key": "autre:Q8257787",
           "label": "Galician Championship",
-          "count": 4,
-          "first": "2054",
-          "last": "2054",
+          "count": 6,
+          "first": null,
+          "last": null,
           "scope": "autre"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 3,
-          "first": "1935",
-          "last": "1991",
+          "first": "1936",
+          "last": "1992",
           "scope": "autre"
         },
         {
@@ -146,16 +146,16 @@
           "key": "autre:Q749736",
           "label": "championnat d'Espagne de football de quatrième division",
           "count": 1,
-          "first": "1930",
-          "last": "1930",
+          "first": "1931",
+          "last": "1931",
           "scope": "autre"
         },
         {
           "key": "autre:Q751826",
           "label": "Championnat d'Espagne de football de troisième division",
           "count": 1,
-          "first": "1980",
-          "last": "1980",
+          "first": "1981",
+          "last": "1981",
           "scope": "autre"
         },
         {
@@ -170,8 +170,8 @@
           "key": "autre:Q20547839",
           "label": "Q20547839",
           "count": 1,
-          "first": "2054",
-          "last": "2054",
+          "first": null,
+          "last": null,
           "scope": "autre"
         }
       ]
@@ -179,14 +179,14 @@
     "86": {
       "qid": "Q8682",
       "name": "Real Madrid",
-      "total": 100,
+      "total": 101,
       "trophies": [
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 36,
-          "first": "1931",
-          "last": "2023",
+          "first": "1932",
+          "last": "2024",
           "scope": "national"
         },
         {
@@ -194,15 +194,15 @@
           "label": "Coupe du Roi",
           "count": 20,
           "first": "1905",
-          "last": "2022",
+          "last": "2023",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 15,
-          "first": "1955",
-          "last": "2023",
+          "first": "1956",
+          "last": "2024",
           "scope": "europe"
         },
         {
@@ -217,8 +217,8 @@
           "key": "c3",
           "label": "Ligue Europa",
           "count": 2,
-          "first": "1984",
-          "last": "1985",
+          "first": "1985",
+          "last": "1986",
           "scope": "europe"
         },
         {
@@ -240,9 +240,9 @@
         {
           "key": "autre:Q586642",
           "label": "Campeonato Regional Centro",
-          "count": 8,
+          "count": 9,
           "first": "1906",
-          "last": "1923",
+          "last": "1924",
           "scope": "autre"
         },
         {
@@ -288,16 +288,16 @@
           "key": "autre:Q749736",
           "label": "championnat d'Espagne de football de quatrième division",
           "count": 2,
-          "first": "1943",
-          "last": "1947",
+          "first": "1944",
+          "last": "1948",
           "scope": "autre"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 1,
-          "first": "1959",
-          "last": "1959",
+          "first": "1960",
+          "last": "1960",
           "scope": "autre"
         }
       ]
@@ -305,30 +305,30 @@
     "88": {
       "qid": "Q8780",
       "name": "Espanyol",
-      "total": 16,
+      "total": 20,
       "trophies": [
         {
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 4,
           "first": "1929",
-          "last": "2005",
+          "last": "2006",
           "scope": "national"
         },
         {
           "key": "autre:Q1031297",
           "label": "championnat de Catalogne de football",
-          "count": 10,
-          "first": "1902",
-          "last": "2010",
+          "count": 14,
+          "first": "1903",
+          "last": "1940",
           "scope": "autre"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 2,
-          "first": "1969",
-          "last": "1993",
+          "first": "1970",
+          "last": "1994",
           "scope": "autre"
         }
       ]
@@ -342,24 +342,24 @@
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 3,
-          "first": "1986",
-          "last": "2025",
+          "first": "1987",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 2,
-          "first": "1980",
-          "last": "1981",
+          "first": "1981",
+          "last": "1982",
           "scope": "national"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 3,
-          "first": "1948",
-          "last": "2009",
+          "first": "1949",
+          "last": "2010",
           "scope": "autre"
         }
       ]
@@ -367,46 +367,46 @@
     "90": {
       "qid": "Q8760",
       "name": "Deportivo",
-      "total": 10,
+      "total": 15,
       "trophies": [
         {
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 2,
-          "first": "1994",
-          "last": "2001",
+          "first": "1995",
+          "last": "2002",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 1,
-          "first": "1999",
-          "last": "1999",
+          "first": "2000",
+          "last": "2000",
           "scope": "national"
+        },
+        {
+          "key": "autre:Q8257787",
+          "label": "Galician Championship",
+          "count": 6,
+          "first": null,
+          "last": null,
+          "scope": "autre"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 5,
-          "first": "1961",
-          "last": "2011",
+          "first": "1962",
+          "last": "2012",
           "scope": "autre"
         },
         {
           "key": "autre:Q100146559",
           "label": "championnat d'Espagne de football de troisième division",
           "count": 1,
-          "first": "2023",
-          "last": "2023",
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q8257787",
-          "label": "Galician Championship",
-          "count": 1,
-          "first": "2054",
-          "last": "2054",
+          "first": "2024",
+          "last": "2024",
           "scope": "autre"
         }
       ]
@@ -421,15 +421,15 @@
           "label": "Coupe du Roi",
           "count": 24,
           "first": "1903",
-          "last": "2023",
+          "last": "2024",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 8,
-          "first": "1929",
-          "last": "1983",
+          "first": "1930",
+          "last": "1984",
           "scope": "national"
         }
       ]
@@ -444,39 +444,39 @@
           "label": "Coupe du Roi",
           "count": 8,
           "first": "1941",
-          "last": "2018",
+          "last": "2019",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 6,
-          "first": "1941",
-          "last": "2003",
+          "first": "1942",
+          "last": "2004",
           "scope": "national"
         },
         {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 2,
-          "first": "1961",
-          "last": "1962",
+          "first": "1962",
+          "last": "1963",
           "scope": "europe"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1979",
-          "last": "1979",
+          "first": "1980",
+          "last": "1980",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "2003",
-          "last": "2003",
+          "first": "2004",
+          "last": "2004",
           "scope": "europe"
         },
         {
@@ -491,8 +491,8 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 2,
-          "first": "1930",
-          "last": "1986",
+          "first": "1931",
+          "last": "1987",
           "scope": "autre"
         },
         {
@@ -514,24 +514,24 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 4,
-          "first": "1929",
-          "last": "2015",
+          "first": "1930",
+          "last": "2016",
           "scope": "autre"
         },
         {
           "key": "autre:Q751826",
           "label": "Championnat d'Espagne de football de troisième division",
           "count": 2,
-          "first": "1992",
-          "last": "2012",
+          "first": "1993",
+          "last": "2013",
           "scope": "autre"
         },
         {
           "key": "autre:Q749736",
           "label": "championnat d'Espagne de football de quatrième division",
           "count": 1,
-          "first": "1940",
-          "last": "1940",
+          "first": "1941",
+          "last": "1941",
           "scope": "autre"
         }
       ]
@@ -545,16 +545,16 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 4,
-          "first": "1952",
-          "last": "2018",
+          "first": "1953",
+          "last": "2019",
           "scope": "autre"
         },
         {
           "key": "autre:Q749736",
           "label": "championnat d'Espagne de football de quatrième division",
           "count": 1,
-          "first": "1931",
-          "last": "1931",
+          "first": "1932",
+          "last": "1932",
           "scope": "autre"
         }
       ]
@@ -568,8 +568,8 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 1,
-          "first": "1998",
-          "last": "1998",
+          "first": "1999",
+          "last": "1999",
           "scope": "autre"
         },
         {
@@ -591,16 +591,16 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 1,
-          "first": "2017",
-          "last": "2017",
+          "first": "2018",
+          "last": "2018",
           "scope": "autre"
         },
         {
           "key": "autre:Q751826",
           "label": "Championnat d'Espagne de football de troisième division",
           "count": 1,
-          "first": "2007",
-          "last": "2007",
+          "first": "2008",
+          "last": "2008",
           "scope": "autre"
         },
         {
@@ -622,8 +622,8 @@
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "2020",
-          "last": "2020",
+          "first": "2021",
+          "last": "2021",
           "scope": "europe"
         },
         {
@@ -646,23 +646,23 @@
           "label": "Coupe du Roi",
           "count": 5,
           "first": "1935",
-          "last": "2009",
+          "last": "2010",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 1,
-          "first": "1945",
-          "last": "1945",
+          "first": "1946",
+          "last": "1946",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 7,
-          "first": "2005",
-          "last": "2022",
+          "first": "2006",
+          "last": "2023",
           "scope": "europe"
         },
         {
@@ -670,7 +670,7 @@
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 4,
           "first": "1929",
-          "last": "2000",
+          "last": "2001",
           "scope": "autre"
         },
         {
@@ -692,24 +692,24 @@
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 3,
-          "first": "1976",
-          "last": "2021",
+          "first": "1977",
+          "last": "2022",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 2,
-          "first": "1934",
-          "last": "2014",
+          "first": "1935",
+          "last": "2015",
           "scope": "national"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 5,
-          "first": "1931",
-          "last": "2010",
+          "first": "1932",
+          "last": "2011",
           "scope": "autre"
         }
       ]
@@ -723,24 +723,24 @@
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 11,
-          "first": "1939",
-          "last": "2020",
+          "first": "1940",
+          "last": "2021",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 10,
-          "first": "1959",
-          "last": "2012",
+          "first": "1960",
+          "last": "2013",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
-          "first": "2009",
-          "last": "2017",
+          "first": "2010",
+          "last": "2018",
           "scope": "europe"
         },
         {
@@ -755,8 +755,8 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1961",
-          "last": "1961",
+          "first": "1962",
+          "last": "1962",
           "scope": "europe"
         },
         {
@@ -771,16 +771,16 @@
           "key": "autre:Q586642",
           "label": "Campeonato Regional Centro",
           "count": 1,
-          "first": "1920",
-          "last": "1920",
+          "first": "1921",
+          "last": "1921",
           "scope": "autre"
         },
         {
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 1,
-          "first": "2001",
-          "last": "2001",
+          "first": "2002",
+          "last": "2002",
           "scope": "autre"
         }
       ]
@@ -802,8 +802,8 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 3,
-          "first": "2003",
-          "last": "2022",
+          "first": "2004",
+          "last": "2023",
           "scope": "autre"
         }
       ]
@@ -823,8 +823,8 @@
           "key": "autre:Q35615",
           "label": "championnat d'Espagne de football de deuxième division",
           "count": 1,
-          "first": "2012",
-          "last": "2012",
+          "first": "2013",
+          "last": "2013",
           "scope": "autre"
         }
       ]
