@@ -11,24 +11,24 @@
           "key": "autre:Q19565",
           "label": "championnat d'Angleterre de football de troisième division",
           "count": 1,
-          "first": "2020",
-          "last": "2020",
+          "first": "2021",
+          "last": "2021",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 1,
-          "first": "1965",
-          "last": "1965",
+          "first": "1966",
+          "last": "1966",
           "scope": "autre"
         },
         {
           "key": "autre:Q16846280",
           "label": "North Regional League",
           "count": 1,
-          "first": "1967",
-          "last": "1967",
+          "first": "1968",
+          "last": "1968",
           "scope": "autre"
         }
       ]
@@ -42,32 +42,32 @@
           "key": "autre:Q18573",
           "label": "Southern Football League",
           "count": 3,
-          "first": "1909",
-          "last": "1926",
+          "first": "1910",
+          "last": "1927",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436315",
           "label": "Football League Fourth Division",
           "count": 1,
-          "first": "1964",
-          "last": "1964",
+          "first": "1965",
+          "last": "1965",
           "scope": "autre"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 1,
-          "first": "2001",
-          "last": "2001",
+          "first": "2002",
+          "last": "2002",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 1,
-          "first": "2000",
-          "last": "2000",
+          "first": "2001",
+          "last": "2001",
           "scope": "autre"
         }
       ]
@@ -81,32 +81,32 @@
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 2,
-          "first": "1991",
-          "last": "1998",
+          "first": "1992",
+          "last": "1999",
           "scope": "autre"
         },
         {
           "key": "autre:Q48837",
           "label": "championnat d'Angleterre de football de quatrième division",
           "count": 1,
-          "first": "2008",
-          "last": "2008",
+          "first": "2009",
+          "last": "2009",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436315",
           "label": "Football League Fourth Division",
           "count": 1,
-          "first": "1962",
-          "last": "1962",
+          "first": "1963",
+          "last": "1963",
           "scope": "autre"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 1,
-          "first": "1934",
-          "last": "1934",
+          "first": "1935",
+          "last": "1935",
           "scope": "autre"
         }
       ]
@@ -120,24 +120,24 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 1,
-          "first": "2014",
-          "last": "2014",
+          "first": "2015",
+          "last": "2015",
           "scope": "national"
         },
         {
           "key": "autre:Q19510",
           "label": "championnat d'Angleterre de football de deuxième division",
           "count": 1,
-          "first": "2014",
-          "last": "2014",
+          "first": "2015",
+          "last": "2015",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 1,
-          "first": "1986",
-          "last": "1986",
+          "first": "1987",
+          "last": "1987",
           "scope": "autre"
         }
       ]
@@ -151,48 +151,48 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 3,
-          "first": "1968",
-          "last": "1991",
+          "first": "1969",
+          "last": "1992",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 1,
-          "first": "1971",
-          "last": "1971",
+          "first": "1972",
+          "last": "1972",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 1,
-          "first": "1967",
-          "last": "1967",
+          "first": "1968",
+          "last": "1968",
           "scope": "national"
         },
         {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 2,
-          "first": "1967",
-          "last": "1970",
+          "first": "1968",
+          "last": "1971",
           "scope": "europe"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 3,
-          "first": "1923",
-          "last": "1989",
+          "first": "1924",
+          "last": "1990",
           "scope": "autre"
         },
         {
           "key": "autre:Q19510",
           "label": "championnat d'Angleterre de football de deuxième division",
           "count": 2,
-          "first": "2019",
-          "last": "2024",
+          "first": "2020",
+          "last": "2025",
           "scope": "autre"
         }
       ]
@@ -206,40 +206,40 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 14,
-          "first": "1930",
-          "last": "2025",
+          "first": "1931",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 14,
-          "first": "1929",
-          "last": "2019",
+          "first": "1930",
+          "last": "2020",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 2,
-          "first": "1986",
-          "last": "1992",
+          "first": "1987",
+          "last": "1993",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1993",
-          "last": "1993",
+          "first": "1994",
+          "last": "1994",
           "scope": "europe"
         },
         {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 1,
-          "first": "1969",
-          "last": "1969",
+          "first": "1970",
+          "last": "1970",
           "scope": "europe"
         }
       ]
@@ -253,48 +253,48 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 20,
-          "first": "1907",
-          "last": "2012",
+          "first": "1908",
+          "last": "2013",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 13,
-          "first": "1908",
-          "last": "2023",
+          "first": "1909",
+          "last": "2024",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 6,
-          "first": "1991",
-          "last": "2022",
+          "first": "1992",
+          "last": "2023",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 3,
-          "first": "1967",
-          "last": "2007",
+          "first": "1968",
+          "last": "2008",
           "scope": "europe"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1990",
-          "last": "1990",
+          "first": "1991",
+          "last": "1991",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "2016",
-          "last": "2016",
+          "first": "2017",
+          "last": "2017",
           "scope": "europe"
         },
         {
@@ -325,8 +325,8 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 2,
-          "first": "1935",
-          "last": "1974",
+          "first": "1936",
+          "last": "1975",
           "scope": "autre"
         }
       ]
@@ -340,48 +340,48 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 7,
-          "first": "1904",
-          "last": "2016",
+          "first": "1905",
+          "last": "2017",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 6,
-          "first": "1909",
-          "last": "1954",
+          "first": "1910",
+          "last": "1955",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 1,
-          "first": "2024",
-          "last": "2024",
+          "first": "2025",
+          "last": "2025",
           "scope": "national"
         },
         {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 1,
-          "first": "1968",
-          "last": "1968",
+          "first": "1969",
+          "last": "1969",
           "scope": "europe"
         },
         {
           "key": "autre:Q2750075",
           "label": "Northern Football League",
           "count": 3,
-          "first": "1902",
-          "last": "1904",
+          "first": "1903",
+          "last": "1905",
           "scope": "autre"
         },
         {
           "key": "autre:Q19510",
           "label": "championnat d'Angleterre de football de deuxième division",
           "count": 2,
-          "first": "2009",
-          "last": "2016",
+          "first": "2010",
+          "last": "2017",
           "scope": "autre"
         },
         {
@@ -396,8 +396,8 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 1,
-          "first": "1964",
-          "last": "1964",
+          "first": "1965",
+          "last": "1965",
           "scope": "autre"
         },
         {
@@ -419,40 +419,40 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 7,
-          "first": "1893",
-          "last": "1980",
+          "first": "1894",
+          "last": "1981",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 7,
-          "first": "1886",
-          "last": "1956",
+          "first": "1887",
+          "last": "1957",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 5,
-          "first": "1960",
-          "last": "1995",
+          "first": "1961",
+          "last": "1996",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 1,
-          "first": "1981",
-          "last": "1981",
+          "first": "1982",
+          "last": "1982",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "2025",
-          "last": "2025",
+          "first": "2026",
+          "last": "2026",
           "scope": "europe"
         },
         {
@@ -467,8 +467,8 @@
           "key": "autre:Q1634803",
           "label": "West Midlands (Regional) League",
           "count": 3,
-          "first": "1894",
-          "last": "1899",
+          "first": "1895",
+          "last": "1900",
           "scope": "autre"
         },
         {
@@ -483,16 +483,16 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 1,
-          "first": "1937",
-          "last": "1937",
+          "first": "1938",
+          "last": "1938",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 1,
-          "first": "1971",
-          "last": "1971",
+          "first": "1972",
+          "last": "1972",
           "scope": "autre"
         }
       ]
@@ -506,48 +506,48 @@
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 8,
-          "first": "1969",
-          "last": "2017",
+          "first": "1970",
+          "last": "2018",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 6,
-          "first": "1954",
-          "last": "2016",
+          "first": "1955",
+          "last": "2017",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 5,
-          "first": "1964",
-          "last": "2014",
+          "first": "1965",
+          "last": "2015",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 2,
-          "first": "1970",
-          "last": "1997",
+          "first": "1971",
+          "last": "1998",
           "scope": "europe"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 2,
-          "first": "2011",
-          "last": "2020",
+          "first": "2012",
+          "last": "2021",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 2,
-          "first": "2012",
-          "last": "2018",
+          "first": "2013",
+          "last": "2019",
           "scope": "europe"
         },
         {
@@ -570,16 +570,16 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 2,
-          "first": "1983",
-          "last": "1988",
+          "first": "1984",
+          "last": "1989",
           "scope": "autre"
         },
         {
           "key": "autre:Q1466284",
           "label": "FA Youth Cup",
           "count": 1,
-          "first": "2015",
-          "last": "2015",
+          "first": "2016",
+          "last": "2016",
           "scope": "autre"
         },
         {
@@ -601,40 +601,40 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 20,
-          "first": "1900",
-          "last": "2024",
+          "first": "1901",
+          "last": "2025",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 10,
-          "first": "1980",
-          "last": "2023",
+          "first": "1981",
+          "last": "2024",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 8,
-          "first": "1964",
-          "last": "2021",
+          "first": "1965",
+          "last": "2022",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 6,
-          "first": "1976",
-          "last": "2018",
+          "first": "1977",
+          "last": "2019",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
-          "first": "1972",
-          "last": "2000",
+          "first": "1973",
+          "last": "2001",
           "scope": "europe"
         },
         {
@@ -657,8 +657,8 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 4,
-          "first": "1893",
-          "last": "1961",
+          "first": "1894",
+          "last": "1962",
           "scope": "autre"
         },
         {
@@ -688,16 +688,16 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 10,
-          "first": "1891",
-          "last": "2006",
+          "first": "1892",
+          "last": "2007",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 2,
-          "first": "1936",
-          "last": "1972",
+          "first": "1937",
+          "last": "1973",
           "scope": "national"
         },
         {
@@ -712,40 +712,40 @@
           "key": "autre:Q19510",
           "label": "championnat d'Angleterre de football de deuxième division",
           "count": 2,
-          "first": "2004",
-          "last": "2006",
+          "first": "2005",
+          "last": "2007",
           "scope": "autre"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 1,
-          "first": "1975",
-          "last": "1975",
+          "first": "1976",
+          "last": "1976",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 1,
-          "first": "1987",
-          "last": "1987",
+          "first": "1988",
+          "last": "1988",
           "scope": "autre"
         },
         {
           "key": "autre:Q843159",
           "label": "Football League Trophy",
           "count": 1,
-          "first": "2020",
-          "last": "2020",
+          "first": "2021",
+          "last": "2021",
           "scope": "autre"
         },
         {
           "key": "autre:Q2750075",
           "label": "Northern Football League",
           "count": 1,
-          "first": "1905",
-          "last": "1905",
+          "first": "1906",
+          "last": "1906",
           "scope": "autre"
         }
       ]
@@ -759,48 +759,48 @@
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 8,
-          "first": "1900",
-          "last": "1990",
+          "first": "1901",
+          "last": "1991",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 4,
-          "first": "1970",
-          "last": "2007",
+          "first": "1971",
+          "last": "2008",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 2,
-          "first": "1950",
-          "last": "1960",
+          "first": "1951",
+          "last": "1961",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
-          "first": "1971",
-          "last": "2024",
+          "first": "1972",
+          "last": "2025",
           "scope": "europe"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1962",
-          "last": "1962",
+          "first": "1963",
+          "last": "1963",
           "scope": "europe"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 2,
-          "first": "1919",
-          "last": "1949",
+          "first": "1920",
+          "last": "1950",
           "scope": "autre"
         },
         {
@@ -823,16 +823,16 @@
           "key": "autre:Q18573",
           "label": "Southern Football League",
           "count": 1,
-          "first": "1899",
-          "last": "1899",
+          "first": "1900",
+          "last": "1900",
           "scope": "autre"
         },
         {
           "key": "autre:Q2422930",
           "label": "Western Football League",
           "count": 1,
-          "first": "1903",
-          "last": "1903",
+          "first": "1904",
+          "last": "1904",
           "scope": "autre"
         }
       ]
@@ -846,24 +846,24 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 9,
-          "first": "1890",
-          "last": "1986",
+          "first": "1891",
+          "last": "1987",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 5,
-          "first": "1905",
-          "last": "1994",
+          "first": "1906",
+          "last": "1995",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1984",
-          "last": "1984",
+          "first": "1985",
+          "last": "1985",
           "scope": "europe"
         },
         {
@@ -878,8 +878,8 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 1,
-          "first": "1930",
-          "last": "1930",
+          "first": "1931",
+          "last": "1931",
           "scope": "autre"
         },
         {
@@ -901,40 +901,40 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 1,
-          "first": "2000",
-          "last": "2000",
+          "first": "2001",
+          "last": "2001",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "2009",
-          "last": "2009",
+          "first": "2010",
+          "last": "2010",
           "scope": "europe"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 2,
-          "first": "1948",
-          "last": "1998",
+          "first": "1949",
+          "last": "1999",
           "scope": "autre"
         },
         {
           "key": "autre:Q18573",
           "label": "Southern Football League",
           "count": 2,
-          "first": "1905",
-          "last": "1906",
+          "first": "1906",
+          "last": "1907",
           "scope": "autre"
         },
         {
           "key": "autre:Q19510",
           "label": "championnat d'Angleterre de football de deuxième division",
           "count": 1,
-          "first": "2021",
-          "last": "2021",
+          "first": "2022",
+          "last": "2022",
           "scope": "autre"
         },
         {
@@ -956,40 +956,40 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 1,
-          "first": "1961",
-          "last": "1961",
+          "first": "1962",
+          "last": "1962",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 1,
-          "first": "1977",
-          "last": "1977",
+          "first": "1978",
+          "last": "1978",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "1980",
-          "last": "1980",
+          "first": "1981",
+          "last": "1981",
           "scope": "europe"
         },
         {
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 3,
-          "first": "1960",
-          "last": "1991",
+          "first": "1961",
+          "last": "1992",
           "scope": "autre"
         },
         {
           "key": "autre:Q18573",
           "label": "Southern Football League",
           "count": 1,
-          "first": "1936",
-          "last": "1936",
+          "first": "1937",
+          "last": "1937",
           "scope": "autre"
         }
       ]
@@ -1003,40 +1003,40 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 11,
-          "first": "1936",
-          "last": "2023",
+          "first": "1937",
+          "last": "2024",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 9,
-          "first": "1969",
-          "last": "2025",
+          "first": "1970",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 8,
-          "first": "1903",
-          "last": "2025",
+          "first": "1904",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1969",
-          "last": "1969",
+          "first": "1970",
+          "last": "1970",
           "scope": "europe"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 1,
-          "first": "2022",
-          "last": "2022",
+          "first": "2023",
+          "last": "2023",
           "scope": "europe"
         },
         {
@@ -1051,8 +1051,8 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 6,
-          "first": "1898",
-          "last": "1965",
+          "first": "1899",
+          "last": "1966",
           "scope": "autre"
         }
       ]
@@ -1066,16 +1066,16 @@
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 1,
-          "first": "1993",
-          "last": "1993",
+          "first": "1994",
+          "last": "1994",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 1,
-          "first": "2024",
-          "last": "2024",
+          "first": "2025",
+          "last": "2025",
           "scope": "national"
         }
       ]
@@ -1089,48 +1089,48 @@
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 1,
-          "first": "2012",
-          "last": "2012",
+          "first": "2013",
+          "last": "2013",
           "scope": "national"
         },
         {
           "key": "autre:Q511040",
           "label": "Coupe du pays de Galles de football",
           "count": 4,
-          "first": "1931",
-          "last": "1965",
+          "first": "1932",
+          "last": "1966",
           "scope": "autre"
         },
         {
           "key": "autre:Q843159",
           "label": "Football League Trophy",
           "count": 2,
-          "first": "1993",
-          "last": "2005",
+          "first": "1994",
+          "last": "2006",
           "scope": "autre"
         },
         {
           "key": "autre:Q19565",
           "label": "championnat d'Angleterre de football de troisième division",
           "count": 1,
-          "first": "2007",
-          "last": "2007",
+          "first": "2008",
+          "last": "2008",
           "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 1,
-          "first": "1999",
-          "last": "1999",
+          "first": "2000",
+          "last": "2000",
           "scope": "autre"
         },
         {
           "key": "autre:Q16258475",
           "label": "U21 Premier League Cup",
           "count": 1,
-          "first": "2016",
-          "last": "2016",
+          "first": "2017",
+          "last": "2017",
           "scope": "autre"
         }
       ]
@@ -1144,32 +1144,32 @@
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue anglaise",
           "count": 4,
-          "first": "1977",
-          "last": "1989",
+          "first": "1978",
+          "last": "1990",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
           "count": 2,
-          "first": "1977",
-          "last": "1997",
+          "first": "1978",
+          "last": "1998",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
           "count": 2,
-          "first": "1897",
-          "last": "1958",
+          "first": "1898",
+          "last": "1959",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 2,
-          "first": "1978",
-          "last": "1979",
+          "first": "1979",
+          "last": "1980",
           "scope": "europe"
         },
         {
@@ -1184,8 +1184,8 @@
           "key": "autre:Q769744",
           "label": "Football League Second Division",
           "count": 2,
-          "first": "1906",
-          "last": "1921",
+          "first": "1907",
+          "last": "1922",
           "scope": "autre"
         }
       ]
