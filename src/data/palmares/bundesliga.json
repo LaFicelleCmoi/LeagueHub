@@ -11,16 +11,16 @@
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 4,
-          "first": "1967",
-          "last": "1982",
+          "first": "1968",
+          "last": "1983",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 3,
-          "first": "1961",
-          "last": "1977",
+          "first": "1962",
+          "last": "1978",
           "scope": "national"
         },
         {
@@ -42,32 +42,32 @@
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 8,
-          "first": "1955",
-          "last": "2011",
+          "first": "1956",
+          "last": "2012",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 5,
-          "first": "1964",
-          "last": "2020",
+          "first": "1965",
+          "last": "2021",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1965",
-          "last": "1965",
+          "first": "1966",
+          "last": "1966",
           "scope": "europe"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 1,
-          "first": "1996",
-          "last": "1996",
+          "first": "1997",
+          "last": "1997",
           "scope": "europe"
         }
       ]
@@ -81,24 +81,24 @@
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 5,
-          "first": "1973",
-          "last": "2017",
+          "first": "1974",
+          "last": "2018",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 1,
-          "first": "1958",
-          "last": "1958",
+          "first": "1959",
+          "last": "1959",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 2,
-          "first": "1979",
-          "last": "2021",
+          "first": "1980",
+          "last": "2022",
           "scope": "europe"
         },
         {
@@ -135,23 +135,23 @@
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 6,
-          "first": "1922",
-          "last": "1982",
+          "first": "1923",
+          "last": "1983",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 3,
-          "first": "1962",
-          "last": "1986",
+          "first": "1963",
+          "last": "1987",
           "scope": "national"
         },
         {
           "key": "coupe-ligue",
           "label": "Coupe de la Ligue allemande",
           "count": 2,
-          "first": "1972",
+          "first": "1973",
           "last": "2003",
           "scope": "national"
         },
@@ -159,24 +159,24 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1976",
-          "last": "1976",
+          "first": "1977",
+          "last": "1977",
           "scope": "europe"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 1,
-          "first": "1982",
-          "last": "1982",
+          "first": "1983",
+          "last": "1983",
           "scope": "europe"
         },
         {
           "key": "autre:Q52041",
           "label": "Oberliga",
           "count": 15,
-          "first": "1947",
-          "last": "1962",
+          "first": "1948",
+          "last": "1963",
           "scope": "autre"
         },
         {
@@ -198,16 +198,16 @@
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 2,
-          "first": "1992",
-          "last": "2023",
+          "first": "1993",
+          "last": "2024",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "1987",
-          "last": "1987",
+          "first": "1988",
+          "last": "1988",
           "scope": "europe"
         }
       ]
@@ -221,16 +221,16 @@
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 30,
-          "first": "1931",
-          "last": "2025",
+          "first": "1932",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 21,
-          "first": "1956",
-          "last": "2025",
+          "first": "1957",
+          "last": "2026",
           "scope": "national"
         },
         {
@@ -245,8 +245,8 @@
           "key": "c1",
           "label": "Ligue des champions",
           "count": 6,
-          "first": "1973",
-          "last": "2019",
+          "first": "1974",
+          "last": "2020",
           "scope": "europe"
         },
         {
@@ -261,16 +261,16 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1966",
-          "last": "1966",
+          "first": "1967",
+          "last": "1967",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "1995",
-          "last": "1995",
+          "first": "1996",
+          "last": "1996",
           "scope": "europe"
         },
         {
@@ -300,8 +300,8 @@
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 7,
-          "first": "1933",
-          "last": "1957",
+          "first": "1934",
+          "last": "1958",
           "scope": "national"
         },
         {
@@ -309,7 +309,7 @@
           "label": "Coupe d'Allemagne",
           "count": 5,
           "first": "1937",
-          "last": "2010",
+          "last": "2011",
           "scope": "national"
         },
         {
@@ -324,8 +324,8 @@
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "1996",
-          "last": "1996",
+          "first": "1997",
+          "last": "1997",
           "scope": "europe"
         },
         {
@@ -347,16 +347,16 @@
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 5,
-          "first": "1949",
-          "last": "2006",
+          "first": "1950",
+          "last": "2007",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 4,
-          "first": "1953",
-          "last": "2024",
+          "first": "1954",
+          "last": "2025",
           "scope": "national"
         },
         {
@@ -378,16 +378,16 @@
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 6,
-          "first": "1960",
-          "last": "2008",
+          "first": "1961",
+          "last": "2009",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 4,
-          "first": "1964",
-          "last": "2003",
+          "first": "1965",
+          "last": "2004",
           "scope": "national"
         },
         {
@@ -402,8 +402,8 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1991",
-          "last": "1991",
+          "first": "1992",
+          "last": "1992",
           "scope": "europe"
         },
         {
@@ -425,32 +425,32 @@
           "key": "championnat",
           "label": "Championnat d'Allemagne",
           "count": 5,
-          "first": "1969",
-          "last": "1976",
+          "first": "1970",
+          "last": "1977",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 3,
-          "first": "1959",
-          "last": "1994",
+          "first": "1960",
+          "last": "1995",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 2,
-          "first": "1974",
-          "last": "1978",
+          "first": "1975",
+          "last": "1979",
           "scope": "europe"
         },
         {
           "key": "autre:Q113159",
           "label": "championnat d'Allemagne féminin de football de deuxième division",
           "count": 1,
-          "first": "2017",
-          "last": "2017",
+          "first": "2018",
+          "last": "2018",
           "scope": "autre"
         }
       ]
@@ -482,8 +482,8 @@
           "key": "autre:Q15735",
           "label": "Fußball-Bayernliga",
           "count": 5,
-          "first": "1972",
-          "last": "2001",
+          "first": "1973",
+          "last": "2002",
           "scope": "autre"
         }
       ]
@@ -503,16 +503,16 @@
           "key": "coupe",
           "label": "Coupe d'Allemagne",
           "count": 2,
-          "first": "2021",
-          "last": "2022",
+          "first": "2022",
+          "last": "2023",
           "scope": "national"
         },
         {
           "key": "autre:Q548937",
           "label": "Regionalliga Nord-Est",
           "count": 1,
-          "first": "2012",
-          "last": "2012",
+          "first": "2013",
+          "last": "2013",
           "scope": "autre"
         }
       ]
