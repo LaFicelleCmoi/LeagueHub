@@ -1,0 +1,1194 @@
+{
+  "slug": "premier-league",
+  "updatedAt": "2026-09-19",
+  "clubs": {
+    "306": {
+      "qid": "Q19477",
+      "name": "Hull City",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "first": "2020",
+          "last": "2020",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "first": "1965",
+          "last": "1965",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q16846280",
+          "label": "North Regional League",
+          "count": 1,
+          "first": "1967",
+          "last": "1967",
+          "scope": "autre"
+        }
+      ]
+    },
+    "331": {
+      "qid": "Q19453",
+      "name": "Brighton & Hove Albion",
+      "total": 6,
+      "trophies": [
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 3,
+          "first": "1909",
+          "last": "1926",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "first": "1964",
+          "last": "1964",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "first": "2000",
+          "last": "2000",
+          "scope": "autre"
+        }
+      ]
+    },
+    "337": {
+      "qid": "Q19571",
+      "name": "Brentford",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 2,
+          "first": "1991",
+          "last": "1998",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q48837",
+          "label": "championnat d'Angleterre de football de quatrième division",
+          "count": 1,
+          "first": "2008",
+          "last": "2008",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "first": "1962",
+          "last": "1962",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "first": "1934",
+          "last": "1934",
+          "scope": "autre"
+        }
+      ]
+    },
+    "349": {
+      "qid": "Q19568",
+      "name": "AFC Bournemouth",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "first": "2014",
+          "last": "2014",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q19510",
+          "label": "championnat d'Angleterre de football de deuxième division",
+          "count": 1,
+          "first": "2014",
+          "last": "2014",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "first": "1986",
+          "last": "1986",
+          "scope": "autre"
+        }
+      ]
+    },
+    "357": {
+      "qid": "Q1128631",
+      "name": "Leeds United",
+      "total": 12,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 3,
+          "first": "1968",
+          "last": "1991",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "first": "1971",
+          "last": "1971",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "first": "1967",
+          "last": "1967",
+          "scope": "national"
+        },
+        {
+          "key": "villes-foires",
+          "label": "Coupe des villes de foires",
+          "count": 2,
+          "first": "1967",
+          "last": "1970",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 3,
+          "first": "1923",
+          "last": "1989",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19510",
+          "label": "championnat d'Angleterre de football de deuxième division",
+          "count": 2,
+          "first": "2019",
+          "last": "2024",
+          "scope": "autre"
+        }
+      ]
+    },
+    "359": {
+      "qid": "Q9617",
+      "name": "Arsenal",
+      "total": 32,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 14,
+          "first": "1930",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 14,
+          "first": "1929",
+          "last": "2019",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 2,
+          "first": "1986",
+          "last": "1992",
+          "scope": "national"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1993",
+          "last": "1993",
+          "scope": "europe"
+        },
+        {
+          "key": "villes-foires",
+          "label": "Coupe des villes de foires",
+          "count": 1,
+          "first": "1969",
+          "last": "1969",
+          "scope": "europe"
+        }
+      ]
+    },
+    "360": {
+      "qid": "Q18656",
+      "name": "Manchester United",
+      "total": 49,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 20,
+          "first": "1907",
+          "last": "2012",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 13,
+          "first": "1908",
+          "last": "2023",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 6,
+          "first": "1991",
+          "last": "2022",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 3,
+          "first": "1967",
+          "last": "2007",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1990",
+          "last": "1990",
+          "scope": "europe"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 1,
+          "first": "2016",
+          "last": "2016",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 1,
+          "first": "1991",
+          "last": "1991",
+          "scope": "europe"
+        },
+        {
+          "key": "mondial",
+          "label": "Coupe du monde des clubs",
+          "count": 1,
+          "first": "2008",
+          "last": "2008",
+          "scope": "monde"
+        },
+        {
+          "key": "intercontinentale",
+          "label": "Coupe intercontinentale",
+          "count": 1,
+          "first": "1999",
+          "last": "1999",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 2,
+          "first": "1935",
+          "last": "1974",
+          "scope": "autre"
+        }
+      ]
+    },
+    "361": {
+      "qid": "Q18716",
+      "name": "Newcastle United",
+      "total": 23,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 7,
+          "first": "1904",
+          "last": "2016",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 6,
+          "first": "1909",
+          "last": "1954",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "first": "2024",
+          "last": "2024",
+          "scope": "national"
+        },
+        {
+          "key": "villes-foires",
+          "label": "Coupe des villes de foires",
+          "count": 1,
+          "first": "1968",
+          "last": "1968",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q2750075",
+          "label": "Northern Football League",
+          "count": 3,
+          "first": "1902",
+          "last": "1904",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19510",
+          "label": "championnat d'Angleterre de football de deuxième division",
+          "count": 2,
+          "first": "2009",
+          "last": "2016",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2006",
+          "last": "2006",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "first": "1964",
+          "last": "1964",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q3065059",
+          "label": "Northern Football Alliance",
+          "count": 1,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        }
+      ]
+    },
+    "362": {
+      "qid": "Q18711",
+      "name": "Aston Villa",
+      "total": 28,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 7,
+          "first": "1893",
+          "last": "1980",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 7,
+          "first": "1886",
+          "last": "1956",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 5,
+          "first": "1960",
+          "last": "1995",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 1,
+          "first": "1981",
+          "last": "1981",
+          "scope": "europe"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 1,
+          "first": "2025",
+          "last": "2025",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 1,
+          "first": "1982",
+          "last": "1982",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q1634803",
+          "label": "West Midlands (Regional) League",
+          "count": 3,
+          "first": "1894",
+          "last": "1899",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "first": "1937",
+          "last": "1937",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "first": "1971",
+          "last": "1971",
+          "scope": "autre"
+        }
+      ]
+    },
+    "363": {
+      "qid": "Q9616",
+      "name": "Chelsea",
+      "total": 32,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 8,
+          "first": "1969",
+          "last": "2017",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 6,
+          "first": "1954",
+          "last": "2016",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 5,
+          "first": "1964",
+          "last": "2014",
+          "scope": "national"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 2,
+          "first": "1970",
+          "last": "1997",
+          "scope": "europe"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 2,
+          "first": "2011",
+          "last": "2020",
+          "scope": "europe"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 2,
+          "first": "2012",
+          "last": "2018",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 1,
+          "first": "1998",
+          "last": "1998",
+          "scope": "europe"
+        },
+        {
+          "key": "mondial",
+          "label": "Coupe du monde des clubs",
+          "count": 2,
+          "first": "2021",
+          "last": "2025",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 2,
+          "first": "1983",
+          "last": "1988",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1466284",
+          "label": "FA Youth Cup",
+          "count": 1,
+          "first": "2015",
+          "last": "2015",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2605489",
+          "label": "Premier League Asia Trophy",
+          "count": 1,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        }
+      ]
+    },
+    "364": {
+      "qid": "Q1130849",
+      "name": "Liverpool",
+      "total": 58,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 20,
+          "first": "1900",
+          "last": "2024",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 10,
+          "first": "1980",
+          "last": "2023",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 8,
+          "first": "1964",
+          "last": "2021",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 6,
+          "first": "1976",
+          "last": "2018",
+          "scope": "europe"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 3,
+          "first": "1972",
+          "last": "2000",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 3,
+          "first": "1977",
+          "last": "2019",
+          "scope": "europe"
+        },
+        {
+          "key": "mondial",
+          "label": "Coupe du monde des clubs",
+          "count": 1,
+          "first": "2019",
+          "last": "2019",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 4,
+          "first": "1893",
+          "last": "1961",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1054420",
+          "label": "Lancashire Combination",
+          "count": 2,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1801766",
+          "label": "Lancashire League",
+          "count": 1,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        }
+      ]
+    },
+    "366": {
+      "qid": "Q18739",
+      "name": "Sunderland",
+      "total": 23,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 10,
+          "first": "1891",
+          "last": "2006",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 2,
+          "first": "1936",
+          "last": "1972",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q3065059",
+          "label": "Northern Football Alliance",
+          "count": 5,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19510",
+          "label": "championnat d'Angleterre de football de deuxième division",
+          "count": 2,
+          "first": "2004",
+          "last": "2006",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "first": "1975",
+          "last": "1975",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "first": "1987",
+          "last": "1987",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "first": "2020",
+          "last": "2020",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2750075",
+          "label": "Northern Football League",
+          "count": 1,
+          "first": "1905",
+          "last": "1905",
+          "scope": "autre"
+        }
+      ]
+    },
+    "367": {
+      "qid": "Q18741",
+      "name": "Tottenham Hotspur",
+      "total": 25,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 8,
+          "first": "1900",
+          "last": "1990",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 4,
+          "first": "1970",
+          "last": "2007",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 2,
+          "first": "1950",
+          "last": "1960",
+          "scope": "national"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 3,
+          "first": "1971",
+          "last": "2024",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1962",
+          "last": "1962",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 2,
+          "first": "1919",
+          "last": "1949",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q4311339",
+          "label": "London League",
+          "count": 2,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2605489",
+          "label": "Premier League Asia Trophy",
+          "count": 1,
+          "first": "2009",
+          "last": "2009",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 1,
+          "first": "1899",
+          "last": "1899",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 1,
+          "first": "1903",
+          "last": "1903",
+          "scope": "autre"
+        }
+      ]
+    },
+    "368": {
+      "qid": "Q5794",
+      "name": "Everton",
+      "total": 24,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 9,
+          "first": "1890",
+          "last": "1986",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 5,
+          "first": "1905",
+          "last": "1994",
+          "scope": "national"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1984",
+          "last": "1984",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q4229457",
+          "label": "The Combination",
+          "count": 7,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "first": "1930",
+          "last": "1930",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1054420",
+          "label": "Lancashire Combination",
+          "count": 1,
+          "first": null,
+          "last": null,
+          "scope": "autre"
+        }
+      ]
+    },
+    "370": {
+      "qid": "Q18708",
+      "name": "Fulham",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "first": "2000",
+          "last": "2000",
+          "scope": "national"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 1,
+          "first": "2009",
+          "last": "2009",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 2,
+          "first": "1948",
+          "last": "1998",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 2,
+          "first": "1905",
+          "last": "1906",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19510",
+          "label": "championnat d'Angleterre de football de deuxième division",
+          "count": 1,
+          "first": "2021",
+          "last": "2021",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2002",
+          "last": "2002",
+          "scope": "autre"
+        }
+      ]
+    },
+    "373": {
+      "qid": "Q9653",
+      "name": "Ipswich Town",
+      "total": 7,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "first": "1961",
+          "last": "1961",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "first": "1977",
+          "last": "1977",
+          "scope": "national"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 1,
+          "first": "1980",
+          "last": "1980",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 3,
+          "first": "1960",
+          "last": "1991",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 1,
+          "first": "1936",
+          "last": "1936",
+          "scope": "autre"
+        }
+      ]
+    },
+    "382": {
+      "qid": "Q50602",
+      "name": "Manchester City",
+      "total": 37,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 11,
+          "first": "1936",
+          "last": "2023",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 9,
+          "first": "1969",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 8,
+          "first": "1903",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1969",
+          "last": "1969",
+          "scope": "europe"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 1,
+          "first": "2022",
+          "last": "2022",
+          "scope": "europe"
+        },
+        {
+          "key": "mondial",
+          "label": "Coupe du monde des clubs",
+          "count": 1,
+          "first": "2023",
+          "last": "2023",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 6,
+          "first": "1898",
+          "last": "1965",
+          "scope": "autre"
+        }
+      ]
+    },
+    "384": {
+      "qid": "Q19467",
+      "name": "Crystal Palace",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "first": "1993",
+          "last": "1993",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "first": "2024",
+          "last": "2024",
+          "scope": "national"
+        }
+      ]
+    },
+    "388": {
+      "qid": "Q18659",
+      "name": "Coventry City",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "first": "2012",
+          "last": "2012",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q511040",
+          "label": "Coupe du pays de Galles de football",
+          "count": 4,
+          "first": "1931",
+          "last": "1965",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 2,
+          "first": "1993",
+          "last": "2005",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "first": "2007",
+          "last": "2007",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "first": "1999",
+          "last": "1999",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q16258475",
+          "label": "U21 Premier League Cup",
+          "count": 1,
+          "first": "2016",
+          "last": "2016",
+          "scope": "autre"
+        }
+      ]
+    },
+    "393": {
+      "qid": "Q19490",
+      "name": "Nottingham Forest",
+      "total": 13,
+      "trophies": [
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 4,
+          "first": "1977",
+          "last": "1989",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 2,
+          "first": "1977",
+          "last": "1997",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 2,
+          "first": "1897",
+          "last": "1958",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 2,
+          "first": "1978",
+          "last": "1979",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 1,
+          "first": "1979",
+          "last": "1979",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 2,
+          "first": "1906",
+          "last": "1921",
+          "scope": "autre"
+        }
+      ]
+    }
+  }
+}

@@ -4,6 +4,7 @@ import {
   calendarMatchesBetween,
   getCalendar,
   nextCalendarMatch,
+  type CalendarSlug as CalendarKey,
   type CalendarMatch,
   type CalendarSlug,
   type CompetitionCalendar,
@@ -11,10 +12,12 @@ import {
 import { buildRounds, CUP_CALENDARS } from "@/lib/cup-calendar";
 import { frenchDateRange, legLabel, roundKey, roundLabel, type Cup } from "@/lib/cups";
 import { addDays, dayKey, espnDate, formatTime } from "@/lib/format";
+import { CUPS } from "@/lib/cups";
 import { LEAGUES, type League } from "@/lib/leagues";
 import type {
   Article,
   CupMatch,
+  ClubSeasonMatch,
   CupOverview,
   EuropeanCup,
   Leader,
@@ -759,6 +762,112 @@ export async function getTeamForm(teamId: string, league: League, count = 5): Pr
         .filter((fixture): fixture is TeamFixture => fixture !== null)
         .sort((a, b) => a.date.localeCompare(b.date))[0] ?? null,
   };
+}
+
+/** Résultat d'un match du point de vue du club, quand il est terminé. */
+function clubOutcome(goalsFor: number, goalsAgainst: number, us: { winner?: boolean }, them: { winner?: boolean }): MatchOutcome {
+  if (us.winner) return "win";
+  if (them.winner) return "loss";
+  return goalsFor > goalsAgainst ? "win" : goalsFor < goalsAgainst ? "loss" : "draw";
+}
+
+function seasonMatchFromSchedule(event: EspnScheduleEvent, teamId: string): ClubSeasonMatch | null {
+  const slug = event.league?.slug ?? "";
+  const competition = event.competitions[0];
+  const us = competition?.competitors.find((c) => c.team.id === teamId);
+  const them = competition?.competitors.find((c) => c.team.id !== teamId);
+  if (!competition || !us || !them || !isOfficial(slug)) return null;
+
+  const status = competition.status;
+  const played = status.type.state !== "pre" && !STATUSES_WITHOUT_SCORE.has(status.type.name);
+  const goalsFor = played ? (us.score?.value ?? Number(us.score?.displayValue ?? 0)) : null;
+  const goalsAgainst = played ? (them.score?.value ?? Number(them.score?.displayValue ?? 0)) : null;
+
+  return {
+    id: event.id,
+    date: event.date,
+    competitionCode: slug,
+    competition: COMPETITION_LABELS[slug] ?? event.league?.abbreviation ?? event.league?.name ?? slug,
+    home: us.homeAway === "home",
+    opponent: toTeam(them.team),
+    goalsFor,
+    goalsAgainst,
+    state: status.type.state,
+    status: statusLabel(status, event.date),
+    outcome:
+      status.type.completed && goalsFor !== null && goalsAgainst !== null
+        ? clubOutcome(goalsFor, goalsAgainst, us, them)
+        : null,
+    venue: competition.venue?.fullName ?? null,
+    europeanCup: europeanCup(slug),
+  };
+}
+
+/** Match du calendrier stocké, quand ESPN ne l'a pas encore dans le calendrier du club. */
+function seasonMatchFromCalendar(slug: CalendarKey, teamId: string): ClubSeasonMatch[] {
+  const calendar = getCalendar(slug);
+  return calendar.matches
+    .filter((match) => match.home === teamId || match.away === teamId)
+    .map((match) => {
+      const home = match.home === teamId;
+      const opponentId = home ? match.away : match.home;
+      const opponent = calendar.teams[opponentId];
+      const undecided = !opponent || /^TBD\b/i.test(opponent.name);
+      const kickoff = Date.parse(match.date);
+      const pending = kickoff > Date.now() - KICKOFF_GRACE;
+      return {
+        id: match.id,
+        date: match.date,
+        competitionCode: calendar.espnCode,
+        competition: COMPETITION_LABELS[calendar.espnCode] ?? calendar.espnCode,
+        home,
+        opponent: {
+          id: opponentId,
+          name: undecided ? "À déterminer" : opponent.name,
+          shortName: undecided ? "À déterminer" : opponent.shortName,
+          abbreviation: undecided ? "?" : opponent.abbreviation,
+          logo: undecided ? null : opponent.logo,
+        },
+        goalsFor: null,
+        goalsAgainst: null,
+        state: pending ? ("pre" as const) : ("post" as const),
+        status: kickoff > Date.now() ? formatTime(match.date) : pending ? "Direct indisponible" : "Score indisponible",
+        outcome: null,
+        venue: match.venue,
+        europeanCup: null,
+      };
+    });
+}
+
+/**
+ * Déroulé de la saison d'un club, toutes compétitions : le calendrier ESPN du club (championnat,
+ * coupes nationales, coupes d'Europe) complété par le calendrier stocké dans le site.
+ */
+export async function getClubSeason(teamId: string, league: League): Promise<ClubSeasonMatch[]> {
+  const schedule = `/site/v2/sports/soccer/all/teams/${teamId}/schedule`;
+  const [current, fixtures] = await Promise.all([
+    espnFetch<EspnScheduleResponse>(schedule, { memoryTtl: MEMORY_TTL.team }).catch(() => null),
+    espnFetch<EspnScheduleResponse>(schedule, { memoryTtl: MEMORY_TTL.team, params: { fixture: "true" } }).catch(
+      () => null,
+    ),
+  ]);
+
+  const matches = new Map<string, ClubSeasonMatch>();
+  for (const event of [...(current?.events ?? []), ...(fixtures?.events ?? [])]) {
+    const match = seasonMatchFromSchedule(event, teamId);
+    if (match) matches.set(match.id, match);
+  }
+
+  // Compétitions du calendrier du site : le championnat du club et les coupes de son pays.
+  const country = league.espnCode.split(".")[0];
+  const cupSlugs = CUPS.filter((cup) => cup.espnCode.startsWith(`${country}.`)).map((cup) => cup.slug);
+  for (const slug of [league.slug, ...cupSlugs]) {
+    for (const match of seasonMatchFromCalendar(slug, teamId)) {
+      if (!matches.has(match.id)) matches.set(match.id, match);
+    }
+  }
+
+  return [...matches.values()].sort((a, b) => a.date.localeCompare(b.date));
 }
 
 // --- Coupes nationales ---

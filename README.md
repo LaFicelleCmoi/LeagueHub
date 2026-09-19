@@ -22,6 +22,8 @@ La page d'accueil réunit les chiffres clés (dont le total de buts de la saison
 - **Synchronisation avec le direct** : les scores en direct et les fiches des clubs ne passent plus par le Data Cache de Next.js (qui renvoyait encore l'ancienne version pendant sa mise à jour, soit un rafraîchissement de retard) mais par une copie en mémoire de quelques secondes et le CDN. Les matchs de la veille restent suivis après minuit, et un match resté « à venir » est interrogé jusqu'à ce qu'ESPN le lance. Une page servie depuis le cache recharge ses données dès qu'elle a plus de 90 s. Les coupes nationales ont leurs scores en direct, et la fiche du club comme « Mon club » affichent le match en cours avec son score, relu toutes les 30 s.
 - **Calendrier stocké dans le site, direct ESPN** : l'organisation du site (quels matchs, dates, stades, tours des coupes) vient de `src/data/calendrier/`, relevé chaque nuit chez ESPN par `scripts/sync-calendar.mts` (GitHub Action `calendrier.yml`, un commit par fichier modifié). Les pages s'affichent donc même si ESPN ne répond pas ; ESPN n'apporte que l'état des matchs : score, minute, buts, cartons jaunes et rouges. Lancer le relevé à la main : `npm run calendrier`.
 - **Détails du match** : bouton sur chaque carte de match, avec tout ce qu'ESPN fournit, en français — chronologie complète (buts et passeurs, penaltys marqués, manqués ou arrêtés, contre-son-camp, cartons et motifs, remplacements, VAR, arrêts de jeu, périodes), 28 statistiques comparées, compositions (schéma, titulaires, remplaçants, entrées et sorties), arbitres, stade, affluence, diffuseurs et commentaire minute par minute (en anglais). Relu toutes les 30 s pendant le match.
+- **Recherche de club** : une barre de recherche dans l'en-tête (raccourci clavier `/`, insensible aux accents, navigation au clavier) mène à la page d'un club : bilan de la saison, prochain match, **palmarès complet** (nombre de titres par trophée, première et dernière année) et **déroulé de la saison en cours**, mois par mois, toutes compétitions — championnat, coupes nationales et coupes d'Europe.
+- **Palmarès** : relevé sur Wikidata (chaque saison de compétition y désigne son vainqueur) par `scripts/sync-palmares.mts`, une fois par semaine (GitHub Action `palmares.yml`). Les anciens noms d'une même compétition sont regroupés (« First Division » et « Premier League » comptent ensemble) ; divisions inférieures et coupes régionales apparaissent sous « Autres trophées ». Lancer le relevé à la main : `npm run palmares`.
 
 ## Stack
 
@@ -65,6 +67,8 @@ src/
     ├── cup-calendar.ts           Calendrier officiel 2026-27 des coupes, fusionné avec les données ESPN
     ├── cups-tab.ts               Interrupteur de l'onglet Coupes, mémorisé dans le navigateur
     ├── calendar.ts               Calendrier stocké dans le site (matchs, dates, stades, tours)
+    ├── clubs.ts                  Index des clubs des 5 championnats (barre de recherche)
+    ├── palmares.ts               Palmarès des clubs relevé sur Wikidata
     ├── countdown.ts              Horloge partagée des comptes à rebours avant le coup d'envoi
     ├── team-form.ts              Fiche d'un club côté navigateur, relue toutes les 30 s pendant ses matchs
     ├── live.ts                   Règles du suivi en direct (quels matchs, quand)

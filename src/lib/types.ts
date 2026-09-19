@@ -228,6 +228,25 @@ export interface TeamSeasonTotals {
   goalsAgainst: number;
 }
 
+/** Un match de la saison d'un club, vu depuis ce club (page du club). */
+export interface ClubSeasonMatch {
+  id: string;
+  date: string;
+  /** Code ESPN de la compétition, pour ouvrir le détail du match. */
+  competitionCode: string;
+  competition: string;
+  home: boolean;
+  opponent: Team;
+  goalsFor: number | null;
+  goalsAgainst: number | null;
+  state: MatchState;
+  /** Libellé : heure du coup d'envoi, minute de jeu, « Terminé »… */
+  status: string;
+  outcome: MatchOutcome | null;
+  venue: string | null;
+  europeanCup: EuropeanCup | null;
+}
+
 export interface TeamForm {
   team: Team;
   season: TeamSeasonTotals;

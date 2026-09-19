@@ -4,13 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ArrowUpRight, Menu, Star, Trophy, X } from "lucide-react";
+import type { ClubIndexEntry } from "@/lib/clubs";
 import { useCupsTab } from "@/lib/cups-tab";
 import { UCL_TRACKER_URL } from "@/lib/external-links";
 import { LEAGUES } from "@/lib/leagues";
+import { ClubSearch } from "./ClubSearch";
 import { CupsTabSwitch } from "./CupsTabSwitch";
 import { LeagueLogo } from "./LeagueLogo";
 
-export function SiteHeader() {
+export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const cupsTab = useCupsTab();
@@ -77,7 +79,10 @@ export function SiteHeader() {
                 <span className="sr-only"> : tracker Ligue des champions 2026-2027 (nouvel onglet)</span>
               </a>
             </li>
-            <li className="ml-2 border-l border-slate-200 pl-2 dark:border-slate-800">
+            <li className="ml-2 w-44 border-l border-slate-200 pl-2 xl:w-52 dark:border-slate-800">
+              <ClubSearch clubs={clubs} />
+            </li>
+            <li>
               <CupsTabSwitch />
             </li>
           </ul>
@@ -98,6 +103,9 @@ export function SiteHeader() {
       {open && (
         <nav id="mobile-nav" aria-label="Navigation principale" className="border-t border-slate-200 lg:hidden dark:border-slate-800">
           <ul className="mx-auto grid max-w-6xl gap-1 p-2">
+            <li className="px-1 pb-2">
+              <ClubSearch clubs={clubs} onNavigate={close} />
+            </li>
             {LEAGUES.map((league) => {
               const active = pathname.startsWith(`/${league.slug}`);
               return (

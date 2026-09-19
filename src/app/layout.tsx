@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
+import { clubIndex } from "@/lib/clubs";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,7 +26,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} flex min-h-dvh flex-col font-sans antialiased`}>
-        <SiteHeader />
+        {/* Les clubs du calendrier alimentent la recherche de l'en-tête. */}
+        <SiteHeader clubs={clubIndex()} />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
         <footer className="border-t border-slate-200 dark:border-slate-800">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:justify-between dark:text-slate-400">

@@ -1,0 +1,780 @@
+{
+  "slug": "ligue-1",
+  "updatedAt": "2026-09-19",
+  "clubs": {
+    "160": {
+      "qid": "Q483020",
+      "name": "Paris Saint-Germain",
+      "total": 44,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 16,
+          "first": "1981",
+          "last": "2024",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 13,
+          "first": "1985",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 9,
+          "first": "1994",
+          "last": "2019",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 2,
+          "first": "2024",
+          "last": "2025",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1995",
+          "last": "1995",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 1,
+          "first": "1970",
+          "last": "1970",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "1990",
+          "last": "1990",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "autre"
+        }
+      ]
+    },
+    "166": {
+      "qid": "Q19516",
+      "name": "Lille",
+      "total": 16,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 6,
+          "first": "1945",
+          "last": "2010",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 4,
+          "first": "1945",
+          "last": "2020",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 4,
+          "first": "1963",
+          "last": "1999",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "1959",
+          "last": "1959",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2004",
+          "last": "2004",
+          "scope": "autre"
+        }
+      ]
+    },
+    "167": {
+      "qid": "Q704",
+      "name": "Lyon",
+      "total": 22,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 7,
+          "first": "2001",
+          "last": "2007",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 5,
+          "first": "1963",
+          "last": "2011",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "first": "2000",
+          "last": "2000",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 4,
+          "first": "1970",
+          "last": "2021",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 3,
+          "first": "1950",
+          "last": "1988",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "1997",
+          "last": "1997",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q115802",
+          "label": "Mobcast Cup",
+          "count": 1,
+          "first": "2012",
+          "last": "2012",
+          "scope": "autre"
+        }
+      ]
+    },
+    "169": {
+      "qid": "Q19509",
+      "name": "Stade Rennais",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 3,
+          "first": "1964",
+          "last": "2018",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 3,
+          "first": "1972",
+          "last": "2007",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 2,
+          "first": "1955",
+          "last": "1982",
+          "scope": "autre"
+        }
+      ]
+    },
+    "170": {
+      "qid": "Q501693",
+      "name": "Troyes",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 3,
+          "first": "2014",
+          "last": "2025",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "2017",
+          "last": "2017",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "autre"
+        }
+      ]
+    },
+    "172": {
+      "qid": "Q182876",
+      "name": "AJ Auxerre",
+      "total": 15,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 4,
+          "first": "1993",
+          "last": "2004",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 1,
+          "first": "1995",
+          "last": "1995",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 7,
+          "first": "1981",
+          "last": "2013",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 2,
+          "first": "1979",
+          "last": "2023",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "1997",
+          "last": "1997",
+          "scope": "autre"
+        }
+      ]
+    },
+    "174": {
+      "qid": "Q180305",
+      "name": "AS Monaco",
+      "total": 19,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 8,
+          "first": "1960",
+          "last": "2016",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 5,
+          "first": "1959",
+          "last": "1990",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "first": "2002",
+          "last": "2002",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 4,
+          "first": "1961",
+          "last": "2015",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 1,
+          "first": "2012",
+          "last": "2012",
+          "scope": "autre"
+        }
+      ]
+    },
+    "175": {
+      "qid": "Q191843",
+      "name": "Lens",
+      "total": 11,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 1,
+          "first": "1997",
+          "last": "1997",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 1,
+          "first": "2025",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "first": "1998",
+          "last": "1998",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 4,
+          "first": "1936",
+          "last": "2008",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 3,
+          "first": "1956",
+          "last": "1991",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2005",
+          "last": "2005",
+          "scope": "autre"
+        }
+      ]
+    },
+    "176": {
+      "qid": "Q132885",
+      "name": "Marseille",
+      "total": 27,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 10,
+          "first": "1936",
+          "last": "2009",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 10,
+          "first": "1923",
+          "last": "1988",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 3,
+          "first": "2009",
+          "last": "2011",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 1,
+          "first": "1992",
+          "last": "1992",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 1,
+          "first": "1994",
+          "last": "1994",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "1978",
+          "last": "1978",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2005",
+          "last": "2005",
+          "scope": "autre"
+        }
+      ]
+    },
+    "179": {
+      "qid": "Q19518",
+      "name": "Toulouse",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 1,
+          "first": "2022",
+          "last": "2022",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 3,
+          "first": "1981",
+          "last": "2021",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "2004",
+          "last": "2004",
+          "scope": "autre"
+        }
+      ]
+    },
+    "180": {
+      "qid": "Q126334",
+      "name": "Strasbourg",
+      "total": 14,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 3,
+          "first": "1950",
+          "last": "2000",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 3,
+          "first": "1996",
+          "last": "2018",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 1,
+          "first": "1978",
+          "last": "1978",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 3,
+          "first": "1976",
+          "last": "2016",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 2,
+          "first": "1964",
+          "last": "2005",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "first": "2015",
+          "last": "2015",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "1995",
+          "last": "1995",
+          "scope": "autre"
+        }
+      ]
+    },
+    "273": {
+      "qid": "Q48911",
+      "name": "Lorient",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 2,
+          "first": "2019",
+          "last": "2024",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "first": "1994",
+          "last": "1994",
+          "scope": "autre"
+        }
+      ]
+    },
+    "2502": {
+      "qid": "Q185163",
+      "name": "Nice",
+      "total": 12,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 4,
+          "first": "1950",
+          "last": "1958",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 3,
+          "first": "1951",
+          "last": "1996",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 4,
+          "first": "1947",
+          "last": "1993",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "2011",
+          "last": "2011",
+          "scope": "autre"
+        }
+      ]
+    },
+    "2697": {
+      "qid": "Q210864",
+      "name": "Le Mans",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "2003",
+          "last": "2003",
+          "scope": "autre"
+        }
+      ]
+    },
+    "3236": {
+      "qid": "Q328658",
+      "name": "Le Havre AC",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 1,
+          "first": "1958",
+          "last": "1958",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 6,
+          "first": "1937",
+          "last": "2022",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "1988",
+          "last": "1988",
+          "scope": "autre"
+        }
+      ]
+    },
+    "6851": {
+      "qid": "Q483020",
+      "name": "Paris FC",
+      "total": 44,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 16,
+          "first": "1981",
+          "last": "2024",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 13,
+          "first": "1985",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 9,
+          "first": "1994",
+          "last": "2019",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 2,
+          "first": "2024",
+          "last": "2025",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1995",
+          "last": "1995",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 1,
+          "first": "1970",
+          "last": "1970",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "1990",
+          "last": "1990",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "autre"
+        }
+      ]
+    },
+    "6997": {
+      "qid": "Q218372",
+      "name": "Brest",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 1,
+          "first": "1980",
+          "last": "1980",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "first": "1989",
+          "last": "1989",
+          "scope": "autre"
+        }
+      ]
+    },
+    "7868": {
+      "qid": "Q845137",
+      "name": "Angers",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "autre:Q217374",
+          "label": "championnat de France de football de deuxième division",
+          "count": 2,
+          "first": "1968",
+          "last": "1975",
+          "scope": "autre"
+        }
+      ]
+    }
+  }
+}

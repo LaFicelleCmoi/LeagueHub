@@ -1,0 +1,47 @@
+# Relève le palmarès des clubs sur Wikidata une fois par semaine (les titres changent rarement)
+# et publie les changements : un commit par championnat modifié.
+name: Palmarès
+
+on:
+  schedule:
+    # Lundi 4 h 40 UTC, après la nuit du calendrier.
+    - cron: "40 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: palmares
+  cancel-in-progress: false
+
+jobs:
+  palmares:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Relevé du palmarès
+        run: npm run palmares
+
+      - name: Un commit par championnat modifié
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          changed=$(git status --porcelain -- src/data/palmares | awk '{ print $2 }')
+          if [ -z "$changed" ]; then
+            echo "Palmarès inchangé."
+            exit 0
+          fi
+          for file in $changed; do
+            git add -- "$file"
+            git commit -m "chore(palmarès): met à jour $(basename "$file" .json)" -- "$file"
+          done
+          git push

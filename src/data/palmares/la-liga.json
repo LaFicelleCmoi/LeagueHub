@@ -1,0 +1,833 @@
+{
+  "slug": "la-liga",
+  "updatedAt": "2026-09-19",
+  "clubs": {
+    "83": {
+      "qid": "Q7156",
+      "name": "Barcelona",
+      "total": 112,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 32,
+          "first": "1910",
+          "last": "2024",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 29,
+          "first": "1929",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 5,
+          "first": "1991",
+          "last": "2014",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 5,
+          "first": "1992",
+          "last": "2015",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 4,
+          "first": "1978",
+          "last": "1996",
+          "scope": "europe"
+        },
+        {
+          "key": "villes-foires",
+          "label": "Coupe des villes de foires",
+          "count": 3,
+          "first": "1955",
+          "last": "1965",
+          "scope": "europe"
+        },
+        {
+          "key": "mondial",
+          "label": "Coupe du monde des clubs",
+          "count": 3,
+          "first": "2009",
+          "last": "2015",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q1031297",
+          "label": "championnat de Catalogne de football",
+          "count": 17,
+          "first": "1901",
+          "last": "2010",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q17475",
+          "label": "Trophée Joan Gamper",
+          "count": 8,
+          "first": "2007",
+          "last": "2019",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q493331",
+          "label": "Coupe de la Reinnes",
+          "count": 2,
+          "first": "1983",
+          "last": "1986",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q4216",
+          "label": "Coupe Latine de football",
+          "count": 2,
+          "first": "1949",
+          "last": "1952",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q3179674",
+          "label": "championnat d'Espagne de rink hockey",
+          "count": 1,
+          "first": "2013",
+          "last": "2013",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q4139",
+          "label": "Petite coupe du monde des clubs",
+          "count": 1,
+          "first": "1957",
+          "last": "1957",
+          "scope": "autre"
+        }
+      ]
+    },
+    "85": {
+      "qid": "Q8749",
+      "name": "Celta Vigo",
+      "total": 13,
+      "trophies": [
+        {
+          "key": "autre:Q8257787",
+          "label": "Galician Championship",
+          "count": 4,
+          "first": "2054",
+          "last": "2054",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 3,
+          "first": "1935",
+          "last": "1991",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q617283",
+          "label": "Copa Xunta de Galicia",
+          "count": 2,
+          "first": "2006",
+          "last": "2008",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 1,
+          "first": "1930",
+          "last": "1930",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "first": "1980",
+          "last": "1980",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2000",
+          "last": "2000",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q20547839",
+          "label": "Q20547839",
+          "count": 1,
+          "first": "2054",
+          "last": "2054",
+          "scope": "autre"
+        }
+      ]
+    },
+    "86": {
+      "qid": "Q8682",
+      "name": "Real Madrid",
+      "total": 100,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 36,
+          "first": "1931",
+          "last": "2023",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 20,
+          "first": "1905",
+          "last": "2022",
+          "scope": "national"
+        },
+        {
+          "key": "c1",
+          "label": "Ligue des champions",
+          "count": 15,
+          "first": "1955",
+          "last": "2023",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 5,
+          "first": "2002",
+          "last": "2022",
+          "scope": "europe"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 2,
+          "first": "1984",
+          "last": "1985",
+          "scope": "europe"
+        },
+        {
+          "key": "mondial",
+          "label": "Coupe du monde des clubs",
+          "count": 5,
+          "first": "2014",
+          "last": "2022",
+          "scope": "monde"
+        },
+        {
+          "key": "intercontinentale",
+          "label": "Coupe intercontinentale",
+          "count": 3,
+          "first": "1960",
+          "last": "2002",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q586642",
+          "label": "Campeonato Regional Centro",
+          "count": 8,
+          "first": "1906",
+          "last": "1923",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q4216",
+          "label": "Coupe Latine de football",
+          "count": 2,
+          "first": "1955",
+          "last": "1957",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18543",
+          "label": "Major League Soccer",
+          "count": 2,
+          "first": "2011",
+          "last": "2012",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q493331",
+          "label": "Coupe de la Reinnes",
+          "count": 1,
+          "first": "1985",
+          "last": "1985",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q4139",
+          "label": "Petite coupe du monde des clubs",
+          "count": 1,
+          "first": "1952",
+          "last": "1952",
+          "scope": "autre"
+        }
+      ]
+    },
+    "87": {
+      "qid": "Q12236",
+      "name": "Racing Santander",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 2,
+          "first": "1943",
+          "last": "1947",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 1,
+          "first": "1959",
+          "last": "1959",
+          "scope": "autre"
+        }
+      ]
+    },
+    "88": {
+      "qid": "Q8780",
+      "name": "Espanyol",
+      "total": 16,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 4,
+          "first": "1929",
+          "last": "2005",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1031297",
+          "label": "championnat de Catalogne de football",
+          "count": 10,
+          "first": "1902",
+          "last": "2010",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 2,
+          "first": "1969",
+          "last": "1993",
+          "scope": "autre"
+        }
+      ]
+    },
+    "89": {
+      "qid": "Q10315",
+      "name": "Real Sociedad",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 3,
+          "first": "1986",
+          "last": "2025",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 2,
+          "first": "1980",
+          "last": "1981",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 3,
+          "first": "1948",
+          "last": "2009",
+          "scope": "autre"
+        }
+      ]
+    },
+    "90": {
+      "qid": "Q8760",
+      "name": "Deportivo",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 2,
+          "first": "1994",
+          "last": "2001",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 1,
+          "first": "1999",
+          "last": "1999",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 5,
+          "first": "1961",
+          "last": "2011",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q100146559",
+          "label": "championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "first": "2023",
+          "last": "2023",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q8257787",
+          "label": "Galician Championship",
+          "count": 1,
+          "first": "2054",
+          "last": "2054",
+          "scope": "autre"
+        }
+      ]
+    },
+    "93": {
+      "qid": "Q8687",
+      "name": "Athletic Club",
+      "total": 32,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 24,
+          "first": "1903",
+          "last": "2023",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 8,
+          "first": "1929",
+          "last": "1983",
+          "scope": "national"
+        }
+      ]
+    },
+    "94": {
+      "qid": "Q10333",
+      "name": "Valencia",
+      "total": 22,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 8,
+          "first": "1941",
+          "last": "2018",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 6,
+          "first": "1941",
+          "last": "2003",
+          "scope": "national"
+        },
+        {
+          "key": "villes-foires",
+          "label": "Coupe des villes de foires",
+          "count": 2,
+          "first": "1961",
+          "last": "1962",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1979",
+          "last": "1979",
+          "scope": "europe"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 1,
+          "first": "2003",
+          "last": "2003",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 1,
+          "first": "1980",
+          "last": "1980",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 2,
+          "first": "1930",
+          "last": "1986",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "1998",
+          "last": "1998",
+          "scope": "autre"
+        }
+      ]
+    },
+    "96": {
+      "qid": "Q223620",
+      "name": "Alavés",
+      "total": 7,
+      "trophies": [
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 4,
+          "first": "1929",
+          "last": "2015",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 2,
+          "first": "1992",
+          "last": "2012",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 1,
+          "first": "1940",
+          "last": "1940",
+          "scope": "autre"
+        }
+      ]
+    },
+    "97": {
+      "qid": "Q10286",
+      "name": "Osasuna",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 4,
+          "first": "1952",
+          "last": "2018",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 1,
+          "first": "1931",
+          "last": "1931",
+          "scope": "autre"
+        }
+      ]
+    },
+    "99": {
+      "qid": "Q8857",
+      "name": "Málaga",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 1,
+          "first": "1998",
+          "last": "1998",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "first": "2002",
+          "last": "2002",
+          "scope": "autre"
+        }
+      ]
+    },
+    "101": {
+      "qid": "Q10300",
+      "name": "Rayo Vallecano",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 1,
+          "first": "2017",
+          "last": "2017",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "first": "2007",
+          "last": "2007",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q610727",
+          "label": "Coupe d'Espagne féminine de football",
+          "count": 1,
+          "first": "2008",
+          "last": "2008",
+          "scope": "autre"
+        }
+      ]
+    },
+    "102": {
+      "qid": "Q12297",
+      "name": "Villarreal",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 1,
+          "first": "2020",
+          "last": "2020",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 2,
+          "first": "2003",
+          "last": "2004",
+          "scope": "autre"
+        }
+      ]
+    },
+    "243": {
+      "qid": "Q10329",
+      "name": "Sevilla",
+      "total": 18,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 5,
+          "first": "1935",
+          "last": "2009",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 1,
+          "first": "1945",
+          "last": "1945",
+          "scope": "national"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 7,
+          "first": "2005",
+          "last": "2022",
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 4,
+          "first": "1929",
+          "last": "2000",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19681427",
+          "label": "Supercopa Euroamericana",
+          "count": 1,
+          "first": "2016",
+          "last": "2016",
+          "scope": "autre"
+        }
+      ]
+    },
+    "244": {
+      "qid": "Q8723",
+      "name": "Real Betis",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 3,
+          "first": "1976",
+          "last": "2021",
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 2,
+          "first": "1934",
+          "last": "2014",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 5,
+          "first": "1931",
+          "last": "2010",
+          "scope": "autre"
+        }
+      ]
+    },
+    "1068": {
+      "qid": "Q8701",
+      "name": "Atlético Madrid",
+      "total": 31,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Espagne",
+          "count": 11,
+          "first": "1939",
+          "last": "2020",
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 10,
+          "first": "1959",
+          "last": "2012",
+          "scope": "national"
+        },
+        {
+          "key": "c3",
+          "label": "Ligue Europa",
+          "count": 3,
+          "first": "2009",
+          "last": "2017",
+          "scope": "europe"
+        },
+        {
+          "key": "supercoupe-europe",
+          "label": "Supercoupe d'Europe",
+          "count": 3,
+          "first": "2010",
+          "last": "2018",
+          "scope": "europe"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "first": "1961",
+          "last": "1961",
+          "scope": "europe"
+        },
+        {
+          "key": "intercontinentale",
+          "label": "Coupe intercontinentale",
+          "count": 1,
+          "first": "1974",
+          "last": "1974",
+          "scope": "monde"
+        },
+        {
+          "key": "autre:Q586642",
+          "label": "Campeonato Regional Centro",
+          "count": 1,
+          "first": "1920",
+          "last": "1920",
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 1,
+          "first": "2001",
+          "last": "2001",
+          "scope": "autre"
+        }
+      ]
+    },
+    "1538": {
+      "qid": "Q8823",
+      "name": "Levante",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 1,
+          "first": "1937",
+          "last": "1937",
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 3,
+          "first": "2003",
+          "last": "2022",
+          "scope": "autre"
+        }
+      ]
+    },
+    "2922": {
+      "qid": "Q8806",
+      "name": "Getafe",
+      "total": 0,
+      "trophies": []
+    },
+    "3751": {
+      "qid": "Q10512",
+      "name": "Elche",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q35615",
+          "label": "championnat d'Espagne de football de deuxième division",
+          "count": 1,
+          "first": "2012",
+          "last": "2012",
+          "scope": "autre"
+        }
+      ]
+    }
+  }
+}
