@@ -117,6 +117,23 @@ async function sparql<T = Record<string, { value: string }>>(query: string): Pro
   throw new Error(String(lastError));
 }
 
+/** Année du sacre. Une saison à cheval sur deux années (« 2024-2025 », « 1900-01 ») se conclut
+ *  la seconde : c'est alors elle qui compte. Les éditions tenues dans l'année (« Trophée des
+ *  champions 2023 ») gardent la leur. */
+function titleYear(seasonLabel: string): string | null {
+  // Saison sans libellé : le service de Wikidata renvoie son identifiant, où « Q20547839 »
+  // se lirait « 2054 ». Mieux vaut pas d'année du tout.
+  if (/^Q\d+$/.test(seasonLabel)) return null;
+  const span = seasonLabel.match(/(1[89]\d{2}|20\d{2})\s*[-–—/]\s*(\d{2,4})/);
+  if (span) {
+    const start = Number(span[1]);
+    const end = span[2].length === 4 ? Number(span[2]) : Math.floor(start / 100) * 100 + Number(span[2]);
+    // « 1999-00 » : la fin de saison bascule dans le siècle suivant.
+    return String(end < start ? end + 100 : end);
+  }
+  return seasonLabel.match(/(1[89]\d{2}|20\d{2})/)?.[1] ?? null;
+}
+
 function normalize(text: string): string {
   return text
     .toLowerCase()
@@ -191,8 +208,8 @@ async function resolveClubs(slug: LeagueSlug, teams: Record<string, { name: stri
 }
 
 function groupTrophies(slug: LeagueSlug, rows: { comp: string; label: string; types: Set<string>; season: string; year: string | null }[]): Trophy[] {
-  // Une saison est identifiée par son année de début : « Football League 1900-01 » et
-  // « championnat d'Angleterre de football 1900-1901 » désignent le même titre.
+  // Une saison est identifiée par l'année de son sacre : « Football League 1900-01 » et
+  // « championnat d'Angleterre de football 1900-1901 » désignent le même titre, remporté en 1901.
   const groups = new Map<string, { label: string; scope: Scope; seasons: Set<string>; years: Set<string> }>();
   for (const row of rows) {
     if ([...row.types].some((type) => DROP_TYPES.includes(type))) continue;
@@ -254,8 +271,8 @@ async function palmaresBatch(slug: LeagueSlug, qids: string[]): Promise<Map<stri
         label: row.compLabel.value,
         types: new Set((row.types?.value ?? "").split("|").map((type) => type.toLowerCase()).filter(Boolean)),
         season: row.season.value,
-        // Année de début de la saison, commune aux différents libellés d'une même édition.
-        year: row.seasonLabel.value.match(/(1[89]\d{2}|20\d{2})/)?.[1] ?? null,
+        // Année du sacre, commune aux différents libellés d'une même édition.
+        year: titleYear(row.seasonLabel.value),
       },
     ]);
   }
