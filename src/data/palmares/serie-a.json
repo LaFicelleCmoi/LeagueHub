@@ -12,23 +12,23 @@
           "label": "Championnat d'Italie",
           "count": 19,
           "first": "1901",
-          "last": "2021",
+          "last": "2022",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 5,
-          "first": "1966",
-          "last": "2002",
+          "first": "1967",
+          "last": "2003",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 7,
-          "first": "1962",
-          "last": "2006",
+          "first": "1963",
+          "last": "2007",
           "scope": "europe"
         },
         {
@@ -43,8 +43,8 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 2,
-          "first": "1967",
-          "last": "1972",
+          "first": "1968",
+          "last": "1973",
           "scope": "europe"
         },
         {
@@ -75,8 +75,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 2,
-          "first": "1980",
-          "last": "1982",
+          "first": "1981",
+          "last": "1983",
           "scope": "autre"
         },
         {
@@ -106,24 +106,24 @@
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 9,
-          "first": "1963",
-          "last": "2007",
+          "first": "1964",
+          "last": "2008",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 3,
-          "first": "1941",
-          "last": "2000",
+          "first": "1942",
+          "last": "2001",
           "scope": "national"
         },
         {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 1,
-          "first": "1960",
-          "last": "1960",
+          "first": "1961",
+          "last": "1961",
           "scope": "europe"
         },
         {
@@ -138,8 +138,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "1951",
-          "last": "1951",
+          "first": "1952",
+          "last": "1952",
           "scope": "autre"
         },
         {
@@ -161,24 +161,24 @@
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 1,
-          "first": "1962",
-          "last": "1962",
+          "first": "1963",
+          "last": "1963",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "2023",
-          "last": "2023",
+          "first": "2024",
+          "last": "2024",
           "scope": "europe"
         },
         {
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 5,
-          "first": "1939",
-          "last": "2010",
+          "first": "1940",
+          "last": "2011",
           "scope": "autre"
         },
         {
@@ -193,8 +193,8 @@
           "key": "autre:Q3911657",
           "label": "Prima Divisione",
           "count": 1,
-          "first": "1927",
-          "last": "1927",
+          "first": "1928",
+          "last": "1928",
           "scope": "autre"
         }
       ]
@@ -208,24 +208,24 @@
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 7,
-          "first": "1924",
-          "last": "1963",
+          "first": "1925",
+          "last": "1964",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 2,
-          "first": "1969",
-          "last": "1973",
+          "first": "1970",
+          "last": "1974",
           "scope": "national"
         },
         {
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 2,
-          "first": "1987",
-          "last": "1995",
+          "first": "1988",
+          "last": "1996",
           "scope": "autre"
         },
         {
@@ -255,24 +255,24 @@
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 6,
-          "first": "1939",
-          "last": "2000",
+          "first": "1940",
+          "last": "2001",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 2,
-          "first": "1955",
-          "last": "1968",
+          "first": "1956",
+          "last": "1969",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1960",
-          "last": "1960",
+          "first": "1961",
+          "last": "1961",
           "scope": "europe"
         },
         {
@@ -287,8 +287,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 3,
-          "first": "1930",
-          "last": "1993",
+          "first": "1931",
+          "last": "1994",
           "scope": "autre"
         }
       ]
@@ -302,32 +302,32 @@
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 21,
-          "first": "1909",
-          "last": "2025",
+          "first": "1910",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 10,
-          "first": "1938",
-          "last": "2025",
+          "first": "1939",
+          "last": "2026",
           "scope": "national"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 3,
-          "first": "1963",
-          "last": "2009",
+          "first": "1964",
+          "last": "2010",
           "scope": "europe"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
-          "first": "1990",
-          "last": "1997",
+          "first": "1991",
+          "last": "1998",
           "scope": "europe"
         },
         {
@@ -366,31 +366,31 @@
           "label": "Championnat d'Italie",
           "count": 37,
           "first": "1905",
-          "last": "2019",
+          "last": "2020",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 14,
-          "first": "1937",
-          "last": "2020",
+          "first": "1938",
+          "last": "2021",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
-          "first": "1976",
-          "last": "1992",
+          "first": "1977",
+          "last": "1993",
           "scope": "europe"
         },
         {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 2,
-          "first": "1984",
-          "last": "1995",
+          "first": "1985",
+          "last": "1996",
           "scope": "europe"
         },
         {
@@ -405,8 +405,8 @@
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1983",
-          "last": "1983",
+          "first": "1984",
+          "last": "1984",
           "scope": "europe"
         },
         {
@@ -429,8 +429,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "2006",
-          "last": "2006",
+          "first": "2007",
+          "last": "2007",
           "scope": "autre"
         },
         {
@@ -453,23 +453,23 @@
           "label": "Coupe d'Italie",
           "count": 7,
           "first": "1958",
-          "last": "2018",
+          "last": "2019",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 2,
-          "first": "1973",
-          "last": "1999",
+          "first": "1974",
+          "last": "2000",
           "scope": "national"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1998",
-          "last": "1998",
+          "first": "1999",
+          "last": "1999",
           "scope": "europe"
         },
         {
@@ -484,8 +484,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "1968",
-          "last": "1968",
+          "first": "1969",
+          "last": "1969",
           "scope": "autre"
         }
       ]
@@ -499,8 +499,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "2009",
-          "last": "2009",
+          "first": "2010",
+          "last": "2010",
           "scope": "autre"
         }
       ]
@@ -514,32 +514,32 @@
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 6,
-          "first": "1961",
-          "last": "2019",
+          "first": "1962",
+          "last": "2020",
           "scope": "national"
         },
         {
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 4,
-          "first": "1986",
-          "last": "2024",
+          "first": "1987",
+          "last": "2025",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
-          "first": "1988",
-          "last": "1988",
+          "first": "1989",
+          "last": "1989",
           "scope": "europe"
         },
         {
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "1949",
-          "last": "1949",
+          "first": "1950",
+          "last": "1950",
           "scope": "autre"
         },
         {
@@ -561,24 +561,24 @@
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 3,
-          "first": "1991",
-          "last": "2001",
+          "first": "1992",
+          "last": "2002",
           "scope": "national"
         },
         {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 2,
-          "first": "1994",
-          "last": "1998",
+          "first": "1995",
+          "last": "1999",
           "scope": "europe"
         },
         {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
-          "first": "1992",
-          "last": "1992",
+          "first": "1993",
+          "last": "1993",
           "scope": "europe"
         },
         {
@@ -600,8 +600,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 2,
-          "first": "1955",
-          "last": "1978",
+          "first": "1956",
+          "last": "1979",
           "scope": "autre"
         },
         {
@@ -616,8 +616,8 @@
           "key": "autre:Q1116662",
           "label": "Seconda Divisione",
           "count": 1,
-          "first": "1924",
-          "last": "1924",
+          "first": "1925",
+          "last": "1925",
           "scope": "autre"
         }
       ]
@@ -631,16 +631,16 @@
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 8,
-          "first": "1926",
-          "last": "1975",
+          "first": "1927",
+          "last": "1976",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 5,
-          "first": "1935",
-          "last": "1992",
+          "first": "1936",
+          "last": "1993",
           "scope": "national"
         },
         {
@@ -655,8 +655,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 3,
-          "first": "1959",
-          "last": "2000",
+          "first": "1960",
+          "last": "2001",
           "scope": "autre"
         },
         {
@@ -678,8 +678,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 3,
-          "first": "1948",
-          "last": "2001",
+          "first": "1949",
+          "last": "2002",
           "scope": "autre"
         }
       ]
@@ -693,16 +693,16 @@
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 1,
-          "first": "1969",
-          "last": "1969",
+          "first": "1970",
+          "last": "1970",
           "scope": "national"
         },
         {
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "2015",
-          "last": "2015",
+          "first": "2016",
+          "last": "2016",
           "scope": "autre"
         }
       ]
@@ -717,23 +717,23 @@
           "label": "Championnat d'Italie",
           "count": 9,
           "first": "1898",
-          "last": "1923",
+          "last": "1924",
           "scope": "national"
         },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 1,
-          "first": "1936",
-          "last": "1936",
+          "first": "1937",
+          "last": "1937",
           "scope": "national"
         },
         {
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 6,
-          "first": "1934",
-          "last": "1988",
+          "first": "1935",
+          "last": "1989",
           "scope": "autre"
         },
         {
@@ -755,8 +755,8 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 1,
-          "first": "2012",
-          "last": "2012",
+          "first": "2013",
+          "last": "2013",
           "scope": "autre"
         }
       ]
@@ -770,16 +770,16 @@
           "key": "autre:Q1141778",
           "label": "championnat d'Italie de football de quatrième division",
           "count": 1,
-          "first": "2016",
-          "last": "2016",
+          "first": "2017",
+          "last": "2017",
           "scope": "autre"
         },
         {
           "key": "autre:Q607965",
           "label": "Serie C",
           "count": 1,
-          "first": "1926",
-          "last": "1926",
+          "first": "1927",
+          "last": "1927",
           "scope": "autre"
         }
       ]
@@ -799,16 +799,16 @@
           "key": "autre:Q194052",
           "label": "championnat d'Italie de football de deuxième division",
           "count": 3,
-          "first": "1960",
-          "last": "2025",
+          "first": "1961",
+          "last": "2026",
           "scope": "autre"
         },
         {
           "key": "autre:Q252836",
           "label": "Coppa Italia Serie C",
           "count": 1,
-          "first": "2016",
-          "last": "2016",
+          "first": "2017",
+          "last": "2017",
           "scope": "autre"
         }
       ]
