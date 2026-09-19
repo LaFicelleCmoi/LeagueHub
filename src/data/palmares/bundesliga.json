@@ -456,27 +456,10 @@
       ]
     },
     "598": {
-      "qid": "Q141971",
+      "qid": "Q97927360",
       "name": "1. FC Union Berlin",
-      "total": 2,
-      "trophies": [
-        {
-          "key": "autre:Q2188121",
-          "label": "championnat d'Allemagne de football de quatrième division",
-          "count": 1,
-          "first": "2000",
-          "last": "2000",
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q316686",
-          "label": "Fußball-Oberliga Nordost",
-          "count": 1,
-          "first": "2005",
-          "last": "2005",
-          "scope": "autre"
-        }
-      ]
+      "total": 0,
+      "trophies": []
     },
     "2950": {
       "qid": "Q105254",
