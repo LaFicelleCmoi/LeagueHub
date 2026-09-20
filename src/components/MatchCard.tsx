@@ -101,35 +101,57 @@ function TeamLine({ side, match }: { side: MatchSide; match: Match }) {
   );
 }
 
+const isGoal = (kind: MatchEventKind) => kind === "goal" || kind === "penalty" || kind === "own-goal";
+
+interface EventGroup {
+  key: string;
+  kind: MatchEventKind;
+  player: string;
+  minutes: { minute: string; kind: MatchEventKind }[];
+}
+
+/**
+ * Regroupe les buts d'un même joueur : un doublé tient sur une ligne, « Harry Kane 39' (pén.), 54' ».
+ * La mention suit la minute, puisqu'elle ne vaut que pour ce but-là. Les cartons restent séparés :
+ * un jaune puis un rouge sont deux sanctions, avec chacune sa couleur.
+ */
+function groupEvents(events: MatchEvent[]): EventGroup[] {
+  const groups: EventGroup[] = [];
+  events.forEach((event, index) => {
+    const key = isGoal(event.kind) ? `goal:${event.player}` : `${event.kind}:${event.player}:${index}`;
+    const group = groups.find((candidate) => candidate.key === key);
+    if (group) group.minutes.push({ minute: event.minute, kind: event.kind });
+    else groups.push({ key, kind: event.kind, player: event.player, minutes: [{ minute: event.minute, kind: event.kind }] });
+  });
+  return groups;
+}
+
 function EventList({ events, alignRight = false }: { events: MatchEvent[]; alignRight?: boolean }) {
   return (
     <ul className="min-w-0 space-y-1">
-      {events.map((event, index) => (
-        <li
-          key={`${event.minute}-${event.player}-${index}`}
-          className={`flex items-center gap-1.5 ${alignRight ? "justify-end text-right" : ""}`}
-        >
-          {event.kind === "red-card" || event.kind === "yellow-card" ? (
-            <>
-              <span
-                aria-hidden
-                className={`inline-block h-3 w-2 shrink-0 rounded-[1px] ${event.kind === "red-card" ? "bg-red-600" : "bg-amber-400"}`}
-              />
-              <span className="sr-only">{event.kind === "red-card" ? "Carton rouge :" : "Carton jaune :"}</span>
-            </>
-          ) : (
-            <>
-              <span aria-hidden>⚽</span>
-              <span className="sr-only">But :</span>
-            </>
-          )}
-          <span className="shrink-0 tabular-nums text-slate-500 dark:text-slate-400">{event.minute}</span>
-          <span className="truncate">
-            {event.player}
-            {EVENT_SUFFIX[event.kind]}
-          </span>
-        </li>
-      ))}
+      {groupEvents(events).map((group) => {
+        const minutes = group.minutes.map(({ minute, kind }) => `${minute}${EVENT_SUFFIX[kind]}`).join(", ");
+        return (
+          <li key={group.key} className={`flex items-center gap-1.5 ${alignRight ? "justify-end text-right" : ""}`}>
+            {group.kind === "red-card" || group.kind === "yellow-card" ? (
+              <>
+                <span
+                  aria-hidden
+                  className={`inline-block h-3 w-2 shrink-0 rounded-[1px] ${group.kind === "red-card" ? "bg-red-600" : "bg-amber-400"}`}
+                />
+                <span className="sr-only">{group.kind === "red-card" ? "Carton rouge :" : "Carton jaune :"}</span>
+              </>
+            ) : (
+              <>
+                <span aria-hidden>⚽</span>
+                <span className="sr-only">{group.minutes.length > 1 ? "Buts :" : "But :"}</span>
+              </>
+            )}
+            <span className="truncate">{group.player}</span>
+            <span className="shrink-0 tabular-nums text-slate-500 dark:text-slate-400">{minutes}</span>
+          </li>
+        );
+      })}
     </ul>
   );
 }
