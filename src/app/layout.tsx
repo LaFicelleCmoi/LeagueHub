@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { clubIndex } from "@/lib/clubs";
+import { THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,7 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    // Le thème est posé sur <html> par le script ci-dessous : le serveur ne peut pas le connaître.
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body className={`${geistSans.variable} flex min-h-dvh flex-col font-sans antialiased`}>
         {/* Les clubs du calendrier alimentent la recherche de l'en-tête. */}
         <SiteHeader clubs={clubIndex()} />
