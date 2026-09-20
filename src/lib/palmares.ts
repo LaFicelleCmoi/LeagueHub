@@ -15,9 +15,8 @@ export interface Trophy {
   key: string;
   label: string;
   count: number;
-  /** Années du premier et du dernier titre. */
-  first: string | null;
-  last: string | null;
+  /** Années des sacres, dans l'ordre. Une saison dont le libellé n'a pas de millésime n'y figure pas. */
+  years: string[];
   scope: TrophyScope;
 }
 
@@ -44,11 +43,11 @@ const FILES = {
   "ligue-1": ligue1,
 } as unknown as Record<LeagueSlug, PalmaresFile>;
 
+/** Périmètres mis en avant, dans l'ordre d'affichage ; « autre » est replié à part. */
 export const TROPHY_SCOPES: { scope: TrophyScope; label: string }[] = [
   { scope: "national", label: "Titres nationaux" },
   { scope: "europe", label: "Europe" },
   { scope: "monde", label: "Monde" },
-  { scope: "autre", label: "Autres trophées" },
 ];
 
 export function getPalmares(league: LeagueSlug, teamId: string): { club: ClubPalmares; updatedAt: string } | null {
