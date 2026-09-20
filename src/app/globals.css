@@ -9,7 +9,7 @@
 }
 
 @theme {
-  /* Composant React Bits StarBorder : bordure animée des matchs en direct. */
+  /* Composant React Bits StarBorder : bordure animée de la bannière Ligue des champions. */
   --animate-star-movement-bottom: star-movement-bottom linear infinite alternate;
   --animate-star-movement-top: star-movement-top linear infinite alternate;
 
@@ -32,6 +32,19 @@
     100% {
       transform: translate(100%, 0%);
       opacity: 0;
+    }
+  }
+
+  /* Match en direct : halo rouge qui respire autour de la carte. */
+  --animate-live-glow: live-glow 2.8s ease-in-out infinite;
+
+  @keyframes live-glow {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 0.9;
     }
   }
 
