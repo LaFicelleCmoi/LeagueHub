@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, MapPin, Trophy } from "lucide-react";
+import { ChevronRight, MapPin } from "lucide-react";
+import { ClubPalmares } from "@/components/ClubPalmares";
 import { EmptyState } from "@/components/EmptyState";
 import { EUROPEAN_CUP_STYLES, EuropeanCupTag } from "@/components/EuropeanCup";
 import { KickoffCountdown } from "@/components/KickoffCountdown";
@@ -14,7 +15,7 @@ import { getClubSeason, getStandings, getTeamForm } from "@/lib/espn/api";
 import { formatTime, TIME_ZONE } from "@/lib/format";
 import { plural } from "@/lib/league-stats";
 import { getLeague, type LeagueSlug } from "@/lib/leagues";
-import { getPalmares, TROPHY_SCOPES } from "@/lib/palmares";
+import { getPalmares } from "@/lib/palmares";
 import type { ClubSeasonMatch } from "@/lib/types";
 
 export const revalidate = 300;
@@ -194,52 +195,7 @@ export default async function ClubPage({ params }: ClubPageProps) {
         </section>
       )}
 
-      <section aria-labelledby="club-palmares-heading" className="space-y-3">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h2 id="club-palmares-heading" className="flex items-center gap-2 text-lg font-semibold">
-            <Trophy className="size-5 text-amber-500" aria-hidden />
-            Palmarès
-          </h2>
-          {palmares && (
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              {palmares.club.total} {plural(palmares.club.total, "trophée", "trophées")} · relevé sur Wikidata
-            </p>
-          )}
-        </div>
-
-        {!palmares || palmares.club.trophies.length === 0 ? (
-          <EmptyState>Aucun trophée relevé pour ce club.</EmptyState>
-        ) : (
-          <div className="grid gap-4 md:grid-cols-2">
-            {TROPHY_SCOPES.map(({ scope, label }) => {
-              const trophies = palmares.club.trophies.filter((trophy) => trophy.scope === scope);
-              if (trophies.length === 0) return null;
-              return (
-                <section key={scope} aria-label={label} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                  <h3 className="text-[11px] font-bold uppercase tracking-wide text-slate-400">{label}</h3>
-                  <ul className="mt-2 divide-y divide-slate-100 dark:divide-slate-800">
-                    {trophies.map((trophy) => (
-                      <li key={trophy.key} className="flex items-center gap-3 py-2">
-                        <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-amber-100 text-sm font-bold tabular-nums text-amber-900 dark:bg-amber-500/20 dark:text-amber-200">
-                          {trophy.count}
-                        </span>
-                        <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-medium">{trophy.label}</span>
-                          {trophy.first && (
-                            <span className="block text-xs text-slate-500 dark:text-slate-400">
-                              {trophy.first === trophy.last ? trophy.first : `${trophy.first} – ${trophy.last}`}
-                            </span>
-                          )}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              );
-            })}
-          </div>
-        )}
-      </section>
+      <ClubPalmares club={palmares?.club ?? null} />
 
       <section aria-labelledby="club-season-heading" className="space-y-3">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
