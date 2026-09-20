@@ -27,8 +27,8 @@ interface Trophy {
   key: string;
   label: string;
   count: number;
-  first: string | null;
-  last: string | null;
+  /** Années des sacres, dans l'ordre. Une saison dont le libellé n'a pas de millésime n'y figure pas. */
+  years: string[];
   scope: Scope;
 }
 
@@ -162,6 +162,11 @@ async function resolveClubs(slug: LeagueSlug, teams: Record<string, { name: stri
       } LIMIT 300`);
   }
 
+  // « VfB Stuttgart II », « Real Madrid B » : les équipes réserve jouent les mêmes saisons que leur
+  // club et lui volent son palmarès quand le nom du club, lui, manque à l'appel.
+  const RESERVE = /\s(ii|b|u\s?\d{2}|amateure?|reserves?)$/i;
+  rows = rows.filter((row) => !RESERVE.test(row.clubLabel.value.trim()));
+
   const candidates = rows.map((row) => ({
     qid: row.club.value.split("/").pop() ?? "",
     keys: new Set([normalize(row.clubLabel.value)]),
@@ -229,17 +234,13 @@ function groupTrophies(slug: LeagueSlug, rows: { comp: string; label: string; ty
 
   const order: Scope[] = ["national", "europe", "monde", "autre"];
   return [...groups]
-    .map(([key, group]) => {
-      const years = [...group.years].sort();
-      return {
-        key,
-        label: group.label,
-        count: group.seasons.size,
-        first: years[0] ?? null,
-        last: years.at(-1) ?? null,
-        scope: group.scope,
-      };
-    })
+    .map(([key, group]) => ({
+      key,
+      label: group.label,
+      count: group.seasons.size,
+      years: [...group.years].sort(),
+      scope: group.scope,
+    }))
     .sort((a, b) => order.indexOf(a.scope) - order.indexOf(b.scope) || b.count - a.count || a.label.localeCompare(b.label, "fr"));
 }
 
@@ -332,6 +333,28 @@ for (const league of LEAGUES) {
         if (kept) clubs[entry.id] = kept;
       }
       console.error(`   ${batch.map((entry) => entry.name).join(", ")} : échec (${String(error)})`);
+    }
+  }
+
+  // Wikidata répond parfois de façon incomplète : une chute du nombre de titres est presque toujours
+  // une réponse tronquée, pas un titre retiré. On la confirme par une requête dédiée avant de l'écrire.
+  for (const entry of entries) {
+    const fresh = clubs[entry.id];
+    const kept = previous.clubs?.[entry.id];
+    if (!fresh || !kept || fresh.total >= kept.total) continue;
+    try {
+      // Club apparié à un autre élément Wikidata que la fois passée : on retente avec l'ancien,
+      // qui a fait ses preuves. Un club ne change pas d'identité d'une semaine à l'autre.
+      const qid = kept.qid === fresh.qid ? fresh.qid : kept.qid;
+      const trophies = (await palmaresBatch(league.slug, [qid])).get(qid) ?? [];
+      const total = trophies.reduce((sum, trophy) => sum + trophy.count, 0);
+      if (total > fresh.total) clubs[entry.id] = { ...fresh, qid, total, trophies };
+      console.error(`   ${entry.name} : ${kept.total} titres relevés la fois passée, ${fresh.total} cette fois, ${total} au second essai`);
+      await sleep(1200);
+    } catch {
+      // Toujours pas de réponse : le palmarès d'hier vaut mieux qu'un palmarès amputé.
+      clubs[entry.id] = kept;
+      console.error(`   ${entry.name} : relevé incomplet, palmarès précédent conservé`);
     }
   }
 
