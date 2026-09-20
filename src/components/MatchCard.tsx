@@ -8,7 +8,6 @@ import { KickoffCountdown } from "./KickoffCountdown";
 import { useLiveMatch } from "./LiveMatches";
 import { MatchDetailDialog } from "./MatchDetailDialog";
 import ShinyText from "./reactbits/ShinyText";
-import StarBorder from "./reactbits/StarBorder";
 import { TeamLogo } from "./TeamLogo";
 
 const EVENT_SUFFIX: Record<MatchEventKind, string> = {
@@ -233,20 +232,14 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
 
   if (!live) return card;
 
-  // Bordure animée pour distinguer les matchs en cours.
+  // Match en cours : liseré rouge et halo doux qui respire, sans déborder sous la carte.
   return (
-    <StarBorder
-      as="div"
-      className="block min-w-0 rounded-xl"
-      innerClassName="rounded-xl"
-      color="#ef4444"
-      speed="5s"
-      thickness={2}
-      backgroundColor="transparent"
-      textColor="inherit"
-      borderColor="transparent"
-    >
-      {card}
-    </StarBorder>
+    <div className="relative min-w-0">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -inset-1 rounded-2xl bg-red-500/30 opacity-60 blur-md motion-safe:animate-live-glow"
+      />
+      <div className="relative rounded-xl ring-1 ring-red-500/60 dark:ring-red-500/50">{card}</div>
+    </div>
   );
 }
