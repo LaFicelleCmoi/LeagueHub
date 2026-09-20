@@ -51,9 +51,16 @@ function LiveChip({ result }: { result: LiveResult }) {
     >
       {inPlay && <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-red-500 motion-reduce:animate-none" />}
       <span className="sr-only">
-        {inPlay ? "En cours" : "Terminé, pas encore compté par ESPN"} contre {them.team.name} :
+        {inPlay ? "En cours" : "Terminé, pas encore compté par ESPN"} {side === "home" ? "contre" : "chez"}{" "}
+        {them.team.name} :
       </span>
       {score}
+      {/* Adversaire du match en cours : écusson, et abréviation dès qu'il y a la place. */}
+      <span aria-hidden className="inline-flex items-center gap-1 font-normal">
+        <span className="opacity-70">{side === "home" ? "vs" : "chez"}</span>
+        <TeamLogo team={them.team} size={12} />
+        <span className="hidden lg:inline">{them.team.abbreviation}</span>
+      </span>
       {inPlay && <span className="hidden font-normal sm:inline">· {match.status}</span>}
     </span>
   );
