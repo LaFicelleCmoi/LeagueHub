@@ -11,6 +11,7 @@ import { LEAGUES } from "@/lib/leagues";
 import { ClubSearch } from "./ClubSearch";
 import { CupsTabSwitch } from "./CupsTabSwitch";
 import { LeagueLogo } from "./LeagueLogo";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const pathname = usePathname();
@@ -84,6 +85,9 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
             </li>
             <li>
               <CupsTabSwitch />
+            </li>
+            <li>
+              <ThemeToggle />
             </li>
           </ul>
         </nav>
@@ -162,6 +166,9 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
             </li>
             <li className="mt-1 border-t border-slate-200 pt-1 dark:border-slate-800">
               <CupsTabSwitch variant="row" />
+            </li>
+            <li>
+              <ThemeToggle variant="row" />
             </li>
           </ul>
         </nav>
