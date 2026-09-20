@@ -14,6 +14,7 @@ Pour chaque championnat :
 La page d'accueil réunit les chiffres clés (dont le total de buts de la saison régulière des 5 championnats et la moyenne par match), le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
 
 - **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
+- **Thème clair ou sombre** : un bouton dans l'en-tête (et une ligne dans le menu mobile) fait le tour des trois réglages — système, clair, sombre. Le choix est mémorisé dans le navigateur et appliqué avant la première peinture : une page réglée en sombre ne s'affiche jamais en clair au chargement. Sans choix explicite, le site suit le réglage de l'appareil.
 - **Club favori** : chaque visiteur peut choisir son club (mémorisé dans le navigateur, sans compte). Il a droit à un traitement spécial : section « Mon club » sur l'accueil (place au classement, forme, match du jour en direct ou prochain match), logo sur le badge 3D, étoile dorée et ligne ambrée dans les classements, cadre doré sur ses matchs, célébration quand il marque en direct et fiche « Votre club » dorée.
 - **Tracker Ligue des champions 2026-2027** : bannière sur l'accueil, pastille « LDC » dans l'en-tête et adresses courtes `/ldc` et `/ligue-des-champions` qui redirigent vers [ldc-2026-2027.vercel.app](https://ldc-2026-2027.vercel.app/) (projet indépendant, ouvert dans un nouvel onglet).
 - **Onglet Coupes nationales** (activable) : un interrupteur « Coupes » dans l'en-tête affiche un onglet dédié à la FA Cup, la Copa del Rey, la Coppa Italia, la DFB-Pokal et la Coupe de France. Chaque coupe a sa page (`/coupes/[coupe]`) : frise des tours, prochains matchs et résultats par tour (aller-retour, tirs au but), exploits des petits poucets face aux clubs de première division, et dernière finale quand l'édition suivante n'est pas encore programmée.
@@ -73,6 +74,7 @@ src/
     ├── team-form.ts              Fiche d'un club côté navigateur, relue toutes les 30 s pendant ses matchs
     ├── live.ts                   Règles du suivi en direct (quels matchs, quand)
     ├── favorite-club.ts          Club favori mémorisé dans le navigateur
+    ├── theme.ts                  Thème clair / sombre mémorisé dans le navigateur
     ├── favorite-card.ts          Recto du badge dessiné avec le club favori
     ├── standings-style.ts        Couleurs partagées des classements
     ├── types.ts                  Modèles normalisés utilisés par l'interface
