@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Le thème se choisit dans l'en-tête (src/lib/theme.ts) : la variante « dark: » suit la classe
+   posée sur <html>, et non plus le seul réglage du système. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
@@ -61,16 +65,16 @@
 }
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   /* Fond de page (slate-50), réutilisé par les fondus du bandeau de logos. */
   --page-bg: oklch(98.4% 0.003 247.858);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* slate-950 */
-    --page-bg: oklch(12.9% 0.042 264.695);
-  }
+.dark {
+  /* Barres de défilement et champs du navigateur suivent le thème choisi. */
+  color-scheme: dark;
+  /* slate-950 */
+  --page-bg: oklch(12.9% 0.042 264.695);
 }
 
 body {
