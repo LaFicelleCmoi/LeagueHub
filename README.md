@@ -140,7 +140,7 @@ Huit composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Cl
 | CountUp | Chiffres clés de l'accueil |
 | LogoLoop | Bandeau défilant des clubs (clic pour la forme du club) |
 | SpotlightCard | Halo aux couleurs de la ligue sur les cartes top 5 |
-| StarBorder | Bordure animée des matchs en direct |
+| StarBorder | Bordure animée de la bannière Ligue des champions |
 | ShinyText | Minute de jeu des matchs en direct |
 
 Le badge 3D (three.js et moteur physique Rapier) n'est téléchargé que lorsqu'il approche de la zone visible. Son modèle `public/lanyard/card.glb` a été allégé (texture intégrée remplacée par un aplat, de 2,4 Mo à 177 Ko) : le recto, le verso et la sangle sont des images séparées, et le recto du club favori est dessiné dans le navigateur.
