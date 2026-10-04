@@ -15,8 +15,9 @@ import { PageSync } from "@/components/PageSync";
 import { StatTiles, type Stat } from "@/components/StatTiles";
 import { UclTrackerBanner } from "@/components/UclTrackerBanner";
 import SplitFlapText from "@/components/reactbits/SplitFlapText";
+import { nextMatchDay } from "@/lib/calendar";
 import { getMatches, getStandings } from "@/lib/espn/api";
-import { formatDay } from "@/lib/format";
+import { daysUntilDay, formatDay, formatTime } from "@/lib/format";
 import { addTotals, goalsInMatches, goalsPerMatchHint, plural, seasonTotals } from "@/lib/league-stats";
 import { LEAGUES } from "@/lib/leagues";
 import { selectTrackedMatches } from "@/lib/live";
@@ -47,6 +48,21 @@ export default async function HomePage() {
     ({ league, standings }) => standings?.rows.map((row) => ({ team: row.team, league: league.slug })) ?? [],
   );
   const todayMatches = matchDays.flatMap((entry) => entry.today);
+
+  // Pas de match aujourd'hui (trêve, milieu de semaine) : la page montre la prochaine journée.
+  const next = matchDays.length === 0 ? nextMatchDay(LEAGUES.map((league) => league.slug), now) : null;
+  const nextDate = next ? new Date(next.firstKickoff) : null;
+  const upcoming = nextDate
+    ? (
+        await Promise.all(
+          LEAGUES.map(async (league) => ({ league, today: await getMatches(league, nextDate).catch(() => []) })),
+        )
+      ).filter((entry) => entry.today.length > 0)
+    : [];
+  const shownDays = matchDays.length > 0 ? matchDays : upcoming;
+  const daysToNext = next ? daysUntilDay(next.day, now) : 0;
+  // Peu de matchs par championnat (milieu de semaine, reprise) : les championnats se rangent en grille.
+  const compact = shownDays.every((entry) => entry.today.length <= 2);
   const goalsToday = goalsInMatches(todayMatches);
   const season = addTotals(overview.map(({ standings }) => seasonTotals(standings)));
 
@@ -64,8 +80,23 @@ export default async function HomePage() {
   const stats: Stat[] = [
     { label: "championnats", value: LEAGUES.length },
     { label: plural(clubs.length, "club", "clubs"), value: clubs.length },
-    { label: plural(todayMatches.length, "match aujourd’hui", "matchs aujourd’hui"), value: todayMatches.length },
-    { label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"), value: goalsToday },
+    ...(next
+      ? [
+          {
+            label: plural(daysToNext, "jour avant la prochaine journée", "jours avant la prochaine journée"),
+            value: daysToNext,
+            hint: `${formatDay(next.firstKickoff)} · ${formatTime(next.firstKickoff)}`,
+          },
+          {
+            label: plural(next.roundCount, "match à la prochaine journée", "matchs à la prochaine journée"),
+            value: next.roundCount,
+            hint: "Dans les 5 championnats, sur 4 jours",
+          },
+        ]
+      : [
+          { label: plural(todayMatches.length, "match aujourd’hui", "matchs aujourd’hui"), value: todayMatches.length },
+          { label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"), value: goalsToday },
+        ]),
     {
       label: plural(season.goals, "but au total en saison régulière", "buts au total en saison régulière"),
       value: season.goals,
@@ -109,7 +140,10 @@ export default async function HomePage() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <HeroBadge />
+            {/* Badge 3D sur grand écran seulement : sur mobile, il repoussait tout le contenu. */}
+            <div className="hidden md:block">
+              <HeroBadge />
+            </div>
             <FavoriteClubPicker clubs={clubs} />
           </div>
         </section>
@@ -127,11 +161,14 @@ export default async function HomePage() {
           <section aria-labelledby="today-heading">
             <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h2 id="today-heading" className="text-xl font-semibold">
-                Matchs du jour
+                {matchDays.length > 0 || !nextDate ? "Matchs du jour" : "Prochains matchs"}
               </h2>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <LiveIndicator />
-                <p className="text-sm text-slate-500 dark:text-slate-400">{formatDay(now)}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  {formatDay(matchDays.length > 0 || !nextDate ? now : nextDate)}
+                  {matchDays.length === 0 && nextDate && ` · dans ${daysToNext} ${plural(daysToNext, "jour", "jours")}`}
+                </p>
                 <Link
                   href="/direct"
                   className="inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:underline dark:text-slate-200"
@@ -142,11 +179,11 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {matchDays.length === 0 ? (
+            {shownDays.length === 0 ? (
               <EmptyState>Aucun match aujourd’hui dans les 5 championnats.</EmptyState>
             ) : (
-              <div className="space-y-8">
-                {matchDays.map(({ league, today }) => (
+              <div className={compact ? "grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" : "space-y-8"}>
+                {shownDays.map(({ league, today }) => (
                   <div key={league.slug}>
                     <Link
                       href={`/${league.slug}/matchs`}
@@ -156,7 +193,7 @@ export default async function HomePage() {
                       {league.name}
                       <ChevronRight className="size-4 text-slate-400" aria-hidden />
                     </Link>
-                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                    <div className={`grid grid-cols-1 gap-3 ${compact ? "" : "md:grid-cols-2"}`}>
                       {today.map((match) => (
                         <MatchCard key={match.id} match={match} />
                       ))}
