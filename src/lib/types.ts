@@ -73,6 +73,8 @@ export interface Match {
   home: MatchSide;
   away: MatchSide;
   events: MatchEvent[];
+  /** Absent des données d'ESPN à sa date prévue : match reporté ou déplacé, horaire à confirmer. */
+  unconfirmed?: boolean;
 }
 
 // --- Détail d'un match (fenêtre « Détails du match ») ---
@@ -138,8 +140,50 @@ export interface Lineup {
   players: LineupPlayer[];
 }
 
+/** Un des 5 derniers matchs d'une équipe, vu depuis cette équipe (avant-match). */
+export interface FormGame {
+  id: string;
+  date: string;
+  home: boolean;
+  opponent: { name: string; abbreviation: string; logo: string | null };
+  goalsFor: number;
+  goalsAgainst: number;
+  outcome: MatchOutcome | null;
+  competition: string;
+}
+
+export interface TeamFormLine {
+  side: "home" | "away";
+  team: Team;
+  /** Du plus récent au plus ancien. */
+  games: FormGame[];
+}
+
+export interface HeadToHeadGame {
+  id: string;
+  date: string;
+  competition: string;
+  home: { name: string; logo: string | null };
+  away: { name: string; logo: string | null };
+  homeScore: number | null;
+  awayScore: number | null;
+  winner: "home" | "away" | null;
+}
+
+export interface HeadToHead {
+  /** Du plus récent au plus ancien. */
+  games: HeadToHeadGame[];
+  /** Victoires des équipes du match affiché (domicile, extérieur) et nuls. */
+  wins: { home: number; away: number };
+  draws: number;
+}
+
 export interface MatchDetail {
   match: Match;
+  /** Forme des deux équipes avant le match. */
+  form: TeamFormLine[];
+  /** Confrontations directes récentes, quand ESPN en fournit. */
+  headToHead: HeadToHead | null;
   timeline: TimelineEvent[];
   stats: MatchStat[];
   lineups: Lineup[];
