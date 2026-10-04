@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { getEuropeanCompetition } from "@/lib/competitions";
 import { getCup } from "@/lib/cups";
-import { getCupLiveMatches, getLiveMatches } from "@/lib/espn/api";
+import { getCupLiveMatches, getEuropeanLiveMatches, getLiveMatches } from "@/lib/espn/api";
 import { getLeague } from "@/lib/leagues";
 
-// Scores en direct pour le navigateur, d'un championnat ou d'une coupe nationale.
+// Scores en direct pour le navigateur : championnat, coupe nationale ou coupe d'Europe.
 // Pas de Data Cache de Next.js : une fois expiré, il renverrait encore l'ancienne version
 // pendant sa mise à jour, soit un rafraîchissement de retard. ESPN reste protégé par :
 // - une copie en mémoire de 5 s partagée par les requêtes simultanées (voir espnFetch) ;
@@ -15,13 +16,20 @@ export async function GET(_request: Request, { params }: { params: Promise<{ lea
   const { league: slug } = await params;
   const league = getLeague(slug);
   const cup = league ? undefined : getCup(slug);
+  const european = league || cup ? undefined : getEuropeanCompetition(slug);
 
-  if (!league && !cup) {
+  if (!league && !cup && !european) {
     return NextResponse.json({ error: "Compétition inconnue" }, { status: 404 });
   }
 
   try {
-    const matches = league ? await getLiveMatches(league) : cup ? await getCupLiveMatches(cup) : [];
+    const matches = league
+      ? await getLiveMatches(league)
+      : cup
+        ? await getCupLiveMatches(cup)
+        : european
+          ? await getEuropeanLiveMatches(european)
+          : [];
     return NextResponse.json({ matches }, { headers: CACHE_HEADERS });
   } catch {
     return NextResponse.json(
