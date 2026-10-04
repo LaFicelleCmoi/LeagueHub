@@ -13,11 +13,21 @@ import { CupsTabSwitch } from "./CupsTabSwitch";
 import { LeagueLogo } from "./LeagueLogo";
 import { ThemeToggle } from "./ThemeToggle";
 
+function LiveDot() {
+  return (
+    <span aria-hidden className="relative flex size-2 shrink-0">
+      <span className="absolute inline-flex size-full animate-ping rounded-full bg-red-500 opacity-75 motion-reduce:hidden" />
+      <span className="relative inline-flex size-2 rounded-full bg-red-500" />
+    </span>
+  );
+}
+
 export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const cupsTab = useCupsTab();
   const onCups = pathname.startsWith("/coupes");
+  const onDirect = pathname.startsWith("/direct");
   const close = () => setOpen(false);
 
   return (
@@ -47,12 +57,26 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                     }`}
                   >
                     <LeagueLogo league={league} size={20} />
-                    {/* Noms complets à partir de 1280 px : avant, la place manque avec l'onglet Coupes. */}
-                    <span className="sr-only xl:not-sr-only">{league.name}</span>
+                    {/* Logos seuls : la barre porte aussi Direct, LDC et la recherche. Le nom reste lu par les lecteurs d'écran et s'affiche au survol. */}
+                    <span className="sr-only">{league.name}</span>
                   </Link>
                 </li>
               );
             })}
+            <li>
+              <Link
+                href="/direct"
+                aria-current={onDirect ? "page" : undefined}
+                className={`ml-1 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors ${
+                  onDirect
+                    ? "bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-300"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                }`}
+              >
+                <LiveDot />
+                Direct
+              </Link>
+            </li>
             {cupsTab && (
               <li>
                 <Link
@@ -109,6 +133,22 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
           <ul className="mx-auto grid max-w-6xl gap-1 p-2">
             <li className="px-1 pb-2">
               <ClubSearch clubs={clubs} onNavigate={close} />
+            </li>
+            <li>
+              <Link
+                href="/direct"
+                onClick={close}
+                aria-current={onDirect ? "page" : undefined}
+                className={`flex items-center gap-3 rounded-lg px-3 py-3 font-semibold ${
+                  onDirect ? "bg-red-50 dark:bg-red-500/15" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                <span className="grid size-6 place-items-center">
+                  <LiveDot />
+                </span>
+                <span>Direct</span>
+                <span className="ml-auto text-sm font-normal text-slate-500 dark:text-slate-400">Tous les matchs du jour</span>
+              </Link>
             </li>
             {LEAGUES.map((league) => {
               const active = pathname.startsWith(`/${league.slug}`);
