@@ -1,9 +1,21 @@
 import "server-only";
 
-import type { Lineup, LineupPlayer, MatchDetail, MatchStat, TimelineEvent, TimelineKind } from "@/lib/types";
+import type {
+  FormGame,
+  HeadToHead,
+  Lineup,
+  LineupPlayer,
+  MatchDetail,
+  MatchOutcome,
+  MatchStat,
+  Team,
+  TeamFormLine,
+  TimelineEvent,
+  TimelineKind,
+} from "@/lib/types";
 import { toMatch, withUndecidedTeams } from "./api";
 import { espnFetch } from "./client";
-import type { EspnEvent, EspnKeyEvent, EspnRosterPlayer, EspnStat, EspnSummaryResponse } from "./types";
+import type { EspnEvent, EspnKeyEvent, EspnRosterPlayer, EspnSeriesGame, EspnStat, EspnSummaryResponse } from "./types";
 
 // Détail d'un match lu chez ESPN (/summary) et traduit en français : chronologie complète,
 // statistiques, compositions, arbitres, stade, affluence, diffuseurs et commentaire.
@@ -242,6 +254,87 @@ const OFFICIAL_ROLES: [RegExp, string][] = [
   [/referee/i, "Arbitre"],
 ];
 
+// --- Avant-match ---
+
+const COMPETITION_SHORT: Record<string, string> = {
+  UCL: "LDC",
+  UEL: "Europa",
+  UECL: "Conférence",
+  LALIGA: "La Liga",
+  EPL: "Premier League",
+  "SERIE A": "Serie A",
+  BUNDESLIGA: "Bundesliga",
+  "LIGUE 1": "Ligue 1",
+};
+
+const RESULTS: Record<string, MatchOutcome> = { W: "win", D: "draw", L: "loss" };
+
+function toFormLines(data: EspnSummaryResponse, sides: { home: Team; away: Team }): TeamFormLine[] {
+  return (["home", "away"] as const).flatMap((side) => {
+    const team = sides[side];
+    const entry = data.lastFiveGames?.find((item) => item.team.id === team.id);
+    if (!entry) return [];
+    const games: FormGame[] = (entry.events ?? []).map((game) => {
+      const home = game.homeTeamId === team.id;
+      const homeScore = Number(game.homeTeamScore ?? 0) || 0;
+      const awayScore = Number(game.awayTeamScore ?? 0) || 0;
+      const abbreviation = (game.leagueAbbreviation ?? "").toUpperCase();
+      return {
+        id: game.id,
+        date: game.gameDate,
+        home,
+        opponent: {
+          name: game.opponent?.displayName ?? "Adversaire",
+          abbreviation: game.opponent?.abbreviation ?? "",
+          logo: game.opponentLogo ?? game.opponent?.logo ?? null,
+        },
+        goalsFor: home ? homeScore : awayScore,
+        goalsAgainst: home ? awayScore : homeScore,
+        outcome: RESULTS[game.gameResult ?? ""] ?? null,
+        competition: COMPETITION_SHORT[abbreviation] ?? game.leagueAbbreviation ?? game.leagueName ?? "",
+      };
+    });
+    games.sort((a, b) => b.date.localeCompare(a.date));
+    return [{ side, team, games }];
+  });
+}
+
+function toHeadToHead(data: EspnSummaryResponse, homeId: string, awayId: string): HeadToHead | null {
+  const series = data.seasonseries?.find((item) => (item.events?.length ?? 0) > 0);
+  const events: EspnSeriesGame[] = series?.events ?? [];
+  if (events.length === 0) return null;
+
+  let homeWins = 0;
+  let awayWins = 0;
+  let draws = 0;
+  const games = events
+    .filter((game) => game.statusType?.completed !== false)
+    .map((game) => {
+      const home = game.competitors?.find((competitor) => competitor.homeAway === "home");
+      const away = game.competitors?.find((competitor) => competitor.homeAway === "away");
+      const homeScore = home?.score !== undefined ? Number(home.score) : null;
+      const awayScore = away?.score !== undefined ? Number(away.score) : null;
+      const winner = home?.winner ? "home" : away?.winner ? "away" : null;
+      const winnerId = winner === "home" ? home?.team.id : winner === "away" ? away?.team.id : null;
+      if (winnerId === homeId) homeWins += 1;
+      else if (winnerId === awayId) awayWins += 1;
+      else draws += 1;
+      return {
+        id: game.id,
+        date: game.date,
+        competition: game.competitionName ?? "",
+        home: { name: home?.team.displayName ?? "", logo: home?.team.logo ?? home?.team.logos?.[0]?.href ?? null },
+        away: { name: away?.team.displayName ?? "", logo: away?.team.logo ?? away?.team.logos?.[0]?.href ?? null },
+        homeScore: Number.isFinite(homeScore) ? homeScore : null,
+        awayScore: Number.isFinite(awayScore) ? awayScore : null,
+        winner: winner as "home" | "away" | null,
+      };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  return games.length > 0 ? { games, wins: { home: homeWins, away: awayWins }, draws } : null;
+}
+
 // --- Détail complet ---
 
 /** Détail d'un match ; `competition` est le code ESPN (« esp.1 »). */
@@ -283,6 +376,8 @@ export async function getMatchDetail(competition: string, eventId: string): Prom
   const venue = data.gameInfo?.venue;
   return {
     match,
+    form: toFormLines(data, { home: match.home.team, away: match.away.team }),
+    headToHead: toHeadToHead(data, homeId, awayId),
     timeline: toTimeline(data.keyEvents ?? [], homeId, awayId),
     stats: toStats(boxscore("home"), boxscore("away")),
     lineups,
