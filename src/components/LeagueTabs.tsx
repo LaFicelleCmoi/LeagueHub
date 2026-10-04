@@ -25,13 +25,14 @@ export function LeagueTabs({ slug }: { slug: string }) {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`-mb-px flex items-center gap-2 border-b-2 px-3 py-3 text-sm font-medium transition-colors ${
+                className={`-mb-px flex items-center gap-2 border-b-2 px-2.5 py-3 text-sm font-medium transition-colors sm:px-3 ${
                   active
                     ? "border-[var(--accent)] text-slate-900 dark:text-white"
                     : "border-transparent text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
-                <Icon className="size-4" aria-hidden />
+                {/* Icônes masquées sur mobile : les 4 onglets tiennent sans défilement caché. */}
+                <Icon className="hidden size-4 sm:block" aria-hidden />
                 {label}
               </Link>
             </li>
