@@ -94,3 +94,8 @@ body {
   background-color: var(--page-bg);
   @apply text-slate-900 dark:text-slate-100;
 }
+
+/* L'en-tête est collant : une ancre ou un focus clavier ne doit jamais finir dessous. */
+html {
+  scroll-padding-top: 5rem;
+}
