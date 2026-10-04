@@ -211,8 +211,33 @@ export interface EspnRosterPlayer {
   plays?: { clock?: { displayValue?: string }; substitution?: boolean }[];
 }
 
+export interface EspnLastGame {
+  id: string;
+  gameDate: string;
+  homeTeamId?: string;
+  awayTeamId?: string;
+  homeTeamScore?: string;
+  awayTeamScore?: string;
+  /** « W », « D » ou « L », du point de vue de l'équipe. */
+  gameResult?: string;
+  leagueAbbreviation?: string;
+  leagueName?: string;
+  opponent?: { id?: string; displayName?: string; abbreviation?: string; logo?: string };
+  opponentLogo?: string;
+}
+
+export interface EspnSeriesGame {
+  id: string;
+  date: string;
+  competitionName?: string;
+  statusType?: { completed?: boolean };
+  competitors?: { homeAway: "home" | "away"; winner?: boolean; score?: string; team: EspnTeam }[];
+}
+
 export interface EspnSummaryResponse {
   header?: { competitions?: EspnCompetition[] };
+  lastFiveGames?: { team: EspnTeam; events?: EspnLastGame[] }[];
+  seasonseries?: { type?: string; events?: EspnSeriesGame[] }[];
   keyEvents?: EspnKeyEvent[];
   commentary?: { time?: { displayValue?: string }; text?: string }[];
   boxscore?: { teams?: { team: EspnTeam; homeAway?: "home" | "away"; statistics?: (EspnStat & { label?: string })[] }[] };
