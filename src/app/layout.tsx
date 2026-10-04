@@ -1,8 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import Link from "next/link";
+import { Trophy } from "lucide-react";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { SiteHeader } from "@/components/SiteHeader";
 import { clubIndex } from "@/lib/clubs";
+import { UCL_TRACKER_URL } from "@/lib/external-links";
+import { LEAGUES } from "@/lib/leagues";
 import { THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
@@ -46,10 +50,66 @@ export default function RootLayout({
         <SiteHeader clubs={clubIndex()} />
         <ServiceWorkerRegistration />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
-        <footer className="border-t border-slate-200 dark:border-slate-800">
-          <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:justify-between dark:text-slate-400">
-            <p>LeagueHub — site non officiel, sans lien avec les ligues ni les clubs.</p>
-            <p>Données : ESPN · Horaires en heure de Paris</p>
+        <footer className="mt-8 border-t border-slate-200 bg-white/60 dark:border-slate-800 dark:bg-slate-950/60">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="space-y-3">
+              <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold tracking-tight">
+                <span className="grid size-8 place-items-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
+                  <Trophy className="size-4" aria-hidden />
+                </span>
+                LeagueHub
+              </Link>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Scores en direct, classements, coupes et palmarès des 5 grands championnats européens.
+              </p>
+            </div>
+            <nav aria-label="Championnats">
+              <h2 className="text-xs font-bold uppercase tracking-wide text-slate-400">Championnats</h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                {LEAGUES.map((league) => (
+                  <li key={league.slug}>
+                    <Link href={`/${league.slug}`} className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+                      {league.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <nav aria-label="Compétitions">
+              <h2 className="text-xs font-bold uppercase tracking-wide text-slate-400">Compétitions</h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li>
+                  <Link href="/direct" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+                    Direct, toutes compétitions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coupes" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+                    Coupes nationales
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href={UCL_TRACKER_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  >
+                    Tracker Ligue des champions
+                    <span className="sr-only"> (nouvel onglet)</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-wide text-slate-400">À propos</h2>
+              <ul className="mt-3 space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                <li>Scores et calendriers : ESPN</li>
+                <li>Palmarès : Wikidata</li>
+                <li>Horaires en heure de Paris</li>
+                <li>Site non officiel, sans lien avec les ligues ni les clubs.</li>
+              </ul>
+            </div>
           </div>
         </footer>
       </body>
