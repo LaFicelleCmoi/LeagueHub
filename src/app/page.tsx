@@ -132,6 +132,13 @@ export default async function HomePage() {
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <LiveIndicator />
                 <p className="text-sm text-slate-500 dark:text-slate-400">{formatDay(now)}</p>
+                <Link
+                  href="/direct"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:underline dark:text-slate-200"
+                >
+                  Toutes les compétitions
+                  <ChevronRight className="size-4" aria-hidden />
+                </Link>
               </div>
             </div>
 
