@@ -18,7 +18,8 @@ export function MatchDayList({ title, matches, empty }: { title: string; matches
               <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
                 {day.label}
               </h3>
-              <div className="space-y-3">
+              {/* grid-cols-1 (minmax(0, 1fr)) : une carte ne peut jamais élargir la page sur mobile. */}
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
                 {day.items.map((match) => (
                   <MatchCard key={match.id} match={match} />
                 ))}
