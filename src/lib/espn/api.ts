@@ -9,11 +9,12 @@ import {
   type CalendarSlug,
   type CompetitionCalendar,
 } from "@/lib/calendar";
+import { DIRECT_COMPETITIONS, type DirectCompetition, type EuropeanCompetition } from "@/lib/competitions";
 import { buildRounds, CUP_CALENDARS } from "@/lib/cup-calendar";
 import { frenchDateRange, legLabel, roundKey, roundLabel, type Cup } from "@/lib/cups";
 import { addDays, dayKey, espnDate, formatTime } from "@/lib/format";
 import { CUPS } from "@/lib/cups";
-import { LEAGUES, type League } from "@/lib/leagues";
+import { getLeague, LEAGUES, type League } from "@/lib/leagues";
 import type {
   Article,
   CupMatch,
@@ -274,8 +275,11 @@ async function scoreboardEvents(path: string, from: Date, to: Date, cache: Cache
   return [...events.values()];
 }
 
-/** Match du calendrier sans données ESPN : affiché avec sa date et son heure, sans score. */
-function calendarMatch(fixture: CalendarMatch, calendar: CompetitionCalendar): Match {
+/**
+ * Match du calendrier sans données ESPN : affiché avec sa date et son heure, sans score.
+ * `unconfirmed` : ESPN a répondu mais ne liste plus le match à cette date (reporté ou déplacé).
+ */
+function calendarMatch(fixture: CalendarMatch, calendar: CompetitionCalendar, unconfirmed = false): Match {
   const side = (id: string): MatchSide => {
     const team = calendar.teams[id];
     return {
@@ -301,8 +305,15 @@ function calendarMatch(fixture: CalendarMatch, calendar: CompetitionCalendar): M
     id: fixture.id,
     competition: calendar.espnCode,
     date: fixture.date,
-    state: pending ? "pre" : "post",
-    status: kickoff > now ? formatTime(fixture.date) : pending ? "Direct indisponible" : "Score indisponible",
+    state: pending || unconfirmed ? "pre" : "post",
+    status: unconfirmed
+      ? "À confirmer"
+      : kickoff > now
+        ? formatTime(fixture.date)
+        : pending
+          ? "Direct indisponible"
+          : "Score indisponible",
+    unconfirmed,
     venue: fixture.venue,
     home: side(fixture.home),
     away: side(fixture.away),
@@ -323,15 +334,20 @@ interface CompetitionItem {
  */
 async function competitionMatches(slug: CalendarSlug, from: Date, to: Date, cache: CacheOptions): Promise<CompetitionItem[]> {
   const calendar = getCalendar(slug);
+  let espnAnswered = true;
   const events = await scoreboardEvents(`/site/v2/sports/soccer/${calendar.espnCode}/scoreboard`, from, to, cache).catch(
-    () => [] as EspnEvent[],
+    () => {
+      espnAnswered = false;
+      return [] as EspnEvent[];
+    },
   );
   const byId = new Map(events.map((event) => [event.id, event]));
 
   const items: CompetitionItem[] = calendarMatchesBetween(slug, from, to).map((fixture) => {
     const event = byId.get(fixture.id) ?? null;
     byId.delete(fixture.id);
-    const match = (event && toMatch(event, calendar.espnCode)) ?? calendarMatch(fixture, calendar);
+    // ESPN a répondu sans ce match : il a été reporté ou déplacé hors de la période demandée.
+    const match = (event && toMatch(event, calendar.espnCode)) ?? calendarMatch(fixture, calendar, espnAnswered);
     return { match, event, fixture };
   });
   // Matchs ajoutés ou déplacés par ESPN depuis le dernier relevé du calendrier.
@@ -1012,4 +1028,50 @@ export async function getCupLiveMatches(cup: Cup): Promise<Match[]> {
     .map((event) => toCupMatch(event, cup.espnCode))
     .filter((item): item is CupMatch => item !== null)
     .map((item) => item.match);
+}
+
+// --- Coupes d'Europe et page « Direct » ---
+
+/** Matchs d'une coupe d'Europe entre deux dates, lus chez ESPN (pas de calendrier stocké). */
+async function europeanMatches(code: string, from: Date, to: Date, cache: CacheOptions): Promise<Match[]> {
+  const events = await scoreboardEvents(`/site/v2/sports/soccer/${code}/scoreboard`, from, to, cache);
+  return events
+    .map((event) => toMatch(event, code))
+    .filter((match): match is Match => match !== null)
+    .map(withUndecidedTeams)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/** Matchs d'une coupe d'Europe d'hier et d'aujourd'hui, pour le suivi en direct. */
+export async function getEuropeanLiveMatches(competition: EuropeanCompetition): Promise<Match[]> {
+  const now = new Date();
+  return europeanMatches(competition.espnCode, addDays(now, -1), now, { memoryTtl: MEMORY_TTL.live });
+}
+
+/**
+ * Tous les matchs d'une journée (heure de Paris), compétition par compétition : coupes d'Europe,
+ * championnats et coupes nationales. Une compétition indisponible n'empêche pas les autres.
+ */
+export async function getDirectDay(day: Date): Promise<{ competition: DirectCompetition; matches: Match[] }[]> {
+  const cache = { revalidate: REVALIDATE.matches };
+  const groups = await Promise.all(
+    DIRECT_COMPETITIONS.map(async (competition) => {
+      try {
+        let matches: Match[];
+        if (competition.kind === "league") {
+          const league = getLeague(competition.slug);
+          matches = league ? await getMatches(league, day, day, cache) : [];
+        } else if (competition.kind === "cup") {
+          const items = await competitionMatches(competition.slug as CalendarKey, day, day, cache);
+          matches = items.map((item) => withUndecidedTeams(item.match));
+        } else {
+          matches = await europeanMatches(competition.espnCode, day, day, cache);
+        }
+        return { competition, matches };
+      } catch {
+        return { competition, matches: [] };
+      }
+    }),
+  );
+  return groups.filter((group) => group.matches.length > 0);
 }
