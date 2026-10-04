@@ -1,20 +1,19 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { CupSlug } from "@/lib/cups";
+import type { DirectSlug } from "@/lib/competitions";
 import { TIME_ZONE } from "@/lib/format";
-import type { LeagueSlug } from "@/lib/leagues";
 import { LIVE_POLL_INTERVAL, needsLiveUpdate, type TrackedMatch } from "@/lib/live";
 import type { Match } from "@/lib/types";
 
 // Actualisation des scores sans recharger la page : le navigateur interroge la
-// route interne /api/live/[championnat ou coupe], mise en cache quelques secondes. Jamais ESPN.
+// route interne /api/live/[compétition], mise en cache quelques secondes. Jamais ESPN.
 
 const MAX_RETRY_DELAY = 5 * 60_000;
 
 export interface LiveSource {
-  /** Championnat ou coupe nationale. */
-  slug: LeagueSlug | CupSlug;
+  /** Championnat, coupe nationale ou coupe d'Europe. */
+  slug: DirectSlug;
   matches: TrackedMatch[];
 }
 
