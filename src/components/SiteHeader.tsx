@@ -11,6 +11,7 @@ import { LEAGUES } from "@/lib/leagues";
 import { ClubSearch } from "./ClubSearch";
 import { CupsTabSwitch } from "./CupsTabSwitch";
 import { LeagueLogo } from "./LeagueLogo";
+import { SettingsMenu } from "./SettingsMenu";
 import { ThemeToggle } from "./ThemeToggle";
 
 function LiveDot() {
@@ -108,10 +109,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
               <ClubSearch clubs={clubs} />
             </li>
             <li>
-              <CupsTabSwitch />
-            </li>
-            <li>
-              <ThemeToggle />
+              <SettingsMenu />
             </li>
           </ul>
         </nav>
