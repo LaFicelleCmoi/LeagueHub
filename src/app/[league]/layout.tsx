@@ -3,7 +3,9 @@ import { ClubDialogProvider } from "@/components/ClubDialogProvider";
 import { LeagueLogo } from "@/components/LeagueLogo";
 import { LeagueTabs } from "@/components/LeagueTabs";
 import { StatTiles, type Stat } from "@/components/StatTiles";
+import { nextMatchDay } from "@/lib/calendar";
 import { getMatches, getStandings } from "@/lib/espn/api";
+import { daysUntilDay, formatDay, formatTime } from "@/lib/format";
 import { resolveLeague, type LeaguePageProps } from "@/lib/league-params";
 import { goalsInMatches, goalsPerMatchHint, plural, seasonTotals } from "@/lib/league-stats";
 import { LEAGUES } from "@/lib/leagues";
@@ -32,10 +34,33 @@ export default async function LeagueLayout({ children, params }: LeaguePageProps
   const goalsToday = goalsInMatches(today);
   const season = seasonTotals(standings);
 
+  // Jour sans match : les chiffres du jour (toujours à zéro) laissent la place à la prochaine journée
+  // et au leader.
+  const next = today.length === 0 ? nextMatchDay([league.slug], now) : null;
+  const leader = standings?.rows[0];
+  const daysToNext = next ? daysUntilDay(next.day, now) : 0;
+
   const stats: Stat[] = [
     { label: plural(clubs, "club", "clubs"), value: clubs },
-    { label: plural(today.length, "match aujourd’hui", "matchs aujourd’hui"), value: today.length },
-    { label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"), value: goalsToday },
+    ...(today.length > 0
+      ? [
+          { label: plural(today.length, "match aujourd’hui", "matchs aujourd’hui"), value: today.length },
+          { label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"), value: goalsToday },
+        ]
+      : [
+          ...(next
+            ? [
+                {
+                  label: plural(daysToNext, "jour avant la prochaine journée", "jours avant la prochaine journée"),
+                  value: daysToNext,
+                  hint: `${formatDay(next.firstKickoff)} · ${formatTime(next.firstKickoff)} · ${next.roundCount} ${plural(next.roundCount, "match", "matchs")}`,
+                },
+              ]
+            : []),
+          ...(leader
+            ? [{ label: plural(leader.points, "point pour le leader", "points pour le leader"), value: leader.points, hint: leader.team.name }]
+            : []),
+        ]),
     {
       label: plural(season.goals, "but au total en saison régulière", "buts au total en saison régulière"),
       value: season.goals,
