@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, Info, ListOrdered, MessageSquareText, Users, X } from "lucide-react";
+import { BarChart3, Info, ListOrdered, MessageSquareText, Swords, Users, X } from "lucide-react";
 import type { Match, MatchDetail } from "@/lib/types";
 import { MatchCommentary } from "./MatchCommentary";
 import { MatchInfo } from "./MatchInfo";
 import { MatchLineups } from "./MatchLineups";
+import { MatchPreview } from "./MatchPreview";
 import { MatchStats } from "./MatchStats";
 import { MatchTimeline } from "./MatchTimeline";
 import { TeamLogo } from "./TeamLogo";
@@ -17,6 +18,7 @@ const LIVE_REFRESH = 30_000;
 const BEFORE_KICKOFF = 15 * 60_000;
 
 const TABS = [
+  { id: "preview", label: "Avant-match", icon: Swords },
   { id: "timeline", label: "Chronologie", icon: ListOrdered },
   { id: "stats", label: "Statistiques", icon: BarChart3 },
   { id: "lineups", label: "Compositions", icon: Users },
@@ -82,7 +84,8 @@ function Side({ match, side }: { match: Match; side: "home" | "away" }) {
 // Fenêtre « Détails du match » : tout ce qu'ESPN fournit sur le match, en français.
 export function MatchDetailDialog({ match: cardMatch, onClose }: { match: Match; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [tab, setTab] = useState<TabId>("timeline");
+  // Avant le coup d'envoi, l'avant-match est plus utile qu'une chronologie vide.
+  const [tab, setTab] = useState<TabId>(cardMatch.state === "pre" ? "preview" : "timeline");
   const [attempt, setAttempt] = useState(0);
   const status = useMatchDetail(cardMatch.competition, cardMatch.id, attempt);
   const detail = status.state === "ready" ? status.detail : null;
@@ -210,6 +213,7 @@ export function MatchDetailDialog({ match: cardMatch, onClose }: { match: Match;
           </p>
         )}
 
+        {detail && tab === "preview" && <MatchPreview detail={detail} />}
         {detail && tab === "timeline" && <MatchTimeline detail={detail} />}
         {detail && tab === "stats" && <MatchStats detail={detail} />}
         {detail && tab === "lineups" && <MatchLineups detail={detail} />}
