@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { SiteHeader } from "@/components/SiteHeader";
 import { clubIndex } from "@/lib/clubs";
 import { THEME_SCRIPT } from "@/lib/theme";
@@ -17,6 +18,16 @@ export const metadata: Metadata = {
   },
   description:
     "Classements, résultats, calendriers, buteurs et actualités de la Premier League, La Liga, Serie A, Bundesliga et Ligue 1.",
+  applicationName: "LeagueHub",
+  // Installé sur iPhone ou iPad, le site s'ouvre en plein écran comme une application.
+  appleWebApp: { capable: true, title: "LeagueHub", statusBarStyle: "black-translucent" },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
+  ],
 };
 
 export default function RootLayout({
@@ -33,6 +44,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} flex min-h-dvh flex-col font-sans antialiased`}>
         {/* Les clubs du calendrier alimentent la recherche de l'en-tête. */}
         <SiteHeader clubs={clubIndex()} />
+        <ServiceWorkerRegistration />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
         <footer className="border-t border-slate-200 dark:border-slate-800">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:justify-between dark:text-slate-400">
