@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
     // Ces images changent rarement : on les garde une semaine en cache.
     minimumCacheTTL: 60 * 60 * 24 * 7,
   },
+  // Le service worker doit toujours être relu : une nouvelle version remplace l'ancienne sans délai.
+  async headers() {
+    return [
+      {
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+        ],
+      },
+    ];
+  },
   // Adresses courtes vers le tracker de la Ligue des champions (même URL que src/lib/external-links.ts).
   async redirects() {
     return ["/ldc", "/ligue-des-champions"].map((source) => ({
