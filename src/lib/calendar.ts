@@ -89,3 +89,36 @@ export function nextCalendarMatch(
   }
   return best;
 }
+
+/** Une journée de championnat s'étale du vendredi au lundi : 4 jours à partir du premier match. */
+const ROUND_DAYS = 4;
+
+/**
+ * Première journée à venir (jour de Paris après aujourd'hui) où au moins une des compétitions joue :
+ * son premier coup d'envoi, le nombre de matchs ce jour-là et sur l'ensemble de la journée.
+ */
+export function nextMatchDay(
+  slugs: CalendarSlug[],
+  now: Date = new Date(),
+): { day: string; firstKickoff: string; count: number; roundCount: number } | null {
+  const today = dayKey(now);
+  let best: string | null = null;
+  for (const slug of slugs) {
+    const match = CALENDARS[slug].matches.find((item) => dayKey(item.date) > today);
+    if (match && (!best || dayKey(match.date) < best)) best = dayKey(match.date);
+  }
+  if (!best) return null;
+  const matches = slugs.flatMap((slug) => CALENDARS[slug].matches.filter((item) => dayKey(item.date) === best));
+  matches.sort((a, b) => a.date.localeCompare(b.date));
+  const roundEnd = dayKey(new Date(Date.parse(matches[0].date) + (ROUND_DAYS - 1) * 86_400_000));
+  const roundCount = slugs.reduce(
+    (sum, slug) =>
+      sum +
+      CALENDARS[slug].matches.filter((item) => {
+        const day = dayKey(item.date);
+        return day >= best && day <= roundEnd;
+      }).length,
+    0,
+  );
+  return { day: best, firstKickoff: matches[0].date, count: matches.length, roundCount };
+}
