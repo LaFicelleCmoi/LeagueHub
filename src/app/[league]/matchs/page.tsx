@@ -12,6 +12,11 @@ export const revalidate = 60;
 
 const PAST_DAYS = 7;
 const NEXT_DAYS = 14;
+/** Sans résultat récent (trêve), on remonte jusqu'à la dernière journée jouée. */
+const FALLBACK_DAYS = 35;
+const FALLBACK_RESULTS = 10;
+/** Des résultats de moins de 48 h passent avant le programme à venir. */
+const FRESH_RESULTS = 48 * 3_600_000;
 
 export async function generateMetadata({ params }: LeaguePageProps): Promise<Metadata> {
   const league = await resolveLeague(params);
@@ -28,11 +33,36 @@ export default async function MatchesPage({ params }: LeaguePageProps) {
 
   const live = matches.filter((m) => m.state === "in");
   const upcoming = matches.filter((m) => m.state === "pre");
-  const results = matches.filter((m) => m.state === "post").reverse();
+  let results = matches.filter((m) => m.state === "post").reverse();
+  let resultsTitle = "Derniers résultats";
+
+  if (results.length === 0) {
+    const older = await getMatches(league, addDays(now, -FALLBACK_DAYS), addDays(now, -PAST_DAYS - 1)).catch(() => []);
+    results = older.filter((m) => m.state === "post").reverse().slice(0, FALLBACK_RESULTS);
+    if (results.length > 0) resultsTitle = "Dernière journée jouée";
+  }
 
   // Les cartes se mettent à jour sur place ; un match qui démarre reste dans sa section.
   const tracked = selectTrackedMatches(matches, now.getTime());
   const sources = tracked.length > 0 ? [{ slug: league.slug, matches: tracked }] : [];
+  const resultsFirst = results.length > 0 && now.getTime() - Date.parse(results[0].date) < FRESH_RESULTS;
+
+  const resultsList = (
+    <MatchDayList
+      key="results"
+      title={resultsTitle}
+      matches={results}
+      empty={`Aucun match joué ces ${FALLBACK_DAYS} derniers jours.`}
+    />
+  );
+  const upcomingList = (
+    <MatchDayList
+      key="upcoming"
+      title="Prochains matchs"
+      matches={upcoming}
+      empty={`Aucun match programmé dans les ${NEXT_DAYS} prochains jours.`}
+    />
+  );
 
   return (
     <LiveMatchesProvider sources={sources}>
@@ -44,7 +74,7 @@ export default async function MatchesPage({ params }: LeaguePageProps) {
           <section>
             <h2 className="mb-4 text-lg font-semibold">En direct</h2>
             {/* grid-cols-1 (minmax(0, 1fr)) : une carte ne peut jamais élargir la page sur mobile. */}
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
               {live.map((match) => (
                 <MatchCard key={match.id} match={match} />
               ))}
@@ -52,18 +82,8 @@ export default async function MatchesPage({ params }: LeaguePageProps) {
           </section>
         )}
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-          <MatchDayList
-            title="Derniers résultats"
-            matches={results}
-            empty={`Aucun match joué ces ${PAST_DAYS} derniers jours.`}
-          />
-          <MatchDayList
-            title="Prochains matchs"
-            matches={upcoming}
-            empty={`Aucun match programmé dans les ${NEXT_DAYS} prochains jours.`}
-          />
-        </div>
+        {/* Pleine largeur : plus de colonne vide à côté d'une liste interminable. */}
+        {resultsFirst ? [resultsList, upcomingList] : [upcomingList, resultsList]}
       </div>
     </LiveMatchesProvider>
   );
