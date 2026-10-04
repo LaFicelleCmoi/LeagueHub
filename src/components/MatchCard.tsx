@@ -186,7 +186,7 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
         </div>
       </div>
 
-      {match.state === "pre" && <KickoffCountdown date={match.date} className="mt-3" />}
+      {match.state === "pre" && !match.unconfirmed && <KickoffCountdown date={match.date} className="mt-3" />}
 
       {/* Annonce les changements de score aux lecteurs d'écran. */}
       {live && (
