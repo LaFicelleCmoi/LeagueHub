@@ -56,6 +56,15 @@ export function espnDate(date: Date): string {
   return dayKey(date).replaceAll("-", "");
 }
 
+/** Nombre de jours calendaires (heure de Paris) entre aujourd'hui et un jour « AAAA-MM-JJ ». */
+export function daysUntilDay(day: string, now: Date = new Date()): number {
+  const toUtc = (key: string) => {
+    const [year, month, date] = key.split("-").map(Number);
+    return Date.UTC(year, month - 1, date);
+  };
+  return Math.round((toUtc(day) - toUtc(dayKey(now))) / 86_400_000);
+}
+
 export function addDays(date: Date, days: number): Date {
   return new Date(date.getTime() + days * 86_400_000);
 }
