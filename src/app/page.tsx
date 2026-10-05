@@ -16,6 +16,7 @@ import { StatTiles, type Stat } from "@/components/StatTiles";
 import { UclTrackerBanner } from "@/components/UclTrackerBanner";
 import SplitFlapText from "@/components/reactbits/SplitFlapText";
 import { nextMatchDay } from "@/lib/calendar";
+import { clubIndex } from "@/lib/clubs";
 import { getMatches, getStandings } from "@/lib/espn/api";
 import { daysUntilDay, formatDay, formatTime } from "@/lib/format";
 import { addTotals, goalsInMatches, goalsPerMatchHint, plural, seasonTotals } from "@/lib/league-stats";
@@ -144,7 +145,7 @@ export default async function HomePage() {
             <div className="hidden md:block">
               <HeroBadge />
             </div>
-            <FavoriteClubPicker clubs={clubs} />
+            <FavoriteClubPicker clubs={clubIndex()} />
           </div>
         </section>
 
