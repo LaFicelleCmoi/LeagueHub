@@ -12,6 +12,7 @@ export interface ClubIndexEntry {
   shortName: string;
   abbreviation: string;
   logo: string | null;
+  color?: string | null;
   league: LeagueSlug;
 }
 
