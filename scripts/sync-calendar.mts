@@ -21,6 +21,8 @@ interface EspnTeam {
   shortDisplayName?: string;
   abbreviation?: string;
   logo?: string;
+  color?: string;
+  alternateColor?: string;
 }
 
 interface EspnEvent {
@@ -39,6 +41,21 @@ interface CalendarTeam {
   shortName: string;
   abbreviation: string;
   logo: string | null;
+  /** Couleur du club (« #c8142f »), pour teinter son écusson dans l'interface. */
+  color: string | null;
+}
+
+/** Couleur principale du club, ou la secondaire quand la principale est presque blanche. */
+function teamColor(team: EspnTeam): string | null {
+  const valid = (hex?: string) => (hex && /^[0-9a-f]{6}$/i.test(hex) ? hex.toLowerCase() : null);
+  const light = (hex: string) => {
+    const [r, g, b] = [0, 2, 4].map((i) => Number.parseInt(hex.slice(i, i + 2), 16) / 255);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.85;
+  };
+  const main = valid(team.color);
+  const alternate = valid(team.alternateColor);
+  const chosen = main && !light(main) ? main : alternate && !light(alternate) ? alternate : main;
+  return chosen ? `#${chosen}` : null;
 }
 
 interface CalendarMatch {
@@ -134,6 +151,7 @@ async function syncCompetition(slug: string, espnCode: string, kind: "league" | 
         shortName: team.shortDisplayName ?? team.displayName,
         abbreviation: team.abbreviation ?? team.displayName.slice(0, 3).toUpperCase(),
         logo: team.logo ?? null,
+        color: teamColor(team),
       };
     }
 
