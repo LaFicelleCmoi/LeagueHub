@@ -25,6 +25,8 @@ export interface CalendarTeam {
   shortName: string;
   abbreviation: string;
   logo: string | null;
+  /** Couleur du club (« #c8142f »), pour teinter son écusson dans l'interface. */
+  color?: string | null;
 }
 
 export interface CalendarMatch {
