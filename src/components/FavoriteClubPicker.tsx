@@ -1,59 +1,50 @@
 "use client";
 
-import { Star, X } from "lucide-react";
-import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
-import { LEAGUES } from "@/lib/leagues";
-import type { ClubRef } from "@/lib/types";
+import { useState, type CSSProperties } from "react";
+import { ChevronRight, Star } from "lucide-react";
+import type { ClubIndexEntry } from "@/lib/clubs";
+import { useFavoriteClub } from "@/lib/favorite-club";
+import { getLeague } from "@/lib/leagues";
+import { FavoriteClubDialog } from "./FavoriteClubDialog";
+import { TeamLogo } from "./TeamLogo";
 
-// Choix du club affiché sur le badge LeagueHub, mémorisé dans le navigateur.
-export function FavoriteClubPicker({ clubs }: { clubs: ClubRef[] }) {
+// Choix du club favori (badge LeagueHub, « Mon club »), mémorisé dans le navigateur.
+export function FavoriteClubPicker({ clubs }: { clubs: ClubIndexEntry[] }) {
   const favorite = useFavoriteClub();
+  const [open, setOpen] = useState(false);
+  const entry = favorite ? clubs.find((club) => club.id === favorite.team.id && club.league === favorite.league) : undefined;
+  const league = favorite ? getLeague(favorite.league) : undefined;
+  const color = entry?.color ?? league?.accent ?? "#f59e0b";
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
-      <label
-        htmlFor="favorite-club"
-        className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400"
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+        style={{ "--club": color } as CSSProperties}
+        className="group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 text-left shadow-sm transition hover:border-amber-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-amber-500/40"
       >
-        <Star className="size-3.5 fill-amber-400 text-amber-500" aria-hidden />
-        Club favori sur mon pass
-      </label>
-      <div className="mt-1.5 flex items-center gap-2">
-        <select
-          id="favorite-club"
-          value={favorite?.team.id ?? ""}
-          onChange={(event) => setFavoriteClub(clubs.find((club) => club.team.id === event.target.value) ?? null)}
-          className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-2 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
-        >
-          <option value="">Aucun (pass LeagueHub)</option>
-          {LEAGUES.map((league) => {
-            const options = clubs
-              .filter((club) => club.league === league.slug)
-              .sort((a, b) => a.team.name.localeCompare(b.team.name, "fr"));
-            return (
-              options.length > 0 && (
-                <optgroup key={league.slug} label={league.name}>
-                  {options.map((club) => (
-                    <option key={club.team.id} value={club.team.id}>
-                      {club.team.name}
-                    </option>
-                  ))}
-                </optgroup>
-              )
-            );
-          })}
-        </select>
         {favorite && (
-          <button
-            type="button"
-            onClick={() => setFavoriteClub(null)}
-            aria-label="Retirer le club favori"
-            className="grid size-9 shrink-0 place-items-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
-          >
-            <X className="size-4" aria-hidden />
-          </button>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,color-mix(in_srgb,var(--club)_18%,transparent),transparent_65%)]"
+          />
         )}
-      </div>
-    </div>
+        <span className="relative grid size-11 shrink-0 place-items-center rounded-full bg-amber-50 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:ring-amber-500/30">
+          {favorite ? <TeamLogo team={favorite.team} size={30} /> : <Star className="size-5 fill-amber-400 text-amber-500" aria-hidden />}
+        </span>
+        <span className="relative min-w-0 flex-1">
+          <span className="block text-[11px] font-bold uppercase tracking-wide text-amber-600 dark:text-amber-400">Mon club</span>
+          <span className="block truncate font-semibold">{favorite ? favorite.team.name : "Choisir mon club"}</span>
+          <span className="block truncate text-xs text-slate-500 dark:text-slate-400">
+            {favorite ? `${league?.name ?? ""} · changer` : "Il s’affichera sur votre pass et en avant sur le site"}
+          </span>
+        </span>
+        <ChevronRight className="relative size-5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5" aria-hidden />
+      </button>
+
+      {open && <FavoriteClubDialog clubs={clubs} onClose={() => setOpen(false)} />}
+    </>
   );
 }
