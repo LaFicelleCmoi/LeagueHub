@@ -38,12 +38,12 @@
     {"id":"401918751","date":"2026-10-03T15:30Z","home":"22372","away":"131403","venue":"Paraje Gilxaurdi","round":"qualifying-round","leg":2},
     {"id":"401918748","date":"2026-10-03T16:00Z","home":"133838","away":"20776","venue":"Estadio San Miguel","round":"qualifying-round","leg":2},
     {"id":"401918760","date":"2026-10-03T16:00Z","home":"133851","away":"133844","venue":"Estadio José Martínez","round":"qualifying-round","leg":2},
-    {"id":"401918758","date":"2026-10-04T11:00Z","home":"133833","away":"133831","venue":"Estadio de Tasagaya","round":"qualifying-round","leg":2},
     {"id":"401918510","date":"2026-10-04T14:00Z","home":"133836","away":"133847","venue":"San Juan del Bicentenario","round":"qualifying-round","leg":2},
-    {"id":"401918752","date":"2026-10-04T14:00Z","home":"18334","away":"133840","venue":"Municipal Sagnier","round":"qualifying-round","leg":2},
     {"id":"401918753","date":"2026-10-04T14:00Z","home":"133850","away":"133842","venue":"La Caseta","round":"qualifying-round","leg":2},
     {"id":"401918757","date":"2026-10-04T15:30Z","home":"133843","away":"133841","venue":"Manuel Delgado Meco","round":"qualifying-round","leg":2},
     {"id":"401918759","date":"2026-10-04T16:00Z","home":"131419","away":"133832","venue":"La Espiguera","round":"qualifying-round","leg":2},
-    {"id":"401918761","date":"2026-10-04T16:00Z","home":"133846","away":"131412","venue":"Tavernes de la Valldigna","round":"qualifying-round","leg":2}
+    {"id":"401918761","date":"2026-10-04T16:00Z","home":"133846","away":"131412","venue":"Tavernes de la Valldigna","round":"qualifying-round","leg":2},
+    {"id":"401918758","date":"2026-10-11T11:00Z","home":"133833","away":"133831","venue":null,"round":"qualifying-round","leg":2},
+    {"id":"401918752","date":"2026-10-11T14:00Z","home":"18334","away":"133840","venue":"Municipal Sagnier","round":"qualifying-round","leg":2}
   ]
 }
