@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
+import { espnImage } from "@/lib/espn-image";
 import { formatDateTime } from "@/lib/format";
 import type { Article } from "@/lib/types";
 
@@ -9,9 +10,11 @@ export function NewsCard({ article }: { article: Article }) {
       <div className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
         {article.image && (
           <Image
-            src={article.image}
+            // Photo redimensionnée par ESPN (640 px) : pas de transformation facturée par Vercel.
+            src={espnImage(article.image, 640, { square: false })}
             alt=""
             fill
+            unoptimized
             sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
