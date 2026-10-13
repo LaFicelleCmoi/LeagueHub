@@ -2,14 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Logos des clubs, des ligues et photos d'actualité hébergés sur le CDN d'ESPN.
-    remotePatterns: [
-      { protocol: "https", hostname: "**.espncdn.com" },
-      // Certaines photos d'actualité sont servies depuis ce second CDN d'ESPN.
-      { protocol: "https", hostname: "espnmedia-cdn.akamaized.net" },
-    ],
-    // Ces images changent rarement : on les garde une semaine en cache.
-    minimumCacheTTL: 60 * 60 * 24 * 7,
+    // Aucune optimisation d'images Vercel (facturée à la transformation et à la mise en cache) :
+    // les logos et les photos sont redimensionnés par ESPN lui-même (voir src/lib/espn-image.ts).
+    unoptimized: true,
   },
   // Le service worker doit toujours être relu : une nouvelle version remplace l'ancienne sans délai.
   async headers() {
