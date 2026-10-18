@@ -103,7 +103,7 @@ const SLIDES: Slide[] = [
       { icon: Scale, label: "Comparateur" },
     ],
     icon: Trophy,
-    logo: { src: "/coupes-europe/ligue-europa.png", width: 186, height: 271 },
+    logo: { src: "/coupes-europe/ligue-europa.png", width: 188, height: 288 },
     cta: "Ouvrir le tracker Europa",
     href: UEL_TRACKER_URL,
     theme: {
@@ -136,7 +136,7 @@ const SLIDES: Slide[] = [
       { icon: Scale, label: "Comparateur" },
     ],
     icon: Medal,
-    logo: { src: "/coupes-europe/ligue-conference.png", width: 290, height: 288 },
+    logo: { src: "/coupes-europe/ligue-conference.png", width: 289, height: 288 },
     cta: "Ouvrir le tracker Conférence",
     href: UECL_TRACKER_URL,
     theme: {
