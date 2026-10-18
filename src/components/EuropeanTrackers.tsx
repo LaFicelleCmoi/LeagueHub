@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import {
   ArrowUpRight,
@@ -47,6 +48,8 @@ interface Slide {
   description: string;
   features: { icon: LucideIcon; label: string }[];
   icon: LucideIcon;
+  /** Logo officiel de la coupe, noir sur fond blanc : voir la plaque de TrackerSlide. */
+  logo: { src: string; width: number; height: number };
   cta: string;
   href: string;
   theme: Theme;
@@ -67,6 +70,7 @@ const SLIDES: Slide[] = [
       { icon: Gamepad2, label: "Jeu & simulateur" },
     ],
     icon: Star,
+    logo: { src: "/coupes-europe/ligue-des-champions.png", width: 300, height: 288 },
     cta: "Ouvrir le tracker LDC",
     href: UCL_TRACKER_URL,
     theme: {
@@ -99,6 +103,7 @@ const SLIDES: Slide[] = [
       { icon: Scale, label: "Comparateur" },
     ],
     icon: Trophy,
+    logo: { src: "/coupes-europe/ligue-europa.png", width: 186, height: 271 },
     cta: "Ouvrir le tracker Europa",
     href: UEL_TRACKER_URL,
     theme: {
@@ -131,6 +136,7 @@ const SLIDES: Slide[] = [
       { icon: Scale, label: "Comparateur" },
     ],
     icon: Medal,
+    logo: { src: "/coupes-europe/ligue-conference.png", width: 290, height: 288 },
     cta: "Ouvrir le tracker Conférence",
     href: UECL_TRACKER_URL,
     theme: {
@@ -184,13 +190,9 @@ function TrackerSlide({ slide }: { slide: Slide }) {
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 opacity-70" style={{ backgroundImage: STARFIELD }} />
 
-      {/* Anneaux et grande icône de la coupe, clin d'œil au trophée. */}
+      {/* Anneaux derrière le logo de la coupe. */}
       <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full border border-white/10" />
       <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 size-64 rounded-full border border-white/10" />
-      <Icon
-        aria-hidden
-        className="pointer-events-none absolute -right-4 top-4 size-48 fill-white/[0.04] text-white/10 transition-transform duration-1000 group-hover:rotate-[18deg] motion-reduce:transition-none"
-      />
       {TWINKLES.map((position) => (
         <Star
           key={position}
@@ -199,8 +201,21 @@ function TrackerSlide({ slide }: { slide: Slide }) {
         />
       ))}
 
-      <div className="relative grid h-full gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10">
-        <div className="min-w-0">
+      {/* Mobile : logo, texte, bouton, dans cet ordre. Grand écran : le texte à gauche, le logo au-dessus du
+          bouton à droite, le tout centré en hauteur. */}
+      <div className="relative grid h-full gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:content-center lg:gap-x-10">
+        {/* Plaque blanche : les logos officiels sont noirs, ils ne se liraient pas sur la bannière. */}
+        <div className="w-fit rounded-2xl bg-white p-2.5 shadow-lg shadow-black/30 ring-1 ring-white/40 lg:col-start-2 lg:row-start-1 lg:self-end lg:justify-self-center">
+          <Image
+            src={slide.logo.src}
+            alt=""
+            width={slide.logo.width}
+            height={slide.logo.height}
+            className="h-14 w-auto sm:h-16 lg:h-24"
+          />
+        </div>
+
+        <div className="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
           <p
             className={`inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur ${theme.kicker}`}
           >
@@ -228,7 +243,7 @@ function TrackerSlide({ slide }: { slide: Slide }) {
           </ul>
         </div>
 
-        <div className="flex flex-col items-start gap-2 lg:items-end">
+        <div className="flex flex-col items-start gap-2 lg:col-start-2 lg:row-start-2 lg:items-center lg:self-start">
           <StarBorder
             as="a"
             href={slide.href}
