@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { ClubDialogProvider } from "@/components/ClubDialogProvider";
 import { ClubsLoop } from "@/components/ClubsLoop";
 import { EmptyState } from "@/components/EmptyState";
+import { EuropeanTrackers } from "@/components/EuropeanTrackers";
 import { FavoriteClubPicker } from "@/components/FavoriteClubPicker";
 import { FavoriteClubSpotlight, type ClubPosition } from "@/components/FavoriteClubSpotlight";
 import { HeroBadge } from "@/components/HeroBadge";
@@ -13,7 +14,6 @@ import { LiveIndicator, LiveMatchesProvider } from "@/components/LiveMatches";
 import { MatchCard } from "@/components/MatchCard";
 import { PageSync } from "@/components/PageSync";
 import { StatTiles, type Stat } from "@/components/StatTiles";
-import { UclTrackerBanner } from "@/components/UclTrackerBanner";
 import SplitFlapText from "@/components/reactbits/SplitFlapText";
 import { nextMatchDay } from "@/lib/calendar";
 import { clubIndex } from "@/lib/clubs";
@@ -155,7 +155,7 @@ export default async function HomePage() {
 
           <LeagueShortcuts />
 
-          <UclTrackerBanner />
+          <EuropeanTrackers />
 
           {clubs.length > 0 && <ClubsLoop clubs={clubs} />}
 
