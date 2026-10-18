@@ -48,7 +48,7 @@ interface Slide {
   description: string;
   features: { icon: LucideIcon; label: string }[];
   icon: LucideIcon;
-  /** Logo officiel de la coupe, noir sur fond blanc : voir la plaque de TrackerSlide. */
+  /** Logo de la coupe, en version blanche à fond transparent : il se pose directement sur la bannière. */
   logo: { src: string; width: number; height: number };
   cta: string;
   href: string;
@@ -204,16 +204,15 @@ function TrackerSlide({ slide }: { slide: Slide }) {
       {/* Mobile : logo, texte, bouton, dans cet ordre. Grand écran : le texte à gauche, le logo au-dessus du
           bouton à droite, le tout centré en hauteur. */}
       <div className="relative grid h-full gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:content-center lg:gap-x-10">
-        {/* Plaque blanche : les logos officiels sont noirs, ils ne se liraient pas sur la bannière. */}
-        <div className="w-fit rounded-2xl bg-white p-2.5 shadow-lg shadow-black/30 ring-1 ring-white/40 lg:col-start-2 lg:row-start-1 lg:self-end lg:justify-self-center">
-          <Image
-            src={slide.logo.src}
-            alt=""
-            width={slide.logo.width}
-            height={slide.logo.height}
-            className="h-14 w-auto sm:h-16 lg:h-24"
-          />
-        </div>
+        {/* Les logos officiels sont noirs : ils sont fournis en blanc (l'orange d'Europa et le vert de la
+            Conférence sont conservés), sans quoi ils se perdraient sur la bannière sombre. */}
+        <Image
+          src={slide.logo.src}
+          alt=""
+          width={slide.logo.width}
+          height={slide.logo.height}
+          className="h-16 w-auto justify-self-start drop-shadow-lg sm:h-20 lg:col-start-2 lg:row-start-1 lg:h-28 lg:self-end lg:justify-self-center"
+        />
 
         <div className="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
           <p
