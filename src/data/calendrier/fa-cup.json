@@ -86,6 +86,7 @@
   },
   "matches": [
     {"id":"401931109","date":"2026-11-06T19:45Z","home":"4489","away":"375","venue":"RAW Charging Stadium","round":"first-round","leg":null},
+    {"id":"401931079","date":"2026-11-07T12:00Z","home":"2589","away":"386","venue":"The Stan Robinson Stadium","round":"first-round","leg":null},
     {"id":"401931081","date":"2026-11-07T15:00Z","home":"343","away":"284","venue":"SMH Group Stadium","round":"first-round","leg":null},
     {"id":"401931082","date":"2026-11-07T15:00Z","home":"2567","away":"132415","venue":"Pirelli Stadium","round":"first-round","leg":null},
     {"id":"401931083","date":"2026-11-07T15:00Z","home":"2595","away":"350","venue":"Meadow Park","round":"first-round","leg":null},
@@ -120,7 +121,6 @@
     {"id":"401931275","date":"2026-11-07T15:00Z","home":"307","away":"21711","venue":"Home Park","round":"first-round","leg":null},
     {"id":"401931097","date":"2026-11-07T17:30Z","home":"633","away":"340","venue":"J. Davidson Stadium","round":"first-round","leg":null},
     {"id":"401931104","date":"2026-11-07T20:00Z","home":"342","away":"338","venue":"London Road Stadium","round":"first-round","leg":null},
-    {"id":"401931079","date":"2026-11-08T12:00Z","home":"2589","away":"386","venue":"The Stan Robinson Stadium","round":"first-round","leg":null},
     {"id":"401931080","date":"2026-11-08T14:15Z","home":"20770","away":"400","venue":"Flamingo Park","round":"first-round","leg":null},
     {"id":"401931093","date":"2026-11-08T15:00Z","home":"133370","away":"2594","venue":"The Wyatt Homes Stadium","round":"first-round","leg":null},
     {"id":"401931108","date":"2026-11-08T17:15Z","home":"332","away":"399","venue":"Boundary Park","round":"first-round","leg":null},
