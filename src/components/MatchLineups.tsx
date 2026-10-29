@@ -154,7 +154,7 @@ export function MatchLineups({ detail }: { detail: MatchDetail }) {
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {detail.lineups.map((lineup) => (
         <TeamLineup key={lineup.side} lineup={lineup} />
       ))}
