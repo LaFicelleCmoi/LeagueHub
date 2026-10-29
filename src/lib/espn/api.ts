@@ -27,6 +27,8 @@ import type {
   MatchEvent,
   MatchOutcome,
   MatchSide,
+  SquadLine,
+  SquadPlayer,
   StandingRow,
   Standings,
   Team,
@@ -52,6 +54,7 @@ import type {
   EspnStatisticsResponse,
   EspnStatus,
   EspnTeam,
+  EspnTeamRosterResponse,
 } from "./types";
 
 // Durée de cache (secondes) adaptée au rythme de mise à jour de chaque donnée.
@@ -61,6 +64,8 @@ const REVALIDATE = {
   leaders: 900,
   news: 900,
   previousSeason: 86_400,
+  // Effectif d'un club : il ne bouge qu'au mercato, ses chiffres une fois par journée.
+  squad: 21_600,
   // Calendrier des tours d'une coupe.
   cupInfo: 3_600,
 } as const;
@@ -1076,4 +1081,35 @@ export async function getDirectDay(day: Date): Promise<{ competition: DirectComp
     }),
   );
   return groups.filter((group) => group.matches.length > 0);
+}
+
+const SQUAD_LINES: readonly SquadLine[] = ["G", "D", "M", "F"];
+
+/** Effectif d'un club avec les chiffres de chaque joueur en championnat cette saison. */
+export async function getSquad(teamId: string, league: League): Promise<SquadPlayer[]> {
+  const data = await espnFetch<EspnTeamRosterResponse>(soccer(league, `teams/${teamId}/roster`), {
+    revalidate: REVALIDATE.squad,
+  });
+  return (data.athletes ?? []).flatMap((athlete) => {
+    const line = athlete.position?.abbreviation as SquadLine | undefined;
+    if (!line || !SQUAD_LINES.includes(line)) return [];
+    const stats = new Map<string, number>();
+    for (const category of athlete.statistics?.splits?.categories ?? []) {
+      for (const stat of category.stats ?? []) stats.set(stat.name, stat.value ?? 0);
+    }
+    return [
+      {
+        id: athlete.id,
+        name: athlete.displayName,
+        shortName: athlete.shortName ?? athlete.displayName,
+        jersey: athlete.jersey ?? null,
+        line,
+        goals: stats.get("totalGoals") ?? 0,
+        assists: stats.get("goalAssists") ?? 0,
+        appearances: stats.get("appearances") ?? 0,
+        yellowCards: stats.get("yellowCards") ?? 0,
+        fouls: stats.get("foulsCommitted") ?? 0,
+      },
+    ];
+  });
 }
