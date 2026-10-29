@@ -3,14 +3,15 @@
 import { useState, type CSSProperties } from "react";
 import { ChevronRight, Star } from "lucide-react";
 import type { ClubIndexEntry } from "@/lib/clubs";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { useFavoriteClub, type Division } from "@/lib/favorite-club";
 import { getLeague } from "@/lib/leagues";
 import { FavoriteClubDialog } from "./FavoriteClubDialog";
 import { TeamLogo } from "./TeamLogo";
 
-// Choix du club favori (badge LeagueHub, « Mon club »), mémorisé dans le navigateur.
-export function FavoriteClubPicker({ clubs }: { clubs: ClubIndexEntry[] }) {
-  const favorite = useFavoriteClub();
+// Choix du club favori d'une division (badge LeagueHub, « Mon club »), mémorisé dans le navigateur.
+// Les clubs proposés sont ceux de la division.
+export function FavoriteClubPicker({ division, clubs }: { division: Division; clubs: ClubIndexEntry[] }) {
+  const favorite = useFavoriteClub(division);
   const [open, setOpen] = useState(false);
   const entry = favorite ? clubs.find((club) => club.id === favorite.team.id && club.league === favorite.league) : undefined;
   const league = favorite ? getLeague(favorite.league) : undefined;
@@ -44,7 +45,7 @@ export function FavoriteClubPicker({ clubs }: { clubs: ClubIndexEntry[] }) {
         <ChevronRight className="relative size-5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5" aria-hidden />
       </button>
 
-      {open && <FavoriteClubDialog clubs={clubs} onClose={() => setOpen(false)} />}
+      {open && <FavoriteClubDialog division={division} clubs={clubs} onClose={() => setOpen(false)} />}
     </>
   );
 }
