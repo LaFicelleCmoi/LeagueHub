@@ -1,8 +1,8 @@
 import { CUPS, cupLogo, type CupSlug } from "./cups";
-import { ALL_LEAGUES, leagueLogo, type LeagueSlug } from "./leagues";
+import { LEAGUES, leagueLogo, SECOND_DIVISIONS, type League, type LeagueSlug } from "./leagues";
 
-// Toutes les compétitions suivies par la page « Direct » : coupes d'Europe, championnats
-// (deuxièmes divisions comprises), coupes nationales.
+// Toutes les compétitions suivies par la page « Direct » : coupes d'Europe, championnats,
+// coupes nationales et deuxièmes divisions.
 
 export type EuropeanSlug = "ligue-des-champions" | "ligue-europa" | "ligue-conference";
 
@@ -45,7 +45,22 @@ export interface DirectCompetition {
 
 const uefaLogo = (id: number, folder = "500") => `https://a.espncdn.com/i/leaguelogos/soccer/${folder}/${id}.png`;
 
-/** Ordre d'affichage : coupes d'Europe, championnats, coupes nationales. */
+function leagueCompetition(league: League): DirectCompetition {
+  return {
+    slug: league.slug,
+    kind: "league",
+    espnCode: league.espnCode,
+    name: league.name,
+    subtitle: league.tier === 2 ? `${league.country} · 2e division` : league.country,
+    logo: leagueLogo(league),
+    darkLogo: leagueLogo(league, "dark"),
+    accent: league.accent,
+    href: `/${league.slug}/matchs`,
+  };
+}
+
+/** Ordre d'affichage : coupes d'Europe, championnats, coupes nationales, puis les deuxièmes
+ *  divisions, à part des 5 grands. */
 export const DIRECT_COMPETITIONS: readonly DirectCompetition[] = [
   ...EUROPEAN_COMPETITIONS.map((competition) => ({
     slug: competition.slug,
@@ -58,17 +73,7 @@ export const DIRECT_COMPETITIONS: readonly DirectCompetition[] = [
     accent: competition.accent,
     href: null,
   })),
-  ...ALL_LEAGUES.map((league) => ({
-    slug: league.slug,
-    kind: "league" as const,
-    espnCode: league.espnCode,
-    name: league.name,
-    subtitle: league.country,
-    logo: leagueLogo(league),
-    darkLogo: leagueLogo(league, "dark"),
-    accent: league.accent,
-    href: `/${league.slug}/matchs`,
-  })),
+  ...LEAGUES.map(leagueCompetition),
   ...CUPS.map((cup) => ({
     slug: cup.slug,
     kind: "cup" as const,
@@ -80,4 +85,5 @@ export const DIRECT_COMPETITIONS: readonly DirectCompetition[] = [
     accent: cup.accent,
     href: `/coupes/${cup.slug}`,
   })),
+  ...SECOND_DIVISIONS.map(leagueCompetition),
 ];
