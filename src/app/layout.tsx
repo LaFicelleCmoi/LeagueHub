@@ -51,7 +51,7 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
         <footer className="mt-8 border-t border-slate-200 bg-white/60 dark:border-slate-800 dark:bg-slate-950/60">
-          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-5">
             <div className="space-y-3">
               <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold tracking-tight">
                 <span className="grid size-8 place-items-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
@@ -60,7 +60,7 @@ export default function RootLayout({
                 LeagueHub
               </Link>
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                Scores en direct, classements, coupes et palmarès des 5 grands championnats européens.
+                Scores en direct, classements, coupes et palmarès des 5 grands championnats européens et de leurs deuxièmes divisions.
               </p>
             </div>
             <nav aria-label="Championnats">
