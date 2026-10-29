@@ -5,9 +5,10 @@ import laLiga from "@/data/palmares/la-liga.json";
 import ligue1 from "@/data/palmares/ligue-1.json";
 import premierLeague from "@/data/palmares/premier-league.json";
 import serieA from "@/data/palmares/serie-a.json";
-import type { LeagueSlug } from "./leagues";
+import type { LeagueSlug, TopLeagueSlug } from "./leagues";
 
-// Palmarès des clubs, relevé chaque semaine sur Wikidata par scripts/sync-palmares.mts.
+// Palmarès des clubs des 5 grands championnats, relevé chaque semaine sur Wikidata par
+// scripts/sync-palmares.mts. Les clubs des deuxièmes divisions n'en ont pas.
 
 export type TrophyScope = "national" | "europe" | "monde" | "autre";
 
@@ -41,7 +42,7 @@ const FILES = {
   "serie-a": serieA,
   bundesliga,
   "ligue-1": ligue1,
-} as unknown as Record<LeagueSlug, PalmaresFile>;
+} as unknown as Record<TopLeagueSlug, PalmaresFile>;
 
 /** Périmètres mis en avant, dans l'ordre d'affichage ; « autre » est replié à part. */
 export const TROPHY_SCOPES: { scope: TrophyScope; label: string }[] = [
@@ -51,7 +52,7 @@ export const TROPHY_SCOPES: { scope: TrophyScope; label: string }[] = [
 ];
 
 export function getPalmares(league: LeagueSlug, teamId: string): { club: ClubPalmares; updatedAt: string } | null {
-  const file = FILES[league];
+  const file = FILES[league as TopLeagueSlug] as PalmaresFile | undefined;
   const club = file?.clubs[teamId];
   return club ? { club, updatedAt: file.updatedAt } : null;
 }
