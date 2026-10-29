@@ -7,7 +7,10 @@
 // - hauteur du conteneur réglable via `className` (h-screen par défaut) ;
 // - `useMap={1}` au lieu de `useMap` : les types de meshline attendent un nombre ;
 // - `args` facultatif pour meshLineMaterial (R3F l'instancie sans argument, comme la démo) ;
-// - `touch-action: pan-y` sur le canvas : sur mobile, la page défile toujours au-dessus du badge.
+// - `touch-action: pan-y` sur le canvas : sur mobile, la page défile toujours au-dessus du badge ;
+// - rendu et physique en pause hors écran ou onglet caché ;
+// - lissage de la sangle borné (plus d'emballement sous 50 images/s ni au retour sur l'onglet) ;
+// - le glisser s'arrête aussi quand le navigateur annule le geste (défilement sur mobile).
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -80,15 +83,38 @@ export default function Lanyard({
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState<boolean>(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
+  const container = useRef<HTMLDivElement>(null);
+  const [onScreen, setOnScreen] = useState(true);
+  const [pageVisible, setPageVisible] = useState(true);
+  const active = onScreen && pageVisible;
+
   useEffect(() => {
     const handleResize = (): void => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Pas de rendu ni de physique quand le badge est hors écran ou l'onglet caché.
+  useEffect(() => {
+    const element = container.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => setOnScreen(Boolean(entry?.isIntersecting)));
+    observer.observe(element);
+    const handleVisibility = (): void => setPageVisible(document.visibilityState === 'visible');
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, []);
+
   return (
-    <div className={`relative z-0 w-full flex justify-center items-center transform scale-100 origin-center ${className}`}>
+    <div
+      ref={container}
+      className={`relative z-0 w-full flex justify-center items-center transform scale-100 origin-center ${className}`}
+    >
       <Canvas
+        frameloop={active ? 'always' : 'never'}
         style={{ touchAction: 'pan-y' }}
         camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
@@ -96,7 +122,7 @@ export default function Lanyard({
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
       >
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60} paused={!active}>
           <Band
             isMobile={isMobile}
             frontImage={frontImage}
@@ -262,6 +288,21 @@ function Band({
     [0, 1.45, 0]
   ]);
 
+  // Fin du glisser, même relâché hors du badge ou geste annulé par le défilement mobile :
+  // sans ça le badge reste collé au pointeur.
+  useEffect(() => {
+    if (!dragged) return;
+    const release = (): void => drag(false);
+    window.addEventListener('pointerup', release);
+    window.addEventListener('pointercancel', release);
+    window.addEventListener('blur', release);
+    return () => {
+      window.removeEventListener('pointerup', release);
+      window.removeEventListener('pointercancel', release);
+      window.removeEventListener('blur', release);
+    };
+  }, [dragged]);
+
   useEffect(() => {
     if (hovered) {
       document.body.style.cursor = dragged ? 'grabbing' : 'grab';
@@ -271,7 +312,9 @@ function Band({
     }
   }, [hovered, dragged]);
 
-  useFrame((state, delta) => {
+  useFrame((state, frameDelta) => {
+    // Une image très longue (onglet repris, appareil lent) ne doit pas projeter la sangle.
+    const delta = Math.min(frameDelta, 1 / 20);
     if (dragged && typeof dragged !== 'boolean') {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
@@ -287,7 +330,11 @@ function Band({
       [j1, j2].forEach(ref => {
         const lerped = getLerped(ref.current);
         const clampedDistance = Math.max(0.1, Math.min(1, lerped.distanceTo(ref.current.translation())));
-        lerped.lerp(ref.current.translation(), delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
+        // Facteur borné à 1 : au-delà, le lissage dépasse sa cible et la sangle tremble.
+        lerped.lerp(
+          ref.current.translation(),
+          Math.min(1, delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)))
+        );
       });
       curve.points[0].copy(j3.current.translation());
       curve.points[1].copy(getLerped(j2.current));
