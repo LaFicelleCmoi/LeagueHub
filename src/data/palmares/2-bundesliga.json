@@ -1,0 +1,509 @@
+{
+  "slug": "2-bundesliga",
+  "updatedAt": "2026-10-29",
+  "clubs": {
+    "121": {
+      "qid": "Q105861",
+      "name": "VfL Bochum",
+      "total": 0,
+      "trophies": []
+    },
+    "123": {
+      "qid": "Q107818",
+      "name": "Energie Cottbus",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q316686",
+          "label": "Fußball-Oberliga Nordost",
+          "count": 1,
+          "years": [
+            "2010"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "129": {
+      "qid": "Q102720",
+      "name": "Hertha Berlin",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 2,
+          "years": [
+            "1930",
+            "1931"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue allemande",
+          "count": 2,
+          "years": [
+            "2001",
+            "2002"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "130": {
+      "qid": "Q8466",
+      "name": "Kaiserslautern",
+      "total": 6,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 4,
+          "years": [
+            "1951",
+            "1953",
+            "1991",
+            "1998"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Allemagne",
+          "count": 2,
+          "years": [
+            "1990",
+            "1996"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "138": {
+      "qid": "Q101859",
+      "name": "VfL Wolfsburg",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 1,
+          "years": [
+            "2009"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Allemagne",
+          "count": 1,
+          "years": [
+            "2015"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "269": {
+      "qid": "Q15786",
+      "name": "1. FC Nürnberg",
+      "total": 14,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 9,
+          "years": [
+            "1920",
+            "1921",
+            "1924",
+            "1925",
+            "1927",
+            "1936",
+            "1948",
+            "1961",
+            "1968"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Allemagne",
+          "count": 4,
+          "years": [
+            "1935",
+            "1939",
+            "1962",
+            "2007"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [
+            "1980"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "270": {
+      "qid": "Q6463",
+      "name": "St. Pauli",
+      "total": 6,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2188121",
+          "label": "championnat d'Allemagne de football de quatrième division",
+          "count": 4,
+          "years": [
+            "1964",
+            "1966",
+            "1972",
+            "1973"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q317927",
+          "label": "Oberliga Hamburg",
+          "count": 1,
+          "years": [
+            "2011"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "2428": {
+      "qid": "Q33748",
+      "name": "Hannover 96",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 2,
+          "years": [
+            "1938",
+            "1954"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Allemagne",
+          "count": 1,
+          "years": [
+            "1992"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2188121",
+          "label": "championnat d'Allemagne de football de quatrième division",
+          "count": 1,
+          "years": [
+            "1997"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "2506": {
+      "qid": "Q105844",
+      "name": "Arminia Bielefeld",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 2,
+          "years": [],
+          "scope": "national"
+        }
+      ]
+    },
+    "3067": {
+      "qid": "Q154053",
+      "name": "TSV Eintracht Braunschweig",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 1,
+          "years": [
+            "1967"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2188121",
+          "label": "championnat d'Allemagne de football de quatrième division",
+          "count": 1,
+          "years": [
+            "1974"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3070": {
+      "qid": "Q153539",
+      "name": "SpVgg Greuther Fürth",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 3,
+          "years": [
+            "1914",
+            "1926",
+            "1929"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "3812": {
+      "qid": "Q479351",
+      "name": "SV Darmstadt 98",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 2,
+          "years": [
+            "1981"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q316340",
+          "label": "Hessenliga",
+          "count": 2,
+          "years": [],
+          "scope": "autre"
+        }
+      ]
+    },
+    "4471": {
+      "qid": "Q105853",
+      "name": "Karlsruher SC",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Allemagne",
+          "count": 2,
+          "years": [
+            "1955",
+            "1956"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 1,
+          "years": [
+            "1909"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "years": [
+            "1996"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "6418": {
+      "qid": "Q162251",
+      "name": "1. FC Heidenheim 1846",
+      "total": 0,
+      "trophies": []
+    },
+    "7013": {
+      "qid": "Q160530",
+      "name": "VfL Osnabruck",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "autre:Q2188121",
+          "label": "championnat d'Allemagne de football de quatrième division",
+          "count": 4,
+          "years": [
+            "1969",
+            "1970",
+            "1971",
+            "2000"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "7017": {
+      "qid": "Q141931",
+      "name": "Dynamo Dresden",
+      "total": 11,
+      "trophies": [
+        {
+          "key": "autre:Q157553",
+          "label": "championnat de RDA de football",
+          "count": 8,
+          "years": [
+            "1953",
+            "1971",
+            "1973",
+            "1976",
+            "1977",
+            "1978",
+            "1989",
+            "1990"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2952011",
+          "label": "championnat de RDA de football (Bezirksliga) Dresde",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q698076",
+          "label": "Coupe de RDA de football",
+          "count": 1,
+          "years": [
+            "1985"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1548467",
+          "label": "Q1548467",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        }
+      ]
+    },
+    "7884": {
+      "qid": "Q157828",
+      "name": "Holstein Kiel",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 1,
+          "years": [
+            "1912"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2188121",
+          "label": "championnat d'Allemagne de football de quatrième division",
+          "count": 2,
+          "years": [
+            "1965",
+            "2013"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "10382": {
+      "qid": "Q155730",
+      "name": "1. FC Magdeburg",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "years": [
+            "1974"
+          ],
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q157553",
+          "label": "championnat de RDA de football",
+          "count": 3,
+          "years": [
+            "1972",
+            "1974",
+            "1975"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2952018",
+          "label": "championnat de RDA de football (Bezirksliga) Magdebourg",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1548467",
+          "label": "Q1548467",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q16064752",
+          "label": "Regionalliga",
+          "count": 1,
+          "years": [
+            "2015"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q548937",
+          "label": "Regionalliga Nord-Est",
+          "count": 1,
+          "years": [
+            "2015"
+          ],
+          "scope": "autre"
+        }
+      ]
+    }
+  }
+}
