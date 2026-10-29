@@ -1,5 +1,5 @@
 // Thème du site, mémorisé dans le navigateur (aucun compte nécessaire).
-// « système » suit le réglage de l'appareil, et le reste des composants n'a rien à savoir :
+// Sombre par défaut ; « système » suit le réglage de l'appareil. Le reste des composants n'a rien à savoir :
 // la classe posée sur <html> commande la variante « dark: » de Tailwind (voir globals.css).
 //
 // Aucun hook ici : le module est aussi importé par le layout, qui s'exécute sur le serveur.
@@ -10,11 +10,13 @@ const STORAGE_KEY = "leaguehub:theme:v1";
 const CHANGE_EVENT = "leaguehub:theme";
 const DARK_QUERY = "(prefers-color-scheme: dark)";
 
+export const DEFAULT_THEME: Theme = "dark";
+
 // Repli en mémoire si le stockage est indisponible (navigation privée stricte…).
-let memoryValue: Theme = "system";
+let memoryValue: Theme = DEFAULT_THEME;
 
 function parse(raw: string | null): Theme {
-  return raw === "light" || raw === "dark" ? raw : "system";
+  return raw === "light" || raw === "system" ? raw : DEFAULT_THEME;
 }
 
 /** Thème choisi, relu à la source : le visiteur a pu en changer dans un autre onglet. */
@@ -53,7 +55,7 @@ export function subscribeToTheme(onChange: () => void) {
 export function setTheme(theme: Theme) {
   memoryValue = theme;
   try {
-    if (theme === "system") window.localStorage.removeItem(STORAGE_KEY);
+    if (theme === DEFAULT_THEME) window.localStorage.removeItem(STORAGE_KEY);
     else window.localStorage.setItem(STORAGE_KEY, theme);
   } catch {
     // Stockage indisponible : le choix reste valable jusqu'au rechargement de la page.
@@ -63,7 +65,7 @@ export function setTheme(theme: Theme) {
 }
 
 /**
- * Exécuté dans <head> avant la première peinture : sans lui, une page réglée en sombre
- * s'afficherait en clair le temps que React démarre.
+ * Exécuté dans <head> avant la première peinture : <html> arrive du serveur en sombre (le défaut),
+ * et sans ce script une page réglée en clair s'afficherait en sombre le temps que React démarre.
  */
-export const THEME_SCRIPT = `try{var t=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});if(t==="dark"||(t!=="light"&&matchMedia(${JSON.stringify(DARK_QUERY)}).matches))document.documentElement.classList.add("dark")}catch(e){}`;
+export const THEME_SCRIPT = `try{var t=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});if(t==="light"||(t==="system"&&!matchMedia(${JSON.stringify(DARK_QUERY)}).matches))document.documentElement.classList.remove("dark")}catch(e){}`;
