@@ -1,8 +1,8 @@
 import { CUPS, cupLogo, type CupSlug } from "./cups";
-import { LEAGUES, leagueLogo, type LeagueSlug } from "./leagues";
+import { ALL_LEAGUES, leagueLogo, type LeagueSlug } from "./leagues";
 
-// Toutes les compétitions suivies par la page « Direct » : coupes d'Europe, championnats,
-// coupes nationales.
+// Toutes les compétitions suivies par la page « Direct » : coupes d'Europe, championnats
+// (deuxièmes divisions comprises), coupes nationales.
 
 export type EuropeanSlug = "ligue-des-champions" | "ligue-europa" | "ligue-conference";
 
@@ -58,7 +58,7 @@ export const DIRECT_COMPETITIONS: readonly DirectCompetition[] = [
     accent: competition.accent,
     href: null,
   })),
-  ...LEAGUES.map((league) => ({
+  ...ALL_LEAGUES.map((league) => ({
     slug: league.slug,
     kind: "league" as const,
     espnCode: league.espnCode,
