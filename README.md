@@ -2,6 +2,8 @@
 
 Les 5 grands championnats européens réunis sur un seul site : **Premier League** (Angleterre), **La Liga** (Espagne), **Serie A** (Italie), **Bundesliga** (Allemagne) et **Ligue 1** (France).
 
+Leurs deuxièmes divisions ont aussi leurs pages : **Championship** (Angleterre), **Segunda División** (LaLiga Hypermotion, Espagne), **Serie B** (Italie), **2. Bundesliga** (Allemagne) et **Ligue 2** (BKT, France).
+
 Pour chaque championnat :
 
 - **Chiffres clés** : nombre de clubs, matchs et buts du jour, buts au total en saison régulière avec la moyenne par match
@@ -12,6 +14,8 @@ Pour chaque championnat :
 - **Actualités** : derniers articles ESPN
 
 La page d'accueil réunit les chiffres clés (dont le total de buts de la saison régulière des 5 championnats et la moyenne par match), le badge 3D « Pass supporter », les raccourcis vers chaque championnat, le bandeau des 96 clubs, les matchs du jour et le top 5 de chaque classement.
+
+- **Deuxièmes divisions** (`/deuxiemes-divisions`) : un bandeau sous les raccourcis de l'accueil (et le lien « D2 » de l'en-tête) mène à leur propre page d'accueil, construite sur le même modèle (`LeaguesHome`) : chiffres clés, raccourcis, bandeau des clubs, matchs du jour et top 5 des classements. Chacune a les mêmes onglets qu'un grand championnat (classement, matchs, buteurs, actualités) ; le classement montre les zones de montée directe, de barrage de promotion et de relégation. Elles figurent dans le Direct et la recherche de club ; le club favori et le palmarès restent réservés aux 5 grands championnats.
 
 - **Forme d'un club** : un clic sur un club, dans le bandeau ou dans les classements, ouvre ses 5 derniers matchs officiels (toutes compétitions), avec victoire / nul / défaite, score, adversaire, lieu et compétition.
 - **Thème clair ou sombre** : un bouton dans l'en-tête (et une ligne dans le menu mobile) fait le tour des trois réglages — système, clair, sombre. Le choix est mémorisé dans le navigateur et appliqué avant la première peinture : une page réglée en sombre ne s'affiche jamais en clair au chargement. Sans choix explicite, le site suit le réglage de l'appareil.
@@ -24,7 +28,7 @@ La page d'accueil réunit les chiffres clés (dont le total de buts de la saison
 - **Calendrier stocké dans le site, direct ESPN** : l'organisation du site (quels matchs, dates, stades, tours des coupes) vient de `src/data/calendrier/`, relevé chaque nuit chez ESPN par `scripts/sync-calendar.mts` (GitHub Action `calendrier.yml`, un commit par fichier modifié). Les pages s'affichent donc même si ESPN ne répond pas ; ESPN n'apporte que l'état des matchs : score, minute, buts, cartons jaunes et rouges. Lancer le relevé à la main : `npm run calendrier`.
 - **Détails du match** : bouton sur chaque carte de match, avec tout ce qu'ESPN fournit, en français — chronologie complète (buts et passeurs, penaltys marqués, manqués ou arrêtés, contre-son-camp, cartons et motifs, remplacements, VAR, arrêts de jeu, périodes), 28 statistiques comparées, compositions (schéma, titulaires, remplaçants, entrées et sorties), arbitres, stade, affluence, diffuseurs et commentaire minute par minute (en anglais). Relu toutes les 30 s pendant le match.
 - **Interface adaptée au calendrier** : les jours sans match (trêve, milieu de semaine), les chiffres du jour laissent la place à la prochaine journée (jours restants, nombre de matchs sur la journée) et aux points du leader, et l'accueil montre les prochains matchs au lieu d'un encadré vide. La page Matchs est en grilles pleine largeur et reprend la dernière journée jouée quand rien n'a eu lieu depuis 7 jours. Les réglages (onglet Coupes, thème) sont regroupés dans un menu, le badge 3D est réservé aux grands écrans et le pied de page donne accès à toutes les rubriques.
-- **Direct toutes compétitions** (`/direct`) : tous les matchs d'une journée — Ligue des champions, Ligue Europa, Ligue Conférence, les 5 championnats et les 5 coupes nationales — groupés par compétition, avec le direct, des filtres (en direct, à venir, terminés, mon club) et la navigation hier / aujourd'hui / demain.
+- **Direct toutes compétitions** (`/direct`) : tous les matchs d'une journée — Ligue des champions, Ligue Europa, Ligue Conférence, les 5 championnats, leurs deuxièmes divisions et les 5 coupes nationales — groupés par compétition, avec le direct, des filtres (en direct, à venir, terminés, mon club) et la navigation hier / aujourd'hui / demain.
 - **Avant-match** : dans « Détails du match », la forme des deux équipes (5 derniers matchs, toutes compétitions) et les confrontations directes avec leur bilan.
 - **Application installable (PWA)** : manifeste, icônes et service worker. Le site s'installe sur l'écran d'accueil et s'ouvre en plein écran ; hors connexion, une page dédiée s'affiche. Aucune donnée n'est mise en cache : les scores viennent toujours du réseau.
 - **Images sans coût Vercel** : l'optimisation d'images de Vercel est désactivée ; logos et photos d'actualité sont redimensionnés par ESPN lui-même (service « combiner »), au double de leur taille d'affichage. Un logo pèse quelques kilo-octets au lieu de 25 Ko, et aucune transformation n'est facturée.
@@ -48,12 +52,14 @@ La page d'accueil réunit les chiffres clés (dont le total de buts de la saison
 ```
 src/
 ├── app/
-│   ├── page.tsx                  Accueil
+│   ├── page.tsx                  Accueil (5 grands championnats)
+│   ├── deuxiemes-divisions/      Accueil des deuxièmes divisions
 │   ├── icon.svg, apple-icon.png  Favicon et icône iOS
 │   ├── api/live/[league]/        Scores en direct (JSON) pour le navigateur
 │   ├── api/teams/[league]/[team] 5 derniers matchs d'un club (JSON)
 │   ├── coupes/                   Onglet Coupes nationales : /coupes et /coupes/[coupe]
-│   └── [league]/                 premier-league, la-liga, serie-a, bundesliga, ligue-1
+│   └── [league]/                 premier-league, la-liga, serie-a, bundesliga, ligue-1,
+│                                 championship, segunda-division, serie-b, 2-bundesliga, ligue-2
 │       ├── layout.tsx            En-tête du championnat + onglets
 │       ├── page.tsx              Classement
 │       ├── matchs/page.tsx       Direct, résultats, calendrier
@@ -68,12 +74,12 @@ src/
 │   ├── HeroBadge.tsx             Badge 3D (chargement différé, version fixe de secours)
 │   └── …                         Tableaux, cartes de match, logos, navigation
 └── lib/
-    ├── leagues.ts                Configuration des 5 championnats
+    ├── leagues.ts                Configuration des 5 championnats et de leurs deuxièmes divisions
     ├── cups.ts                   Configuration des 5 coupes nationales (tours et dates en français)
     ├── cup-calendar.ts           Calendrier officiel 2026-27 des coupes, fusionné avec les données ESPN
     ├── cups-tab.ts               Interrupteur de l'onglet Coupes, mémorisé dans le navigateur
     ├── calendar.ts               Calendrier stocké dans le site (matchs, dates, stades, tours)
-    ├── clubs.ts                  Index des clubs des 5 championnats (barre de recherche)
+    ├── clubs.ts                  Index des clubs de tous les championnats (barre de recherche)
     ├── palmares.ts               Palmarès des clubs relevé sur Wikidata
     ├── countdown.ts              Horloge partagée des comptes à rebours avant le coup d'envoi
     ├── team-form.ts              Fiche d'un club côté navigateur, relue toutes les 30 s pendant ses matchs
@@ -141,8 +147,8 @@ Huit composants de [React Bits](https://reactbits.dev) (licence MIT + Commons Cl
 | Composant | Utilisation |
 | --- | --- |
 | Lanyard | Badge 3D « Pass supporter » accroché à sa sangle, personnalisable avec le club favori |
-| PixelCard | Raccourcis vers les 5 championnats, pixels aux couleurs de chaque ligue |
-| SplitFlapText | Panneau d'affichage des championnats sur l'accueil |
+| PixelCard | Raccourcis vers les championnats, pixels aux couleurs de chaque ligue |
+| SplitFlapText | Panneau d'affichage des championnats sur les deux accueils |
 | CountUp | Chiffres clés de l'accueil |
 | LogoLoop | Bandeau défilant des clubs (clic pour la forme du club) |
 | SpotlightCard | Halo aux couleurs de la ligue sur les cartes top 5 |
