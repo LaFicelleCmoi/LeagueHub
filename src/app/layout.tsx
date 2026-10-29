@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Barlow_Condensed, Geist, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
 import { Trophy } from "lucide-react";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
@@ -12,6 +12,19 @@ import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+// Titres et logo : police condensée façon panneau de stade, qui loge les longs noms de clubs.
+const barlowCondensed = Barlow_Condensed({
+  variable: "--font-barlow-condensed",
+  subsets: ["latin"],
+  weight: ["600", "700", "900"],
+});
+
+// Panneau à palettes de l'accueil : même rendu sur toutes les machines.
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -43,7 +56,8 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className={`${geistSans.variable} flex min-h-dvh flex-col font-sans antialiased`}>
+      <body className={`${geistSans.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable} flex min-h-dvh flex-col font-sans antialiased`}>
+        <div className="site-ball" aria-hidden />
         {/* Les clubs du calendrier alimentent la recherche de l'en-tête. */}
         <SiteHeader clubs={clubIndex()} />
         <ServiceWorkerRegistration />
@@ -51,7 +65,7 @@ export default function RootLayout({
         <footer className="mt-8 border-t border-slate-200 bg-white/60 dark:border-slate-800 dark:bg-slate-950/60">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-5">
             <div className="space-y-3">
-              <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold tracking-tight">
+              <Link href="/" className="inline-flex items-center gap-2 font-display text-xl font-bold tracking-wide">
                 <span className="grid size-8 place-items-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
                   <Trophy className="size-4" aria-hidden />
                 </span>
