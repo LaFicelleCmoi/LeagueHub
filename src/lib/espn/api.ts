@@ -14,7 +14,7 @@ import { buildRounds, CUP_CALENDARS } from "@/lib/cup-calendar";
 import { frenchDateRange, legLabel, roundKey, roundLabel, type Cup } from "@/lib/cups";
 import { addDays, dayKey, espnDate, formatTime } from "@/lib/format";
 import { CUPS } from "@/lib/cups";
-import { getLeague, LEAGUES, type League } from "@/lib/leagues";
+import { ALL_LEAGUES, getLeague, type League } from "@/lib/leagues";
 import type {
   Article,
   CupMatch,
@@ -108,6 +108,9 @@ function toZone(description: string | undefined): Zone | null {
   if (text.includes("champions league")) return { label: `Ligue des champions${suffix}`, tone: "ucl", qualifying };
   if (text.includes("europa league")) return { label: `Ligue Europa${suffix}`, tone: "uel", qualifying };
   if (text.includes("conference league")) return { label: `Ligue Conférence${suffix}`, tone: "uecl", qualifying };
+  // Deuxièmes divisions : montée directe et barrages d'accession.
+  if (/promotion play-?off/.test(text)) return { label: "Barrage de promotion", tone: "promotion-playoff", qualifying };
+  if (text.includes("promotion")) return { label: "Promotion", tone: "promotion", qualifying };
   if (/relegation play-?off/.test(text)) return { label: "Barrage de relégation", tone: "playoff", qualifying };
   if (text.includes("relegat")) return { label: "Relégation", tone: "relegation", qualifying };
   return { label: description, tone: "other", qualifying };
@@ -435,8 +438,7 @@ export async function getNews(league: League, limit = 12): Promise<Article[]> {
 // Compétitions officielles retenues, avec leur nom en français. Les championnats nationaux
 // (« eng.1 », « eng.2 »…) sont aussi retenus ; amicaux et tournois de préparation sont ignorés.
 const COMPETITION_LABELS: Record<string, string> = {
-  ...Object.fromEntries(LEAGUES.map((league) => [league.espnCode, league.name])),
-  "eng.2": "Championship",
+  ...Object.fromEntries(ALL_LEAGUES.map((league) => [league.espnCode, league.name])),
   "eng.fa": "FA Cup",
   "eng.league_cup": "Carabao Cup",
   "eng.charity": "Community Shield",
