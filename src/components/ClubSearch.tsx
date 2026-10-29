@@ -30,14 +30,17 @@ function score(club: ClubIndexEntry, query: string): number {
   return -1;
 }
 
-// Barre de recherche des clubs : mène à la page d'un club (saison en cours et palmarès).
+// Barre de recherche des clubs : mène à la page d'un club (saison en cours et palmarès),
+// ou, avec `onSelect`, sert à choisir un club sans quitter la page (simulateur de match).
 export function ClubSearch({
   clubs,
   onNavigate,
+  onSelect,
   placeholder = "Rechercher un club",
 }: {
   clubs: ClubIndexEntry[];
   onNavigate?: () => void;
+  onSelect?: (club: ClubIndexEntry) => void;
   placeholder?: string;
 }) {
   const router = useRouter();
@@ -59,8 +62,9 @@ export function ClubSearch({
       .map((item) => item.club);
   }, [clubs, query]);
 
-  // Raccourci « / » : la recherche prend le focus, sauf si on écrit déjà quelque part.
+  // Raccourci « / » : la recherche de l'en-tête prend le focus, sauf si on écrit déjà quelque part.
   useEffect(() => {
+    if (onSelect) return;
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       const typing = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target?.isContentEditable;
@@ -71,7 +75,7 @@ export function ClubSearch({
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [onSelect]);
 
   // Clic en dehors : la liste se referme.
   useEffect(() => {
@@ -86,6 +90,10 @@ export function ClubSearch({
   const go = (club: ClubIndexEntry) => {
     setOpen(false);
     setQuery("");
+    if (onSelect) {
+      onSelect(club);
+      return;
+    }
     onNavigate?.();
     router.push(`/clubs/${club.league}/${club.id}`);
   };
@@ -160,29 +168,41 @@ export function ClubSearch({
           ) : (
             results.map((club, index) => {
               const league = getLeague(club.league);
+              const className = `flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left ${
+                index === active ? "bg-slate-100 dark:bg-slate-800" : ""
+              }`;
+              const content = (
+                <>
+                  <TeamLogo team={{ ...club, logo: club.logo }} size={24} />
+                  <span className="min-w-0 flex-1 truncate text-sm font-medium">{club.name}</span>
+                  {league && (
+                    <span className="flex shrink-0 items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                      <LeagueLogo league={league} size={14} />
+                      <span className="hidden sm:inline">{league.name}</span>
+                    </span>
+                  )}
+                </>
+              );
               return (
                 <li key={`${club.league}-${club.id}`} id={`${listId}-${index}`} role="option" aria-selected={index === active}>
-                  <Link
-                    href={`/clubs/${club.league}/${club.id}`}
-                    onClick={() => {
-                      setOpen(false);
-                      setQuery("");
-                      onNavigate?.();
-                    }}
-                    onMouseEnter={() => setActive(index)}
-                    className={`flex items-center gap-3 rounded-lg px-2 py-2 ${
-                      index === active ? "bg-slate-100 dark:bg-slate-800" : ""
-                    }`}
-                  >
-                    <TeamLogo team={{ ...club, logo: club.logo }} size={24} />
-                    <span className="min-w-0 flex-1 truncate text-sm font-medium">{club.name}</span>
-                    {league && (
-                      <span className="flex shrink-0 items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
-                        <LeagueLogo league={league} size={14} />
-                        <span className="hidden sm:inline">{league.name}</span>
-                      </span>
-                    )}
-                  </Link>
+                  {onSelect ? (
+                    <button type="button" onClick={() => go(club)} onMouseEnter={() => setActive(index)} className={className}>
+                      {content}
+                    </button>
+                  ) : (
+                    <Link
+                      href={`/clubs/${club.league}/${club.id}`}
+                      onClick={() => {
+                        setOpen(false);
+                        setQuery("");
+                        onNavigate?.();
+                      }}
+                      onMouseEnter={() => setActive(index)}
+                      className={className}
+                    >
+                      {content}
+                    </Link>
+                  )}
                 </li>
               );
             })
