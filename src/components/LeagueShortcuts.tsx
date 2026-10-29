@@ -79,7 +79,7 @@ export function LeagueGroupLink({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 rounded-2xl bg-slate-900 px-4 py-5 text-white shadow-sm transition outline-offset-2 hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-slate-900 sm:px-6 dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 dark:hover:bg-slate-700 dark:focus-visible:outline-white"
+      className="group flex flex-col items-start gap-3 rounded-2xl bg-slate-900 px-4 py-5 sm:flex-row sm:items-center sm:gap-4 text-white shadow-sm transition outline-offset-2 hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-slate-900 sm:px-6 dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 dark:hover:bg-slate-700 dark:focus-visible:outline-white"
     >
       <span aria-hidden className="flex shrink-0 -space-x-1.5 sm:-space-x-1">
         {leagues.map((league) => (
@@ -92,15 +92,18 @@ export function LeagueGroupLink({
           </span>
         ))}
       </span>
-      <span className="min-w-0 flex-1">
-        <span className="block text-xs font-semibold uppercase tracking-wide text-slate-400">{eyebrow}</span>
-        <span className="block text-lg font-bold">{title}</span>
-        <span className="block text-sm text-slate-300">{description}</span>
+      {/* Mobile : logos au-dessus, le texte garde toute la largeur. */}
+      <span className="flex w-full min-w-0 flex-1 items-center gap-4">
+        <span className="min-w-0 flex-1">
+          <span className="block text-xs font-semibold uppercase tracking-wide text-slate-400">{eyebrow}</span>
+          <span className="block text-lg font-bold">{title}</span>
+          <span className="block text-sm text-slate-300">{description}</span>
+        </span>
+        <ChevronRight
+          className="size-6 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
+          aria-hidden
+        />
       </span>
-      <ChevronRight
-        className="size-6 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
-        aria-hidden
-      />
     </Link>
   );
 }
