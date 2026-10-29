@@ -18,7 +18,7 @@ export default async function LeadersPage({ params }: LeaguePageProps) {
   const { goals, assists } = await getLeaders(league);
 
   return (
-    <div className="grid items-start gap-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
       <LeadersTable title="Meilleurs buteurs" statAbbr="Buts" statTitle="Buts marqués" leaders={goals} />
       <LeadersTable title="Meilleurs passeurs" statAbbr="PD" statTitle="Passes décisives" leaders={assists} />
     </div>
