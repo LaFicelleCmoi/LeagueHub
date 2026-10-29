@@ -2,7 +2,7 @@
 
 import { useCallback, useLayoutEffect, useMemo, useRef } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { divisionOf, useFavoriteClub } from "@/lib/favorite-club";
 import { formatGoalDiff } from "@/lib/format";
 import type { LeagueSlug } from "@/lib/leagues";
 import { computeLiveStandings, preMatchKey, type LiveResult } from "@/lib/live-standings";
@@ -119,7 +119,7 @@ export function StandingsTable({
 }) {
   const liveMatches = useLiveMatches(matches);
   const openClub = useOpenClub();
-  const favorite = useFavoriteClub();
+  const favorite = useFavoriteClub(divisionOf(league));
 
   // Nombre de matchs d'avant-match des équipes vues en train de jouer : sert à savoir, une fois
   // le match terminé, si ESPN l'a déjà ajouté à son classement.
