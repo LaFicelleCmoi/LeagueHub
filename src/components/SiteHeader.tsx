@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState } from "react";
-import { ArrowUpRight, Menu, Star, Trophy, X } from "lucide-react";
+import { ArrowUpRight, Dices, Menu, Star, Trophy, X } from "lucide-react";
 import type { ClubIndexEntry } from "@/lib/clubs";
 import { useCupsTab } from "@/lib/cups-tab";
 import { UCL_TRACKER_URL } from "@/lib/external-links";
@@ -72,6 +72,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const cupsTab = useCupsTab();
   const onCups = pathname.startsWith("/coupes");
   const onDirect = pathname.startsWith("/direct");
+  const onSimulator = pathname.startsWith("/simulateur");
   // Accueil des deuxièmes divisions, page de l'une d'elles ou d'un de leurs clubs (/clubs/ligue-2/…).
   const segments = pathname.split("/");
   const leagueSegment = segments[1] === "clubs" ? segments[2] : segments[1];
@@ -132,6 +133,22 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
               >
                 <LiveDot />
                 Direct
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/simulateur"
+                aria-current={onSimulator ? "page" : undefined}
+                title="Simulateur de match"
+                className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors ${
+                  onSimulator
+                    ? "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                }`}
+              >
+                <Dices className="size-4" aria-hidden />
+                {/* Icône seule entre 1024 et 1280 px : la barre est déjà chargée. */}
+                <span className="sr-only xl:not-sr-only">Simulateur</span>
               </Link>
             </li>
             {cupsTab && (
@@ -202,6 +219,22 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 </span>
                 <span>Direct</span>
                 <span className="ml-auto text-sm font-normal text-slate-500 dark:text-slate-400">Tous les matchs du jour</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/simulateur"
+                onClick={close}
+                aria-current={onSimulator ? "page" : undefined}
+                className={`flex items-center gap-3 rounded-lg px-3 py-3 font-semibold ${
+                  onSimulator ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                <span className="grid size-6 place-items-center">
+                  <Dices className="size-5" aria-hidden />
+                </span>
+                <span>Simulateur</span>
+                <span className="ml-auto text-sm font-normal text-slate-500 dark:text-slate-400">Crée ton propre match</span>
               </Link>
             </li>
             <li className="flex items-center justify-between gap-3 px-3 pb-1 pt-2">
