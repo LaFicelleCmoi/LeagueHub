@@ -25,10 +25,11 @@ export default function HomePage() {
         </div>
       }
       favorite
-      shortcutsFooter={
+      footer={
         <LeagueGroupLink
           href={SECOND_DIVISIONS_HREF}
-          title="Deuxièmes divisions"
+          eyebrow="Un autre espace"
+          title="Les deuxièmes divisions"
           description="Championship, Segunda División, Serie B, 2. Bundesliga et Ligue 2"
           leagues={SECOND_DIVISIONS}
         />
