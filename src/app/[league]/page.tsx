@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: LeaguePageProps): Promise<Met
   const league = await resolveLeague(params);
   return {
     title: `Classement ${league.name}`,
-    description: `Classement en direct de la ${league.name} (${league.country}) : points, victoires, buts et zones européennes.`,
+    description: `Classement en direct de la ${league.name} (${league.country}) : points, victoires, buts et ${league.tier === 1 ? "zones européennes" : "zones de montée et de relégation"}.`,
   };
 }
 
