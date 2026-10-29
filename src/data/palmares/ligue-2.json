@@ -1,0 +1,629 @@
+{
+  "slug": "ligue-2",
+  "updatedAt": "2026-10-29",
+  "clubs": {
+    "165": {
+      "qid": "Q192071",
+      "name": "Nantes",
+      "total": 15,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 8,
+          "years": [
+            "1965",
+            "1966",
+            "1973",
+            "1977",
+            "1980",
+            "1983",
+            "1995",
+            "2001"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 4,
+          "years": [
+            "1979",
+            "1999",
+            "2000",
+            "2022"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 3,
+          "years": [
+            "1974",
+            "1975",
+            "2002"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "171": {
+      "qid": "Q459148",
+      "name": "Guingamp",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 2,
+          "years": [
+            "2009",
+            "2014"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "years": [
+            "1996"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "177": {
+      "qid": "Q221525",
+      "name": "Metz",
+      "total": 11,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 4,
+          "years": [
+            "1935",
+            "2007",
+            "2014",
+            "2019"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 2,
+          "years": [
+            "1984",
+            "1988"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "years": [
+            "1996"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 3,
+          "years": [
+            "1981",
+            "2001",
+            "2010"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q973312",
+          "label": "championnat de France de football de cinquième division",
+          "count": 1,
+          "years": [
+            "2010"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "178": {
+      "qid": "Q19521",
+      "name": "Saint-Étienne",
+      "total": 24,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 10,
+          "years": [
+            "1957",
+            "1964",
+            "1967",
+            "1968",
+            "1969",
+            "1970",
+            "1974",
+            "1975",
+            "1976",
+            "1981"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 6,
+          "years": [
+            "1962",
+            "1968",
+            "1970",
+            "1974",
+            "1975",
+            "1977"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 3,
+          "years": [
+            "1963",
+            "1999",
+            "2004"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "years": [
+            "2013"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 4,
+          "years": [
+            "1963",
+            "1970",
+            "1998",
+            "2019"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "272": {
+      "qid": "Q19512",
+      "name": "Sochaux",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 2,
+          "years": [
+            "1935",
+            "1938"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 2,
+          "years": [
+            "1947",
+            "2001"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 2,
+          "years": [
+            "1937",
+            "2007"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "years": [
+            "2004"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 3,
+          "years": [
+            "1983",
+            "2007",
+            "2015"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "274": {
+      "qid": "Q19513",
+      "name": "Montpellier",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 3,
+          "years": [
+            "1946",
+            "1961",
+            "1987"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 2,
+          "years": [
+            "1929",
+            "1990"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 1,
+          "years": [
+            "2012"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 3,
+          "years": [
+            "1996",
+            "2009",
+            "2017"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "years": [
+            "1999"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3170": {
+      "qid": "Q503317",
+      "name": "Dijon FCO",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2026"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3171": {
+      "qid": "Q870182",
+      "name": "Clermont Foot",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 2,
+          "years": [
+            "2002",
+            "2007"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3243": {
+      "qid": "Q208228",
+      "name": "Stade de Reims",
+      "total": 14,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat de France",
+          "count": 6,
+          "years": [
+            "1949",
+            "1953",
+            "1955",
+            "1958",
+            "1960",
+            "1962"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 2,
+          "years": [
+            "1966",
+            "2018"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 2,
+          "years": [
+            "1950",
+            "1958"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q973312",
+          "label": "championnat de France de football de cinquième division",
+          "count": 1,
+          "years": [
+            "2016"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2004"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "years": [
+            "1964"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q4216",
+          "label": "Coupe Latine de football",
+          "count": 1,
+          "years": [
+            "1953"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3266": {
+      "qid": "Q760736",
+      "name": "Stade Laval",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2022"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1137325",
+          "label": "Coupe Gambardella",
+          "count": 1,
+          "years": [
+            "1984"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3267": {
+      "qid": "Q19523",
+      "name": "AS Nancy Lorraine",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 5,
+          "years": [
+            "1975",
+            "1990",
+            "1998",
+            "2005",
+            "2016"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 1,
+          "years": [
+            "1978"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue française",
+          "count": 1,
+          "years": [
+            "2006"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2025"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "6994": {
+      "qid": "Q209509",
+      "name": "Grenoble",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 2,
+          "years": [
+            "1960",
+            "1962"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1061291",
+          "label": "championnat de France de football de quatrième division",
+          "count": 1,
+          "years": [
+            "2017"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2001"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "7719": {
+      "qid": "Q292231",
+      "name": "Rodez Aveyron",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2019"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "7732": {
+      "qid": "Q1815297",
+      "name": "Dunkerque",
+      "total": 0,
+      "trophies": []
+    },
+    "7869": {
+      "qid": "Q309400",
+      "name": "Boulogne",
+      "total": 0,
+      "trophies": []
+    },
+    "10678": {
+      "qid": "Q288419",
+      "name": "Pau",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 1,
+          "years": [
+            "2020"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "11884": {
+      "qid": "Q522283",
+      "name": "Red Star FC 93",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe de France",
+          "count": 5,
+          "years": [
+            "1921",
+            "1922",
+            "1923",
+            "1928",
+            "1942"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat de France de D2",
+          "count": 2,
+          "years": [
+            "1934",
+            "1939"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q864298",
+          "label": "championnat de France de football de troisième division",
+          "count": 3,
+          "years": [
+            "2015",
+            "2018",
+            "2024"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "18066": {
+      "qid": "Q1140695",
+      "name": "Annecy",
+      "total": 0,
+      "trophies": []
+    }
+  }
+}
