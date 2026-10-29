@@ -1,6 +1,6 @@
 {
   "slug": "premier-league",
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-10-29",
   "clubs": {
     "306": {
       "qid": "Q19477",
@@ -87,6 +87,15 @@
       "total": 5,
       "trophies": [
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1935"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "autre:Q1436448",
           "label": "Football League Third Division",
           "count": 2,
@@ -113,40 +122,22 @@
             "1963"
           ],
           "scope": "autre"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 1,
-          "years": [
-            "1935"
-          ],
-          "scope": "autre"
         }
       ]
     },
     "349": {
       "qid": "Q19568",
       "name": "AFC Bournemouth",
-      "total": 3,
+      "total": 2,
       "trophies": [
         {
-          "key": "championnat",
-          "label": "Championnat d'Angleterre",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
           "count": 1,
           "years": [
             "2015"
           ],
           "scope": "national"
-        },
-        {
-          "key": "autre:Q19510",
-          "label": "championnat d'Angleterre de football de deuxième division",
-          "count": 1,
-          "years": [
-            "2015"
-          ],
-          "scope": "autre"
         },
         {
           "key": "autre:Q1436448",
@@ -164,6 +155,19 @@
       "name": "Leeds United",
       "total": 12,
       "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 5,
+          "years": [
+            "1924",
+            "1964",
+            "1990",
+            "2020",
+            "2025"
+          ],
+          "scope": "national"
+        },
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
@@ -202,27 +206,6 @@
             "1971"
           ],
           "scope": "europe"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 3,
-          "years": [
-            "1924",
-            "1964",
-            "1990"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q19510",
-          "label": "championnat d'Angleterre de football de deuxième division",
-          "count": 2,
-          "years": [
-            "2020",
-            "2025"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -374,6 +357,16 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 2,
+          "years": [
+            "1936",
+            "1975"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 3,
@@ -428,39 +421,14 @@
             "1999"
           ],
           "scope": "monde"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 2,
-          "years": [
-            "1936",
-            "1975"
-          ],
-          "scope": "autre"
         }
       ]
     },
     "361": {
       "qid": "Q18716",
       "name": "Newcastle United",
-      "total": 23,
+      "total": 21,
       "trophies": [
-        {
-          "key": "championnat",
-          "label": "Championnat d'Angleterre",
-          "count": 7,
-          "years": [
-            "1905",
-            "1907",
-            "1909",
-            "1927",
-            "1993",
-            "2010",
-            "2017"
-          ],
-          "scope": "national"
-        },
         {
           "key": "coupe",
           "label": "Coupe d'Angleterre (FA Cup)",
@@ -472,6 +440,30 @@
             "1951",
             "1952",
             "1955"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 4,
+          "years": [
+            "1905",
+            "1907",
+            "1909",
+            "1927"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 4,
+          "years": [
+            "1965",
+            "1993",
+            "2010",
+            "2017"
           ],
           "scope": "national"
         },
@@ -505,30 +497,11 @@
           "scope": "autre"
         },
         {
-          "key": "autre:Q19510",
-          "label": "championnat d'Angleterre de football de deuxième division",
-          "count": 2,
-          "years": [
-            "2010",
-            "2017"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q182068",
           "label": "Coupe Intertoto",
           "count": 1,
           "years": [
             "2006"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 1,
-          "years": [
-            "1965"
           ],
           "scope": "autre"
         },
@@ -590,6 +563,15 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1938"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 1,
@@ -633,15 +615,6 @@
           "count": 1,
           "years": [
             "2001"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 1,
-          "years": [
-            "1938"
           ],
           "scope": "autre"
         },
@@ -705,6 +678,16 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 2,
+          "years": [
+            "1984",
+            "1989"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 2,
@@ -752,16 +735,6 @@
             "2025"
           ],
           "scope": "monde"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 2,
-          "years": [
-            "1984",
-            "1989"
-          ],
-          "scope": "autre"
         },
         {
           "key": "autre:Q1466284",
@@ -849,6 +822,18 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 4,
+          "years": [
+            "1894",
+            "1896",
+            "1905",
+            "1962"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c1",
           "label": "Ligue des champions",
           "count": 6,
@@ -894,18 +879,6 @@
           "scope": "monde"
         },
         {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 4,
-          "years": [
-            "1894",
-            "1896",
-            "1905",
-            "1962"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q1054420",
           "label": "Lancashire Combination",
           "count": 2,
@@ -924,19 +897,28 @@
     "366": {
       "qid": "Q18739",
       "name": "Sunderland",
-      "total": 23,
+      "total": 21,
       "trophies": [
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
-          "count": 10,
+          "count": 6,
           "years": [
             "1892",
             "1893",
             "1895",
             "1902",
             "1913",
-            "1936",
+            "1936"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 5,
+          "years": [
+            "1976",
             "1996",
             "1999",
             "2005",
@@ -959,25 +941,6 @@
           "label": "Northern Football Alliance",
           "count": 5,
           "years": [],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q19510",
-          "label": "championnat d'Angleterre de football de deuxième division",
-          "count": 2,
-          "years": [
-            "2005",
-            "2007"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 1,
-          "years": [
-            "1976"
-          ],
           "scope": "autre"
         },
         {
@@ -1053,6 +1016,16 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 2,
+          "years": [
+            "1920",
+            "1950"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
@@ -1071,16 +1044,6 @@
             "1963"
           ],
           "scope": "europe"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 2,
-          "years": [
-            "1920",
-            "1950"
-          ],
-          "scope": "autre"
         },
         {
           "key": "autre:Q4311339",
@@ -1154,6 +1117,15 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1931"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
@@ -1167,15 +1139,6 @@
           "label": "The Combination",
           "count": 7,
           "years": [],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 1,
-          "years": [
-            "1931"
-          ],
           "scope": "autre"
         },
         {
@@ -1193,11 +1156,13 @@
       "total": 8,
       "trophies": [
         {
-          "key": "championnat",
-          "label": "Championnat d'Angleterre",
-          "count": 1,
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 3,
           "years": [
-            "2001"
+            "1949",
+            "2001",
+            "2022"
           ],
           "scope": "national"
         },
@@ -1211,31 +1176,12 @@
           "scope": "europe"
         },
         {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 2,
-          "years": [
-            "1949",
-            "1999"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q18573",
           "label": "Southern Football League",
           "count": 2,
           "years": [
             "1906",
             "1907"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q19510",
-          "label": "championnat d'Angleterre de football de deuxième division",
-          "count": 1,
-          "years": [
-            "2022"
           ],
           "scope": "autre"
         },
@@ -1247,6 +1193,15 @@
             "2002"
           ],
           "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "years": [
+            "1999"
+          ],
+          "scope": "autre"
         }
       ]
     },
@@ -1255,6 +1210,17 @@
       "name": "Ipswich Town",
       "total": 7,
       "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 3,
+          "years": [
+            "1961",
+            "1968",
+            "1992"
+          ],
+          "scope": "national"
+        },
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
@@ -1283,17 +1249,6 @@
           "scope": "europe"
         },
         {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 3,
-          "years": [
-            "1961",
-            "1968",
-            "1992"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q18573",
           "label": "Southern Football League",
           "count": 1,
@@ -1312,11 +1267,10 @@
         {
           "key": "championnat",
           "label": "Championnat d'Angleterre",
-          "count": 11,
+          "count": 10,
           "years": [
             "1937",
             "1968",
-            "2002",
             "2012",
             "2014",
             "2018",
@@ -1362,6 +1316,21 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 7,
+          "years": [
+            "1899",
+            "1903",
+            "1910",
+            "1928",
+            "1947",
+            "1966",
+            "2002"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
@@ -1387,20 +1356,6 @@
             "2023"
           ],
           "scope": "monde"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 6,
-          "years": [
-            "1899",
-            "1903",
-            "1910",
-            "1928",
-            "1947",
-            "1966"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -1410,8 +1365,8 @@
       "total": 2,
       "trophies": [
         {
-          "key": "championnat",
-          "label": "Championnat d'Angleterre",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
           "count": 1,
           "years": [
             "1994"
@@ -1512,11 +1467,12 @@
           "scope": "national"
         },
         {
-          "key": "championnat",
-          "label": "Championnat d'Angleterre",
-          "count": 2,
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 3,
           "years": [
-            "1978",
+            "1907",
+            "1922",
             "1998"
           ],
           "scope": "national"
@@ -1528,6 +1484,15 @@
           "years": [
             "1898",
             "1959"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "years": [
+            "1978"
           ],
           "scope": "national"
         },
@@ -1549,16 +1514,6 @@
             "1979"
           ],
           "scope": "europe"
-        },
-        {
-          "key": "autre:Q769744",
-          "label": "Football League Second Division",
-          "count": 2,
-          "years": [
-            "1907",
-            "1922"
-          ],
-          "scope": "autre"
         }
       ]
     }
