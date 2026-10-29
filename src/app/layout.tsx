@@ -6,7 +6,7 @@ import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistratio
 import { SiteHeader } from "@/components/SiteHeader";
 import { clubIndex } from "@/lib/clubs";
 import { UCL_TRACKER_URL } from "@/lib/external-links";
-import { LEAGUES, SECOND_DIVISIONS_HREF } from "@/lib/leagues";
+import { LEAGUES, SECOND_DIVISIONS, SECOND_DIVISIONS_HREF } from "@/lib/leagues";
 import { THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
@@ -51,7 +51,7 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
         <footer className="mt-8 border-t border-slate-200 bg-white/60 dark:border-slate-800 dark:bg-slate-950/60">
-          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-5">
             <div className="space-y-3">
               <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold tracking-tight">
                 <span className="grid size-8 place-items-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
@@ -73,11 +73,22 @@ export default function RootLayout({
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Link href={SECOND_DIVISIONS_HREF} className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
-                    Deuxièmes divisions
-                  </Link>
-                </li>
+              </ul>
+            </nav>
+            <nav aria-label="Deuxièmes divisions">
+              <h2 className="text-xs font-bold uppercase tracking-wide text-slate-400">
+                <Link href={SECOND_DIVISIONS_HREF} className="hover:text-slate-600 dark:hover:text-slate-200">
+                  Deuxièmes divisions
+                </Link>
+              </h2>
+              <ul className="mt-3 space-y-2 text-sm">
+                {SECOND_DIVISIONS.map((league) => (
+                  <li key={league.slug}>
+                    <Link href={`/${league.slug}`} className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+                      {league.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </nav>
             <nav aria-label="Compétitions">
