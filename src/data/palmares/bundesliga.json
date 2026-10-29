@@ -1,11 +1,11 @@
 {
   "slug": "bundesliga",
-  "updatedAt": "2026-09-20",
+  "updatedAt": "2026-10-29",
   "clubs": {
     "122": {
       "qid": "Q104770",
       "name": "FC Cologne",
-      "total": 8,
+      "total": 9,
       "trophies": [
         {
           "key": "coupe",
@@ -31,6 +31,13 @@
           "scope": "national"
         },
         {
+          "key": "autre:Q1153075",
+          "label": "Coupe d'Allemagne féminine de football en salle",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        },
+        {
           "key": "autre:Q112251974",
           "label": "PSD-Bank-Cup",
           "count": 1,
@@ -44,7 +51,7 @@
     "124": {
       "qid": "Q41420",
       "name": "Borussia Dortmund",
-      "total": 15,
+      "total": 16,
       "trophies": [
         {
           "key": "championnat",
@@ -92,6 +99,13 @@
             "1997"
           ],
           "scope": "europe"
+        },
+        {
+          "key": "autre:Q247040",
+          "label": "Westfalenliga",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
         }
       ]
     },
@@ -251,7 +265,7 @@
     "131": {
       "qid": "Q104761",
       "name": "Bayer Leverkusen",
-      "total": 3,
+      "total": 5,
       "trophies": [
         {
           "key": "coupe",
@@ -261,6 +275,22 @@
             "1993",
             "2024"
           ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Allemagne",
+          "count": 1,
+          "years": [
+            "2024"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [],
           "scope": "national"
         },
         {
@@ -277,12 +307,12 @@
     "132": {
       "qid": "Q15789",
       "name": "Bayern Munich",
-      "total": 71,
+      "total": 75,
       "trophies": [
         {
           "key": "championnat",
           "label": "Championnat d'Allemagne",
-          "count": 30,
+          "count": 34,
           "years": [
             "1932",
             "1972",
@@ -313,6 +343,10 @@
             "2018",
             "2019",
             "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2025",
             "2026"
           ],
           "scope": "national"
@@ -490,7 +524,7 @@
     "134": {
       "qid": "Q4512",
       "name": "VfB Stuttgart",
-      "total": 11,
+      "total": 12,
       "trophies": [
         {
           "key": "championnat",
@@ -518,6 +552,13 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [],
+          "scope": "national"
+        },
+        {
           "key": "autre:Q182068",
           "label": "Coupe Intertoto",
           "count": 2,
@@ -532,7 +573,7 @@
     "137": {
       "qid": "Q51976",
       "name": "Werder Bremen",
-      "total": 13,
+      "total": 14,
       "trophies": [
         {
           "key": "coupe",
@@ -558,6 +599,13 @@
             "1993",
             "2004"
           ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Allemagne de D2",
+          "count": 1,
+          "years": [],
           "scope": "national"
         },
         {
