@@ -1,9 +1,9 @@
 {
   "slug": "la-liga",
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-10-29",
   "clubs": {
     "83": {
-      "qid": "Q7156",
+      "qid": "Q3091261",
       "name": "Barcelona",
       "total": 129,
       "trophies": [
@@ -223,21 +223,21 @@
       "total": 15,
       "trophies": [
         {
-          "key": "autre:Q8257787",
-          "label": "Galician Championship",
-          "count": 6,
-          "years": [],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
           "count": 3,
           "years": [
             "1936",
             "1982",
             "1992"
           ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q8257787",
+          "label": "Galician Championship",
+          "count": 6,
+          "years": [],
           "scope": "autre"
         },
         {
@@ -289,7 +289,7 @@
     "86": {
       "qid": "Q8682",
       "name": "Real Madrid",
-      "total": 101,
+      "total": 103,
       "trophies": [
         {
           "key": "championnat",
@@ -360,6 +360,15 @@
             "2011",
             "2014",
             "2023"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "1984"
           ],
           "scope": "national"
         },
@@ -471,6 +480,15 @@
           "scope": "autre"
         },
         {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "2012"
+          ],
+          "scope": "autre"
+        },
+        {
           "key": "autre:Q493331",
           "label": "Coupe de la Reinnes",
           "count": 1,
@@ -496,21 +514,21 @@
       "total": 3,
       "trophies": [
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "1960"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "autre:Q749736",
           "label": "championnat d'Espagne de football de quatrième division",
           "count": 2,
           "years": [
             "1944",
             "1948"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 1,
-          "years": [
-            "1960"
           ],
           "scope": "autre"
         }
@@ -534,6 +552,16 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 2,
+          "years": [
+            "1970",
+            "1994"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "autre:Q1031297",
           "label": "championnat de Catalogne de football",
           "count": 14,
@@ -545,16 +573,6 @@
             "1940"
           ],
           "scope": "autre"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 2,
-          "years": [
-            "1970",
-            "1994"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -563,6 +581,17 @@
       "name": "Real Sociedad",
       "total": 8,
       "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 3,
+          "years": [
+            "1949",
+            "1967",
+            "2010"
+          ],
+          "scope": "national"
+        },
         {
           "key": "coupe",
           "label": "Coupe du Roi",
@@ -583,17 +612,6 @@
             "1982"
           ],
           "scope": "national"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 3,
-          "years": [
-            "1949",
-            "1967",
-            "2010"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -602,6 +620,19 @@
       "name": "Deportivo",
       "total": 15,
       "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 5,
+          "years": [
+            "1962",
+            "1964",
+            "1966",
+            "1968",
+            "2012"
+          ],
+          "scope": "national"
+        },
         {
           "key": "coupe",
           "label": "Coupe du Roi",
@@ -626,19 +657,6 @@
           "label": "Galician Championship",
           "count": 6,
           "years": [],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 5,
-          "years": [
-            "1962",
-            "1964",
-            "1966",
-            "1968",
-            "2012"
-          ],
           "scope": "autre"
         },
         {
@@ -743,6 +761,16 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 2,
+          "years": [
+            "1931",
+            "1987"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 2,
@@ -780,16 +808,6 @@
           "scope": "europe"
         },
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 2,
-          "years": [
-            "1931",
-            "1987"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q182068",
           "label": "Coupe Intertoto",
           "count": 1,
@@ -806,8 +824,8 @@
       "total": 7,
       "trophies": [
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
           "count": 4,
           "years": [
             "1930",
@@ -815,7 +833,7 @@
             "1998",
             "2016"
           ],
-          "scope": "autre"
+          "scope": "national"
         },
         {
           "key": "autre:Q751826",
@@ -844,8 +862,8 @@
       "total": 5,
       "trophies": [
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
           "count": 4,
           "years": [
             "1953",
@@ -853,7 +871,7 @@
             "1961",
             "2019"
           ],
-          "scope": "autre"
+          "scope": "national"
         },
         {
           "key": "autre:Q749736",
@@ -872,13 +890,13 @@
       "total": 2,
       "trophies": [
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
           "count": 1,
           "years": [
             "1999"
           ],
-          "scope": "autre"
+          "scope": "national"
         },
         {
           "key": "autre:Q182068",
@@ -897,13 +915,13 @@
       "total": 3,
       "trophies": [
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
           "count": 1,
           "years": [
             "2018"
           ],
-          "scope": "autre"
+          "scope": "national"
         },
         {
           "key": "autre:Q751826",
@@ -970,6 +988,18 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 4,
+          "years": [
+            "1929",
+            "1934",
+            "1969",
+            "2001"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "championnat",
           "label": "Championnat d'Espagne",
           "count": 1,
@@ -994,18 +1024,6 @@
           "scope": "europe"
         },
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 4,
-          "years": [
-            "1929",
-            "1934",
-            "1969",
-            "2001"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q19681427",
           "label": "Supercopa Euroamericana",
           "count": 1,
@@ -1021,6 +1039,19 @@
       "name": "Real Betis",
       "total": 10,
       "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 5,
+          "years": [
+            "1932",
+            "1942",
+            "1971",
+            "1974",
+            "2011"
+          ],
+          "scope": "national"
+        },
         {
           "key": "coupe",
           "label": "Coupe du Roi",
@@ -1041,19 +1072,6 @@
             "2015"
           ],
           "scope": "national"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 5,
-          "years": [
-            "1932",
-            "1942",
-            "1971",
-            "1974",
-            "2011"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -1096,6 +1114,15 @@
             "1992",
             "1996",
             "2013"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "2002"
           ],
           "scope": "national"
         },
@@ -1147,15 +1174,6 @@
             "1921"
           ],
           "scope": "autre"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 1,
-          "years": [
-            "2002"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -1165,6 +1183,17 @@
       "total": 4,
       "trophies": [
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 3,
+          "years": [
+            "2004",
+            "2017",
+            "2023"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "coupe",
           "label": "Coupe du Roi",
           "count": 1,
@@ -1172,17 +1201,6 @@
             "1937"
           ],
           "scope": "national"
-        },
-        {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
-          "count": 3,
-          "years": [
-            "2004",
-            "2017",
-            "2023"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -1198,13 +1216,13 @@
       "total": 1,
       "trophies": [
         {
-          "key": "autre:Q35615",
-          "label": "championnat d'Espagne de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
           "count": 1,
           "years": [
             "2013"
           ],
-          "scope": "autre"
+          "scope": "national"
         }
       ]
     }
