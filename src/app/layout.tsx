@@ -28,10 +28,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#020617" },
-  ],
+  // Barre du navigateur mobile aux couleurs du thème par défaut (sombre).
+  themeColor: "#020617",
 };
 
 export default function RootLayout({
@@ -40,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Le thème est posé sur <html> par le script ci-dessous : le serveur ne peut pas le connaître.
-    <html lang="fr" suppressHydrationWarning>
+    // Sombre par défaut ; le script ci-dessous retire la classe si le visiteur a choisi le clair.
+    <html lang="fr" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
