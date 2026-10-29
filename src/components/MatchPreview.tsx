@@ -59,7 +59,7 @@ export function MatchPreview({ detail }: { detail: MatchDetail }) {
             Forme du moment
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400">5 derniers matchs, du plus récent au plus ancien</p>
-          <div className="mt-3 grid gap-5 sm:grid-cols-2">
+          <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {form.map((line) => (
               <div key={line.side} className="min-w-0">
                 <p className="flex items-center gap-2 font-medium">
