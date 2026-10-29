@@ -363,3 +363,21 @@ export interface CupOverview {
   /** Calendrier officiel de l'édition affichée, s'il est connu. */
   calendar: CupCalendarInfo | null;
 }
+
+/** Ligne d'un joueur dans l'effectif d'un club : gardien, défenseur, milieu ou attaquant. */
+export type SquadLine = "G" | "D" | "M" | "F";
+
+/** Joueur de l'effectif d'un club, avec ses chiffres de la saison en championnat. */
+export interface SquadPlayer {
+  id: string;
+  name: string;
+  /** « K. Mbappé » : tient dans une ligne du fil du match. */
+  shortName: string;
+  jersey: string | null;
+  line: SquadLine;
+  goals: number;
+  assists: number;
+  appearances: number;
+  yellowCards: number;
+  fouls: number;
+}
