@@ -249,3 +249,14 @@ export interface EspnSummaryResponse {
   };
   broadcasts?: { media?: { shortName?: string; name?: string } }[];
 }
+
+export interface EspnTeamRosterResponse {
+  athletes?: {
+    id: string;
+    displayName: string;
+    shortName?: string;
+    jersey?: string;
+    position?: { abbreviation?: string };
+    statistics?: { splits?: { categories?: { stats?: { name: string; value?: number }[] }[] } };
+  }[];
+}
