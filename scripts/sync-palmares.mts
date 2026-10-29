@@ -1,4 +1,4 @@
-// Relève le palmarès des clubs des 5 championnats sur Wikidata (les saisons de compétition y
+// Relève le palmarès des clubs de tous les championnats (deuxièmes divisions comprises) sur Wikidata (les saisons de compétition y
 // désignent leur vainqueur) et l'écrit dans src/data/palmares/<championnat>.json.
 // Les titres changent quelques fois par an : le relevé tourne une fois par semaine.
 //
@@ -6,7 +6,7 @@
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { LEAGUES, type TopLeagueSlug as LeagueSlug } from "../src/lib/leagues.ts";
+import { ALL_LEAGUES, LEAGUES, type LeagueSlug, type TopLeagueSlug } from "../src/lib/leagues.ts";
 
 const OUT_DIR = fileURLToPath(new URL("../src/data/palmares/", import.meta.url));
 const ENDPOINT = "https://query.wikidata.org/sparql";
@@ -19,6 +19,11 @@ const LEAGUE_ITEM: Record<LeagueSlug, string> = {
   "serie-a": "Q15804",
   bundesliga: "Q82595",
   "ligue-1": "Q13394",
+  championship: "Q19510",
+  "segunda-division": "Q35615",
+  "serie-b": "Q194052",
+  "2-bundesliga": "Q152665",
+  "ligue-2": "Q217374",
 };
 
 type Scope = "national" | "europe" | "monde" | "autre";
@@ -45,37 +50,65 @@ interface PalmaresFile {
   clubs: Record<string, ClubPalmares>;
 }
 
-/** Regroupe les anciens noms d'une même compétition (« First Division » puis « Premier League »). */
-const NATIONAL: Record<LeagueSlug, { key: string; label: string; test: RegExp }[]> = {
+/** Regroupe les anciens noms d'une même compétition (« First Division » puis « Premier League »).
+ *  Règles par pays, rangées sous le championnat de première division : un club de deuxième division
+ *  garde ses titres de première division, et le titre de deuxième division compte parmi les titres
+ *  nationaux. */
+const NATIONAL: Record<TopLeagueSlug, { key: string; label: string; test: RegExp }[]> = {
   "premier-league": [
     { key: "championnat", label: "Championnat d'Angleterre", test: /^(championnat d'angleterre de football|premier league|football league|football league first division|first division)$/i },
     { key: "coupe", label: "Coupe d'Angleterre (FA Cup)", test: /^(coupe d'angleterre de football|fa cup)$/i },
     { key: "coupe-ligue", label: "Coupe de la Ligue anglaise", test: /^(coupe de la ligue anglaise de football|efl cup|football league cup|league cup)$/i },
     { key: "supercoupe", label: "Community Shield", test: /^(community shield|fa community shield|charity shield)$/i },
+    // « First Division » et « Second Division » changent de niveau en 1992 : voir englishTierLabel.
+    { key: "deuxieme-division", label: "Championnat d'Angleterre de D2", test: /^(championnat d'angleterre de football de deuxi[eè]me division|(efl |football league )?championship)$/i },
   ],
   "la-liga": [
     { key: "championnat", label: "Championnat d'Espagne", test: /^(championnat d'espagne de football|la liga|primera divisi[oó]n)$/i },
     { key: "coupe", label: "Coupe du Roi", test: /^(coupe d'espagne de football|copa del rey)$/i },
     { key: "supercoupe", label: "Supercoupe d'Espagne", test: /^(supercoupe d'espagne de football|supercopa de espa[nñ]a|coupe eva duarte)$/i },
+    { key: "deuxieme-division", label: "Championnat d'Espagne de D2", test: /^(championnat d'espagne de football de deuxi[eè]me division|segunda divisi[oó]n|laliga (2|hypermotion|smartbank))$/i },
   ],
   "serie-a": [
     { key: "championnat", label: "Championnat d'Italie", test: /^(championnat d'italie de football|serie a|divisione nazionale|prima categoria)$/i },
     { key: "coupe", label: "Coupe d'Italie", test: /^(coupe d'italie de football|coppa italia)$/i },
     { key: "supercoupe", label: "Supercoupe d'Italie", test: /^(supercoupe d'italie de football|supercoppa italiana)$/i },
+    { key: "deuxieme-division", label: "Championnat d'Italie de D2", test: /^(championnat d'italie de football de deuxi[eè]me division|serie b)$/i },
   ],
   bundesliga: [
     { key: "championnat", label: "Championnat d'Allemagne", test: /^(championnat d'allemagne de football|bundesliga|german football championship|deutsche fu[sß]ballmeisterschaft)$/i },
     { key: "coupe", label: "Coupe d'Allemagne", test: /^(coupe d'allemagne de football|dfb[- ]pokal)$/i },
     { key: "coupe-ligue", label: "Coupe de la Ligue allemande", test: /^(coupe de la ligue d'allemagne de football|dfb[- ]ligapokal|dfl[- ]ligapokal)$/i },
     { key: "supercoupe", label: "Supercoupe d'Allemagne", test: /^(supercoupe d'allemagne de football|dfl[- ]supercup)$/i },
+    { key: "deuxieme-division", label: "Championnat d'Allemagne de D2", test: /^(championnat d'allemagne de football de deuxi[eè]me division|2\. (fu[sß]ball-)?bundesliga( (nord|s[uü]d))?)$/i },
   ],
   "ligue-1": [
     { key: "championnat", label: "Championnat de France", test: /^(championnat de france de football|ligue 1|division 1)$/i },
     { key: "coupe", label: "Coupe de France", test: /^coupe de france de football$/i },
     { key: "coupe-ligue", label: "Coupe de la Ligue française", test: /^coupe de la ligue fran[cç]aise de football$/i },
     { key: "supercoupe", label: "Trophée des champions", test: /^troph[eé]e des champions$/i },
+    { key: "deuxieme-division", label: "Championnat de France de D2", test: /^(championnat de france de football de deuxi[eè]me division|ligue 2|division 2)$/i },
   ],
 };
+
+/** Angleterre : à la création de la Premier League (1992-93), la « First Division » devient la
+ *  deuxième division (jusqu'en 2003-04) et la « Second Division » la troisième. Le libellé seul
+ *  ne dit donc pas le niveau : l'année du sacre tranche. Après 1992, la « Football League » réunit
+ *  les divisions inférieures, déjà relevées chacune sous son nom : la saison est écartée (null). */
+function englishTierLabel(label: string, year: string | null): string | null {
+  if (!year) return label;
+  if (/^football league$/i.test(label) && Number(year) >= 1993) return null;
+  if (/^football league first division$/i.test(label) && Number(year) >= 1993) return "Championship";
+  if (/^football league second division$/i.test(label) && Number(year) <= 1992) return "Championship";
+  return label;
+}
+
+/** Règles nationales d'un championnat : celles du championnat de première division de son pays. */
+function nationalRules(slug: LeagueSlug) {
+  const country = ALL_LEAGUES.find((league) => league.slug === slug)?.country;
+  const top = LEAGUES.find((league) => league.country === country)?.slug ?? (slug as TopLeagueSlug);
+  return NATIONAL[top];
+}
 
 const INTERNATIONAL: { key: string; label: string; scope: Scope; test: RegExp }[] = [
   { key: "c1", label: "Ligue des champions", scope: "europe", test: /^(ligue des champions de l'uefa|coupe des clubs champions europ[eé]ens|uefa champions league)$/i },
@@ -145,32 +178,50 @@ function normalize(text: string): string {
 
 /** Clubs du championnat sur Wikidata, appariés aux noms d'ESPN. */
 async function resolveClubs(slug: LeagueSlug, teams: Record<string, { name: string }>) {
+  // Championnats du même pays : un club promu ou relégué n'a pas encore de saison récente dans
+  // son nouveau championnat, et Wikidata liste mal les participants des deuxièmes divisions.
+  const country = ALL_LEAGUES.find((league) => league.slug === slug)?.country;
+  const items = ALL_LEAGUES.filter((league) => league.country === country)
+    .map((league) => `wd:${LEAGUE_ITEM[league.slug]}`)
+    .join(" ");
+
   // Équipes engagées dans les saisons récentes : liste courte et fiable. La propriété « championnat »
-  // renvoie, elle, des milliers de clubs de toute l'histoire et la réponse est parfois tronquée.
+  // renvoie, elle, des milliers de clubs de toute l'histoire et la réponse est parfois tronquée :
+  // elle ne fait que compléter la liste.
   let rows = await sparql<{ club: { value: string }; clubLabel: { value: string } }>(`
     SELECT DISTINCT ?club ?clubLabel WHERE {
-      ?season wdt:P3450 wd:${LEAGUE_ITEM[slug]} ; wdt:P580 ?start ; wdt:P1923 ?club .
+      VALUES ?league { ${items} }
+      ?season wdt:P3450 ?league ; wdt:P580 ?start ; wdt:P1923 ?club .
       FILTER(YEAR(?start) >= 2015)
       SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,de,es,it". }
-    } LIMIT 300`);
+    } LIMIT 600`);
 
-  if (rows.length < 15) {
-    rows = await sparql<{ club: { value: string }; clubLabel: { value: string } }>(`
-      SELECT DISTINCT ?club ?clubLabel WHERE {
-        ?club wdt:P118 wd:${LEAGUE_ITEM[slug]} .
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,de,es,it". }
-      } LIMIT 300`);
-  }
+  const members = await sparql<{ club: { value: string }; clubLabel: { value: string } }>(`
+    SELECT DISTINCT ?club ?clubLabel WHERE {
+      ?club wdt:P118 wd:${LEAGUE_ITEM[slug]} .
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,de,es,it". }
+    } LIMIT 300`).catch(() => []);
+  const known = new Set(rows.map((row) => row.club.value));
+  rows = [...rows, ...members.filter((row) => !known.has(row.club.value))];
 
   // « VfB Stuttgart II », « Real Madrid B » : les équipes réserve jouent les mêmes saisons que leur
   // club et lui volent son palmarès quand le nom du club, lui, manque à l'appel.
   const RESERVE = /\s(ii|b|u\s?\d{2}|amateure?|reserves?)$/i;
   rows = rows.filter((row) => !RESERVE.test(row.clubLabel.value.trim()));
 
-  const candidates = rows.map((row) => ({
-    qid: row.club.value.split("/").pop() ?? "",
-    keys: new Set([normalize(row.clubLabel.value)]),
-  }));
+  // Allemagne : les saisons récentes listent la section football (« 1. FC Nürnberg (football) »,
+  // équipe masculine) plutôt que le club, qui porte le palmarès. On remonte au club.
+  const parents = await sparql<{ team: { value: string }; club: { value: string } }>(`
+    SELECT ?team ?club WHERE {
+      VALUES ?team { ${rows.map((row) => `wd:${row.club.value.split("/").pop()}`).join(" ")} }
+      ?team wdt:P31 wd:Q103229495 ; wdt:P361 ?club .
+    }`).catch(() => []);
+  const parentOf = new Map(parents.map((row) => [row.team.value.split("/").pop() ?? "", row.club.value.split("/").pop() ?? ""]));
+
+  const candidates = rows.map((row) => {
+    const qid = row.club.value.split("/").pop() ?? "";
+    return { qid: parentOf.get(qid) ?? qid, keys: new Set([normalize(row.clubLabel.value)]) };
+  });
 
   // Les alias (« Mainz 05 », « Die Roten ») sont demandés à part : groupés, ils font échouer la requête.
   const aliases = await sparql<{ club: { value: string }; aliases: { value: string } }>(`
@@ -186,6 +237,9 @@ async function resolveClubs(slug: LeagueSlug, teams: Record<string, { name: stri
 
   const resolved: Record<string, string> = {};
   for (const [id, team] of Object.entries(teams)) {
+    // Équipes réserve engagées en deuxième division (« Real Sociedad II », « Celta Fortuna », nom
+    // commercial du Celta B) : elles prendraient le palmarès du club.
+    if (RESERVE.test(team.name.trim()) || /\sfortuna$/i.test(team.name.trim())) continue;
     const key = normalize(team.name);
     const exact = candidates.find((candidate) => candidate.keys.has(key));
     if (exact) {
@@ -220,7 +274,9 @@ function groupTrophies(slug: LeagueSlug, rows: { comp: string; label: string; ty
     if ([...row.types].some((type) => DROP_TYPES.includes(type))) continue;
     if (![...row.types].some((type) => KEEP_TYPES.includes(type))) continue;
 
-    const national = NATIONAL[slug].find((rule) => rule.test.test(row.label));
+    const compLabel = englishTierLabel(row.label, row.year);
+    if (compLabel === null) continue;
+    const national = nationalRules(slug).find((rule) => rule.test.test(compLabel));
     const international = INTERNATIONAL.find((rule) => rule.test.test(row.label));
     const key = national?.key ?? international?.key ?? `autre:${row.comp}`;
     const label = national?.label ?? international?.label ?? row.label;
@@ -257,7 +313,9 @@ async function palmaresBatch(slug: LeagueSlug, qids: string[]): Promise<Map<stri
   }>(`
     SELECT ?club ?season ?seasonLabel ?comp ?compLabel (GROUP_CONCAT(DISTINCT ?typeLabel; separator="|") AS ?types) WHERE {
       VALUES ?club { ${values} }
-      ?season wdt:P1346 ?club ; wdt:P3450 ?comp .
+      # Titres du club, ou de sa section football (équipe masculine, voir resolveClubs).
+      { ?season wdt:P1346 ?club } UNION { ?team wdt:P361 ?club ; wdt:P31 wd:Q103229495 . ?season wdt:P1346 ?team }
+      ?season wdt:P3450 ?comp .
       OPTIONAL { ?comp wdt:P31 ?type . ?type rdfs:label ?typeLabel FILTER(LANG(?typeLabel) = "en") }
       SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
     } GROUP BY ?club ?season ?seasonLabel ?comp ?compLabel`);
@@ -283,7 +341,7 @@ async function palmaresBatch(slug: LeagueSlug, qids: string[]): Promise<Map<stri
 const today = new Date().toISOString().slice(0, 10);
 await mkdir(OUT_DIR, { recursive: true });
 
-for (const league of LEAGUES) {
+for (const league of ALL_LEAGUES) {
   const path = `${OUT_DIR}${league.slug}.json`;
   const previous = JSON.parse(
     await readFile(path, "utf8").catch(() => '{"clubs":{}}'),
