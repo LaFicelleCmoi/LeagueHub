@@ -8,16 +8,16 @@ import { getMatches, getStandings } from "@/lib/espn/api";
 import { daysUntilDay, formatDay, formatTime } from "@/lib/format";
 import { resolveLeague, type LeaguePageProps } from "@/lib/league-params";
 import { goalsInMatches, goalsPerMatchHint, plural, seasonTotals } from "@/lib/league-stats";
-import { LEAGUES } from "@/lib/leagues";
+import { ALL_LEAGUES } from "@/lib/leagues";
 
-// Seuls les 5 championnats sont générés ; toute autre URL renvoie une 404.
+// Seuls les championnats du site (5 grands et deuxièmes divisions) sont générés ; toute autre URL renvoie une 404.
 export const dynamicParams = false;
 
 // Les chiffres du jour sont communs à tous les onglets du championnat.
 export const revalidate = 60;
 
 export function generateStaticParams() {
-  return LEAGUES.map((league) => ({ league: league.slug }));
+  return ALL_LEAGUES.map((league) => ({ league: league.slug }));
 }
 
 export default async function LeagueLayout({ children, params }: LeaguePageProps & { children: ReactNode }) {
