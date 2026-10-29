@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import { renderFavoriteCard } from "@/lib/favorite-card";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { useFavoriteClub, type Division } from "@/lib/favorite-club";
 
 // three.js et le moteur physique (plusieurs centaines de Ko) ne sont téléchargés
 // que lorsque le badge approche de la zone visible.
@@ -51,9 +51,10 @@ function supportsWebGL(): boolean {
   }
 }
 
-export function HeroBadge() {
+/** Pass supporter au logo du club favori de la division (D1 sur l'accueil, D2 sur le leur). */
+export function HeroBadge({ division = 1 }: { division?: Division }) {
   const ref = useRef<HTMLDivElement>(null);
-  const favorite = useFavoriteClub();
+  const favorite = useFavoriteClub(division);
   const [near, setNear] = useState(false);
   const [mode, setMode] = useState<"3d" | "static">("3d");
   // Caméra plus proche que la valeur par défaut (30) : le badge reste lisible dans un bloc étroit,
