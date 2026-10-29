@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { FavoriteClubPicker } from "@/components/FavoriteClubPicker";
+import { HeroBadge } from "@/components/HeroBadge";
 import { LeagueGroupLink } from "@/components/LeagueShortcuts";
 import { LeaguesHome } from "@/components/LeaguesHome";
-import { LEAGUES, SECOND_DIVISIONS } from "@/lib/leagues";
+import { clubIndex } from "@/lib/clubs";
+import { getLeague, LEAGUES, SECOND_DIVISIONS } from "@/lib/leagues";
 
 export const revalidate = 60;
 
@@ -28,6 +31,16 @@ export default function SecondDivisionsPage() {
       }
       title="Les deuxièmes divisions européennes"
       intro="Montée, barrages et relégation : classements, résultats, calendriers, buteurs et actualités de la Championship, Segunda División (LaLiga Hypermotion), Serie B, 2. Bundesliga et Ligue 2 (BKT)."
+      aside={
+        <div className="flex flex-col gap-3">
+          {/* Badge 3D sur grand écran seulement, comme sur l'accueil. */}
+          <div className="hidden md:block">
+            <HeroBadge division={2} />
+          </div>
+          {/* Club favori propre aux deuxièmes divisions, distinct de celui des 5 grands. */}
+          <FavoriteClubPicker division={2} clubs={clubIndex().filter((club) => getLeague(club.league)?.tier === 2)} />
+        </div>
+      }
       shortcutsHeading="Choisir une deuxième division"
       footer={
         <LeagueGroupLink
