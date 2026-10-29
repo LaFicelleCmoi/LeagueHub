@@ -16,8 +16,8 @@ export default function HomePage() {
       intro="Classements, résultats, calendriers, buteurs et actualités de la Premier League, La Liga, Serie A, Bundesliga et Ligue 1, réunis au même endroit."
       aside={
         <div className="flex flex-col gap-3">
-          {/* Badge 3D sur grand écran seulement : sur mobile, il repoussait tout le contenu. */}
-          <div className="hidden md:block">
+          {/* Badge 3D sur grand écran seulement : sur mobile et tablette, il repoussait tout le contenu. */}
+          <div className="hidden lg:block">
             <HeroBadge division={1} />
           </div>
           {/* Club favori parmi les 5 grands ; les deuxièmes divisions ont le leur. */}
