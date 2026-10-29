@@ -16,22 +16,36 @@ import { ThemeToggle } from "./ThemeToggle";
 
 /** Sélecteur d'espace : les 5 grands championnats (D1) ou leurs deuxièmes divisions (D2). */
 function DivisionSwitch({ second, onNavigate, className = "" }: { second: boolean; onNavigate?: () => void; className?: string }) {
+  // Bascule affichée dès le clic, sans attendre le chargement de la page ; oubliée dès que
+  // l'adresse change de division (`from` ne correspond plus).
+  const [pending, setPending] = useState<{ from: boolean; to: boolean } | null>(null);
+  const shownSecond = pending && pending.from === second ? pending.to : second;
   const items = [
-    { href: "/", label: "D1", title: "Les 5 grands championnats", active: !second },
-    { href: SECOND_DIVISIONS_HREF, label: "D2", title: "Les deuxièmes divisions", active: second },
+    { href: "/", label: "D1", title: "Les 5 grands championnats", active: !shownSecond, second: false },
+    { href: SECOND_DIVISIONS_HREF, label: "D2", title: "Les deuxièmes divisions", active: shownSecond, second: true },
   ];
   return (
-    <div role="group" aria-label="Division" className={`inline-flex rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800 ${className}`}>
+    <div role="group" aria-label="Division" className={`relative inline-grid grid-cols-2 rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800 ${className}`}>
+      {/* Pastille qui glisse d'une division à l'autre. */}
+      <span
+        aria-hidden
+        className={`absolute inset-y-0.5 left-0.5 w-[calc(50%-0.125rem)] rounded-md bg-white shadow-sm transition-transform duration-200 ease-out dark:bg-slate-950 ${
+          shownSecond ? "translate-x-full" : ""
+        }`}
+      />
       {items.map((item) => (
         <Link
           key={item.href}
           href={item.href}
-          onClick={onNavigate}
+          onClick={() => {
+            setPending({ from: second, to: item.second });
+            onNavigate?.();
+          }}
           title={item.title}
           aria-current={item.active ? "true" : undefined}
-          className={`rounded-md px-2.5 py-1.5 text-xs font-bold transition-colors ${
+          className={`relative rounded-md px-2.5 py-1.5 text-center text-xs font-bold transition-colors ${
             item.active
-              ? "bg-white text-slate-900 shadow-sm dark:bg-slate-950 dark:text-white"
+              ? "text-slate-900 dark:text-white"
               : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
           }`}
         >
@@ -73,7 +87,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/85 backdrop-blur dark:border-slate-800 dark:bg-slate-950/85">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link href="/" onClick={close} className="flex items-center gap-2 text-lg font-bold tracking-tight">
+        <Link href="/" onClick={close} className="flex items-center gap-2 font-display text-xl font-bold tracking-wide">
           <span className="grid size-8 place-items-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
             <Trophy className="size-4" aria-hidden />
           </span>
