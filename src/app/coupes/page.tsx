@@ -46,7 +46,7 @@ export default async function CupsPage() {
 
       <CupsNav />
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-6">
         {cups.map(({ cup, overview }, index) => (
           <div key={cup.slug} className={SPANS[index] ?? "lg:col-span-2"}>
             <CupCard cup={cup} overview={overview} />
