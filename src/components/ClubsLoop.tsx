@@ -61,7 +61,7 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
   );
 
   return (
-    <section aria-label="Clubs des 5 championnats">
+    <section aria-label="Clubs des championnats">
       <p className="mb-1 text-center text-xs text-slate-500 dark:text-slate-400">
         Touchez un club pour voir ses 5 derniers matchs
       </p>
@@ -75,7 +75,7 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
         hoverSpeed={20}
         fadeOut
         fadeOutColor="var(--page-bg)"
-        ariaLabel="Clubs des 5 championnats"
+        ariaLabel="Clubs des championnats"
       />
     </section>
   );
