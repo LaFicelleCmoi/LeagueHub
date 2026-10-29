@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, type Key } from "react";
 import { Star } from "lucide-react";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { useFavoriteTeamIds } from "@/lib/favorite-club";
 import { getLeague } from "@/lib/leagues";
 import type { ClubRef } from "@/lib/types";
 import { useOpenClub } from "./ClubDialogProvider";
@@ -13,7 +13,7 @@ import { TeamLogo } from "./TeamLogo";
 // Bandeau des clubs : un clic ouvre les 5 derniers matchs du club (fenêtre partagée de la page).
 export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
   const openClub = useOpenClub();
-  const favoriteId = useFavoriteClub()?.team.id;
+  const favoriteIds = useFavoriteTeamIds();
 
   const logos = useMemo<LogoItem[]>(() => clubs.map((club) => ({ node: null, title: club.team.name })), [clubs]);
 
@@ -25,7 +25,7 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
       const club = clubs[index];
       const league = club ? getLeague(club.league) : undefined;
       if (!club || !league) return null;
-      const favorite = club.team.id === favoriteId;
+      const favorite = favoriteIds.has(club.team.id);
 
       return (
         <button
@@ -57,7 +57,7 @@ export function ClubsLoop({ clubs }: { clubs: ClubRef[] }) {
         </button>
       );
     },
-    [clubs, openClub, favoriteId],
+    [clubs, openClub, favoriteIds],
   );
 
   return (
