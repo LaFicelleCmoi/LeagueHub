@@ -2,17 +2,16 @@
 
 import { useSyncExternalStore } from "react";
 import { Monitor, Moon, Sun, type LucideIcon } from "lucide-react";
-import { getTheme, setTheme, subscribeToTheme, type Theme } from "@/lib/theme";
+import { DEFAULT_THEME, getTheme, setTheme, subscribeToTheme, type Theme } from "@/lib/theme";
 
-// Trois positions plutôt que deux : « système » reste le réglage par défaut, et le visiteur
-// qui force le clair ou le sombre peut y revenir.
-const CYCLE: Record<Theme, Theme> = { system: "light", light: "dark", dark: "system" };
+// Trois positions plutôt que deux : sombre par défaut, clair, ou le réglage de l'appareil.
+const CYCLE: Record<Theme, Theme> = { dark: "light", light: "system", system: "dark" };
 const LABELS: Record<Theme, string> = { system: "système", light: "clair", dark: "sombre" };
 const ICONS: Record<Theme, LucideIcon> = { system: Monitor, light: Sun, dark: Moon };
 
 export function ThemeToggle({ variant }: { variant?: "row" }) {
-  // « système » côté serveur : le thème réel n'est connu que dans le navigateur.
-  const theme = useSyncExternalStore(subscribeToTheme, getTheme, () => "system" as Theme);
+  // Thème par défaut côté serveur : le choix du visiteur n'est connu que dans le navigateur.
+  const theme = useSyncExternalStore(subscribeToTheme, getTheme, () => DEFAULT_THEME);
   const next = CYCLE[theme];
   const Icon = ICONS[theme];
   const label = `Thème ${LABELS[theme]}`;
