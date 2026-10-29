@@ -38,8 +38,6 @@ interface LeaguesHomeProps {
   eyebrow?: ReactNode;
   /** Colonne de droite du bandeau d'accueil (badge 3D, club favori). */
   aside?: ReactNode;
-  /** Section « Mon club » : le club favori se choisit parmi les 5 grands championnats. */
-  favorite?: boolean;
   shortcutsHeading?: string;
   /** Bas de page, à part du reste : lien vers l'autre groupe de championnats. */
   footer?: ReactNode;
@@ -53,7 +51,6 @@ export async function LeaguesHome({
   intro,
   eyebrow,
   aside,
-  favorite = false,
   shortcutsHeading,
   footer,
   children,
@@ -179,7 +176,8 @@ export async function LeaguesHome({
 
         <LiveMatchesProvider sources={liveSources}>
           {/* Affichée seulement quand le visiteur a choisi un club favori. */}
-          {favorite && <FavoriteClubSpotlight positions={positions} matches={todayMatches} />}
+          {/* Club favori de la division du groupe (un en D1, un autre en D2). */}
+          <FavoriteClubSpotlight division={leagues[0].tier} positions={positions} matches={todayMatches} />
 
           <LeagueShortcuts leagues={leagues} heading={shortcutsHeading} />
 
