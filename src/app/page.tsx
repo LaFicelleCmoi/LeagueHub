@@ -18,13 +18,12 @@ export default function HomePage() {
         <div className="flex flex-col gap-3">
           {/* Badge 3D sur grand écran seulement : sur mobile, il repoussait tout le contenu. */}
           <div className="hidden md:block">
-            <HeroBadge />
+            <HeroBadge division={1} />
           </div>
-          {/* Le club favori se choisit parmi les 5 grands championnats. */}
-          <FavoriteClubPicker clubs={clubIndex().filter((club) => getLeague(club.league)?.tier === 1)} />
+          {/* Club favori parmi les 5 grands ; les deuxièmes divisions ont le leur. */}
+          <FavoriteClubPicker division={1} clubs={clubIndex().filter((club) => getLeague(club.league)?.tier === 1)} />
         </div>
       }
-      favorite
       footer={
         <LeagueGroupLink
           href={SECOND_DIVISIONS_HREF}
