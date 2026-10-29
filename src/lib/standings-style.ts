@@ -6,6 +6,8 @@ const ZONE_COLORS: Record<ZoneTone, string> = {
   ucl: "bg-blue-600",
   uel: "bg-orange-500",
   uecl: "bg-emerald-500",
+  promotion: "bg-emerald-600",
+  "promotion-playoff": "bg-sky-500",
   playoff: "bg-amber-400",
   relegation: "bg-red-600",
   other: "bg-slate-400",
