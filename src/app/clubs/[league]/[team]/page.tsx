@@ -73,7 +73,7 @@ function SeasonRow({ match }: { match: ClubSeasonMatch }) {
       }`}
     >
       {cup && <span aria-hidden className={`absolute inset-y-2 left-0 w-1 rounded-r-full ${EUROPEAN_CUP_STYLES[cup].bar}`} />}
-      <span className="w-24 shrink-0 text-xs text-slate-500 dark:text-slate-400">{capitalize(dayFormat.format(new Date(match.date)))}</span>
+      <span className="w-[5.25rem] shrink-0 text-xs text-slate-500 sm:w-24 dark:text-slate-400">{capitalize(dayFormat.format(new Date(match.date)))}</span>
       {outcome ? (
         <span aria-hidden className={`grid size-6 shrink-0 place-items-center rounded-md text-xs font-bold ${outcome.badge}`}>
           {outcome.letter}
@@ -86,10 +86,14 @@ function SeasonRow({ match }: { match: ClubSeasonMatch }) {
       <span className="flex min-w-0 flex-1 items-center gap-2 text-sm">
         <span className="text-xs text-slate-400">{match.home ? "vs" : "chez"}</span>
         <TeamLogo team={match.opponent} size={20} />
-        <span className="min-w-0 truncate font-medium">{match.opponent.name}</span>
+        <span className="min-w-0">
+          <span className="block truncate font-medium">{match.opponent.name}</span>
+          {/* Mobile : la compétition passe sous l'adversaire, qui garde la largeur pour son nom. */}
+          {!cup && <span className="block truncate text-xs text-slate-500 sm:hidden dark:text-slate-400">{match.competition}</span>}
+        </span>
       </span>
       <span className="flex shrink-0 items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-        {cup ? <EuropeanCupTag cup={cup} label={EUROPEAN_CUP_STYLES[cup].short} /> : <span className="truncate">{match.competition}</span>}
+        {cup ? <EuropeanCupTag cup={cup} label={EUROPEAN_CUP_STYLES[cup].short} /> : <span className="hidden truncate sm:inline">{match.competition}</span>}
         {played ? (
           <span className={`text-base font-bold tabular-nums ${outcome?.score ?? ""}`}>
             <span className="sr-only">{outcome?.label ?? "Score"} </span>
