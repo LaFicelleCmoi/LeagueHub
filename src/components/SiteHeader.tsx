@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowUpRight, Menu, Star, Trophy, X } from "lucide-react";
 import type { ClubIndexEntry } from "@/lib/clubs";
 import { useCupsTab } from "@/lib/cups-tab";
@@ -58,10 +58,16 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const cupsTab = useCupsTab();
   const onCups = pathname.startsWith("/coupes");
   const onDirect = pathname.startsWith("/direct");
-  // Accueil des deuxièmes divisions ou page de l'une d'elles.
-  const onSecondDivisions = pathname === SECOND_DIVISIONS_HREF || getLeague(pathname.split("/")[1])?.tier === 2;
+  // Accueil des deuxièmes divisions, page de l'une d'elles ou d'un de leurs clubs (/clubs/ligue-2/…).
+  const segments = pathname.split("/");
+  const leagueSegment = segments[1] === "clubs" ? segments[2] : segments[1];
+  const onSecondDivisions = pathname === SECOND_DIVISIONS_HREF || getLeague(leagueSegment ?? "")?.tier === 2;
   // Les championnats de l'espace affiché seulement : les deux divisions ne se mélangent pas.
   const shownLeagues = onSecondDivisions ? SECOND_DIVISIONS : LEAGUES;
+  // La recherche ne propose que les clubs de l'espace affiché.
+  const division = onSecondDivisions ? 2 : 1;
+  const shownClubs = useMemo(() => clubs.filter((club) => getLeague(club.league)?.tier === division), [clubs, division]);
+  const searchPlaceholder = onSecondDivisions ? "Club de D2" : "Rechercher un club";
   const close = () => setOpen(false);
 
   return (
@@ -142,7 +148,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
               </a>
             </li>
             <li className="ml-2 w-44 border-l border-slate-200 pl-2 xl:w-52 dark:border-slate-800">
-              <ClubSearch clubs={clubs} />
+              <ClubSearch clubs={shownClubs} placeholder={searchPlaceholder} />
             </li>
             <li>
               <SettingsMenu />
@@ -166,7 +172,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
         <nav id="mobile-nav" aria-label="Navigation principale" className="border-t border-slate-200 lg:hidden dark:border-slate-800">
           <ul className="mx-auto grid max-w-6xl gap-1 p-2">
             <li className="px-1 pb-2">
-              <ClubSearch clubs={clubs} onNavigate={close} />
+              <ClubSearch clubs={shownClubs} onNavigate={close} placeholder={searchPlaceholder} />
             </li>
             <li>
               <Link
