@@ -1,0 +1,367 @@
+{
+  "slug": "segunda-division",
+  "updatedAt": "2026-10-29",
+  "clubs": {
+    "84": {
+      "qid": "Q8835",
+      "name": "Mallorca",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe du Roi",
+          "count": 1,
+          "years": [
+            "2003"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "2018"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1031297",
+          "label": "championnat de Catalogne de football",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        }
+      ]
+    },
+    "92": {
+      "qid": "Q271574",
+      "name": "Real Oviedo",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 5,
+          "years": [
+            "1933",
+            "1952",
+            "1958",
+            "1972",
+            "1975"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q20547839",
+          "label": "Q20547839",
+          "count": 2,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "2015"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "95": {
+      "qid": "Q10319",
+      "name": "Real Valladolid",
+      "total": 5,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 3,
+          "years": [
+            "1948",
+            "1959",
+            "2007"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 1,
+          "years": [
+            "1934"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q493331",
+          "label": "Coupe de la Reinnes",
+          "count": 1,
+          "years": [
+            "1984"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "98": {
+      "qid": "Q11979",
+      "name": "Las Palmas",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 3,
+          "years": [
+            "1985",
+            "2000",
+            "2023"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "245": {
+      "qid": "Q216661",
+      "name": "Tenerife",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "autre:Q100146559",
+          "label": "championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "2026"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "1987"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q17475",
+          "label": "Trophée Joan Gamper",
+          "count": 1,
+          "years": [
+            "1993"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "2737": {
+      "qid": "Q576285",
+      "name": "Albacete",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "1991"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 2,
+          "years": [
+            "1990",
+            "2014"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 1,
+          "years": [
+            "1949"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3747": {
+      "qid": "Q8812",
+      "name": "Granada",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 2,
+          "years": [
+            "1941",
+            "2023"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "2010"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3752": {
+      "qid": "Q770740",
+      "name": "Eibar",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "2014"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "3788": {
+      "qid": "Q12278",
+      "name": "Sporting Gijón",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 4,
+          "years": [
+            "1944",
+            "1951",
+            "1957",
+            "1977"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "3842": {
+      "qid": "Q460448",
+      "name": "Cádiz",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "2005"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q751826",
+          "label": "Championnat d'Espagne de football de troisième division",
+          "count": 1,
+          "years": [
+            "2009"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "4438": {
+      "qid": "Q743557",
+      "name": "Castellón",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 2,
+          "years": [
+            "1981",
+            "1989"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q749736",
+          "label": "championnat d'Espagne de football de quatrième division",
+          "count": 1,
+          "years": [
+            "1930"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "5404": {
+      "qid": "Q5773365",
+      "name": "Ceuta",
+      "total": 0,
+      "trophies": []
+    },
+    "6832": {
+      "qid": "Q10407",
+      "name": "Almería",
+      "total": 0,
+      "trophies": []
+    },
+    "7320": {
+      "qid": "Q600232",
+      "name": "Eldense",
+      "total": 0,
+      "trophies": []
+    },
+    "8447": {
+      "qid": "Q10499",
+      "name": "Córdoba",
+      "total": 0,
+      "trophies": []
+    },
+    "9812": {
+      "qid": "Q11945",
+      "name": "Girona",
+      "total": 0,
+      "trophies": []
+    },
+    "12597": {
+      "qid": "Q852079",
+      "name": "Burgos",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Espagne de D2",
+          "count": 1,
+          "years": [
+            "1976"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "17534": {
+      "qid": "Q856119",
+      "name": "Leganés",
+      "total": 0,
+      "trophies": []
+    },
+    "20179": {
+      "qid": "Q1386854",
+      "name": "FC Andorra",
+      "total": 0,
+      "trophies": []
+    }
+  }
+}
