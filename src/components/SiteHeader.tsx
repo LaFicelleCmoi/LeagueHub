@@ -147,7 +147,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 <span className="sr-only"> : tracker Ligue des champions 2026-2027 (nouvel onglet)</span>
               </a>
             </li>
-            <li className="ml-2 w-44 border-l border-slate-200 pl-2 xl:w-52 dark:border-slate-800">
+            <li className="ml-2 w-52 border-l border-slate-200 pl-2 xl:w-56 dark:border-slate-800">
               <ClubSearch clubs={shownClubs} placeholder={searchPlaceholder} />
             </li>
             <li>
@@ -243,7 +243,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                   <Star className="size-5 fill-amber-300 text-amber-300" aria-hidden />
                 </span>
                 <span>Ligue des champions</span>
-                <span className="ml-auto inline-flex items-center gap-1 text-sm font-normal text-indigo-200">
+                <span className="ml-auto inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-sm font-normal text-indigo-200">
                   Tracker 2026-27
                   <ArrowUpRight className="size-4" aria-hidden />
                 </span>
