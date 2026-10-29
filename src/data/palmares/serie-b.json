@@ -1,0 +1,428 @@
+{
+  "slug": "serie-b",
+  "updatedAt": "2026-10-29",
+  "clubs": {
+    "119": {
+      "qid": "Q8639",
+      "name": "Hellas Verona",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 3,
+          "years": [
+            "1957",
+            "1982",
+            "1999"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Italie",
+          "count": 1,
+          "years": [
+            "1985"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "120": {
+      "qid": "Q56542463",
+      "name": "Vicenza",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 3,
+          "years": [
+            "1955",
+            "1977",
+            "2000"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Italie",
+          "count": 1,
+          "years": [
+            "1997"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q496887",
+          "label": "tournoi de Viareggio",
+          "count": 2,
+          "years": [
+            "1954",
+            "1955"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q252836",
+          "label": "Coppa Italia Serie C",
+          "count": 1,
+          "years": [
+            "2023"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q607965",
+          "label": "Serie C",
+          "count": 1,
+          "years": [
+            "2026"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "2573": {
+      "qid": "Q8408",
+      "name": "Modena",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "1943"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "2574": {
+      "qid": "Q6703",
+      "name": "Empoli",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 2,
+          "years": [
+            "2005",
+            "2018"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q496887",
+          "label": "tournoi de Viareggio",
+          "count": 1,
+          "years": [
+            "2000"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "2734": {
+      "qid": "Q1457",
+      "name": "Sampdoria",
+      "total": 15,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Italie",
+          "count": 5,
+          "years": [
+            "1985",
+            "1988",
+            "1989",
+            "1994"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 3,
+          "years": [
+            "1934",
+            "1941",
+            "1967"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Italie",
+          "count": 1,
+          "years": [
+            "1991"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "years": [
+            "1990"
+          ],
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q496887",
+          "label": "tournoi de Viareggio",
+          "count": 4,
+          "years": [
+            "1950",
+            "1958",
+            "1963",
+            "1977"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q17475",
+          "label": "Trophée Joan Gamper",
+          "count": 1,
+          "years": [
+            "2012"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "2923": {
+      "qid": "Q2674",
+      "name": "Palermo",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 4,
+          "years": [
+            "1932",
+            "1968",
+            "2004",
+            "2014"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "3257": {
+      "qid": "Q501372",
+      "name": "Catanzaro",
+      "total": 0,
+      "trophies": []
+    },
+    "3337": {
+      "qid": "Q6664",
+      "name": "Cesena",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q496887",
+          "label": "tournoi de Viareggio",
+          "count": 1,
+          "years": [
+            "1990"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3345": {
+      "qid": "Q297430",
+      "name": "Arezzo",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q607965",
+          "label": "Serie C",
+          "count": 1,
+          "years": [
+            "2026"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3346": {
+      "qid": "Q6630",
+      "name": "Ascoli",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 2,
+          "years": [
+            "1978",
+            "1986"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "3952": {
+      "qid": "Q8428",
+      "name": "Padova",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q252836",
+          "label": "Coppa Italia Serie C",
+          "count": 1,
+          "years": [
+            "2022"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "3956": {
+      "qid": "Q289613",
+      "name": "Pisa",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "1985"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "3975": {
+      "qid": "Q6748",
+      "name": "Juve Stabia",
+      "total": 0,
+      "trophies": []
+    },
+    "3988": {
+      "qid": "Q650365",
+      "name": "Carrarese",
+      "total": 0,
+      "trophies": []
+    },
+    "3991": {
+      "qid": "Q430993",
+      "name": "Mantova",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "1971"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "4050": {
+      "qid": "Q759482",
+      "name": "Cremonese",
+      "total": 2,
+      "trophies": [
+        {
+          "key": "autre:Q1342576",
+          "label": "Coupe anglo-italienne",
+          "count": 1,
+          "years": [
+            "1993"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q607965",
+          "label": "Serie C",
+          "count": 1,
+          "years": [
+            "2017"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "4055": {
+      "qid": "Q298217",
+      "name": "US Avellino",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q1141778",
+          "label": "championnat d'Italie de football de quatrième division",
+          "count": 1,
+          "years": [
+            "2019"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "4059": {
+      "qid": "Q652516",
+      "name": "Benevento",
+      "total": 1,
+      "trophies": [
+        {
+          "key": "autre:Q607965",
+          "label": "Serie C",
+          "count": 1,
+          "years": [
+            "2026"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "11137": {
+      "qid": "Q2276413",
+      "name": "Virtus Entella",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "autre:Q3718091",
+          "label": "Eccellenza Liguria",
+          "count": 2,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q677397",
+          "label": "championnat d'Italie de football de troisième division",
+          "count": 1,
+          "years": [
+            "2014"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q607965",
+          "label": "Serie C",
+          "count": 1,
+          "years": [
+            "2019"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "11139": {
+      "qid": "Q1387710",
+      "name": "Sudtirol",
+      "total": 0,
+      "trophies": []
+    }
+  }
+}
