@@ -34,7 +34,7 @@ export default function SecondDivisionsPage() {
       aside={
         <div className="flex flex-col gap-3">
           {/* Badge 3D sur grand écran seulement, comme sur l'accueil. */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <HeroBadge division={2} />
           </div>
           {/* Club favori propre aux deuxièmes divisions, distinct de celui des 5 grands. */}
