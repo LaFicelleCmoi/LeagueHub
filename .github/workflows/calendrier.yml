@@ -11,6 +11,8 @@ on:
 
 permissions:
   contents: write
+  # Ouvrir une issue quand une compétition apparaît chez ESPN (voir plus bas).
+  issues: write
 
 concurrency:
   group: calendrier
@@ -31,6 +33,25 @@ jobs:
 
       - name: Relevé du calendrier
         run: npm run calendrier
+
+      # Une coupe n'est publiée chez ESPN qu'une fois ses tours tirés (Coupe de France : à partir des
+      # 32es de finale, en décembre). Quand un calendrier vide reçoit ses premiers matchs, une issue
+      # prévient le propriétaire du dépôt.
+      - name: Signale les calendriers qui reçoivent leurs premiers matchs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count='let s="";process.stdin.on("data",(d)=>(s+=d)).on("end",()=>{try{console.log(JSON.parse(s).matches.length)}catch{console.log(0)}})'
+          for file in $(git status --porcelain -- src/data/calendrier | awk '{ print $2 }'); do
+            before=$(git show "HEAD:$file" 2>/dev/null | node -e "$count")
+            after=$(node -e "$count" < "$file")
+            if [ "$before" = "0" ] && [ "$after" != "0" ]; then
+              slug=$(basename "$file" .json)
+              gh issue create \
+                --title "Calendrier : $slug publié chez ESPN ($after matchs)" \
+                --body "Le relevé de nuit vient de trouver les premiers matchs de \`$slug\` chez ESPN ($after matchs). Le fichier \`$file\` est commité par la même exécution et le site se met à jour au prochain déploiement."
+            fi
+          done
 
       - name: Un commit par fichier modifié
         run: |
