@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Search, Star, X } from "lucide-react";
 import type { ClubIndexEntry } from "@/lib/clubs";
-import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
-import { getLeague, LEAGUES, type LeagueSlug } from "@/lib/leagues";
+import { setFavoriteClub, useFavoriteClub, type Division } from "@/lib/favorite-club";
+import { getLeague, LEAGUES, SECOND_DIVISIONS, type LeagueSlug } from "@/lib/leagues";
 import { LeagueLogo } from "./LeagueLogo";
 import { TeamLogo } from "./TeamLogo";
 
@@ -75,12 +75,14 @@ function ClubCard({
   );
 }
 
-// Fenêtre « Mon club » : onglets par championnat, recherche et grille des clubs à leurs couleurs.
-export function FavoriteClubDialog({ clubs, onClose }: { clubs: ClubIndexEntry[]; onClose: () => void }) {
+// Fenêtre « Mon club » d'une division : onglets par championnat, recherche et grille des clubs à
+// leurs couleurs.
+export function FavoriteClubDialog({ division, clubs, onClose }: { division: Division; clubs: ClubIndexEntry[]; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const favorite = useFavoriteClub();
-  const [tab, setTab] = useState<LeagueSlug>(favorite?.league ?? LEAGUES[0].slug);
+  const leagues = division === 2 ? SECOND_DIVISIONS : LEAGUES;
+  const favorite = useFavoriteClub(division);
+  const [tab, setTab] = useState<LeagueSlug>(favorite?.league ?? leagues[0].slug);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -96,8 +98,8 @@ export function FavoriteClubDialog({ clubs, onClose }: { clubs: ClubIndexEntry[]
   }, []);
 
   const counts = useMemo(
-    () => Object.fromEntries(LEAGUES.map((league) => [league.slug, clubs.filter((club) => club.league === league.slug).length])),
-    [clubs],
+    () => Object.fromEntries(leagues.map((league) => [league.slug, clubs.filter((club) => club.league === league.slug).length])),
+    [clubs, leagues],
   );
 
   const needle = normalize(query);
@@ -111,7 +113,7 @@ export function FavoriteClubDialog({ clubs, onClose }: { clubs: ClubIndexEntry[]
 
   const close = () => dialogRef.current?.close();
   const pick = (club: ClubIndexEntry) => {
-    setFavoriteClub({
+    setFavoriteClub(division, {
       league: club.league,
       team: { id: club.id, name: club.name, shortName: club.shortName, abbreviation: club.abbreviation, logo: club.logo },
     });
@@ -132,7 +134,7 @@ export function FavoriteClubDialog({ clubs, onClose }: { clubs: ClubIndexEntry[]
         <div>
           <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] text-amber-600 dark:text-amber-400">
             <Star className="size-3.5 fill-current" aria-hidden />
-            Mon club
+            {division === 2 ? "Mon club · Deuxièmes divisions" : "Mon club"}
           </p>
           <h2 id="favorite-dialog-title" className="mt-1 text-xl font-black uppercase tracking-tight sm:text-2xl">
             Choisir mon club
@@ -154,7 +156,7 @@ export function FavoriteClubDialog({ clubs, onClose }: { clubs: ClubIndexEntry[]
           aria-label="Championnats"
           className="-mx-1 flex shrink-0 gap-1 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-slate-800 dark:bg-slate-950/60"
         >
-          {LEAGUES.map((league) => {
+          {leagues.map((league) => {
             const active = !searching && tab === league.slug;
             return (
               <button
@@ -232,7 +234,7 @@ export function FavoriteClubDialog({ clubs, onClose }: { clubs: ClubIndexEntry[]
           <button
             type="button"
             onClick={() => {
-              setFavoriteClub(null);
+              setFavoriteClub(division, null);
               close();
             }}
             className="rounded-lg px-3 py-1.5 font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
