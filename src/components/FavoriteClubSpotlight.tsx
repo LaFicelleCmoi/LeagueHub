@@ -145,7 +145,7 @@ export function FavoriteClubSpotlight({
         </button>
       </div>
 
-      <dl className="relative mt-5 grid gap-3 sm:grid-cols-3">
+      <dl className="relative mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
         <Tile label="Classement">
           {position ? (
             <>
