@@ -41,8 +41,8 @@ interface LeaguesHomeProps {
   /** Section « Mon club » : le club favori se choisit parmi les 5 grands championnats. */
   favorite?: boolean;
   shortcutsHeading?: string;
-  /** Sous les raccourcis : lien vers l'autre groupe de championnats. */
-  shortcutsFooter?: ReactNode;
+  /** Bas de page, à part du reste : lien vers l'autre groupe de championnats. */
+  footer?: ReactNode;
   /** Sections placées juste après les raccourcis. */
   children?: ReactNode;
 }
@@ -55,7 +55,7 @@ export async function LeaguesHome({
   aside,
   favorite = false,
   shortcutsHeading,
-  shortcutsFooter,
+  footer,
   children,
 }: LeaguesHomeProps) {
   const now = new Date();
@@ -181,7 +181,7 @@ export async function LeaguesHome({
           {/* Affichée seulement quand le visiteur a choisi un club favori. */}
           {favorite && <FavoriteClubSpotlight positions={positions} matches={todayMatches} />}
 
-          <LeagueShortcuts leagues={leagues} heading={shortcutsHeading} footer={shortcutsFooter} />
+          <LeagueShortcuts leagues={leagues} heading={shortcutsHeading} />
 
           {children}
 
@@ -255,6 +255,8 @@ export async function LeaguesHome({
             ))}
           </div>
         </section>
+
+        {footer}
       </div>
     </ClubDialogProvider>
   );
