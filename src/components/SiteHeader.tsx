@@ -14,6 +14,35 @@ import { LeagueLogo } from "./LeagueLogo";
 import { SettingsMenu } from "./SettingsMenu";
 import { ThemeToggle } from "./ThemeToggle";
 
+/** Sélecteur d'espace : les 5 grands championnats (D1) ou leurs deuxièmes divisions (D2). */
+function DivisionSwitch({ second, onNavigate, className = "" }: { second: boolean; onNavigate?: () => void; className?: string }) {
+  const items = [
+    { href: "/", label: "D1", title: "Les 5 grands championnats", active: !second },
+    { href: SECOND_DIVISIONS_HREF, label: "D2", title: "Les deuxièmes divisions", active: second },
+  ];
+  return (
+    <div role="group" aria-label="Division" className={`inline-flex rounded-lg bg-slate-100 p-0.5 dark:bg-slate-800 ${className}`}>
+      {items.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          onClick={onNavigate}
+          title={item.title}
+          aria-current={item.active ? "true" : undefined}
+          className={`rounded-md px-2.5 py-1.5 text-xs font-bold transition-colors ${
+            item.active
+              ? "bg-white text-slate-900 shadow-sm dark:bg-slate-950 dark:text-white"
+              : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+          }`}
+        >
+          {item.label}
+          <span className="sr-only"> : {item.title}</span>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 function LiveDot() {
   return (
     <span aria-hidden className="relative flex size-2 shrink-0">
@@ -31,6 +60,8 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const onDirect = pathname.startsWith("/direct");
   // Accueil des deuxièmes divisions ou page de l'une d'elles.
   const onSecondDivisions = pathname === SECOND_DIVISIONS_HREF || getLeague(pathname.split("/")[1])?.tier === 2;
+  // Les championnats de l'espace affiché seulement : les deux divisions ne se mélangent pas.
+  const shownLeagues = onSecondDivisions ? SECOND_DIVISIONS : LEAGUES;
   const close = () => setOpen(false);
 
   return (
@@ -45,7 +76,10 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
           <ul className="flex items-center gap-1">
-            {LEAGUES.map((league) => {
+            <li className="mr-1">
+              <DivisionSwitch second={onSecondDivisions} />
+            </li>
+            {shownLeagues.map((league) => {
               const active = pathname.startsWith(`/${league.slug}`);
               return (
                 <li key={league.slug}>
@@ -66,21 +100,6 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 </li>
               );
             })}
-            <li>
-              <Link
-                href={SECOND_DIVISIONS_HREF}
-                aria-current={onSecondDivisions ? "page" : undefined}
-                title="Deuxièmes divisions"
-                className={`rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors ${
-                  onSecondDivisions
-                    ? "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
-                }`}
-              >
-                D2
-                <span className="sr-only"> : deuxièmes divisions</span>
-              </Link>
-            </li>
             <li>
               <Link
                 href="/direct"
@@ -165,7 +184,13 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 <span className="ml-auto text-sm font-normal text-slate-500 dark:text-slate-400">Tous les matchs du jour</span>
               </Link>
             </li>
-            {LEAGUES.map((league) => {
+            <li className="flex items-center justify-between gap-3 px-3 pb-1 pt-2">
+              <span className="text-xs font-bold uppercase tracking-wide text-slate-400">
+                {onSecondDivisions ? "Deuxièmes divisions" : "Les 5 grands championnats"}
+              </span>
+              <DivisionSwitch second={onSecondDivisions} onNavigate={close} />
+            </li>
+            {shownLeagues.map((league) => {
               const active = pathname.startsWith(`/${league.slug}`);
               return (
                 <li key={league.slug}>
@@ -184,22 +209,6 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 </li>
               );
             })}
-            <li>
-              <Link
-                href={SECOND_DIVISIONS_HREF}
-                onClick={close}
-                aria-current={onSecondDivisions ? "page" : undefined}
-                className={`flex items-center gap-3 rounded-lg px-3 py-3 font-medium ${
-                  onSecondDivisions ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-100 dark:hover:bg-slate-800"
-                }`}
-              >
-                <span className="grid size-6 place-items-center rounded-md bg-slate-900 text-[11px] font-bold text-white dark:bg-white dark:text-slate-900">
-                  D2
-                </span>
-                <span>Deuxièmes divisions</span>
-                <span className="ml-auto text-sm text-slate-500 dark:text-slate-400">{SECOND_DIVISIONS.length} championnats</span>
-              </Link>
-            </li>
             {cupsTab && (
               <li>
                 <Link
