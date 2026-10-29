@@ -145,7 +145,8 @@ export async function LeaguesHome({
       <div className="space-y-12">
         <section
           className={
-            aside ? "grid gap-6 md:grid-cols-[minmax(0,1fr)_240px] md:items-center md:gap-8 lg:grid-cols-[minmax(0,1fr)_320px]" : ""
+            // Deux colonnes à partir de 1024 px : plus étroite, la colonne de droite tronquait « Mon club ».
+            aside ? "grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center lg:gap-8" : ""
           }
         >
           <div className="min-w-0">
