@@ -6,7 +6,7 @@
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { LEAGUES, type LeagueSlug } from "../src/lib/leagues.ts";
+import { LEAGUES, type TopLeagueSlug as LeagueSlug } from "../src/lib/leagues.ts";
 
 const OUT_DIR = fileURLToPath(new URL("../src/data/palmares/", import.meta.url));
 const ENDPOINT = "https://query.wikidata.org/sparql";
