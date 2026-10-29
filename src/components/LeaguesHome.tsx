@@ -106,23 +106,19 @@ export async function LeaguesHome({
   const stats: Stat[] = [
     { label: "championnats", value: leagues.length },
     { label: plural(clubs.length, "club", "clubs"), value: clubs.length },
-    ...(next
-      ? [
-          {
-            label: plural(daysToNext, "jour avant la prochaine journée", "jours avant la prochaine journée"),
-            value: daysToNext,
-            hint: `${formatDay(next.firstKickoff)} · ${formatTime(next.firstKickoff)}`,
-          },
-          {
-            label: plural(next.roundCount, "match à la prochaine journée", "matchs à la prochaine journée"),
-            value: next.roundCount,
-            hint: `Dans les ${leagues.length} championnats, sur 4 jours`,
-          },
-        ]
-      : [
-          { label: plural(todayMatches.length, "match aujourd’hui", "matchs aujourd’hui"), value: todayMatches.length },
-          { label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"), value: goalsToday },
-        ]),
+    // Mêmes cartes en D1 et en D2, match ou non : un jour sans match, la prochaine journée passe en précision.
+    {
+      label: plural(todayMatches.length, "match aujourd’hui", "matchs aujourd’hui"),
+      value: todayMatches.length,
+      hint: next
+        ? `Prochaine journée ${formatDay(next.firstKickoff).toLowerCase()} · ${formatTime(next.firstKickoff)}`
+        : null,
+    },
+    {
+      label: plural(goalsToday, "but marqué aujourd’hui", "buts marqués aujourd’hui"),
+      value: goalsToday,
+      hint: next ? `${next.roundCount} ${plural(next.roundCount, "match", "matchs")} à la prochaine journée` : null,
+    },
     {
       label: plural(season.goals, "but au total en saison régulière", "buts au total en saison régulière"),
       value: season.goals,
