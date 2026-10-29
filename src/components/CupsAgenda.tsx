@@ -39,7 +39,7 @@ export function CupsAgenda({ items }: { items: { cup: Cup; overview: CupOverview
     finals.length > 1 ? Math.round((Date.parse(finals[finals.length - 1].round.start) - Date.parse(finals[0].round.start)) / DAY) : 0;
 
   return (
-    <div className="grid gap-5 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-5">
       {next.length > 0 && (
         <section
           aria-labelledby="cups-next-heading"
