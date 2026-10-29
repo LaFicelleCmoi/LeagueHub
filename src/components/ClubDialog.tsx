@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CalendarDays, ChevronRight, Star, X } from "lucide-react";
-import { setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
+import { divisionOf, setFavoriteClub, useFavoriteClub } from "@/lib/favorite-club";
 import { TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
 import { useTeamForm } from "@/lib/team-form";
@@ -71,7 +71,9 @@ function SeasonTotals({ season }: { season: TeamSeasonTotals }) {
 // (focus piégé, fermeture avec Échap, fond assombri).
 export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const favorite = useFavoriteClub();
+  // Favori de la division du club : un club de D2 se compare au favori de D2.
+  const division = club ? divisionOf(club.league) : 1;
+  const favorite = useFavoriteClub(division);
   const [attempt, setAttempt] = useState(0);
   // Relue toutes les 30 s pendant un match du club.
   const status = useTeamForm(club, attempt);
@@ -298,7 +300,7 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
           <footer className="mt-5 flex flex-wrap gap-2">
             <button
               type="button"
-              onClick={() => setFavoriteClub(isFavorite ? null : club)}
+              onClick={() => setFavoriteClub(division, isFavorite ? null : club)}
               aria-pressed={isFavorite}
               className="inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-medium hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800"
             >
