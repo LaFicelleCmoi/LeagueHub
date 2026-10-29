@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronRight, MapPin, Star } from "lucide-react";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { useFavoriteTeamIds } from "@/lib/favorite-club";
 import type { Match, MatchEvent, MatchEventKind, MatchSide } from "@/lib/types";
 import { KickoffCountdown } from "./KickoffCountdown";
 import { useLiveMatch } from "./LiveMatches";
@@ -57,7 +57,7 @@ function LiveBadge({ label }: { label: string }) {
 
 function TeamLine({ side, match }: { side: MatchSide; match: Match }) {
   const scored = useGoalHighlight(side.score);
-  const favorite = useFavoriteClub()?.team.id === side.team.id;
+  const favorite = useFavoriteTeamIds().has(side.team.id);
   const decided = match.home.winner || match.away.winner;
   const dimmed = match.state === "post" && decided && !side.winner;
   const tone = dimmed ? "text-slate-500 dark:text-slate-400" : "";
@@ -157,9 +157,9 @@ function EventList({ events, alignRight = false }: { events: MatchEvent[]; align
 
 export function MatchCard({ match: initialMatch }: { match: Match }) {
   const match = useLiveMatch(initialMatch);
-  const favorite = useFavoriteClub();
+  const favoriteIds = useFavoriteTeamIds();
   const [detailOpen, setDetailOpen] = useState(false);
-  const hasFavorite = favorite !== null && [match.home.team.id, match.away.team.id].includes(favorite.team.id);
+  const hasFavorite = favoriteIds.has(match.home.team.id) || favoriteIds.has(match.away.team.id);
   const live = match.state === "in";
   const home = match.events.filter((e) => e.side === "home");
   const away = match.events.filter((e) => e.side === "away");
