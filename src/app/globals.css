@@ -6,6 +6,8 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow-condensed), var(--font-geist-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 @theme {
@@ -93,6 +95,49 @@
 body {
   background-color: var(--page-bg);
   @apply text-slate-900 dark:text-slate-100;
+}
+
+/* Grand ballon en filigrane derrière tout le site, à demi sorti en haut à droite et fondu sur les bords.
+   z-index négatif : il passe sous le contenu sans toucher aux z-index des autres éléments. */
+.site-ball {
+  position: fixed;
+  top: -20%;
+  right: -14%;
+  z-index: -1;
+  width: min(94vw, 980px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background: url("/ballon.svg") center / contain no-repeat;
+  opacity: 0.16;
+  mask-image: radial-gradient(closest-side, #000 30%, rgb(0 0 0 / 0.35) 62%, transparent 100%);
+}
+
+/* Thème clair : traits sombres, encore plus discrets. */
+:root:not(.dark) .site-ball {
+  filter: invert(1);
+  opacity: 0.07;
+}
+
+@media (max-width: 700px) {
+  .site-ball {
+    top: -8%;
+    right: -40%;
+    width: 150vw;
+    opacity: 0.12;
+  }
+}
+
+/* Titres de page et de section en Barlow Condensed ; les h3 restent en Geist, comme le texte. */
+h1,
+h2 {
+  /* @apply recopie la pile de polices : var(--font-display), résolue sur :root, ne verrait pas
+     la variable de next/font posée sur <body>. */
+  @apply font-display;
+}
+
+/* Le resserrement « tracking-tight » pensé pour Geist colle les lettres d'une police déjà étroite. */
+:is(h1, h2).tracking-tight {
+  letter-spacing: 0.01em;
 }
 
 /* L'en-tête est collant : une ancre ou un focus clavier ne doit jamais finir dessous. */
