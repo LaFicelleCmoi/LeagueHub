@@ -1,0 +1,1440 @@
+{
+  "slug": "championship",
+  "updatedAt": "2026-10-29",
+  "clubs": {
+    "314": {
+      "qid": "Q18519",
+      "name": "Lincoln City",
+      "total": 7,
+      "trophies": [
+        {
+          "key": "autre:Q58916",
+          "label": "championnat d'Angleterre de football de cinquième division",
+          "count": 2,
+          "years": [
+            "1988",
+            "2017"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q48837",
+          "label": "championnat d'Angleterre de football de quatrième division",
+          "count": 1,
+          "years": [
+            "2019"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2026"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "years": [
+            "1976"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "years": [
+            "2018"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q12327058",
+          "label": "Q12327058",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        }
+      ]
+    },
+    "318": {
+      "qid": "Q18659",
+      "name": "Swansea City",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "years": [
+            "2013"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q511040",
+          "label": "Coupe du pays de Galles de football",
+          "count": 4,
+          "years": [
+            "1932",
+            "1950",
+            "1961",
+            "1966"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 2,
+          "years": [
+            "1994",
+            "2006"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2008"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "2000"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q16258475",
+          "label": "U21 Premier League Cup",
+          "count": 1,
+          "years": [
+            "2017"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "333": {
+      "qid": "Q19456",
+      "name": "Bristol City",
+      "total": 14,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1906"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 8,
+          "years": [
+            "1898",
+            "1911",
+            "1921",
+            "1926",
+            "1927",
+            "1938",
+            "1962",
+            "1963"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 2,
+          "years": [
+            "2003",
+            "2015"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2015"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q511040",
+          "label": "Coupe du pays de Galles de football",
+          "count": 1,
+          "years": [
+            "1934"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 1,
+          "years": [
+            "1923"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "334": {
+      "qid": "Q18723",
+      "name": "Queens Park Rangers",
+      "total": 7,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 2,
+          "years": [
+            "1983",
+            "2011"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "years": [
+            "1967"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 2,
+          "years": [
+            "1908",
+            "1912"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1967"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 1,
+          "years": [
+            "1906"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "336": {
+      "qid": "Q18736",
+      "name": "Stoke City",
+      "total": 6,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 2,
+          "years": [
+            "1933",
+            "1963"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "years": [
+            "1972"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 2,
+          "years": [
+            "1992",
+            "2000"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "years": [
+            "1993"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "347": {
+      "qid": "Q18662",
+      "name": "Cardiff City",
+      "total": 16,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "2013"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "years": [
+            "1927"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q511040",
+          "label": "Coupe du pays de Galles de football",
+          "count": 12,
+          "years": [
+            "1956",
+            "1959",
+            "1964",
+            "1965",
+            "1967",
+            "1968",
+            "1969",
+            "1970",
+            "1971",
+            "1973",
+            "1974",
+            "1976"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1993"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 1,
+          "years": [
+            "1914"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "352": {
+      "qid": "Q18529",
+      "name": "Wrexham",
+      "total": 17,
+      "trophies": [
+        {
+          "key": "autre:Q511040",
+          "label": "Coupe du pays de Galles de football",
+          "count": 13,
+          "years": [
+            "1878",
+            "1883",
+            "1931",
+            "1933",
+            "1957",
+            "1958",
+            "1960",
+            "1972",
+            "1975",
+            "1978"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q58916",
+          "label": "championnat d'Angleterre de football de cinquième division",
+          "count": 1,
+          "years": [
+            "2023"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1046509",
+          "label": "FA Trophy",
+          "count": 1,
+          "years": [
+            "2013"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1978"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "years": [
+            "2005"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "358": {
+      "qid": "Q19451",
+      "name": "Bolton Wanderers",
+      "total": 9,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 4,
+          "years": [
+            "1923",
+            "1926",
+            "1929",
+            "1958"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 3,
+          "years": [
+            "1909",
+            "1978",
+            "1997"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1973"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "years": [
+            "2023"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "365": {
+      "qid": "Q19446",
+      "name": "Blackburn Rovers",
+      "total": 15,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 6,
+          "years": [
+            "1884",
+            "1885",
+            "1886",
+            "1890",
+            "1891",
+            "1928"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 3,
+          "years": [
+            "1912",
+            "1914",
+            "1995"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1939"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "years": [
+            "2002"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1054420",
+          "label": "Lancashire Combination",
+          "count": 3,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1975"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "369": {
+      "qid": "Q18661",
+      "name": "Middlesbrough",
+      "total": 11,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 4,
+          "years": [
+            "1927",
+            "1929",
+            "1974",
+            "1995"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "years": [
+            "2004"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2750075",
+          "label": "Northern Football League",
+          "count": 6,
+          "years": [
+            "1894",
+            "1895",
+            "1897"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "371": {
+      "qid": "Q18747",
+      "name": "West Ham United",
+      "total": 12,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 3,
+          "years": [
+            "1964",
+            "1975",
+            "1980"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 2,
+          "years": [
+            "1958",
+            "1981"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "c2",
+          "label": "Coupe des coupes",
+          "count": 1,
+          "years": [
+            "1965"
+          ],
+          "scope": "europe"
+        },
+        {
+          "key": "autre:Q4311339",
+          "label": "London League",
+          "count": 2,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q182068",
+          "label": "Coupe Intertoto",
+          "count": 1,
+          "years": [
+            "1999"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1470261",
+          "label": "International Soccer League",
+          "count": 1,
+          "years": [
+            "1963"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q16258475",
+          "label": "U21 Premier League Cup",
+          "count": 1,
+          "years": [
+            "2016"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 1,
+          "years": [
+            "1907"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "372": {
+      "qid": "Q19462",
+      "name": "Charlton Athletic",
+      "total": 3,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "2000"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "years": [
+            "1947"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2012"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "374": {
+      "qid": "Q19470",
+      "name": "Derby County",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 4,
+          "years": [
+            "1912",
+            "1915",
+            "1969",
+            "1987"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 2,
+          "years": [
+            "1972",
+            "1975"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "years": [
+            "1946"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q86751625",
+          "label": "United Counties League",
+          "count": 1,
+          "years": [
+            "1894"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "376": {
+      "qid": "Q18732",
+      "name": "Southampton",
+      "total": 11,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "years": [
+            "1976"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 7,
+          "years": [
+            "1897",
+            "1898",
+            "1899",
+            "1901",
+            "1903",
+            "1904",
+            "1925"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1960"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "years": [
+            "2010"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q16258475",
+          "label": "U21 Premier League Cup",
+          "count": 1,
+          "years": [
+            "2015"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "379": {
+      "qid": "Q19458",
+      "name": "Burnley",
+      "total": 9,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 4,
+          "years": [
+            "1898",
+            "1973",
+            "2016",
+            "2023"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 2,
+          "years": [
+            "1921",
+            "1960"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 1,
+          "years": [
+            "1914"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "years": [
+            "1992"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1982"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "380": {
+      "qid": "Q19500",
+      "name": "Wolverhampton Wanderers",
+      "total": 20,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 4,
+          "years": [
+            "1932",
+            "1977",
+            "2009",
+            "2018"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 4,
+          "years": [
+            "1893",
+            "1908",
+            "1949",
+            "1960"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 3,
+          "years": [
+            "1954",
+            "1958",
+            "1959"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 2,
+          "years": [
+            "1974",
+            "1980"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1634803",
+          "label": "West Midlands (Regional) League",
+          "count": 3,
+          "years": [
+            "1893",
+            "1898",
+            "1899"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2014"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "years": [
+            "1988"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1989"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q12335140",
+          "label": "Shropshire & District League",
+          "count": 1,
+          "years": [],
+          "scope": "autre"
+        }
+      ]
+    },
+    "381": {
+      "qid": "Q18721",
+      "name": "Norwich City",
+      "total": 12,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 5,
+          "years": [
+            "1972",
+            "1986",
+            "2004",
+            "2019",
+            "2021"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 2,
+          "years": [
+            "1962",
+            "1985"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 3,
+          "years": [
+            "1933",
+            "1934",
+            "1935"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2010"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1466284",
+          "label": "FA Youth Cup",
+          "count": 1,
+          "years": [
+            "2013"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "383": {
+      "qid": "Q18744",
+      "name": "West Bromwich Albion",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 5,
+          "years": [
+            "1888",
+            "1892",
+            "1931",
+            "1954",
+            "1968"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 3,
+          "years": [
+            "1902",
+            "1911",
+            "2008"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "years": [
+            "1920"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 1,
+          "years": [
+            "1966"
+          ],
+          "scope": "national"
+        }
+      ]
+    },
+    "385": {
+      "qid": "Q19604",
+      "name": "Portsmouth",
+      "total": 16,
+      "trophies": [
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 2,
+          "years": [
+            "1949",
+            "1950"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 2,
+          "years": [
+            "1939",
+            "2008"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "2003"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 3,
+          "years": [
+            "1901",
+            "1902",
+            "1903"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 2,
+          "years": [
+            "1962",
+            "1983"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 2,
+          "years": [
+            "1902",
+            "1920"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q48837",
+          "label": "championnat d'Angleterre de football de quatrième division",
+          "count": 1,
+          "years": [
+            "2017"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2024"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "years": [
+            "2019"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2605489",
+          "label": "Premier League Asia Trophy",
+          "count": 1,
+          "years": [
+            "2007"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "391": {
+      "qid": "Q19487",
+      "name": "Millwall",
+      "total": 11,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1988"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q4311339",
+          "label": "London League",
+          "count": 3,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 3,
+          "years": [
+            "1895",
+            "1896",
+            "1926"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q2422930",
+          "label": "Western Football League",
+          "count": 2,
+          "years": [
+            "1908",
+            "1909"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "years": [
+            "1962"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "years": [
+            "2001"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "392": {
+      "qid": "Q19444",
+      "name": "Birmingham City",
+      "total": 10,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 5,
+          "years": [
+            "1893",
+            "1921",
+            "1948",
+            "1955",
+            "1960"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe-ligue",
+          "label": "Coupe de la Ligue anglaise",
+          "count": 2,
+          "years": [
+            "1963",
+            "2011"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2025"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "years": [
+            "1995"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q843159",
+          "label": "Football League Trophy",
+          "count": 1,
+          "years": [
+            "1995"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "394": {
+      "qid": "Q19612",
+      "name": "Preston North End",
+      "total": 13,
+      "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 3,
+          "years": [
+            "1904",
+            "1913",
+            "1951"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 2,
+          "years": [
+            "1889",
+            "1890"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 2,
+          "years": [
+            "1889",
+            "1938"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q1054420",
+          "label": "Lancashire Combination",
+          "count": 3,
+          "years": [],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 2,
+          "years": [
+            "1971",
+            "1996"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "years": [
+            "2000"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "395": {
+      "qid": "Q2714",
+      "name": "Watford",
+      "total": 4,
+      "trophies": [
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "years": [
+            "1978"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q769744",
+          "label": "Football League Second Division",
+          "count": 1,
+          "years": [
+            "1998"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436448",
+          "label": "Football League Third Division",
+          "count": 1,
+          "years": [
+            "1969"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q18573",
+          "label": "Southern Football League",
+          "count": 1,
+          "years": [
+            "1915"
+          ],
+          "scope": "autre"
+        }
+      ]
+    },
+    "398": {
+      "qid": "Q19607",
+      "name": "Sheffield United",
+      "total": 8,
+      "trophies": [
+        {
+          "key": "coupe",
+          "label": "Coupe d'Angleterre (FA Cup)",
+          "count": 4,
+          "years": [
+            "1899",
+            "1902",
+            "1915",
+            "1925"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "championnat",
+          "label": "Championnat d'Angleterre",
+          "count": 1,
+          "years": [
+            "1898"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Angleterre de D2",
+          "count": 1,
+          "years": [
+            "1953"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "autre:Q19565",
+          "label": "championnat d'Angleterre de football de troisième division",
+          "count": 1,
+          "years": [
+            "2017"
+          ],
+          "scope": "autre"
+        },
+        {
+          "key": "autre:Q1436315",
+          "label": "Football League Fourth Division",
+          "count": 1,
+          "years": [
+            "1982"
+          ],
+          "scope": "autre"
+        }
+      ]
+    }
+  }
+}
