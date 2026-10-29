@@ -29,9 +29,10 @@ export default function SecondDivisionsPage() {
       title="Les deuxièmes divisions européennes"
       intro="Montée, barrages et relégation : classements, résultats, calendriers, buteurs et actualités de la Championship, Segunda División (LaLiga Hypermotion), Serie B, 2. Bundesliga et Ligue 2 (BKT)."
       shortcutsHeading="Choisir une deuxième division"
-      shortcutsFooter={
+      footer={
         <LeagueGroupLink
           href="/"
+          eyebrow="Retour à l'accueil"
           title="Les 5 grands championnats"
           description="Premier League, La Liga, Serie A, Bundesliga et Ligue 1"
           leagues={LEAGUES}
