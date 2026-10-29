@@ -31,7 +31,15 @@ function score(club: ClubIndexEntry, query: string): number {
 }
 
 // Barre de recherche des clubs : mène à la page d'un club (saison en cours et palmarès).
-export function ClubSearch({ clubs, onNavigate }: { clubs: ClubIndexEntry[]; onNavigate?: () => void }) {
+export function ClubSearch({
+  clubs,
+  onNavigate,
+  placeholder = "Rechercher un club",
+}: {
+  clubs: ClubIndexEntry[];
+  onNavigate?: () => void;
+  placeholder?: string;
+}) {
   const router = useRouter();
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -116,8 +124,8 @@ export function ClubSearch({ clubs, onNavigate }: { clubs: ClubIndexEntry[]; onN
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          placeholder="Rechercher un club"
-          aria-label="Rechercher un club"
+          placeholder={placeholder}
+          aria-label={placeholder}
           role="combobox"
           aria-expanded={expanded}
           aria-controls={listId}
