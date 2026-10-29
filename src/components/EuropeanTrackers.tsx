@@ -203,7 +203,7 @@ function TrackerSlide({ slide }: { slide: Slide }) {
 
       {/* Mobile : logo, texte, bouton, dans cet ordre. Grand écran : le texte à gauche, le logo au-dessus du
           bouton à droite, le tout centré en hauteur. */}
-      <div className="relative grid h-full gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:content-center lg:gap-x-10">
+      <div className="relative grid h-full grid-cols-1 gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:content-center lg:gap-x-10">
         {/* Les logos officiels sont noirs : ils sont fournis en blanc (l'orange d'Europa et le vert de la
             Conférence sont conservés), sans quoi ils se perdraient sur la bannière sombre. */}
         <Image
