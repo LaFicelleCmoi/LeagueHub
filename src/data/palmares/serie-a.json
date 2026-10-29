@@ -1,6 +1,6 @@
 {
   "slug": "serie-a",
-  "updatedAt": "2026-09-19",
+  "updatedAt": "2026-10-29",
   "clubs": {
     "103": {
       "qid": "Q1543",
@@ -44,6 +44,16 @@
             "1973",
             "1977",
             "2003"
+          ],
+          "scope": "national"
+        },
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 2,
+          "years": [
+            "1981",
+            "1983"
           ],
           "scope": "national"
         },
@@ -120,16 +130,6 @@
           "scope": "autre"
         },
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 2,
-          "years": [
-            "1981",
-            "1983"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q96475166",
           "label": "Coppa del Mediterraneo",
           "count": 2,
@@ -185,6 +185,15 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "1952"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "villes-foires",
           "label": "Coupe des villes de foires",
           "count": 1,
@@ -205,15 +214,6 @@
           "scope": "autre"
         },
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 1,
-          "years": [
-            "1952"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q1342576",
           "label": "Coupe anglo-italienne",
           "count": 1,
@@ -229,6 +229,19 @@
       "name": "Atalanta",
       "total": 10,
       "trophies": [
+        {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 5,
+          "years": [
+            "1940",
+            "1959",
+            "1984",
+            "2006",
+            "2011"
+          ],
+          "scope": "national"
+        },
         {
           "key": "coupe",
           "label": "Coupe d'Italie",
@@ -246,19 +259,6 @@
             "2024"
           ],
           "scope": "europe"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 5,
-          "years": [
-            "1940",
-            "1959",
-            "1984",
-            "2006",
-            "2011"
-          ],
-          "scope": "autre"
         },
         {
           "key": "autre:Q496887",
@@ -302,6 +302,16 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 2,
+          "years": [
+            "1988",
+            "1996"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "coupe",
           "label": "Coupe d'Italie",
           "count": 2,
@@ -310,16 +320,6 @@
             "1974"
           ],
           "scope": "national"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 2,
-          "years": [
-            "1988",
-            "1996"
-          ],
-          "scope": "autre"
         },
         {
           "key": "autre:Q182068",
@@ -361,6 +361,17 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 3,
+          "years": [
+            "1931",
+            "1939",
+            "1994"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "championnat",
           "label": "Championnat d'Italie",
           "count": 2,
@@ -392,17 +403,6 @@
             "1982",
             "1988",
             "1992"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 3,
-          "years": [
-            "1931",
-            "1939",
-            "1994"
           ],
           "scope": "autre"
         }
@@ -589,6 +589,15 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "2007"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 3,
@@ -655,15 +664,6 @@
           "scope": "autre"
         },
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 1,
-          "years": [
-            "2007"
-          ],
-          "scope": "autre"
-        },
-        {
           "key": "autre:Q182068",
           "label": "Coupe Intertoto",
           "count": 1,
@@ -675,7 +675,7 @@
       ]
     },
     "112": {
-      "qid": "Q2609",
+      "qid": "Q3907390",
       "name": "Lazio",
       "total": 12,
       "trophies": [
@@ -705,6 +705,15 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "1969"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c2",
           "label": "Coupe des coupes",
           "count": 1,
@@ -721,15 +730,6 @@
             "1999"
           ],
           "scope": "europe"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 1,
-          "years": [
-            "1969"
-          ],
-          "scope": "autre"
         }
       ]
     },
@@ -739,13 +739,13 @@
       "total": 1,
       "trophies": [
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 1,
           "years": [
             "2010"
           ],
-          "scope": "autre"
+          "scope": "national"
         }
       ]
     },
@@ -781,6 +781,15 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 1,
+          "years": [
+            "1950"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "c3",
           "label": "Ligue Europa",
           "count": 1,
@@ -788,15 +797,6 @@
             "1989"
           ],
           "scope": "europe"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 1,
-          "years": [
-            "1950"
-          ],
-          "scope": "autre"
         },
         {
           "key": "autre:Q496887",
@@ -861,14 +861,14 @@
       "total": 4,
       "trophies": [
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 2,
           "years": [
             "1956",
             "1979"
           ],
-          "scope": "autre"
+          "scope": "national"
         },
         {
           "key": "autre:Q182068",
@@ -925,6 +925,17 @@
           "scope": "national"
         },
         {
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
+          "count": 3,
+          "years": [
+            "1960",
+            "1990",
+            "2001"
+          ],
+          "scope": "national"
+        },
+        {
           "key": "autre:Q496887",
           "label": "tournoi de Viareggio",
           "count": 6,
@@ -935,17 +946,6 @@
             "1989",
             "1995",
             "1998"
-          ],
-          "scope": "autre"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
-          "count": 3,
-          "years": [
-            "1960",
-            "1990",
-            "2001"
           ],
           "scope": "autre"
         },
@@ -966,15 +966,15 @@
       "total": 3,
       "trophies": [
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 3,
           "years": [
             "1949",
             "1980",
             "2002"
           ],
-          "scope": "autre"
+          "scope": "national"
         }
       ]
     },
@@ -993,13 +993,13 @@
           "scope": "national"
         },
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 1,
           "years": [
             "2016"
           ],
-          "scope": "autre"
+          "scope": "national"
         }
       ]
     },
@@ -1026,17 +1026,8 @@
           "scope": "national"
         },
         {
-          "key": "coupe",
-          "label": "Coupe d'Italie",
-          "count": 1,
-          "years": [
-            "1937"
-          ],
-          "scope": "national"
-        },
-        {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 6,
           "years": [
             "1935",
@@ -1046,7 +1037,16 @@
             "1976",
             "1989"
           ],
-          "scope": "autre"
+          "scope": "national"
+        },
+        {
+          "key": "coupe",
+          "label": "Coupe d'Italie",
+          "count": 1,
+          "years": [
+            "1937"
+          ],
+          "scope": "national"
         },
         {
           "key": "autre:Q496887",
@@ -1065,13 +1065,13 @@
       "total": 1,
       "trophies": [
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 1,
           "years": [
             "2013"
           ],
-          "scope": "autre"
+          "scope": "national"
         }
       ]
     },
@@ -1112,15 +1112,15 @@
       "total": 4,
       "trophies": [
         {
-          "key": "autre:Q194052",
-          "label": "championnat d'Italie de football de deuxième division",
+          "key": "deuxieme-division",
+          "label": "Championnat d'Italie de D2",
           "count": 3,
           "years": [
             "1961",
             "1966",
             "2026"
           ],
-          "scope": "autre"
+          "scope": "national"
         },
         {
           "key": "autre:Q252836",
