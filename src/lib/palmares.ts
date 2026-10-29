@@ -1,14 +1,18 @@
 import "server-only";
 
+import bundesliga2 from "@/data/palmares/2-bundesliga.json";
 import bundesliga from "@/data/palmares/bundesliga.json";
+import championship from "@/data/palmares/championship.json";
 import laLiga from "@/data/palmares/la-liga.json";
 import ligue1 from "@/data/palmares/ligue-1.json";
+import ligue2 from "@/data/palmares/ligue-2.json";
 import premierLeague from "@/data/palmares/premier-league.json";
+import segundaDivision from "@/data/palmares/segunda-division.json";
 import serieA from "@/data/palmares/serie-a.json";
-import type { LeagueSlug, TopLeagueSlug } from "./leagues";
+import serieB from "@/data/palmares/serie-b.json";
+import type { LeagueSlug } from "./leagues";
 
-// Palmarès des clubs des 5 grands championnats, relevé chaque semaine sur Wikidata par
-// scripts/sync-palmares.mts. Les clubs des deuxièmes divisions n'en ont pas.
+// Palmarès des clubs, relevé chaque semaine sur Wikidata par scripts/sync-palmares.mts.
 
 export type TrophyScope = "national" | "europe" | "monde" | "autre";
 
@@ -42,7 +46,12 @@ const FILES = {
   "serie-a": serieA,
   bundesliga,
   "ligue-1": ligue1,
-} as unknown as Record<TopLeagueSlug, PalmaresFile>;
+  championship,
+  "segunda-division": segundaDivision,
+  "serie-b": serieB,
+  "2-bundesliga": bundesliga2,
+  "ligue-2": ligue2,
+} as unknown as Record<LeagueSlug, PalmaresFile>;
 
 /** Périmètres mis en avant, dans l'ordre d'affichage ; « autre » est replié à part. */
 export const TROPHY_SCOPES: { scope: TrophyScope; label: string }[] = [
@@ -52,7 +61,7 @@ export const TROPHY_SCOPES: { scope: TrophyScope; label: string }[] = [
 ];
 
 export function getPalmares(league: LeagueSlug, teamId: string): { club: ClubPalmares; updatedAt: string } | null {
-  const file = FILES[league as TopLeagueSlug] as PalmaresFile | undefined;
+  const file = FILES[league];
   const club = file?.clubs[teamId];
   return club ? { club, updatedAt: file.updatedAt } : null;
 }
