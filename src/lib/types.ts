@@ -11,7 +11,7 @@ export interface Team {
   logo: string | null;
 }
 
-export type ZoneTone = "ucl" | "uel" | "uecl" | "playoff" | "relegation" | "other";
+export type ZoneTone = "ucl" | "uel" | "uecl" | "promotion" | "promotion-playoff" | "playoff" | "relegation" | "other";
 
 export interface Zone {
   label: string;
