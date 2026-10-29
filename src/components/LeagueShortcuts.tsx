@@ -1,8 +1,9 @@
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import { ChevronRight } from "lucide-react";
-import type { League, LeagueSlug } from "@/lib/leagues";
+import { leagueLogo, type League, type LeagueSlug } from "@/lib/leagues";
 import { LeagueLogo } from "./LeagueLogo";
+import { ThemedLogo } from "./ThemedLogo";
 import PixelCard from "./reactbits/PixelCard";
 
 // Nuances de la couleur de chaque ligue (claire → foncée) pour l'effet de pixels.
@@ -22,14 +23,7 @@ const PIXEL_COLORS: Record<LeagueSlug, string> = {
 // Aucune carte orpheline : mobile 2 + 2 + 1 (pleine largeur), tablette 3 + 2, grand écran 5.
 const SPANS = ["sm:col-span-2", "sm:col-span-2", "sm:col-span-2", "sm:col-span-3", "col-span-2 sm:col-span-3"];
 
-interface LeagueShortcutsProps {
-  leagues: readonly League[];
-  heading?: string;
-  /** Sous la grille : lien vers l'autre groupe de championnats. */
-  footer?: ReactNode;
-}
-
-export function LeagueShortcuts({ leagues, heading = "Choisir un championnat", footer }: LeagueShortcutsProps) {
+export function LeagueShortcuts({ leagues, heading = "Choisir un championnat" }: { leagues: readonly League[]; heading?: string }) {
   return (
     <section aria-labelledby="leagues-heading">
       <h2 id="leagues-heading" className="mb-4 text-xl font-semibold">
@@ -61,19 +55,23 @@ export function LeagueShortcuts({ leagues, heading = "Choisir un championnat", f
           </li>
         ))}
       </ul>
-      {footer && <div className="mt-3">{footer}</div>}
     </section>
   );
 }
 
-/** Bandeau-lien vers un groupe de championnats (accueil des deuxièmes divisions, ou retour aux 5 grands). */
+/**
+ * Lien vers l'autre espace du site (accueil des deuxièmes divisions, ou retour aux 5 grands), en bas
+ * de page et sur fond sombre : il ne se confond pas avec les raccourcis du groupe affiché.
+ */
 export function LeagueGroupLink({
   href,
+  eyebrow,
   title,
   description,
   leagues,
 }: {
   href: string;
+  eyebrow: string;
   title: string;
   description: string;
   leagues: readonly League[];
@@ -81,24 +79,26 @@ export function LeagueGroupLink({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm transition-shadow outline-offset-2 hover:shadow-md focus-visible:outline-2 focus-visible:outline-slate-900 sm:px-5 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none dark:focus-visible:outline-white"
+      className="group flex items-center gap-4 rounded-2xl bg-slate-900 px-4 py-5 text-white shadow-sm transition outline-offset-2 hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-slate-900 sm:px-6 dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 dark:hover:bg-slate-700 dark:focus-visible:outline-white"
     >
       <span aria-hidden className="flex shrink-0 -space-x-1.5 sm:-space-x-1">
         {leagues.map((league) => (
           <span
             key={league.slug}
-            className="grid size-7 place-items-center rounded-full bg-white shadow-sm ring-2 ring-white dark:bg-slate-800 dark:ring-slate-900"
+            className="grid size-7 place-items-center rounded-full bg-white shadow-sm ring-2 ring-slate-900 sm:size-8 dark:ring-slate-800"
           >
-            <LeagueLogo league={league} size={18} />
+            {/* Pastilles blanches : le logo clair se lit dans les deux thèmes. */}
+            <ThemedLogo light={leagueLogo(league)} dark={null} size={20} />
           </span>
         ))}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block font-semibold">{title}</span>
-        <span className="block text-sm text-slate-500 dark:text-slate-400">{description}</span>
+        <span className="block text-xs font-semibold uppercase tracking-wide text-slate-400">{eyebrow}</span>
+        <span className="block text-lg font-bold">{title}</span>
+        <span className="block text-sm text-slate-300">{description}</span>
       </span>
       <ChevronRight
-        className="size-5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
+        className="size-6 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
         aria-hidden
       />
     </Link>
