@@ -1,6 +1,8 @@
 import "server-only";
 
+import bundesliga2 from "@/data/calendrier/2-bundesliga.json";
 import bundesliga from "@/data/calendrier/bundesliga.json";
+import championship from "@/data/calendrier/championship.json";
 import copaDelRey from "@/data/calendrier/copa-del-rey.json";
 import coppaItalia from "@/data/calendrier/coppa-italia.json";
 import coupeDeFrance from "@/data/calendrier/coupe-de-france.json";
@@ -8,8 +10,11 @@ import dfbPokal from "@/data/calendrier/dfb-pokal.json";
 import faCup from "@/data/calendrier/fa-cup.json";
 import laLiga from "@/data/calendrier/la-liga.json";
 import ligue1 from "@/data/calendrier/ligue-1.json";
+import ligue2 from "@/data/calendrier/ligue-2.json";
 import premierLeague from "@/data/calendrier/premier-league.json";
+import segundaDivision from "@/data/calendrier/segunda-division.json";
 import serieA from "@/data/calendrier/serie-a.json";
+import serieB from "@/data/calendrier/serie-b.json";
 import type { CupSlug } from "./cups";
 import { dayKey } from "./format";
 import type { LeagueSlug } from "./leagues";
@@ -56,6 +61,11 @@ const CALENDARS = {
   "serie-a": serieA,
   bundesliga,
   "ligue-1": ligue1,
+  championship,
+  "segunda-division": segundaDivision,
+  "serie-b": serieB,
+  "2-bundesliga": bundesliga2,
+  "ligue-2": ligue2,
   "fa-cup": faCup,
   "copa-del-rey": copaDelRey,
   "coppa-italia": coppaItalia,
