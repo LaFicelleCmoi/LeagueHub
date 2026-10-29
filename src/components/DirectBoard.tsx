@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ChevronRight, Star } from "lucide-react";
 import type { DirectCompetition } from "@/lib/competitions";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { useFavoriteTeamIds } from "@/lib/favorite-club";
 import type { Match } from "@/lib/types";
 import { EmptyState } from "./EmptyState";
 import { useLiveMatches } from "./LiveMatches";
@@ -29,7 +29,8 @@ const FILTERS: { id: Filter; label: string }[] = [
 // Matchs du jour de toutes les compétitions, filtrables, tenus à jour par le direct.
 export function DirectBoard({ groups }: { groups: DirectGroup[] }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const favorite = useFavoriteClub();
+  // Les favoris des deux divisions : le Direct réunit toutes les compétitions.
+  const favoriteIds = useFavoriteTeamIds();
   const all = useMemo(() => groups.flatMap((group) => group.matches), [groups]);
   // Version la plus récente de chaque match : un match qui démarre passe dans « En direct ».
   const live = useLiveMatches(all);
@@ -45,7 +46,7 @@ export function DirectBoard({ groups }: { groups: DirectGroup[] }) {
       case "finished":
         return state === "post";
       case "favorite":
-        return favorite !== null && [match.home.team.id, match.away.team.id].includes(favorite.team.id);
+        return favoriteIds.has(match.home.team.id) || favoriteIds.has(match.away.team.id);
       default:
         return true;
     }
@@ -62,7 +63,7 @@ export function DirectBoard({ groups }: { groups: DirectGroup[] }) {
   return (
     <div className="space-y-6">
       <div role="group" aria-label="Filtrer les matchs" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
-        {FILTERS.filter(({ id }) => id !== "favorite" || favorite !== null).map(({ id, label }) => {
+        {FILTERS.filter(({ id }) => id !== "favorite" || favoriteIds.size > 0).map(({ id, label }) => {
           const active = filter === id;
           return (
             <button
