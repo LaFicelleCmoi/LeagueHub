@@ -8,7 +8,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { CUPS } from "../src/lib/cups.ts";
-import { LEAGUES } from "../src/lib/leagues.ts";
+import { ALL_LEAGUES } from "../src/lib/leagues.ts";
 
 const ESPN = "https://site.api.espn.com/apis/site/v2/sports/soccer";
 const OUT_DIR = fileURLToPath(new URL("../src/data/calendrier/", import.meta.url));
@@ -189,7 +189,7 @@ console.log(`Calendrier ${season.label}`);
 
 let failures = 0;
 const competitions = [
-  ...LEAGUES.map((league) => ({ slug: league.slug, espnCode: league.espnCode, kind: "league" as const })),
+  ...ALL_LEAGUES.map((league) => ({ slug: league.slug, espnCode: league.espnCode, kind: "league" as const })),
   ...CUPS.map((cup) => ({ slug: cup.slug, espnCode: cup.espnCode, kind: "cup" as const })),
 ];
 for (const { slug, espnCode, kind } of competitions) {
