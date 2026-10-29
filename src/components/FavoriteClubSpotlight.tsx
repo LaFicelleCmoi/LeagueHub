@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Star } from "lucide-react";
-import { useFavoriteClub } from "@/lib/favorite-club";
+import { useFavoriteClub, type Division } from "@/lib/favorite-club";
 import { formatTime, TIME_ZONE } from "@/lib/format";
 import { getLeague } from "@/lib/leagues";
 import { useTeamForm } from "@/lib/team-form";
@@ -84,8 +84,16 @@ function Skeleton({ className }: { className: string }) {
 }
 
 // Section « Mon club » de l'accueil : n'apparaît que si le visiteur a choisi un club favori.
-export function FavoriteClubSpotlight({ positions, matches }: { positions: Record<string, ClubPosition>; matches: Match[] }) {
-  const favorite = useFavoriteClub();
+export function FavoriteClubSpotlight({
+  division,
+  positions,
+  matches,
+}: {
+  division: Division;
+  positions: Record<string, ClubPosition>;
+  matches: Match[];
+}) {
+  const favorite = useFavoriteClub(division);
   const openClub = useOpenClub();
   const liveMatches = useLiveMatches(matches);
   // Relue toutes les 30 s pendant un match du club ; indisponible, le reste de la carte s'affiche quand même.
