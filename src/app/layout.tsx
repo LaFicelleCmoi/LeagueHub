@@ -6,7 +6,7 @@ import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistratio
 import { SiteHeader } from "@/components/SiteHeader";
 import { clubIndex } from "@/lib/clubs";
 import { UCL_TRACKER_URL } from "@/lib/external-links";
-import { LEAGUES } from "@/lib/leagues";
+import { LEAGUES, SECOND_DIVISIONS_HREF } from "@/lib/leagues";
 import { THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
@@ -73,6 +73,11 @@ export default function RootLayout({
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link href={SECOND_DIVISIONS_HREF} className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+                    Deuxièmes divisions
+                  </Link>
+                </li>
               </ul>
             </nav>
             <nav aria-label="Compétitions">
