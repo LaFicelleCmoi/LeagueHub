@@ -7,7 +7,7 @@ import { ArrowUpRight, Menu, Star, Trophy, X } from "lucide-react";
 import type { ClubIndexEntry } from "@/lib/clubs";
 import { useCupsTab } from "@/lib/cups-tab";
 import { UCL_TRACKER_URL } from "@/lib/external-links";
-import { LEAGUES } from "@/lib/leagues";
+import { getLeague, LEAGUES, SECOND_DIVISIONS, SECOND_DIVISIONS_HREF } from "@/lib/leagues";
 import { ClubSearch } from "./ClubSearch";
 import { CupsTabSwitch } from "./CupsTabSwitch";
 import { LeagueLogo } from "./LeagueLogo";
@@ -29,6 +29,8 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const cupsTab = useCupsTab();
   const onCups = pathname.startsWith("/coupes");
   const onDirect = pathname.startsWith("/direct");
+  // Accueil des deuxièmes divisions ou page de l'une d'elles.
+  const onSecondDivisions = pathname === SECOND_DIVISIONS_HREF || getLeague(pathname.split("/")[1])?.tier === 2;
   const close = () => setOpen(false);
 
   return (
@@ -64,6 +66,21 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 </li>
               );
             })}
+            <li>
+              <Link
+                href={SECOND_DIVISIONS_HREF}
+                aria-current={onSecondDivisions ? "page" : undefined}
+                title="Deuxièmes divisions"
+                className={`rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors ${
+                  onSecondDivisions
+                    ? "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                }`}
+              >
+                D2
+                <span className="sr-only"> : deuxièmes divisions</span>
+              </Link>
+            </li>
             <li>
               <Link
                 href="/direct"
@@ -167,6 +184,22 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 </li>
               );
             })}
+            <li>
+              <Link
+                href={SECOND_DIVISIONS_HREF}
+                onClick={close}
+                aria-current={onSecondDivisions ? "page" : undefined}
+                className={`flex items-center gap-3 rounded-lg px-3 py-3 font-medium ${
+                  onSecondDivisions ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                <span className="grid size-6 place-items-center rounded-md bg-slate-900 text-[11px] font-bold text-white dark:bg-white dark:text-slate-900">
+                  D2
+                </span>
+                <span>Deuxièmes divisions</span>
+                <span className="ml-auto text-sm text-slate-500 dark:text-slate-400">{SECOND_DIVISIONS.length} championnats</span>
+              </Link>
+            </li>
             {cupsTab && (
               <li>
                 <Link
