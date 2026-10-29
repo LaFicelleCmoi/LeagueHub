@@ -1,4 +1,6 @@
+import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
+import { ChevronLeft } from "lucide-react";
 import { ClubDialogProvider } from "@/components/ClubDialogProvider";
 import { LeagueLogo } from "@/components/LeagueLogo";
 import { LeagueTabs } from "@/components/LeagueTabs";
@@ -8,7 +10,7 @@ import { getMatches, getStandings } from "@/lib/espn/api";
 import { daysUntilDay, formatDay, formatTime } from "@/lib/format";
 import { resolveLeague, type LeaguePageProps } from "@/lib/league-params";
 import { goalsInMatches, goalsPerMatchHint, plural, seasonTotals } from "@/lib/league-stats";
-import { ALL_LEAGUES } from "@/lib/leagues";
+import { ALL_LEAGUES, SECOND_DIVISIONS_HREF } from "@/lib/leagues";
 
 // Seuls les championnats du site (5 grands et deuxièmes divisions) sont générés ; toute autre URL renvoie une 404.
 export const dynamicParams = false;
@@ -71,6 +73,16 @@ export default async function LeagueLayout({ children, params }: LeaguePageProps
 
   return (
     <div style={{ "--accent": league.accent } as CSSProperties}>
+      {/* Deuxièmes divisions : on rappelle l'espace où l'on se trouve, distinct des 5 grands. */}
+      {league.tier === 2 && (
+        <Link
+          href={SECOND_DIVISIONS_HREF}
+          className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+        >
+          <ChevronLeft className="size-4" aria-hidden />
+          Deuxièmes divisions
+        </Link>
+      )}
       <div className="mb-6 flex items-center gap-4">
         <div className="grid size-16 shrink-0 place-items-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
           <LeagueLogo league={league} size={44} />
@@ -79,6 +91,11 @@ export default async function LeagueLayout({ children, params }: LeaguePageProps
           <p className="flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400">
             <span aria-hidden className="h-3 w-1 rounded-full bg-[var(--accent)]" />
             {league.country}
+            {league.tier === 2 && (
+              <span className="rounded-full bg-slate-900 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white dark:bg-white dark:text-slate-900">
+                2e division
+              </span>
+            )}
           </p>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{league.name}</h1>
         </div>
