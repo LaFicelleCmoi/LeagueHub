@@ -1,6 +1,6 @@
 {
   "slug": "premier-league",
-  "updatedAt": "2026-10-29",
+  "updatedAt": "2026-11-02",
   "clubs": {
     "306": {
       "qid": "Q19477",
@@ -749,7 +749,9 @@
           "key": "autre:Q2605489",
           "label": "Premier League Asia Trophy",
           "count": 1,
-          "years": [],
+          "years": [
+            "2003"
+          ],
           "scope": "autre"
         }
       ]
