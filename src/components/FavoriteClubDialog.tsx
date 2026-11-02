@@ -128,9 +128,9 @@ export function FavoriteClubDialog({ division, clubs, onClose }: { division: Div
         if (event.target === event.currentTarget) close();
       }}
       aria-labelledby="favorite-dialog-title"
-      className="m-auto flex max-h-[min(92dvh,52rem)] w-[min(calc(100%-1rem),56rem)] flex-col overflow-hidden rounded-2xl bg-slate-50 p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/70 backdrop:backdrop-blur-sm dark:bg-slate-950 dark:text-slate-100"
+      className="m-auto flex max-h-[min(92dvh,52rem)] w-[min(calc(100%-1rem),56rem)] flex-col overflow-hidden glass glass-panel rounded-2xl p-0 text-slate-900 backdrop:bg-slate-950/50 dark:text-slate-100"
     >
-      <header className="flex items-start justify-between gap-4 border-b border-slate-200 bg-white px-5 py-4 dark:border-slate-800 dark:bg-slate-900">
+      <header className="flex items-start justify-between gap-4 border-b border-slate-900/10 bg-white/40 px-5 py-4 dark:border-white/10 dark:bg-white/5">
         <div>
           <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.18em] text-amber-600 dark:text-amber-400">
             <Star className="size-3.5 fill-current" aria-hidden />

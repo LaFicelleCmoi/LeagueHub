@@ -110,7 +110,7 @@ export function ClubDialog({ club, onClose }: { club: ClubRef | null; onClose: (
         if (event.target === event.currentTarget) close();
       }}
       aria-labelledby="club-dialog-title"
-      className={`m-auto max-h-[min(90dvh,46rem)] w-[min(calc(100%-2rem),28rem)] overflow-y-auto rounded-2xl bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm dark:bg-slate-900 dark:text-slate-100 ${
+      className={`m-auto max-h-[min(90dvh,46rem)] w-[min(calc(100%-2rem),28rem)] overflow-y-auto glass glass-panel rounded-2xl p-0 text-slate-900 backdrop:bg-slate-950/45 dark:text-slate-100 ${
         isFavorite ? "ring-2 ring-amber-400/70" : ""
       }`}
     >

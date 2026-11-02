@@ -119,7 +119,7 @@ export function ClubSearch({
 
   return (
     <div ref={boxRef} className="relative">
-      <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm focus-within:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:focus-within:border-slate-500">
+      <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/55 px-3 py-1.5 text-sm focus-within:border-slate-400 dark:border-slate-700 dark:bg-white/5 dark:focus-within:border-slate-500">
         <Search className="size-4 shrink-0 text-slate-400" aria-hidden />
         <input
           ref={inputRef}

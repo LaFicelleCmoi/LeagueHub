@@ -86,7 +86,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/85 backdrop-blur dark:border-slate-800 dark:bg-slate-950/85">
+    <header className="glass sticky top-0 z-40 border-b border-white/50 dark:border-white/10">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
         <Link href="/" onClick={close} className="flex items-center gap-2 font-display text-xl font-bold tracking-wide">
           <span className="grid size-8 place-items-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
@@ -110,8 +110,8 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                     title={league.name}
                     className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors xl:px-3 ${
                       active
-                        ? "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                        ? "glass-pill text-slate-900 dark:text-white"
+                        : "text-slate-600 hover:bg-white/60 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
                     }`}
                   >
                     <LeagueLogo league={league} size={20} />
@@ -128,7 +128,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 className={`ml-1 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors ${
                   onDirect
                     ? "bg-red-50 text-red-700 dark:bg-red-500/15 dark:text-red-300"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                    : "text-slate-600 hover:bg-white/60 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                 }`}
               >
                 <LiveDot />
@@ -142,8 +142,8 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 title="Simulateur de match"
                 className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors ${
                   onSimulator
-                    ? "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                    ? "glass-pill text-slate-900 dark:text-white"
+                    : "text-slate-600 hover:bg-white/60 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
                 }`}
               >
                 <Dices className="size-4" aria-hidden />
@@ -178,7 +178,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 <span className="sr-only"> : tracker Ligue des champions 2026-2027 (nouvel onglet)</span>
               </a>
             </li>
-            <li className="ml-2 w-52 border-l border-slate-200 pl-2 xl:w-56 dark:border-slate-800">
+            <li className="ml-2 w-52 border-l border-slate-900/10 pl-2 xl:w-56 dark:border-white/10">
               <ClubSearch clubs={shownClubs} placeholder={searchPlaceholder} />
             </li>
             <li>
@@ -193,14 +193,14 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-          className="grid size-10 place-items-center rounded-lg text-slate-700 hover:bg-slate-100 lg:hidden dark:text-slate-300 dark:hover:bg-slate-800"
+          className="grid size-10 place-items-center rounded-lg text-slate-700 hover:bg-white/60 lg:hidden dark:text-slate-300 dark:hover:bg-white/10"
         >
           {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
         </button>
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Navigation principale" className="border-t border-slate-200 lg:hidden dark:border-slate-800">
+        <nav id="mobile-nav" aria-label="Navigation principale" className="border-t border-slate-900/10 lg:hidden dark:border-white/10">
           <ul className="mx-auto grid max-w-6xl gap-1 p-2">
             <li className="px-1 pb-2">
               <ClubSearch clubs={shownClubs} onNavigate={close} placeholder={searchPlaceholder} />
@@ -211,7 +211,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 onClick={close}
                 aria-current={onDirect ? "page" : undefined}
                 className={`flex items-center gap-3 rounded-lg px-3 py-3 font-semibold ${
-                  onDirect ? "bg-red-50 dark:bg-red-500/15" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                  onDirect ? "bg-red-50 dark:bg-red-500/15" : "hover:bg-white/60 dark:hover:bg-white/10"
                 }`}
               >
                 <span className="grid size-6 place-items-center">
@@ -227,7 +227,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                 onClick={close}
                 aria-current={onSimulator ? "page" : undefined}
                 className={`flex items-center gap-3 rounded-lg px-3 py-3 font-semibold ${
-                  onSimulator ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                  onSimulator ? "glass-pill" : "hover:bg-white/60 dark:hover:bg-white/10"
                 }`}
               >
                 <span className="grid size-6 place-items-center">
@@ -252,7 +252,7 @@ export function SiteHeader({ clubs }: { clubs: ClubIndexEntry[] }) {
                     onClick={close}
                     aria-current={active ? "page" : undefined}
                     className={`flex items-center gap-3 rounded-lg px-3 py-3 font-medium ${
-                      active ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-100 dark:hover:bg-slate-800"
+                      active ? "glass-pill" : "hover:bg-white/60 dark:hover:bg-white/10"
                     }`}
                   >
                     <LeagueLogo league={league} size={24} />

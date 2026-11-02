@@ -115,9 +115,9 @@ export function MatchDetailDialog({ match: cardMatch, onClose }: { match: Match;
         if (event.target === event.currentTarget) close();
       }}
       aria-labelledby={titleId}
-      className="m-auto max-h-[min(92dvh,52rem)] w-[min(calc(100%-1rem),44rem)] overflow-y-auto rounded-2xl bg-white p-0 text-left text-slate-900 shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm dark:bg-slate-900 dark:text-slate-100"
+      className="m-auto max-h-[min(92dvh,52rem)] w-[min(calc(100%-1rem),44rem)] overflow-y-auto glass glass-panel rounded-2xl p-0 text-left text-slate-900 backdrop:bg-slate-950/45 dark:text-slate-100"
     >
-      <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 pt-4 backdrop-blur sm:px-5 dark:border-slate-800 dark:bg-slate-900/95">
+      <div className="sticky top-0 z-10 border-b border-slate-900/10 bg-white/70 px-4 pt-4 backdrop-blur-xl sm:px-5 dark:border-white/10 dark:bg-slate-900/70">
         <h2 id={titleId} className="sr-only">
           Détails du match {match.home.team.name} – {match.away.team.name}
         </h2>
