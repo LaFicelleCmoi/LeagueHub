@@ -206,9 +206,11 @@ export async function LeaguesHome({
             {shownDays.length === 0 ? (
               <EmptyState>Aucun match aujourd’hui dans les {leagues.length} championnats.</EmptyState>
             ) : (
-              <div className={compact ? "grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" : "space-y-8"}>
+              // Colonnes CSS (masonry) plutôt qu'une grille : une grille aligne ses rangées sur le bloc le
+              // plus haut, ce qui laissait un grand trou sous un championnat n'ayant qu'un match.
+              <div className={compact ? "columns-1 gap-6 md:columns-2 xl:columns-3" : "space-y-8"}>
                 {shownDays.map(({ league, today }) => (
-                  <div key={league.slug}>
+                  <div key={league.slug} className={compact ? "mb-6 break-inside-avoid" : undefined}>
                     <Link
                       href={`/${league.slug}/matchs`}
                       className="mb-3 inline-flex items-center gap-2 font-semibold hover:underline"
