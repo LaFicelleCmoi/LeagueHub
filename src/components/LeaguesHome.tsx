@@ -10,7 +10,6 @@ import { LeagueShortcuts } from "./LeagueShortcuts";
 import { LeagueStandingsCard } from "./LeagueStandingsCard";
 import { LiveIndicator, LiveMatchesProvider } from "./LiveMatches";
 import { MatchCard } from "./MatchCard";
-import { RowMasonry } from "./RowMasonry";
 import { PageSync } from "./PageSync";
 import { StatTiles, type Stat } from "./StatTiles";
 import SplitFlapText from "./reactbits/SplitFlapText";
@@ -88,8 +87,6 @@ export async function LeaguesHome({
     : [];
   const shownDays = matchDays.length > 0 ? matchDays : upcoming;
   const daysToNext = next ? daysUntilDay(next.day, now) : 0;
-  // Peu de matchs par championnat (milieu de semaine, reprise) : les championnats se rangent en grille.
-  const compact = shownDays.every((entry) => entry.today.length <= 2);
   const goalsToday = goalsInMatches(todayMatches);
   const season = addTotals(overview.map(({ standings }) => seasonTotals(standings)));
 
@@ -133,27 +130,6 @@ export async function LeaguesHome({
   const flapWords = leagues.map((league) => flapWord(league.name));
   // Les noms longs (« SEGUNDA DIVISION ») élargissent le panneau : la police rétrécit d'autant.
   const flapWidth = Math.max(14, ...flapWords.map((word) => word.length));
-
-  const leagueBlocks = shownDays.map(({ league, today }) => ({
-    key: league.slug,
-    node: (
-      <>
-        <Link
-          href={`/${league.slug}/matchs`}
-          className="mb-3 inline-flex items-center gap-2 font-semibold hover:underline"
-        >
-          <LeagueLogo league={league} size={20} />
-          {league.name}
-          <ChevronRight className="size-4 text-slate-400" aria-hidden />
-        </Link>
-        <div className={`grid grid-cols-1 gap-3 ${compact ? "" : "md:grid-cols-2"}`}>
-          {today.map((match) => (
-            <MatchCard key={match.id} match={match} />
-          ))}
-        </div>
-      </>
-    ),
-  }));
 
   return (
     // Fenêtre « 5 derniers matchs » partagée par le bandeau des clubs et les cartes de classement.
@@ -228,16 +204,26 @@ export async function LeaguesHome({
             {shownDays.length === 0 ? (
               <EmptyState>Aucun match aujourd’hui dans les {leagues.length} championnats.</EmptyState>
             ) : (
-              // Rangés ligne par ligne, sans trou sous un championnat qui n'a qu'un match.
-              compact ? (
-                <RowMasonry items={leagueBlocks} />
-              ) : (
-                <div className="space-y-8">
-                  {leagueBlocks.map((block) => (
-                    <div key={block.key}>{block.node}</div>
-                  ))}
-                </div>
-              )
+              // Un championnat par bloc, sur toute la largeur ; ses matchs deux par ligne.
+              <div className="space-y-8">
+                {shownDays.map(({ league, today }) => (
+                  <div key={league.slug}>
+                    <Link
+                      href={`/${league.slug}/matchs`}
+                      className="mb-3 inline-flex items-center gap-2 font-semibold hover:underline"
+                    >
+                      <LeagueLogo league={league} size={20} />
+                      {league.name}
+                      <ChevronRight className="size-4 text-slate-400" aria-hidden />
+                    </Link>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                      {today.map((match) => (
+                        <MatchCard key={match.id} match={match} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
           </section>
         </LiveMatchesProvider>
