@@ -1,6 +1,6 @@
 {
   "slug": "championship",
-  "updatedAt": "2026-10-29",
+  "updatedAt": "2026-11-02",
   "clubs": {
     "314": {
       "qid": "Q18519",
@@ -1173,7 +1173,9 @@
           "key": "autre:Q4311339",
           "label": "London League",
           "count": 3,
-          "years": [],
+          "years": [
+            "1900"
+          ],
           "scope": "autre"
         },
         {
