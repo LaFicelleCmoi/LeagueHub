@@ -10,6 +10,7 @@ import { LeagueShortcuts } from "./LeagueShortcuts";
 import { LeagueStandingsCard } from "./LeagueStandingsCard";
 import { LiveIndicator, LiveMatchesProvider } from "./LiveMatches";
 import { MatchCard } from "./MatchCard";
+import { RowMasonry } from "./RowMasonry";
 import { PageSync } from "./PageSync";
 import { StatTiles, type Stat } from "./StatTiles";
 import SplitFlapText from "./reactbits/SplitFlapText";
@@ -133,6 +134,27 @@ export async function LeaguesHome({
   // Les noms longs (« SEGUNDA DIVISION ») élargissent le panneau : la police rétrécit d'autant.
   const flapWidth = Math.max(14, ...flapWords.map((word) => word.length));
 
+  const leagueBlocks = shownDays.map(({ league, today }) => ({
+    key: league.slug,
+    node: (
+      <>
+        <Link
+          href={`/${league.slug}/matchs`}
+          className="mb-3 inline-flex items-center gap-2 font-semibold hover:underline"
+        >
+          <LeagueLogo league={league} size={20} />
+          {league.name}
+          <ChevronRight className="size-4 text-slate-400" aria-hidden />
+        </Link>
+        <div className={`grid grid-cols-1 gap-3 ${compact ? "" : "md:grid-cols-2"}`}>
+          {today.map((match) => (
+            <MatchCard key={match.id} match={match} />
+          ))}
+        </div>
+      </>
+    ),
+  }));
+
   return (
     // Fenêtre « 5 derniers matchs » partagée par le bandeau des clubs et les cartes de classement.
     <ClubDialogProvider>
@@ -206,27 +228,16 @@ export async function LeaguesHome({
             {shownDays.length === 0 ? (
               <EmptyState>Aucun match aujourd’hui dans les {leagues.length} championnats.</EmptyState>
             ) : (
-              // Colonnes CSS (masonry) plutôt qu'une grille : une grille aligne ses rangées sur le bloc le
-              // plus haut, ce qui laissait un grand trou sous un championnat n'ayant qu'un match.
-              <div className={compact ? "columns-1 gap-6 md:columns-2 xl:columns-3" : "space-y-8"}>
-                {shownDays.map(({ league, today }) => (
-                  <div key={league.slug} className={compact ? "mb-6 break-inside-avoid" : undefined}>
-                    <Link
-                      href={`/${league.slug}/matchs`}
-                      className="mb-3 inline-flex items-center gap-2 font-semibold hover:underline"
-                    >
-                      <LeagueLogo league={league} size={20} />
-                      {league.name}
-                      <ChevronRight className="size-4 text-slate-400" aria-hidden />
-                    </Link>
-                    <div className={`grid grid-cols-1 gap-3 ${compact ? "" : "md:grid-cols-2"}`}>
-                      {today.map((match) => (
-                        <MatchCard key={match.id} match={match} />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              // Rangés ligne par ligne, sans trou sous un championnat qui n'a qu'un match.
+              compact ? (
+                <RowMasonry items={leagueBlocks} />
+              ) : (
+                <div className="space-y-8">
+                  {leagueBlocks.map((block) => (
+                    <div key={block.key}>{block.node}</div>
+                  ))}
+                </div>
+              )
             )}
           </section>
         </LiveMatchesProvider>
