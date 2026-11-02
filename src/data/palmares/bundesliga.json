@@ -1,6 +1,6 @@
 {
   "slug": "bundesliga",
-  "updatedAt": "2026-10-29",
+  "updatedAt": "2026-11-02",
   "clubs": {
     "122": {
       "qid": "Q104770",
@@ -34,7 +34,9 @@
           "key": "autre:Q1153075",
           "label": "Coupe d'Allemagne féminine de football en salle",
           "count": 1,
-          "years": [],
+          "years": [
+            "1994"
+          ],
           "scope": "autre"
         },
         {
