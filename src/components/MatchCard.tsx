@@ -166,10 +166,10 @@ export function MatchCard({ match: initialMatch }: { match: Match }) {
 
   const card = (
     <article
-      className={`min-w-0 rounded-xl border bg-white p-4 dark:bg-slate-900 ${
+      className={`min-w-0 rounded-xl border glass-card p-4 ${
         hasFavorite
           ? "border-amber-300 ring-2 ring-amber-300/40 dark:border-amber-500/50 dark:ring-amber-500/20"
-          : "border-slate-200 dark:border-slate-800"
+          : "border-white/60 dark:border-white/10"
       }`}
     >
       <div className="flex items-center gap-4">

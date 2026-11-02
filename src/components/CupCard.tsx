@@ -59,7 +59,7 @@ export function CupCard({ cup, overview }: { cup: Cup; overview: CupOverview | n
     <Link
       href={`/coupes/${cup.slug}`}
       style={{ "--accent": cup.accent } as CSSProperties}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0 dark:border-slate-800 dark:bg-slate-900"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/60 glass-card transition hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 dark:border-white/10"
     >
       <div className="relative flex items-center gap-3 px-4 py-4">
         <div

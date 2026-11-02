@@ -10,7 +10,7 @@ interface LeadersTableProps {
 
 export function LeadersTable({ title, statAbbr, statTitle, leaders }: LeadersTableProps) {
   return (
-    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+    <section className="overflow-hidden rounded-2xl border border-white/60 glass-card dark:border-white/10">
       <h2 className="px-4 py-3 font-semibold">{title}</h2>
 
       {leaders.length === 0 ? (
@@ -20,7 +20,7 @@ export function LeadersTable({ title, statAbbr, statTitle, leaders }: LeadersTab
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm tabular-nums">
-            <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
+            <thead className="bg-white/40 text-xs uppercase tracking-wide text-slate-500 dark:bg-white/5 dark:text-slate-400">
               <tr>
                 <th scope="col" className="w-12 py-2.5 pl-4 text-left font-medium">
                   #

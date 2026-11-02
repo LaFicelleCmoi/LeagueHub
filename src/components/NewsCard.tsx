@@ -40,7 +40,7 @@ export function NewsCard({ article }: { article: Article }) {
   );
 
   const className =
-    "group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900";
+    "group flex flex-col overflow-hidden rounded-2xl border border-white/60 glass-card dark:border-white/10";
 
   return article.url ? (
     <a href={article.url} target="_blank" rel="noopener noreferrer" className={className}>

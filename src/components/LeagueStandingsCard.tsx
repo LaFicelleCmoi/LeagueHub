@@ -23,7 +23,7 @@ export function LeagueStandingsCard({ league, standings }: { league: League; sta
   return (
     <SpotlightCard
       spotlightColor={withAlpha(league.accent, 0.16)}
-      className="h-full rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:shadow-none"
+      className="h-full rounded-2xl border border-white/60 glass-card transition-transform dark:border-white/10"
     >
       {/* `relative` place le contenu au-dessus du halo lumineux. */}
       <article style={{ "--accent": league.accent } as CSSProperties} className="relative flex h-full flex-col">

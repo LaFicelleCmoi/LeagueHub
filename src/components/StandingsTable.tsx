@@ -145,7 +145,7 @@ export function StandingsTable({
   const zones = [...new Map(standings.rows.flatMap((r) => (r.zone ? [[r.zone.label, r.zone]] : []))).values()];
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+    <section className="overflow-hidden rounded-2xl border border-white/60 glass-card dark:border-white/10">
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-slate-100 px-4 py-3.5 dark:border-slate-800">
         <div className="flex items-center gap-2.5">
           <h2 className="font-semibold">Classement</h2>
@@ -204,12 +204,12 @@ export function StandingsTable({
                 key={row.team.id}
                 ref={rowRef(row.team.id)}
                 onClick={() => openClub?.({ team: row.team, league })}
-                className={`relative cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/40 ${
+                className={`relative cursor-pointer transition-colors hover:bg-white/50 dark:hover:bg-white/5 ${
                   row.team.id === favorite?.team.id
                     ? "bg-amber-50 dark:bg-amber-400/[0.08]"
                     : row.live
                       ? "bg-red-50/50 dark:bg-red-500/[0.06]"
-                      : "bg-white dark:bg-slate-900"
+                      : ""
                 }`}
               >
                 <td className="relative py-2 pl-4" title={row.zone?.label}>

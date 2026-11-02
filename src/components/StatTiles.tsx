@@ -18,7 +18,7 @@ export function StatTiles({ stats, className = "" }: { stats: Stat[]; className?
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className={`relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-800 dark:bg-slate-900 ${
+          className={`relative flex flex-col overflow-hidden rounded-2xl border border-white/60 glass-card px-4 py-3 dark:border-white/10 ${
             stat.accent
               ? "before:absolute before:inset-y-3 before:left-0 before:w-1 before:rounded-r-full before:bg-[var(--accent,#13295b)] dark:before:bg-[var(--accent,#60a5fa)]"
               : ""
