@@ -117,13 +117,13 @@
     {"id":"401917033","date":"2026-10-28T19:45Z","home":"131","away":"269","venue":"BayArena","round":"second-round","leg":null},
     {"id":"401917034","date":"2026-10-28T19:45Z","home":"7884","away":"7911","venue":"Holstein-Stadion","round":"second-round","leg":null},
     {"id":"401917035","date":"2026-10-28T19:45Z","home":"132","away":"10382","venue":"Allianz Arena","round":"second-round","leg":null},
-    {"id":"401932915","date":"2026-12-01T20:00Z","home":"268","away":"3812","venue":"BORUSSIA-PARK","round":"round-of-16","leg":null},
-    {"id":"401932916","date":"2026-12-01T20:00Z","home":"125","away":"124","venue":"Deutsche Bank Park","round":"round-of-16","leg":null},
-    {"id":"401932917","date":"2026-12-01T20:00Z","home":"130","away":"126","venue":"Fritz-Walter Stadion","round":"round-of-16","leg":null},
-    {"id":"401932918","date":"2026-12-01T20:00Z","home":"121","away":"3841","venue":"Vonovia Ruhrstadion","round":"round-of-16","leg":null},
-    {"id":"401932919","date":"2026-12-01T20:00Z","home":"7884","away":"122","venue":"Holstein-Stadion","round":"round-of-16","leg":null},
-    {"id":"401932935","date":"2026-12-01T20:00Z","home":"132","away":"129","venue":"Allianz Arena","round":"round-of-16","leg":null},
-    {"id":"401932936","date":"2026-12-01T20:00Z","home":"131","away":"11420","venue":"BayArena","round":"round-of-16","leg":null},
-    {"id":"401932937","date":"2026-12-01T20:00Z","home":"134","away":"7017","venue":"MHPArena","round":"round-of-16","leg":null}
+    {"id":"401932919","date":"2026-12-01T17:00Z","home":"7884","away":"122","venue":"Holstein-Stadion","round":"round-of-16","leg":null},
+    {"id":"401932937","date":"2026-12-01T17:00Z","home":"134","away":"7017","venue":"MHPArena","round":"round-of-16","leg":null},
+    {"id":"401932915","date":"2026-12-01T19:45Z","home":"268","away":"3812","venue":"BORUSSIA-PARK","round":"round-of-16","leg":null},
+    {"id":"401932935","date":"2026-12-01T19:45Z","home":"132","away":"129","venue":"Allianz Arena","round":"round-of-16","leg":null},
+    {"id":"401932917","date":"2026-12-02T17:00Z","home":"130","away":"126","venue":"Fritz-Walter Stadion","round":"round-of-16","leg":null},
+    {"id":"401932936","date":"2026-12-02T17:00Z","home":"131","away":"11420","venue":"BayArena","round":"round-of-16","leg":null},
+    {"id":"401932916","date":"2026-12-02T19:45Z","home":"125","away":"124","venue":"Deutsche Bank Park","round":"round-of-16","leg":null},
+    {"id":"401932918","date":"2026-12-02T19:45Z","home":"121","away":"3841","venue":"Vonovia Ruhrstadion","round":"round-of-16","leg":null}
   ]
 }
