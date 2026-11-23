@@ -1,6 +1,6 @@
 {
   "slug": "premier-league",
-  "updatedAt": "2026-11-02",
+  "updatedAt": "2026-11-23",
   "clubs": {
     "306": {
       "qid": "Q19477",
@@ -1155,7 +1155,7 @@
     "370": {
       "qid": "Q18708",
       "name": "Fulham",
-      "total": 8,
+      "total": 7,
       "trophies": [
         {
           "key": "deuxieme-division",
@@ -1167,15 +1167,6 @@
             "2022"
           ],
           "scope": "national"
-        },
-        {
-          "key": "c3",
-          "label": "Ligue Europa",
-          "count": 1,
-          "years": [
-            "2010"
-          ],
-          "scope": "europe"
         },
         {
           "key": "autre:Q18573",
